@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "skipLibCheck": true,
+    "paths": {
+      "@components": [
+        "./src/components"
+      ],
+      "@components/*": ["./src/components/*"],
+      "@theme": [
+        "./src/theme"
+      ],
+      "@theme/*": ["./src/theme/*"],
+      "@types": [
+        "./src/types"
+      ],
+      "@types/*": ["./src/types/*"]
+    },
+    "jsxImportSource": "@emotion/react"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
