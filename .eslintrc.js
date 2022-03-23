@@ -25,5 +25,10 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-interface': 'off'
+  },
+  settings: {
+    react: {
+      version: '17.0.2'
+    }
   }
 };
