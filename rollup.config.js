@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import svgr from '@svgr/rollup';
 import { terser } from 'rollup-plugin-terser';
 
 import { DEFAULT_EXTENSIONS } from '@babel/core';
@@ -43,6 +44,7 @@ export default outputs.map(({ file, format }) => {
       resolve({
         extensions
       }),
+      svgr(),
       terser()
     ]
   };
