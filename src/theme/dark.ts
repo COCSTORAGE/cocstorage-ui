@@ -7,7 +7,9 @@ export const dark: Theme = {
       sub1: '#67A4FF',
       sub2: '#1F6BDE',
       sub3: '#B7D4FF',
-      bg: 'rgba(59, 137, 255, 0.15)'
+      bg1: 'rgba(59, 137, 255, 0.15)',
+      bg2: 'rgba(59, 137, 255, 0.13)',
+      bg3: 'rgba(59, 137, 255, 0.07)'
     },
     secondary: {
       red: {
@@ -21,7 +23,7 @@ export const dark: Theme = {
         main: '#4AD871',
         sub1: '#84D89C',
         sub2: '#28B14E',
-        sub3: '#CODEC9',
+        sub3: '#C0DEC9',
         bg: 'rgba(74, 216, 113, 0.15)'
       },
       yellow: {
@@ -33,14 +35,22 @@ export const dark: Theme = {
       }
     },
     text: {
-      text1: '#F7F9FF',
-      text2: 'rgba(246, 249, 255, 0.7)',
-      text3: 'rgba(246, 249, 255, 0.5)',
-      text4: 'rgba(246, 249, 255, 0.3)'
+      light: {
+        text1: '#232A3D',
+        text2: 'rgba(35, 42, 61, 0.7)',
+        text3: 'rgba(35, 42, 61, 0.5)',
+        text4: 'rgba(35, 42, 61, 0.3)'
+      },
+      dark: {
+        text1: '#EEF3FF',
+        text2: 'rgba(238, 243, 255, 0.7)',
+        text3: 'rgba(238, 243, 255, 0.5)',
+        text4: 'rgba(238, 243, 255, 0.3)'
+      }
     },
     box: {
       filled: {
-        normal: 'rba(238, 243, 255, 0.08)',
+        normal: 'rgba(238, 243, 255, 0.08)',
         focused: 'rgba(238, 243, 255, 0.04)',
         pressed: 'rgba(238, 243, 255, 0.11)',
         disabled: 'rgba(204, 218, 255, 0.03)'

@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     "types/*.d.ts",
-    "global.d.ts"
+    "index.d.ts"
   ],
   "exclude": [
     "node_modules"

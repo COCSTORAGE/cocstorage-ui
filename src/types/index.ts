@@ -7,7 +7,9 @@ export interface COCTheme {
       sub1: string;
       sub2: string;
       sub3: string;
-      bg: string;
+      bg1: string;
+      bg2: string;
+      bg3: string;
     };
     secondary: {
       red: {
@@ -33,10 +35,18 @@ export interface COCTheme {
       };
     };
     text: {
-      text1: string;
-      text2: string;
-      text3: string;
-      text4: string;
+      light: {
+        text1: string;
+        text2: string;
+        text3: string;
+        text4: string;
+      };
+      dark: {
+        text1: string;
+        text2: string;
+        text3: string;
+        text4: string;
+      };
     };
     box: {
       filled: {

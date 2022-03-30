@@ -9,7 +9,7 @@
   "author": "cocstorage",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c && tsc --emitDeclarationOnly",
+    "build": "rm -rf dist && rollup -c && tsc --emitDeclarationOnly",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },

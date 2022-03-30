@@ -11,6 +11,7 @@ module.exports = {
   rules: {
     quotes: ['error', 'single'],
     'no-use-before-define': 'off',
+    'import/no-cycle': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -21,6 +22,7 @@ module.exports = {
     ],
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
+    'react/jsx-props-no-spreading': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-var-requires': 'off',

@@ -5,6 +5,17 @@ function GlobalStyles() {
   return (
     <Global
       styles={css`
+        :root {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+          cursor: default;
+          line-height: 1.5;
+          overflow-wrap: break-word;
+          word-break: break-word;
+          tab-size: 4;
+        }
+
         html,
         body,
         div,
@@ -128,6 +139,20 @@ function GlobalStyles() {
         q:before,
         q:after {
           content: none;
+        }
+
+        img,
+        picture,
+        video,
+        canvas {
+          display: block;
+          max-width: 100%;
+        }
+
+        button {
+          background: none;
+          border: 0;
+          cursor: pointer;
         }
 
         table {

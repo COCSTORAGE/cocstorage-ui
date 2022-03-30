@@ -7,7 +7,9 @@ export const light: Theme = {
       sub1: '#67A4FF',
       sub2: '#1F6BDE',
       sub3: '#B7D4FF',
-      bg: 'rgba(60, 137, 255, 0.15)'
+      bg1: 'rgba(60, 137, 255, 0.15)',
+      bg2: 'rgba(60, 137, 255, 0.13)',
+      bg3: 'rgba(60, 137, 255, 0.07)'
     },
     secondary: {
       red: {
@@ -21,7 +23,7 @@ export const light: Theme = {
         main: '#4AD871',
         sub1: '#84D89C',
         sub2: '#28B14E',
-        sub3: '#CODEC9',
+        sub3: '#C0DEC9',
         bg: 'rgba(74, 216, 113, 0.15)'
       },
       yellow: {
@@ -33,10 +35,18 @@ export const light: Theme = {
       }
     },
     text: {
-      text1: '#232A3D',
-      text2: 'rgba(35, 42, 61, 0.7)',
-      text3: 'rgba(35, 42, 61, 0.5)',
-      text4: 'rgba(35, 42, 61, 0.3)'
+      light: {
+        text1: '#232A3D',
+        text2: 'rgba(35, 42, 61, 0.7)',
+        text3: 'rgba(35, 42, 61, 0.5)',
+        text4: 'rgba(35, 42, 61, 0.3)'
+      },
+      dark: {
+        text1: '#EEF3FF',
+        text2: 'rgba(238, 243, 255, 0.7)',
+        text3: 'rgba(238, 243, 255, 0.5)',
+        text4: 'rgba(238, 243, 255, 0.3)'
+      }
     },
     box: {
       filled: {
