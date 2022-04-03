@@ -3,7 +3,13 @@ import { css } from '@emotion/react';
 
 import { ButtonProps } from '.';
 
-export const StyledButton = styled.button<
+const DefaultButton = styled.button`
+  background: none;
+  border: 0;
+  cursor: pointer;
+`;
+
+export const StyledButton = styled(DefaultButton)<
   Omit<ButtonProps, 'iconOnly'> & { hasStartIcon: boolean }
 >`
   width: fit-content;
@@ -15,7 +21,7 @@ export const StyledButton = styled.button<
       case 'accent':
         return css`
           background-color: ${palette.primary.main};
-          color: ${palette.text.dark.text1};
+          color: ${palette.text.dark.main};
 
           &:hover {
             background-color: ${palette.primary.sub1};
@@ -27,7 +33,7 @@ export const StyledButton = styled.button<
 
           &:disabled {
             background-color: ${palette.box.filled.disabled};
-            color: ${palette.text.light.text3};
+            color: ${palette.text.light.text2};
           }
         `;
       case 'semiAccent':
@@ -45,7 +51,7 @@ export const StyledButton = styled.button<
 
           &:disabled {
             background-color: ${palette.box.filled.disabled};
-            color: ${palette.text.light.text3};
+            color: ${palette.text.light.text2};
           }
         `;
       case 'transparent':
@@ -53,7 +59,7 @@ export const StyledButton = styled.button<
           padding: 5px 6px !important;
           background-color: transparent;
           border-radius: 6px;
-          color: ${palette.text.light.text1};
+          color: ${palette.text.light.main};
 
           &:hover {
             background-color: ${palette.box.filled.focused};
@@ -64,13 +70,13 @@ export const StyledButton = styled.button<
           }
 
           &:disabled {
-            color: ${palette.text.light.text3};
+            color: ${palette.text.light.text2};
           }
         `;
       default:
         return css`
           background-color: ${palette.box.filled.normal};
-          color: ${palette.text.light.text1};
+          color: ${palette.text.light.main};
 
           &:hover {
             background-color: ${palette.box.filled.focused};
@@ -82,7 +88,7 @@ export const StyledButton = styled.button<
 
           &:disabled {
             background-color: ${palette.box.filled.disabled};
-            color: ${palette.text.light.text3};
+            color: ${palette.text.light.text2};
           }
         `;
     }

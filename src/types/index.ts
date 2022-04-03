@@ -1,6 +1,7 @@
 export type ThemeType = 'light' | 'dark';
 
 export interface COCTheme {
+  type: ThemeType;
   palette: {
     primary: {
       main: string;
@@ -36,16 +37,16 @@ export interface COCTheme {
     };
     text: {
       light: {
+        main: string;
         text1: string;
         text2: string;
         text3: string;
-        text4: string;
       };
       dark: {
+        main: string;
         text1: string;
         text2: string;
         text3: string;
-        text4: string;
       };
     };
     box: {
@@ -68,6 +69,10 @@ export interface COCTheme {
       first: string;
       second: string;
       third: string;
+    };
+    common: {
+      white: string;
+      black: string;
     };
   };
 }

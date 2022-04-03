@@ -149,6 +149,10 @@ function GlobalStyles() {
           max-width: 100%;
         }
 
+        input {
+          outline: 0;
+        }
+
         button {
           background: none;
           border: 0;

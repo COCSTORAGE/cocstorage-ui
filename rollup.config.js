@@ -11,13 +11,14 @@ import { DEFAULT_EXTENSIONS } from '@babel/core';
 const outputs = [
   {
     file: 'dist/index.js',
-    format: 'es'
+    format: 'cjs'
   },
   {
-    file: 'dist/index.cjm.js',
-    format: 'cjs'
+    file: 'dist/index.es.js',
+    format: 'es'
   }
 ];
+
 const extensions = [...DEFAULT_EXTENSIONS, '.ts', '.tsx'];
 
 export default outputs.map(({ file, format }) => {

@@ -1,6 +1,7 @@
 import { Theme } from '@emotion/react';
 
 export const dark: Theme = {
+  type: 'dark',
   palette: {
     primary: {
       main: '#3C89FF',
@@ -36,16 +37,16 @@ export const dark: Theme = {
     },
     text: {
       light: {
-        text1: '#232A3D',
-        text2: 'rgba(35, 42, 61, 0.7)',
-        text3: 'rgba(35, 42, 61, 0.5)',
-        text4: 'rgba(35, 42, 61, 0.3)'
+        main: '#232A3D',
+        text1: 'rgba(35, 42, 61, 0.7)',
+        text2: 'rgba(35, 42, 61, 0.5)',
+        text3: 'rgba(35, 42, 61, 0.3)'
       },
       dark: {
-        text1: '#EEF3FF',
-        text2: 'rgba(238, 243, 255, 0.7)',
-        text3: 'rgba(238, 243, 255, 0.5)',
-        text4: 'rgba(238, 243, 255, 0.3)'
+        main: '#EEF3FF',
+        text1: 'rgba(238, 243, 255, 0.7)',
+        text2: 'rgba(238, 243, 255, 0.5)',
+        text3: 'rgba(238, 243, 255, 0.3)'
       }
     },
     box: {
@@ -68,6 +69,10 @@ export const dark: Theme = {
       first: '#63DAFF',
       second: '#4891FF',
       third: '#717EFF'
+    },
+    common: {
+      white: '#FFFFFF',
+      black: '#000000'
     }
   }
 };

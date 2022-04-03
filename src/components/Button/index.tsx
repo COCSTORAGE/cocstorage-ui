@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { StyledButton } from './Button.styles';
@@ -9,6 +10,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   startIcon?: ReactElement;
   iconOnly?: boolean;
+  customStyle?: SerializedStyles;
 }
 
 function Button({
@@ -18,6 +20,7 @@ function Button({
   fullWidth = false,
   startIcon,
   iconOnly = false,
+  customStyle,
   ...props
 }: PropsWithChildren<ButtonProps>) {
   const { theme } = useTheme();
@@ -29,6 +32,7 @@ function Button({
       size={size}
       fullWidth={fullWidth}
       hasStartIcon={!!startIcon}
+      css={customStyle}
       {...props}
     >
       {startIcon && startIcon}
