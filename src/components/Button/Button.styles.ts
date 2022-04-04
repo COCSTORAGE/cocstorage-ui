@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { ButtonProps } from '.';
 
 const DefaultButton = styled.button`
+  padding: 0;
   background: none;
   border: 0;
   cursor: pointer;

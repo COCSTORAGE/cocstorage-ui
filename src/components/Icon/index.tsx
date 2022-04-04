@@ -7,10 +7,10 @@ interface IconPros extends SVGProps<SVGElement> {
   customStyle?: SerializedStyles;
 }
 
-function Icon({ name, customStyle, ...props }: IconPros) {
+function Icon({ name, viewBox = '0 0 24 24', customStyle, ...props }: IconPros) {
   const SvgIcon = SvgIcons[name];
 
-  return <SvgIcon viewBox="0 0 24 24" css={customStyle} {...props} />;
+  return <SvgIcon viewBox={viewBox} css={customStyle} {...props} />;
 }
 
 export default Icon;
