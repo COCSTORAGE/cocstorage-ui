@@ -14,7 +14,6 @@ export const StyledDropdown = styled.button<
   justify-content: space-between;
   gap: 8px;
   padding: 10px 12px;
-  background-color: transparent;
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 8px;
   font-size: 14px;
@@ -69,6 +68,7 @@ export const OptionWrapper = styled.ul<{
   border: none;
   border-radius: 8px;
   background-color: ${({ theme: { palette } }) => palette.background.fg2};
+  z-index: 1;
 `;
 
 export const Option = styled.li`
