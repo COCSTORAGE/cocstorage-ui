@@ -3,10 +3,10 @@ import useTheme from '@theme/useTheme';
 
 import { StyledSwitch, Circle } from './Switch.styles';
 
-export interface SwitchProps extends HTMLAttributes<HTMLDivElement> {
+export interface SwitchProps extends HTMLAttributes<HTMLButtonElement> {
   checked: boolean;
   disabled?: boolean;
-  onClick: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Switch({ checked, disabled, onClick, ...props }: SwitchProps) {
