@@ -5,8 +5,9 @@ import { RadioProps } from '.';
 
 export const Wrapper = styled.div<Pick<RadioProps, 'disabled'>>`
   position: relative;
-  width: 25px;
-  height: 25px;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 20px;
   overflow: hidden;
@@ -30,13 +31,13 @@ export const StyledRadio = styled.input`
   z-index: 1;
 `;
 
-export const RadioMarker = styled.div`
+export const Marker = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
 `;
 
-export const RadioMarkerInner = styled.div`
+export const MarkerInner = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -44,7 +45,7 @@ export const RadioMarkerInner = styled.div`
   justify-content: center;
 `;
 
-export const CheckedCircle = styled.div`
+export const Circle = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 20px;

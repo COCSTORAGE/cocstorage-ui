@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import useTheme from '@theme/useTheme';
 
-import { Wrapper, StyledRadio, RadioMarker, RadioMarkerInner, CheckedCircle } from './Radio.styles';
+import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.styles';
 
 export interface RadioProps extends HTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -14,13 +14,13 @@ function Radio({ checked, disabled, ...props }: RadioProps) {
   return (
     <Wrapper theme={theme} disabled={disabled}>
       <StyledRadio type="radio" checked={checked} disabled={disabled} {...props} />
-      <RadioMarker>
+      <Marker>
         {checked && !disabled && (
-          <RadioMarkerInner>
-            <CheckedCircle theme={theme} />
-          </RadioMarkerInner>
+          <MarkerInner>
+            <Circle theme={theme} />
+          </MarkerInner>
         )}
-      </RadioMarker>
+      </Marker>
     </Wrapper>
   );
 }
