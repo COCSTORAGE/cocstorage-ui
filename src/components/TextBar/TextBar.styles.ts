@@ -9,6 +9,7 @@ const DefaultTextBar = styled.input`
 
 export const Wrapper = styled.div<Pick<TextBarProps, 'fullWidth'>>`
   position: relative;
+  width: fit-content;
 
   ${({ fullWidth }) =>
     fullWidth
