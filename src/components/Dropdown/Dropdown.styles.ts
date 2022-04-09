@@ -19,6 +19,7 @@ export const StyledDropdown = styled(DefaultDropdown)<
     open: boolean;
   }
 >`
+  background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
   ${({ theme: { type, palette } }) => {

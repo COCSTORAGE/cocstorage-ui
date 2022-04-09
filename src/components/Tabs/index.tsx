@@ -8,7 +8,9 @@ import React, {
   MouseEvent
 } from 'react';
 import { SerializedStyles } from '@emotion/react';
+import useTheme from '@theme/useTheme';
 
+import { ThemeType } from '@types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
 export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -26,8 +28,11 @@ function Tabs({
   customStyle,
   ...props
 }: PropsWithChildren<TabsProps>) {
+  const { theme } = useTheme();
+
   const tabsInnerRef = useRef<HTMLDivElement | null>(null);
   const prevValueRef = useRef<number | string>(0);
+  const prevThemeType = useRef<ThemeType | null>(null);
   const isMountedRef = useRef<boolean>(false);
 
   const handleClick = useCallback(
@@ -44,6 +49,14 @@ function Tabs({
     },
     [onChange]
   );
+
+  useEffect(() => {
+    if (prevThemeType.current && prevThemeType.current !== theme.type) {
+      isMountedRef.current = false;
+    }
+
+    prevThemeType.current = theme.type;
+  }, [theme.type]);
 
   useEffect(() => {
     if (tabsInnerRef.current && (!isMountedRef.current || prevValueRef.current !== value)) {
@@ -65,7 +78,7 @@ function Tabs({
     }
 
     prevValueRef.current = value;
-  }, [value]);
+  }, [value, theme.type]);
 
   return (
     <StyledTabs

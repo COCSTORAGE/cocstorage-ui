@@ -1,7 +1,9 @@
 import React from 'react';
 import { Global, css } from '@emotion/react';
+import useTheme from '@theme/useTheme';
 
 function GlobalStyles() {
+  const { theme } = useTheme();
   return (
     <Global
       styles={css`
@@ -34,6 +36,7 @@ function GlobalStyles() {
         html,
         body {
           height: 100%;
+          background-color: ${theme.palette.background.bg};
         }
         img,
         picture,

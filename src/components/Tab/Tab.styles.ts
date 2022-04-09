@@ -15,10 +15,10 @@ const DefaultTab = styled.button`
 `;
 
 export const StyledTab = styled(DefaultTab)`
-  color: ${({ theme: { palette } }) => palette.text.light.text2};
+  color: ${({ theme: { type, palette } }) => palette.text[type].text2};
 
   &.selected {
-    color: ${({ theme: { palette } }) => palette.text.light.main};
+    color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
     & > div {
       visibility: visible;

@@ -8,6 +8,7 @@ export const Wrapper = styled.div<Pick<CheckBoxProps, 'checked' | 'disabled'>>`
   display: inline-block;
   width: 20px;
   height: 20px;
+  background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 4px;
   overflow: hidden;

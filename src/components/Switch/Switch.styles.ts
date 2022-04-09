@@ -12,6 +12,7 @@ const DefaultSwitch = styled.button`
 `;
 
 export const StyledSwitch = styled(DefaultSwitch)<Pick<SwitchProps, 'checked' | 'disabled'>>`
+  background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
   ${({ theme: { type, palette }, checked, disabled }) => {

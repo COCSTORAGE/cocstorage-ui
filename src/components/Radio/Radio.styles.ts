@@ -8,6 +8,7 @@ export const Wrapper = styled.div<Pick<RadioProps, 'disabled'>>`
   display: inline-block;
   width: 22px;
   height: 22px;
+  background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 20px;
   overflow: hidden;
