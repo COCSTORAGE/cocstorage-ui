@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, HTMLAttributes } from 'react';
+import React, { useEffect, useState, useRef, useCallback, memo, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -33,9 +33,7 @@ function Dropdown({
 
   const optionWrapperRef = useRef<HTMLUListElement | null>(null);
 
-  const handleClickDropdown = () => {
-    setOpen(!open);
-  };
+  const handleClickDropdown = useCallback(() => setOpen(!open), [open]);
 
   useEffect(() => {
     if (optionWrapperRef.current) setTop(Number(optionWrapperRef.current?.clientHeight || 0) + 8);
@@ -68,9 +66,9 @@ function Dropdown({
   );
 }
 
-export default Dropdown;
+export default memo(Dropdown);
 
-export function DropDownIcon() {
+function DropDownIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_2_600)">

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { memo, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -21,4 +21,4 @@ function Tab({ text, value, customStyle, ...props }: TabProps) {
   );
 }
 
-export default Tab;
+export default memo(Tab);

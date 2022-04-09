@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, MouseEvent } from 'react';
+import React, { memo, HTMLAttributes, MouseEvent } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -28,4 +28,4 @@ function Switch({ checked, disabled, onClick, customStyle, ...props }: SwitchPro
   );
 }
 
-export default Switch;
+export default memo(Switch);

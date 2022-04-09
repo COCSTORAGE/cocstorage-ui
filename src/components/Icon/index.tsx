@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import React, { memo, SVGProps } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import * as SvgIcons from '../../assets/icons';
 
@@ -13,4 +13,4 @@ function Icon({ name, viewBox = '0 0 24 24', customStyle, ...props }: IconPros) 
   return <SvgIcon viewBox={viewBox} css={customStyle} {...props} />;
 }
 
-export default Icon;
+export default memo(Icon);

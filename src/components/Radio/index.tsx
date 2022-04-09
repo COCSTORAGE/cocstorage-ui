@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { memo, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -27,4 +27,4 @@ function Radio({ checked, disabled, customStyle, ...props }: RadioProps) {
   );
 }
 
-export default Radio;
+export default memo(Radio);

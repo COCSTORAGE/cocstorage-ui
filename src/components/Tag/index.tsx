@@ -1,4 +1,4 @@
-import React, { ReactElement, HTMLAttributes } from 'react';
+import React, { memo, ReactElement, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -12,7 +12,7 @@ export interface TagProps extends HTMLAttributes<HTMLDivElement> {
   customStyle?: SerializedStyles;
 }
 
-function Tag({ variant, text, startIcon, iconOnly, customStyle, ...props }: TagProps) {
+function Tag({ variant = 'text', text, startIcon, iconOnly, customStyle, ...props }: TagProps) {
   const { theme } = useTheme();
 
   return (
@@ -23,4 +23,4 @@ function Tag({ variant, text, startIcon, iconOnly, customStyle, ...props }: TagP
   );
 }
 
-export default Tag;
+export default memo(Tag);

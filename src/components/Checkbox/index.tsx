@@ -1,4 +1,4 @@
-import React, { useState, HTMLAttributes } from 'react';
+import React, { useState, useCallback, memo, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -15,8 +15,8 @@ function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
 
   const [hover, setHover] = useState<boolean>(false);
 
-  const handleMouseOver = () => setHover(true);
-  const handleMouseOut = () => setHover(false);
+  const handleMouseOver = useCallback(() => setHover(true), []);
+  const handleMouseOut = useCallback(() => setHover(false), []);
 
   return (
     <Wrapper
@@ -41,4 +41,4 @@ function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
   );
 }
 
-export default Checkbox;
+export default memo(Checkbox);

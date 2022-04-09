@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -40,4 +40,4 @@ function Button({
   );
 }
 
-export default Button;
+export default memo(Button);

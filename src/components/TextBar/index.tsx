@@ -1,4 +1,4 @@
-import React, { useState, useRef, HTMLAttributes } from 'react';
+import React, { useState, useRef, useCallback, memo, HTMLAttributes } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -29,7 +29,7 @@ function TextBar({
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const handleFocus = () => setIsFocused(!isFocused);
+  const handleFocus = useCallback(() => setIsFocused(!isFocused), [isFocused]);
 
   return (
     <Wrapper fullWidth={fullWidth}>
@@ -55,4 +55,4 @@ function TextBar({
   );
 }
 
-export default TextBar;
+export default memo(TextBar);

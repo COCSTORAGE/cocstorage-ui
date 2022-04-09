@@ -1,4 +1,12 @@
-import React, { useEffect, useRef, PropsWithChildren, HTMLAttributes, MouseEvent } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  memo,
+  PropsWithChildren,
+  HTMLAttributes,
+  MouseEvent
+} from 'react';
 import { SerializedStyles } from '@emotion/react';
 
 import { StyledTabs, TabsInner } from './Tabs.styles';
@@ -22,17 +30,20 @@ function Tabs({
   const prevValueRef = useRef<number | string>(0);
   const isMountedRef = useRef<boolean>(false);
 
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    const dataValue = (event.target as Element).getAttribute('data-value');
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      const dataValue = (event.target as Element).getAttribute('data-value');
 
-    if (!dataValue) return;
+      if (!dataValue) return;
 
-    if (!Number.isNaN(Number(dataValue))) {
-      onChange(Number(dataValue));
-    } else {
-      onChange(dataValue);
-    }
-  };
+      if (!Number.isNaN(Number(dataValue))) {
+        onChange(Number(dataValue));
+      } else {
+        onChange(dataValue);
+      }
+    },
+    [onChange]
+  );
 
   useEffect(() => {
     if (tabsInnerRef.current && (!isMountedRef.current || prevValueRef.current !== value)) {
@@ -69,4 +80,4 @@ function Tabs({
   );
 }
 
-export default Tabs;
+export default memo(Tabs);
