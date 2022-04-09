@@ -12,7 +12,6 @@ const DefaultButton = styled.button`
   background: none;
   border: 0;
   text-align: center;
-  border-radius: 12px;
   font-weight: 500;
   cursor: pointer;
 `;
@@ -117,24 +116,28 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
       case 'big':
         return css`
           padding: 18px 24px;
+          border-radius: 12px;
           line-height: 20px;
           font-size: 16px;
         `;
       case 'small':
         return css`
           padding: 10px 15px;
+          border-radius: 8px;
           line-height: 15px;
           font-size: 12px;
         `;
       case 'pico':
         return css`
           padding: 5px 10px;
+          border-radius: 6px;
           line-height: 15px;
           font-size: 12px;
         `;
       default:
         return css`
           padding: 13px 21px;
+          border-radius: 10px;
           line-height: 18px;
           font-size: 14px;
         `;
