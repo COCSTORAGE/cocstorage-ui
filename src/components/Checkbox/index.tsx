@@ -15,7 +15,8 @@ function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
 
   const [hover, setHover] = useState<boolean>(false);
 
-  const handleHover = () => setHover(!hover);
+  const handleMouseOver = () => setHover(true);
+  const handleMouseOut = () => setHover(false);
 
   return (
     <Wrapper
@@ -23,8 +24,8 @@ function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
       css={customStyle}
       checked={checked}
       disabled={disabled}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
       role="checkbox"
       tabIndex={0}
     >
