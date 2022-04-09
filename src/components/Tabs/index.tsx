@@ -58,9 +58,9 @@ function Tabs({
 
   return (
     <StyledTabs
+      css={customStyle}
       centered={centered}
       onClick={handleClick}
-      css={customStyle}
       role="tablist"
       {...props}
     >

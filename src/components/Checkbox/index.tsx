@@ -1,4 +1,5 @@
 import React, { useState, HTMLAttributes } from 'react';
+import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.styles';
@@ -6,9 +7,10 @@ import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.
 export interface CheckBoxProps extends HTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
+  customStyle?: SerializedStyles;
 }
 
-function Checkbox({ checked, disabled, ...props }: CheckBoxProps) {
+function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
   const { theme } = useTheme();
 
   const [hover, setHover] = useState<boolean>(false);
@@ -18,6 +20,7 @@ function Checkbox({ checked, disabled, ...props }: CheckBoxProps) {
   return (
     <Wrapper
       theme={theme}
+      css={customStyle}
       checked={checked}
       disabled={disabled}
       onMouseEnter={handleHover}
