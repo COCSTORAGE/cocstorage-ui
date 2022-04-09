@@ -91,8 +91,10 @@ export const Label = styled.label<
   top: 0;
   left: 0;
   font-size: 14px;
+  padding: 0 5px;
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   z-index: 1;
+  transform-origin: top left;
   transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
     transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
@@ -112,36 +114,18 @@ export const Label = styled.label<
   }};
 
   ${({ theme: { palette }, variant, isFocused, size }) => {
+    const translateX = size === 'small' ? '7px' : '9px';
+
     switch (isFocused) {
       case true:
         return css`
-          transform: translate(
-              -${size === 'small' ? 3.5 : 4}px,
-              -${size === 'small' ? 16.5 : 19.5}px
-            )
-            scale(0.75);
+          z-index: 2;
+          transform: translate(${translateX}, -35%) scale(0.75);
           ${variant === 'focused' ? `color: ${palette.primary.main}` : ''};
         `;
       default:
         return css`
-          transform: translate(0, 0) scale(1);
-        `;
-    }
-  }};
-
-  ${({ size }) => {
-    switch (size) {
-      case 'small':
-        return css`
-          top: 10px;
-          left: 5.5px;
-          padding: 0 5.5px;
-        `;
-      default:
-        return css`
-          top: 13px;
-          left: 6.5px;
-          padding: 0 6.5px;
+          transform: translate(${translateX}, 50%) scale(1);
         `;
     }
   }};
