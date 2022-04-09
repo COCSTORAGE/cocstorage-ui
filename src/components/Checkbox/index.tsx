@@ -22,6 +22,8 @@ function Checkbox({ checked, disabled, ...props }: CheckBoxProps) {
       disabled={disabled}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
+      role="checkbox"
+      tabIndex={0}
     >
       <StyledCheckbox type="checkbox" checked={checked} disabled={disabled} {...props} />
       <Marker>

@@ -5,3 +5,5 @@ export { default as Dropdown } from './Dropdown';
 export { default as Switch } from './Switch';
 export { default as Radio } from './Radio';
 export { default as Checkbox } from './Checkbox';
+export { default as Tabs } from './Tabs';
+export { default as Tab } from './Tab';

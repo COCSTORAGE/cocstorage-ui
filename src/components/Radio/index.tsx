@@ -12,7 +12,7 @@ function Radio({ checked, disabled, ...props }: RadioProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper theme={theme} disabled={disabled}>
+    <Wrapper theme={theme} disabled={disabled} role="radio" tabIndex={0}>
       <StyledRadio type="radio" checked={checked} disabled={disabled} {...props} />
       <Marker>
         {checked && !disabled && (
