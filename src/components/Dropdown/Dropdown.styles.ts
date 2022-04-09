@@ -3,26 +3,30 @@ import { css } from '@emotion/react';
 
 import { DropdownProps } from '.';
 
-export const StyledDropdown = styled.button<
-  Pick<DropdownProps, 'fullWidth'> & {
-    open: boolean;
-  }
->`
+const DefaultDropdown = styled.button`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   padding: 10px 12px;
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 8px;
   font-size: 14px;
+`;
+
+export const StyledDropdown = styled(DefaultDropdown)<
+  Pick<DropdownProps, 'fullWidth'> & {
+    open: boolean;
+  }
+>`
+  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
   ${({ theme: { type, palette } }) => {
     switch (type) {
       case 'dark':
         return css`
           color: ${palette.text.dark.text2};
+
           & svg path {
             fill: ${palette.text.dark.main};
           }
@@ -30,6 +34,7 @@ export const StyledDropdown = styled.button<
       default:
         return css`
           color: ${palette.text.light.text1};
+
           & svg path {
             fill: ${palette.text.light.main};
           }
@@ -41,8 +46,7 @@ export const StyledDropdown = styled.button<
     open
       ? css`
           border-color: ${palette.primary.main};
-          color: ${type === 'dark' ? palette.text.dark.main : palette.text.light.main};
-          & svg path {
+          color: ${palette.text[type].main} & svg path {
             fill: ${palette.primary.main};
           }
         `
@@ -75,18 +79,7 @@ export const Option = styled.li`
   padding: 11px 12px;
   text-align: left;
 
-  ${({ theme: { type, palette } }) => {
-    switch (type) {
-      case 'dark':
-        return css`
-          color: ${palette.text.dark.main};
-        `;
-      default:
-        return css`
-          color: ${palette.text.light.main};
-        `;
-    }
-  }};
+  color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
   &:hover {
     background-color: ${({ theme: { palette } }) => palette.box.filled.focused};

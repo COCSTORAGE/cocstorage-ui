@@ -31,7 +31,6 @@ function Button({
       variant={variant}
       size={size}
       fullWidth={fullWidth}
-      hasStartIcon={!!startIcon}
       css={customStyle}
       {...props}
     >

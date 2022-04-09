@@ -64,18 +64,7 @@ export const Check = styled.div<
   border-width: 0 2px 2px 0;
   transform: rotate(45deg) translate(-1px, -1px);
 
-  ${({ theme: { type, palette } }) => {
-    switch (type) {
-      case 'dark':
-        return css`
-          border-color: ${palette.text.dark.text2};
-        `;
-      default:
-        return css`
-          border-color: ${palette.text.light.text2};
-        `;
-    }
-  }};
+  border-color: ${({ theme: { type, palette } }) => palette.text[type].text2};
 
   ${({ theme: { palette }, checked }) =>
     checked

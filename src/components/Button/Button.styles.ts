@@ -4,25 +4,30 @@ import { css } from '@emotion/react';
 import { ButtonProps } from '.';
 
 const DefaultButton = styled.button`
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   padding: 0;
   background: none;
   border: 0;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 500;
   cursor: pointer;
 `;
 
-export const StyledButton = styled(DefaultButton)<
-  Omit<ButtonProps, 'iconOnly'> & { hasStartIcon: boolean }
->`
-  width: fit-content;
-  text-align: center;
-  border-radius: 12px;
-
+export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>`
   ${({ theme: { palette }, variant }) => {
     switch (variant) {
       case 'accent':
         return css`
           background-color: ${palette.primary.main};
           color: ${palette.text.dark.main};
+
+          & svg path {
+            fill: ${palette.text.dark.main};
+          }
 
           &:hover {
             background-color: ${palette.primary.sub1};
@@ -41,6 +46,10 @@ export const StyledButton = styled(DefaultButton)<
         return css`
           background-color: ${palette.primary.bg2};
           color: ${palette.primary.main};
+
+          & svg path {
+            fill: ${palette.primary.main};
+          }
 
           &:hover {
             background-color: ${palette.primary.bg3};
@@ -62,6 +71,10 @@ export const StyledButton = styled(DefaultButton)<
           border-radius: 6px;
           color: ${palette.text.light.main};
 
+          & svg path {
+            fill: ${palette.text.light.main};
+          }
+
           &:hover {
             background-color: ${palette.box.filled.focused};
           }
@@ -78,6 +91,10 @@ export const StyledButton = styled(DefaultButton)<
         return css`
           background-color: ${palette.box.filled.normal};
           color: ${palette.text.light.main};
+
+          & svg path {
+            fill: ${palette.text.light.main};
+          }
 
           &:hover {
             background-color: ${palette.box.filled.focused};
@@ -100,21 +117,25 @@ export const StyledButton = styled(DefaultButton)<
       case 'big':
         return css`
           padding: 18px 24px;
+          line-height: 20px;
           font-size: 16px;
         `;
       case 'small':
         return css`
           padding: 10px 15px;
+          line-height: 15px;
           font-size: 12px;
         `;
       case 'pico':
         return css`
           padding: 5px 10px;
+          line-height: 15px;
           font-size: 12px;
         `;
       default:
         return css`
           padding: 13px 21px;
+          line-height: 18px;
           font-size: 14px;
         `;
     }
@@ -124,15 +145,6 @@ export const StyledButton = styled(DefaultButton)<
     fullWidth
       ? css`
           width: 100%;
-        `
-      : ''};
-
-  ${({ hasStartIcon }) =>
-    hasStartIcon
-      ? css`
-          display: flex;
-          align-items: center;
-          gap: 4px;
         `
       : ''};
 `;

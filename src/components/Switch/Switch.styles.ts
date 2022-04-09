@@ -3,13 +3,16 @@ import { css } from '@emotion/react';
 
 import { SwitchProps } from '.';
 
-export const StyledSwitch = styled.button<Pick<SwitchProps, 'checked' | 'disabled'>>`
+const DefaultSwitch = styled.button`
   position: relative;
   width: 50px;
   height: 24px;
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   border-radius: 20px;
   box-sizing: content-box;
+`;
+
+export const StyledSwitch = styled(DefaultSwitch)<Pick<SwitchProps, 'checked' | 'disabled'>>`
+  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
   ${({ theme: { type, palette }, checked, disabled }) => {
     switch (type) {

@@ -3,10 +3,6 @@ import { css } from '@emotion/react';
 
 import { TextBarProps } from '.';
 
-const DefaultTextBar = styled.input`
-  outline: 0;
-`;
-
 export const Wrapper = styled.div<Pick<TextBarProps, 'fullWidth'>>`
   position: relative;
   width: fit-content;
@@ -19,6 +15,12 @@ export const Wrapper = styled.div<Pick<TextBarProps, 'fullWidth'>>`
       : ''};
 `;
 
+const DefaultTextBar = styled.input`
+  outline: 0;
+  border-radius: 8px;
+  font-size: 14px;
+`;
+
 export const StyledTextBar = styled(DefaultTextBar)<
   TextBarProps & {
     textBarSize?: 'small' | 'medium';
@@ -26,27 +28,12 @@ export const StyledTextBar = styled(DefaultTextBar)<
 >`
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.filled.normal};
-  border-radius: 8px;
-  font-size: 14px;
 
-  ${({ theme: { type, palette } }) => {
-    switch (type) {
-      case 'dark':
-        return css`
-          color: ${palette.text.dark.main};
-          &::placeholder {
-            color: ${palette.text.dark.text1};
-          }
-        `;
-      default:
-        return css`
-          color: ${palette.text.light.main};
-          &::placeholder {
-            color: ${palette.text.light.text1};
-          }
-        `;
-    }
-  }};
+  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+
+  &::placeholder {
+    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  }
 
   ${({ theme: { palette }, variant }) => {
     switch (variant) {
@@ -88,7 +75,7 @@ export const Label = styled.label<
   }
 >`
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   font-size: 14px;
   padding: 0 5px;
@@ -100,18 +87,7 @@ export const Label = styled.label<
 
   pointer-events: none;
 
-  ${({ theme: { type, palette } }) => {
-    switch (type) {
-      case 'dark':
-        return css`
-          color: ${palette.text.dark.text1};
-        `;
-      default:
-        return css`
-          color: ${palette.text.light.text1};
-        `;
-    }
-  }};
+  color: ${({ theme: { type, palette } }) => palette.text[type].text1};
 
   ${({ theme: { palette }, variant, isFocused, size }) => {
     const translateX = size === 'small' ? '7px' : '9px';
@@ -119,13 +95,12 @@ export const Label = styled.label<
     switch (isFocused) {
       case true:
         return css`
-          z-index: 2;
-          transform: translate(${translateX}, -35%) scale(0.75);
+          transform: translate(${translateX}, -145%) scale(0.75);
           ${variant === 'focused' ? `color: ${palette.primary.main}` : ''};
         `;
       default:
         return css`
-          transform: translate(${translateX}, 50%) scale(1);
+          transform: translate(${translateX}, -50%) scale(1);
         `;
     }
   }};

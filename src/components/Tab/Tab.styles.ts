@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const StyledTab = styled.button`
+const DefaultTab = styled.button`
   position: relative;
   display: flex;
   align-items: center;
@@ -12,6 +12,9 @@ export const StyledTab = styled.button`
   line-height: 18px;
   text-align: center;
   letter-spacing: -0.333333px;
+`;
+
+export const StyledTab = styled(DefaultTab)`
   color: ${({ theme: { palette } }) => palette.text.light.text2};
 
   &.selected {
