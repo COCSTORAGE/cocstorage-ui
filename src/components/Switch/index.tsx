@@ -21,6 +21,7 @@ function Switch({ checked, disabled, onClick, customStyle, ...props }: SwitchPro
       checked={checked}
       disabled={disabled}
       onClick={!disabled ? onClick : undefined}
+      role="switch"
       {...props}
     >
       <Circle theme={theme} checked={checked} disabled={disabled} />
