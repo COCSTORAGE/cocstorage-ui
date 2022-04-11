@@ -5,9 +5,9 @@ import React, {
   useRef,
   memo,
   PropsWithChildren,
+  HTMLAttributes,
   MouseEvent,
-  TouchEvent,
-  HTMLAttributes
+  TouchEvent
 } from 'react';
 import { createPortal } from 'react-dom';
 import useTheme from '@theme/useTheme';
@@ -142,7 +142,7 @@ function BottomSheet({
 
       sheetCloseTimerRef.current = setTimeout(onClose, transitionDuration + 100);
     }
-  }, [transitionDuration, sheetClose, onClose]);
+  }, [sheetClose, transitionDuration, onClose]);
 
   useEffect(() => {
     if (sheetOpen && sheetRef.current) {
