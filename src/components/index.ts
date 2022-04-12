@@ -10,3 +10,4 @@ export { default as Tab } from './Tab';
 export { default as Tag } from './Tag';
 export { default as BottomSheet } from './BottomSheet';
 export { default as Dialog } from './Dialog';
+export { default as Pagination } from './Pagination';

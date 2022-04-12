@@ -10,6 +10,7 @@ import React, {
   TouchEvent
 } from 'react';
 import { createPortal } from 'react-dom';
+import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { Wrapper, StyledBottomSheet, SwipeZone, Content, Rectangle } from './BottomSheet.styles';
@@ -19,6 +20,7 @@ export interface BottomSheetProps extends HTMLAttributes<HTMLDivElement> {
   transitionDuration?: number;
   disableSwipeable?: boolean;
   onClose: () => void;
+  customStyle?: SerializedStyles;
 }
 
 function BottomSheet({
@@ -27,6 +29,7 @@ function BottomSheet({
   transitionDuration = 225,
   disableSwipeable = false,
   onClose,
+  customStyle,
   ...props
 }: PropsWithChildren<BottomSheetProps>) {
   const { theme } = useTheme();
@@ -185,6 +188,7 @@ function BottomSheet({
           sheetClose={sheetClose}
           transitionDuration={transitionDuration}
           onClick={handleClick}
+          css={customStyle}
         >
           {!disableSwipeable && (
             <SwipeZone

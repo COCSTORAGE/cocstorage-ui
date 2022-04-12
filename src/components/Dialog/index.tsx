@@ -9,6 +9,7 @@ import React, {
   MouseEvent
 } from 'react';
 import { createPortal } from 'react-dom';
+import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { Wrapper, StyledDialog } from './Dialog.styles';
@@ -18,6 +19,7 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCli
   transitionDuration?: number;
   fullScreen?: boolean;
   onClose: () => void;
+  customStyle?: SerializedStyles;
 }
 
 function Dialog({
@@ -26,6 +28,7 @@ function Dialog({
   transitionDuration = 225,
   fullScreen,
   onClose,
+  customStyle,
   ...props
 }: PropsWithChildren<DialogProps>) {
   const { theme } = useTheme();
@@ -116,6 +119,7 @@ function Dialog({
           transitionDuration={transitionDuration}
           fullScreen={fullScreen}
           onClick={handleClick}
+          css={customStyle}
           {...props}
         >
           {children}
