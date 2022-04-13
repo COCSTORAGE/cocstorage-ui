@@ -5,7 +5,8 @@ import React, {
   memo,
   PropsWithChildren,
   HTMLAttributes,
-  MouseEvent
+  MouseEvent,
+  RefObject
 } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
@@ -14,6 +15,7 @@ import { ThemeType } from '@types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
 export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  ref?: RefObject<HTMLDivElement>;
   centered?: boolean;
   onChange: (value: number | string) => void;
   value: number | string;
@@ -21,6 +23,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
 }
 
 function Tabs({
+  ref,
   children,
   centered = false,
   onChange,
@@ -82,6 +85,7 @@ function Tabs({
 
   return (
     <StyledTabs
+      ref={ref}
       css={customStyle}
       centered={centered}
       onClick={handleClick}

@@ -5,6 +5,7 @@ import React, {
   useRef,
   memo,
   PropsWithChildren,
+  RefObject,
   HTMLAttributes,
   MouseEvent,
   TouchEvent
@@ -16,6 +17,7 @@ import useTheme from '@theme/useTheme';
 import { Wrapper, StyledBottomSheet, SwipeZone, Content, Rectangle } from './BottomSheet.styles';
 
 export interface BottomSheetProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: RefObject<HTMLDivElement>;
   open: boolean;
   transitionDuration?: number;
   disableSwipeable?: boolean;
@@ -25,6 +27,7 @@ export interface BottomSheetProps extends HTMLAttributes<HTMLDivElement> {
 
 function BottomSheet({
   children,
+  ref,
   open,
   transitionDuration = 225,
   disableSwipeable = false,
@@ -174,6 +177,7 @@ function BottomSheet({
   if (isMounted && sheetPortalRef.current) {
     return createPortal(
       <Wrapper
+        ref={ref}
         sheetOpen={sheetOpen}
         sheetClose={sheetClose}
         transitionDuration={transitionDuration}

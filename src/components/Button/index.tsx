@@ -1,10 +1,11 @@
-import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes, RefObject } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  ref?: RefObject<HTMLButtonElement>;
   variant?: 'text' | 'accent' | 'semiAccent' | 'transparent';
   size?: 'big' | 'medium' | 'small' | 'pico';
   fullWidth?: boolean;
@@ -14,6 +15,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 function Button({
+  ref,
   children,
   variant = 'text',
   size = 'medium',
@@ -27,6 +29,7 @@ function Button({
 
   return (
     <StyledButton
+      ref={ref}
       theme={theme}
       variant={variant}
       size={size}

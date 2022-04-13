@@ -6,7 +6,8 @@ import React, {
   memo,
   PropsWithChildren,
   HTMLAttributes,
-  MouseEvent
+  MouseEvent,
+  RefObject
 } from 'react';
 import { createPortal } from 'react-dom';
 import { SerializedStyles } from '@emotion/react';
@@ -15,6 +16,7 @@ import useTheme from '@theme/useTheme';
 import { Wrapper, StyledDialog } from './Dialog.styles';
 
 export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
+  ref?: RefObject<HTMLDivElement>;
   open: boolean;
   transitionDuration?: number;
   fullScreen?: boolean;
@@ -24,6 +26,7 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCli
 
 function Dialog({
   children,
+  ref,
   open,
   transitionDuration = 225,
   fullScreen,
@@ -106,6 +109,7 @@ function Dialog({
   if (isMounted && dialogPortalRef.current) {
     return createPortal(
       <Wrapper
+        ref={ref}
         dialogOpen={dialogOpen}
         dialogClose={dialogClose}
         transitionDuration={transitionDuration}

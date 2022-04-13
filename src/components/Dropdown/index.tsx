@@ -1,10 +1,19 @@
-import React, { useEffect, useState, useRef, useCallback, memo, HTMLAttributes } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  memo,
+  HTMLAttributes,
+  RefObject
+} from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
 export interface DropdownProps extends HTMLAttributes<HTMLButtonElement> {
+  ref?: RefObject<HTMLButtonElement>;
   options: Array<{
     name: string;
     value: number | string;
@@ -15,6 +24,7 @@ export interface DropdownProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 function Dropdown({
+  ref,
   options = [],
   value,
   fullWidth,
@@ -45,6 +55,7 @@ function Dropdown({
 
   return (
     <StyledDropdown
+      ref={ref}
       theme={theme}
       open={open && top > 0}
       css={customStyle}

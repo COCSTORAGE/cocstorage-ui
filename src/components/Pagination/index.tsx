@@ -1,4 +1,12 @@
-import React, { useEffect, useState, useCallback, memo, HTMLAttributes, MouseEvent } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  memo,
+  HTMLAttributes,
+  MouseEvent,
+  RefObject
+} from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
@@ -9,6 +17,7 @@ import { StyledPagination, PaginationItem } from './Pagination.styles';
 
 export interface PaginationProps
   extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange' | 'onCLick'> {
+  ref?: RefObject<HTMLUListElement>;
   count: number;
   page: number;
   rowPerPage?: number;
@@ -18,6 +27,7 @@ export interface PaginationProps
 }
 
 function Pagination({
+  ref,
   count,
   page,
   rowPerPage = 20,
@@ -71,7 +81,7 @@ function Pagination({
   }, [firstItem, lastItem]);
 
   return (
-    <StyledPagination {...props} css={customStyle}>
+    <StyledPagination ref={ref} {...props} css={customStyle}>
       <PaginationItem
         theme={theme}
         data-page={page - 1}

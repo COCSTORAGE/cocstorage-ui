@@ -1,10 +1,11 @@
-import React, { memo, ReactElement, HTMLAttributes } from 'react';
+import React, { memo, ReactElement, HTMLAttributes, RefObject } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { StyledTag } from './Tag.styles';
 
 export interface TagProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: RefObject<HTMLDivElement>;
   variant?: 'semiAccent' | 'text' | 'transparent';
   text: string;
   startIcon?: ReactElement;
@@ -12,11 +13,19 @@ export interface TagProps extends HTMLAttributes<HTMLDivElement> {
   customStyle?: SerializedStyles;
 }
 
-function Tag({ variant = 'text', text, startIcon, iconOnly, customStyle, ...props }: TagProps) {
+function Tag({
+  ref,
+  variant = 'text',
+  text,
+  startIcon,
+  iconOnly,
+  customStyle,
+  ...props
+}: TagProps) {
   const { theme } = useTheme();
 
   return (
-    <StyledTag theme={theme} variant={variant} css={customStyle} {...props}>
+    <StyledTag ref={ref} theme={theme} variant={variant} css={customStyle} {...props}>
       {startIcon && startIcon}
       {!iconOnly && text}
     </StyledTag>

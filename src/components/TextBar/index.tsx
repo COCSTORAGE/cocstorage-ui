@@ -1,10 +1,11 @@
-import React, { useState, useRef, useCallback, memo, HTMLAttributes } from 'react';
+import React, { useState, useRef, useCallback, memo, HTMLAttributes, RefObject } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { Wrapper, StyledTextBar, Label } from './TextBar.styles';
 
 export interface TextBarProps extends HTMLAttributes<HTMLInputElement> {
+  ref?: RefObject<HTMLInputElement>;
   variant?: 'filled' | 'focused';
   size?: 'small' | 'medium';
   fullWidth?: boolean;
@@ -14,6 +15,7 @@ export interface TextBarProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 function TextBar({
+  ref,
   variant = 'filled',
   size = 'medium',
   fullWidth,
@@ -32,7 +34,7 @@ function TextBar({
   const handleFocus = useCallback(() => setIsFocused(!isFocused), [isFocused]);
 
   return (
-    <Wrapper fullWidth={fullWidth}>
+    <Wrapper ref={ref} fullWidth={fullWidth}>
       <StyledTextBar
         ref={TextBarRef}
         theme={theme}

@@ -1,16 +1,17 @@
-import React, { useState, useCallback, memo, HTMLAttributes } from 'react';
+import React, { useState, useCallback, memo, HTMLAttributes, RefObject } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.styles';
 
 export interface CheckBoxProps extends HTMLAttributes<HTMLInputElement> {
+  ref?: RefObject<HTMLInputElement>;
   checked: boolean;
   disabled?: boolean;
   customStyle?: SerializedStyles;
 }
 
-function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
+function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckBoxProps) {
   const { theme } = useTheme();
 
   const [hover, setHover] = useState<boolean>(false);
@@ -20,6 +21,7 @@ function Checkbox({ checked, disabled, customStyle, ...props }: CheckBoxProps) {
 
   return (
     <Wrapper
+      ref={ref}
       theme={theme}
       css={customStyle}
       checked={checked}
