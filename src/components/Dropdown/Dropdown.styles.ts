@@ -49,7 +49,8 @@ export const StyledDropdown = styled(DefaultDropdown)<
     open
       ? css`
           border-color: ${palette.primary.main};
-          color: ${palette.text[type].main} & svg path {
+          color: ${palette.text[type].main};
+          & svg path {
             fill: ${palette.primary.main};
           }
         `
