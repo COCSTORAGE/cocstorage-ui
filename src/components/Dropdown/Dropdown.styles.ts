@@ -19,6 +19,8 @@ export const StyledDropdown = styled(DefaultDropdown)<
     open: boolean;
   }
 >`
+  width: 170px;
+
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
@@ -65,7 +67,6 @@ export const OptionWrapper = styled.ul<{
   open: boolean;
   top: number;
 }>`
-  display: ${({ open }) => (open ? 'block' : 'none')};
   position: absolute;
   width: 100%;
   bottom: -${({ top }) => top}px;
@@ -74,6 +75,17 @@ export const OptionWrapper = styled.ul<{
   border-radius: 8px;
   background-color: ${({ theme: { palette } }) => palette.background.fg2};
   z-index: 1;
+
+  visibility: hidden;
+  pointer-events: none;
+
+  ${({ open }) =>
+    open
+      ? css`
+          visibility: visible;
+          pointer-events: visible;
+        `
+      : ''};
 `;
 
 export const Option = styled.li`
