@@ -4,14 +4,14 @@ import useTheme from '@theme/useTheme';
 
 import { StyledSwitch, Circle } from './Switch.styles';
 
-export interface SwitchProps extends HTMLAttributes<HTMLButtonElement> {
+export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
   checked: boolean;
   disabled?: boolean;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onChange: (event: MouseEvent<HTMLButtonElement>) => void;
   customStyle?: SerializedStyles;
 }
 
-function Switch({ checked, disabled, onClick, customStyle, ...props }: SwitchProps) {
+function Switch({ checked, disabled, onChange, customStyle, ...props }: SwitchProps) {
   const { theme } = useTheme();
 
   return (
@@ -20,7 +20,7 @@ function Switch({ checked, disabled, onClick, customStyle, ...props }: SwitchPro
       css={customStyle}
       checked={checked}
       disabled={disabled}
-      onClick={!disabled ? onClick : undefined}
+      onClick={!disabled ? onChange : undefined}
       role="switch"
       {...props}
     >
