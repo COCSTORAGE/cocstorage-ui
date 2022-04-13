@@ -16,7 +16,7 @@ import Icon from '@components/Icon';
 import { StyledPagination, PaginationItem } from './Pagination.styles';
 
 export interface PaginationProps
-  extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange' | 'onCLick'> {
+  extends Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'> {
   ref?: RefObject<HTMLUListElement>;
   count: number;
   page: number;

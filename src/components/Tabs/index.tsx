@@ -14,7 +14,7 @@ import useTheme from '@theme/useTheme';
 import { ThemeType } from '@types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
-export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'> {
   ref?: RefObject<HTMLDivElement>;
   centered?: boolean;
   onChange: (value: number | string) => void;

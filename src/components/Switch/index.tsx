@@ -4,7 +4,8 @@ import useTheme from '@theme/useTheme';
 
 import { StyledSwitch, Circle } from './Switch.styles';
 
-export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {
+export interface SwitchProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'> {
   ref?: RefObject<HTMLButtonElement>;
   checked: boolean;
   disabled?: boolean;

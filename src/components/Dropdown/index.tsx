@@ -5,6 +5,7 @@ import React, {
   useCallback,
   memo,
   HTMLAttributes,
+  MouseEvent,
   RefObject
 } from 'react';
 import { SerializedStyles } from '@emotion/react';
@@ -12,7 +13,8 @@ import useTheme from '@theme/useTheme';
 
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
-export interface DropdownProps extends HTMLAttributes<HTMLButtonElement> {
+export interface DropdownProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'> {
   ref?: RefObject<HTMLButtonElement>;
   options: Array<{
     name: string;
@@ -20,6 +22,7 @@ export interface DropdownProps extends HTMLAttributes<HTMLButtonElement> {
   }>;
   value: number | string;
   fullWidth?: boolean;
+  onChange: (value: number | string) => void;
   customStyle?: SerializedStyles;
 }
 
@@ -28,6 +31,7 @@ function Dropdown({
   options = [],
   value,
   fullWidth,
+  onChange,
   placeholder,
   customStyle,
   ...props
@@ -44,6 +48,25 @@ function Dropdown({
   const optionWrapperRef = useRef<HTMLUListElement | null>(null);
 
   const handleClickDropdown = useCallback(() => setOpen(!open), [open]);
+
+  const handleClickOption = useCallback(
+    (event: MouseEvent<HTMLLIElement>) => {
+      event.stopPropagation();
+
+      const dataValue = event.currentTarget.getAttribute('data-value');
+
+      if (!dataValue) return;
+
+      if (!Number.isNaN(Number(dataValue))) {
+        onChange(Number(dataValue));
+      } else {
+        onChange(dataValue);
+      }
+
+      setOpen(false);
+    },
+    [onChange]
+  );
 
   useEffect(() => {
     if (optionWrapperRef.current) setTop(Number(optionWrapperRef.current?.clientHeight || 0) + 8);
@@ -68,7 +91,12 @@ function Dropdown({
       <DropDownIcon />
       <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
         {options.map((option) => (
-          <Option key={`dropdown-option-${option.name}`} theme={theme}>
+          <Option
+            key={`dropdown-option-${option.name}`}
+            theme={theme}
+            data-value={option.value}
+            onClick={handleClickOption}
+          >
             {option.name}
           </Option>
         ))}
