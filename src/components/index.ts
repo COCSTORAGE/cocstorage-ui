@@ -11,3 +11,4 @@ export { default as Tag } from './Tag';
 export { default as BottomSheet } from './BottomSheet';
 export { default as Dialog } from './Dialog';
 export { default as Pagination } from './Pagination';
+export { default as Box } from './Box';
