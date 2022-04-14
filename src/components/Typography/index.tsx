@@ -1,0 +1,25 @@
+import React, { memo, HTMLAttributes, PropsWithChildren } from 'react';
+import { SerializedStyles } from '@emotion/react';
+
+import { StyledTypography } from './Typography.styles';
+
+export interface TypographyProps extends HTMLAttributes<HTMLElement> {
+  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
+  customStyle?: SerializedStyles;
+}
+
+// TODO 추후 피그마에 Typography 정의가 되면 보완
+function Typography({
+  children,
+  component = 'h1',
+  customStyle,
+  ...props
+}: PropsWithChildren<TypographyProps>) {
+  return (
+    <StyledTypography as={component} css={customStyle} {...props}>
+      {children}
+    </StyledTypography>
+  );
+}
+
+export default memo(Typography);
