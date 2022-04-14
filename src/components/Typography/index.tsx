@@ -5,6 +5,10 @@ import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
+  fontSize?: string;
+  fontWeight?: number;
+  lineHeight?: string;
+  color?: string;
   customStyle?: SerializedStyles;
 }
 
@@ -12,11 +16,23 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
 function Typography({
   children,
   component = 'h1',
+  fontSize,
+  fontWeight,
+  lineHeight,
+  color,
   customStyle,
   ...props
 }: PropsWithChildren<TypographyProps>) {
   return (
-    <StyledTypography as={component} css={customStyle} {...props}>
+    <StyledTypography
+      as={component}
+      textFontSize={fontSize}
+      textFontWeight={fontWeight}
+      textLineHeight={lineHeight}
+      textColor={color}
+      css={customStyle}
+      {...props}
+    >
       {children}
     </StyledTypography>
   );
