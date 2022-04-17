@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsc --emitDeclarationOnly && rollup -c --watch",
-    "build": "tsc --emitDeclarationOnly && rollup -c",
+    "build": "tsc --emitDeclarationOnly && rollup -c --environment BUILD:production",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
@@ -44,9 +44,9 @@
     "typescript": "4.5.5"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   }
 }

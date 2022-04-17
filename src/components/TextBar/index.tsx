@@ -49,7 +49,7 @@ function TextBar({
         {...props}
       />
       {label && (
-        <Label theme={theme} variant={variant} size={size} isFocused={isFocused || !!value}>
+        <Label theme={theme} variant={variant} size={size} isFocused={isFocused} hasValue={!!value}>
           {label}
         </Label>
       )}

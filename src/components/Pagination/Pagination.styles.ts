@@ -36,11 +36,11 @@ export const PaginationItem = styled.li<{
         `
       : ''};
 
-  ${({ theme: { type, palette }, selected }) =>
+  ${({ theme: { palette }, selected }) =>
     selected
       ? css`
           background-color: ${palette.primary.main};
-          color: ${palette.text[type].main};
+          color: ${palette.text.dark.main};
         `
       : ''};
 
