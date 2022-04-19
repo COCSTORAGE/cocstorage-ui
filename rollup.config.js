@@ -8,8 +8,6 @@ import { terser } from 'rollup-plugin-terser';
 
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 
-const isProduction = process.env.BUILD === 'production';
-
 const outputs = [
   {
     file: 'dist/index.js',
@@ -37,15 +35,7 @@ export default outputs.map(({ file, format }) => {
         babelHelpers: 'runtime',
         exclude: 'node_modules/**',
         presets: ['@emotion/babel-preset-css-prop'],
-        plugins: [
-          [
-            '@emotion',
-            {
-              sourceMap: !isProduction
-            }
-          ],
-          '@babel/plugin-transform-runtime'
-        ],
+        plugins: ['@emotion', '@babel/plugin-transform-runtime'],
         extensions
       }),
       commonjs({
