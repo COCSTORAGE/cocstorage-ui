@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Global, css } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
 function GlobalStyles() {
-  const { theme } = useTheme();
+  const {
+    theme: { type, palette }
+  } = useTheme();
   return (
     <Global
       styles={css`
@@ -36,7 +38,8 @@ function GlobalStyles() {
         html,
         body {
           height: 100%;
-          background-color: ${theme.palette.background.bg};
+          background-color: ${palette.background.bg};
+          color: ${palette.text[type].main};
 
           font-family: 'Spoqa Han Sans Neo', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
             'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 나눔고딕, 'Nanum Gothic',
@@ -71,4 +74,4 @@ function GlobalStyles() {
   );
 }
 
-export default GlobalStyles;
+export default memo(GlobalStyles);

@@ -1,5 +1,6 @@
 import React, { memo, HTMLAttributes, PropsWithChildren } from 'react';
 import { SerializedStyles } from '@emotion/react';
+import useTheme from '@theme/useTheme';
 
 import { StyledTypography } from './Typography.styles';
 
@@ -23,9 +24,11 @@ function Typography({
   customStyle,
   ...props
 }: PropsWithChildren<TypographyProps>) {
+  const { theme } = useTheme();
   return (
     <StyledTypography
       as={component}
+      theme={theme}
       textFontSize={fontSize}
       textFontWeight={fontWeight}
       textLineHeight={lineHeight}

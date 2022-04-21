@@ -7,6 +7,8 @@ export const StyledTypography = styled.h1<{
   textLineHeight?: string;
   textColor?: string;
 }>`
+  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+
   ${({ textFontSize }) =>
     textFontSize
       ? css`
@@ -17,7 +19,7 @@ export const StyledTypography = styled.h1<{
   ${({ textFontWeight }) =>
     textFontWeight
       ? css`
-          font-weight: : ${textFontWeight};
+          font-weight: ${textFontWeight};
         `
       : ''};
 
