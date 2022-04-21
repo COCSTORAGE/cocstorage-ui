@@ -76,10 +76,10 @@ export const Label = styled.label<
   }
 >`
   position: absolute;
-  top: 50%;
   left: 0;
-  font-size: 14px;
+  bottom: 0;
   padding: 0 5px;
+  font-size: 14px;
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   z-index: 1;
   transform-origin: top left;
@@ -92,10 +92,12 @@ export const Label = styled.label<
 
   ${({ theme: { palette }, variant, isFocused, hasValue, size }) => {
     const translateX = size === 'small' ? '7px' : '9px';
+    let translateY = size === 'small' ? '-50%' : '-60%';
 
     if (isFocused || hasValue) {
+      translateY = size === 'small' ? '-135%' : '-155%';
       return css`
-        transform: translate(${translateX}, -145%) scale(0.75);
+        transform: translate(${translateX}, ${translateY}) scale(0.75);
 
         ${variant === 'focused' && isFocused
           ? css`
@@ -105,7 +107,7 @@ export const Label = styled.label<
       `;
     }
     return css`
-      transform: translate(${translateX}, -50%) scale(1);
+      transform: translate(${translateX}, ${translateY}) scale(1);
     `;
   }};
 `;

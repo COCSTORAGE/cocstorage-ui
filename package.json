@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Cocstorage UI React Components",
   "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
+  "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
   "repository": "https://github.com/COCSTORAGE/cocstorage-ui",
   "author": "cocstorage",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc --emitDeclarationOnly && rollup -c --watch",
-    "build": "tsc --emitDeclarationOnly && rollup -c --environment BUILD:production",
+    "build:dev": "tsc --emitDeclarationOnly && rollup -c --watch",
+    "build": "tsc --emitDeclarationOnly && rollup -c",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },

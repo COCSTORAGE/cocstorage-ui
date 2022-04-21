@@ -8,14 +8,16 @@ import { terser } from 'rollup-plugin-terser';
 
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 
+import packageJson from './package.json';
+
 const outputs = [
   {
-    file: 'dist/index.js',
+    file: packageJson.main,
     format: 'cjs'
   },
   {
-    file: 'dist/index.es.js',
-    format: 'es'
+    file: packageJson.module,
+    format: 'esm'
   }
 ];
 
