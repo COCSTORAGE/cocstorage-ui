@@ -12,23 +12,13 @@
     "declarationDir": ".",
     "skipLibCheck": true,
     "paths": {
-      "@assets": [
-        "./src/assets"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@components": [
-        "./src/components"
-      ],
+      "@assets": ["./src/assets"],
+      "@assets/*": ["./src/assets/*"],
+      "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
-      "@theme": [
-        "./src/theme"
-      ],
+      "@theme": ["./src/theme"],
       "@theme/*": ["./src/theme/*"],
-      "@types": [
-        "./src/types"
-      ],
+      "@types": ["./src/types"],
       "@types/*": ["./src/types/*"]
     },
     "jsxImportSource": "@emotion/react"
