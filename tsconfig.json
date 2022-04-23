@@ -9,7 +9,7 @@
     "strict": true,
     "esModuleInterop": true,
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": ".",
     "skipLibCheck": true,
     "paths": {
       "@assets": [
@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     "types/*.d.ts",
-    "index.d.ts"
+    "global.d.ts"
   ],
   "exclude": [
     "node_modules",

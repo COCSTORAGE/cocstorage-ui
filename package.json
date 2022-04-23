@@ -9,8 +9,8 @@
   "author": "cocstorage",
   "license": "MIT",
   "scripts": {
-    "build:dev": "tsc --emitDeclarationOnly && rollup -c --watch",
-    "build": "tsc --emitDeclarationOnly && rollup -c",
+    "build:dev": "rollup -c --watch",
+    "build": "rollup -c",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
