@@ -1,14 +1,23 @@
-import React, { useState, useRef, useCallback, memo, HTMLAttributes, RefObject } from 'react';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  memo,
+  HTMLAttributes,
+  RefObject,
+  ReactElement
+} from 'react';
 import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
-import { Wrapper, StyledTextBar, Label } from './TextBar.styles';
+import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
 
 export interface TextBarProps extends HTMLAttributes<HTMLInputElement> {
   ref?: RefObject<HTMLInputElement>;
   variant?: 'filled' | 'focused';
-  size?: 'small' | 'medium';
+  size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
+  startIcon?: ReactElement;
   label?: string;
   value: string;
   customStyle?: SerializedStyles;
@@ -19,6 +28,7 @@ function TextBar({
   variant = 'filled',
   size = 'medium',
   fullWidth,
+  startIcon,
   label,
   value,
   placeholder,
@@ -34,26 +44,39 @@ function TextBar({
   const handleFocus = useCallback(() => setIsFocused(!isFocused), [isFocused]);
 
   return (
-    <Wrapper ref={ref} fullWidth={fullWidth}>
-      <StyledTextBar
+    <StyledTextBar
+      ref={ref}
+      theme={theme}
+      css={customStyle}
+      fullWidth={fullWidth}
+      variant={variant}
+      isFocused={isFocused}
+      textBarSize={size}
+    >
+      {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
+      <Input
         ref={TextBarRef}
         theme={theme}
-        variant={variant}
-        textBarSize={size}
         fullWidth={fullWidth}
+        hasStartIcon={!!startIcon}
         value={value}
         placeholder={label ? undefined : placeholder}
         onFocus={handleFocus}
         onBlur={handleFocus}
-        css={customStyle}
         {...props}
       />
       {label && (
-        <Label theme={theme} variant={variant} size={size} isFocused={isFocused} hasValue={!!value}>
+        <Label
+          theme={theme}
+          variant={variant}
+          size={size}
+          isFocused={isFocused}
+          hasValue={!!value || !!startIcon}
+        >
           {label}
         </Label>
       )}
-    </Wrapper>
+    </StyledTextBar>
   );
 }
 

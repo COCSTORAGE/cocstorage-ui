@@ -48,4 +48,8 @@ export const StyledTypography = styled.h1<{
   & > strong {
     font-weight: 700;
   }
+
+  & > a {
+    text-decoration: underline;
+  }
 `;

@@ -1,6 +1,6 @@
 import React, { memo, SVGProps } from 'react';
 import { SerializedStyles } from '@emotion/react';
-import * as SvgIcons from '@assets/icons';
+import * as SvgIcons from '../../assets/icons';
 
 interface IconPros extends SVGProps<SVGElement> {
   name: keyof typeof SvgIcons;
