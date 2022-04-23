@@ -10,6 +10,7 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
   fontWeight?: number;
   lineHeight?: string;
   color?: string;
+  letterSpacing?: string;
   customStyle?: SerializedStyles;
 }
 
@@ -21,6 +22,7 @@ function Typography({
   fontWeight,
   lineHeight,
   color,
+  letterSpacing,
   customStyle,
   ...props
 }: PropsWithChildren<TypographyProps>) {
@@ -33,6 +35,7 @@ function Typography({
       textFontWeight={fontWeight}
       textLineHeight={lineHeight}
       textColor={color}
+      textLetterSpacing={letterSpacing}
       css={customStyle}
       {...props}
     >

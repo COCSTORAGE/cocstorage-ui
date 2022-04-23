@@ -6,6 +6,7 @@ export const StyledTypography = styled.h1<{
   textFontWeight?: number;
   textLineHeight?: string;
   textColor?: string;
+  textLetterSpacing?: string;
 }>`
   color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
@@ -36,4 +37,15 @@ export const StyledTypography = styled.h1<{
           color: ${textColor};
         `
       : ''};
+
+  ${({ textLetterSpacing }) =>
+    textLetterSpacing
+      ? css`
+          letter-spacing: ${textLetterSpacing};
+        `
+      : ''};
+
+  & > strong {
+    font-weight: 700;
+  }
 `;
