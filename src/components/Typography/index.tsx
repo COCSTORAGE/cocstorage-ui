@@ -21,7 +21,7 @@ function Typography({
   fontWeight,
   lineHeight,
   color,
-  letterSpacing,
+  letterSpacing = '-0.04em',
   customStyle,
   ...props
 }: PropsWithChildren<TypographyProps>) {

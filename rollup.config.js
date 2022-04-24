@@ -27,6 +27,7 @@ export default outputs.map((output) => {
   return {
     input: 'src/index.ts',
     output,
+    external: [/@babel\/runtime/],
     plugins: [
       peerDepsExternal(),
       babel({
@@ -45,8 +46,6 @@ export default outputs.map((output) => {
       }),
       svgr(),
       terser()
-    ],
-    external: (id) =>
-      !!(id.includes('@babel/runtime') || id.includes('react') || id.includes('@emotion'))
+    ]
   };
 });

@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import { CSSObject } from '@emotion/react';
+import styled, { CSSObject } from '@emotion/styled';
 
 import { BottomSheetProps } from '.';
 
