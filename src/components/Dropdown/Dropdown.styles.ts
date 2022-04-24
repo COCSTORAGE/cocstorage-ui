@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { DropdownProps } from '.';
 
@@ -24,44 +24,42 @@ export const StyledDropdown = styled(DefaultDropdown)<
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
-  ${({ theme: { type, palette } }) => {
+  ${({ theme: { type, palette } }): CSSObject => {
     switch (type) {
       case 'dark':
-        return css`
-          color: ${palette.text.dark.text2};
-
-          & svg path {
-            fill: ${palette.text.dark.main};
+        return {
+          color: palette.text.dark.text2,
+          '& svg path': {
+            fill: palette.text.dark.main
           }
-        `;
+        };
       default:
-        return css`
-          color: ${palette.text.light.text1};
-
-          & svg path {
-            fill: ${palette.text.light.main};
+        return {
+          color: palette.text.light.text1,
+          '& svg path': {
+            fill: palette.text.light.main
           }
-        `;
+        };
     }
   }};
 
-  ${({ theme: { type, palette }, open }) =>
+  ${({ theme: { type, palette }, open }): CSSObject =>
     open
-      ? css`
-          border-color: ${palette.primary.main};
-          color: ${palette.text[type].main};
-          & svg path {
-            fill: ${palette.primary.main};
+      ? {
+          borderColor: palette.primary.main,
+          color: palette.text[type].main,
+          '& svg path': {
+            fill: palette.primary.main
           }
-        `
-      : ''};
+        }
+      : {}};
 
-  ${({ fullWidth }) =>
+  ${({ fullWidth }): CSSObject =>
     fullWidth
-      ? css`
-          width: 100%;
-        `
-      : ''};
+      ? {
+          width: '100%'
+        }
+      : {}};
 `;
 
 export const OptionWrapper = styled.ul<{
@@ -80,13 +78,13 @@ export const OptionWrapper = styled.ul<{
   visibility: hidden;
   pointer-events: none;
 
-  ${({ open }) =>
+  ${({ open }): CSSObject =>
     open
-      ? css`
-          visibility: visible;
-          pointer-events: visible;
-        `
-      : ''};
+      ? {
+          visibility: 'visible',
+          pointerEvents: 'visible'
+        }
+      : {}};
 `;
 
 export const Option = styled.li`

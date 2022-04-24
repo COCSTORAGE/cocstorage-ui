@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { TextBarProps } from '.';
 
@@ -20,55 +20,57 @@ export const StyledTextBar = styled.div<
 
   border-radius: 8px;
 
-  ${({ theme: { type, palette }, variant, isFocused }) => {
+  ${({ theme: { type, palette }, variant, isFocused }): CSSObject => {
+    let cssObject: CSSObject;
     switch (variant) {
       case 'focused':
-        return css`
-          ${isFocused
-            ? css`
-                border-color: ${palette.primary.main};
-                & svg path {
-                  fill: ${palette.primary.main};
-                }
-              `
-            : css`
-                & svg path {
-                  fill: ${palette.text[type].text1};
-                }
-              `};
-        `;
+        if (isFocused) {
+          cssObject = {
+            borderColor: palette.primary.main,
+            '& svg path': {
+              fill: palette.primary.main
+            }
+          };
+        } else {
+          cssObject = {
+            '& svg path': {
+              fill: palette.text[type].text1
+            }
+          };
+        }
+        return cssObject;
       default:
-        return css`
-          & svg path {
-            fill: ${palette.text[type].text1};
+        return {
+          '& svg path': {
+            fill: palette.text[type].text1
           }
-        `;
+        };
     }
   }};
 
-  ${({ textBarSize }) => {
+  ${({ textBarSize }): CSSObject => {
     switch (textBarSize) {
       case 'small':
-        return css`
-          height: 36px;
-        `;
+        return {
+          height: 36
+        };
       case 'large':
-        return css`
-          height: 48px;
-        `;
+        return {
+          height: 48
+        };
       default:
-        return css`
-          height: 42px;
-        `;
+        return {
+          height: 42
+        };
     }
   }};
 
-  ${({ fullWidth }) =>
+  ${({ fullWidth }): CSSObject =>
     fullWidth
-      ? css`
-          width: 100%;
-        `
-      : ''};
+      ? {
+          width: '100%'
+        }
+      : {}};
 `;
 
 const DefaultInput = styled.input`
@@ -92,27 +94,27 @@ export const Input = styled(DefaultInput)<
     color: ${({ theme: { type, palette } }) => palette.text[type].text1};
   }
 
-  ${({ textBarSize, hasStartIcon }) => {
+  ${({ textBarSize, hasStartIcon }): CSSObject => {
     if (textBarSize === 'small' && !hasStartIcon) {
-      return css`
-        padding: 0 9px;
-      `;
+      return {
+        padding: '0 9px'
+      };
     }
 
     if (!hasStartIcon) {
-      return css`
-        padding: 0 12px;
-      `;
+      return {
+        padding: '0 12px'
+      };
     }
-    return '';
+    return {};
   }};
 
-  ${({ fullWidth, hasStartIcon }) =>
+  ${({ fullWidth, hasStartIcon }): CSSObject =>
     fullWidth || hasStartIcon
-      ? css`
-          flex-grow: 1;
-        `
-      : ''};
+      ? {
+          flexGrow: 1
+        }
+      : {}};
 `;
 
 export const Label = styled.label<
@@ -136,7 +138,8 @@ export const Label = styled.label<
 
   color: ${({ theme: { type, palette } }) => palette.text[type].text1};
 
-  ${({ theme: { palette }, variant, isFocused, hasValue, size }) => {
+  ${({ theme: { palette }, variant, isFocused, hasValue, size }): CSSObject => {
+    let cssObject: CSSObject;
     const translateX = size === 'small' ? '7px' : '9px';
 
     let translateY = size === 'small' ? '-35%' : '-50%';
@@ -148,28 +151,32 @@ export const Label = styled.label<
 
       if (size === 'large') translateY = '-160%';
 
-      return css`
-        transform: translate(${translateX}, ${translateY}) scale(0.75);
+      cssObject = {
+        transform: `translate(${translateX}, ${translateY}) scale(0.75)`
+      };
 
-        ${variant === 'focused' && isFocused
-          ? css`
-              color: ${palette.primary.main};
-            `
-          : ''}
-      `;
+      if (variant === 'focused' && isFocused) {
+        cssObject = {
+          ...cssObject,
+          color: palette.primary.main
+        };
+      }
+
+      return cssObject;
     }
-    return css`
-      transform: translate(${translateX}, ${translateY}) scale(1);
-    `;
+
+    return {
+      transform: `translate(${translateX}, ${translateY}) scale(1)`
+    };
   }};
 `;
 
 export const StartIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
-  ${({ size }) => {
+  ${({ size }): CSSObject => {
     const paddingL = size === 'small' ? '7px' : '9px';
 
-    return css`
-      padding: 0 4px 0 ${paddingL};
-    `;
+    return {
+      padding: `0 4px 0 ${paddingL}`
+    };
   }}};
 `;

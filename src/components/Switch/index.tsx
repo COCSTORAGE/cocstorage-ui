@@ -1,16 +1,15 @@
 import React, { memo, HTMLAttributes, MouseEvent, RefObject } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledSwitch, Circle } from './Switch.styles';
 
 export interface SwitchProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'> {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>> {
   ref?: RefObject<HTMLButtonElement>;
   checked: boolean;
   disabled?: boolean;
   onChange: (event: MouseEvent<HTMLButtonElement>) => void;
-  customStyle?: SerializedStyles;
 }
 
 function Switch({ ref, checked, disabled, onChange, customStyle, ...props }: SwitchProps) {

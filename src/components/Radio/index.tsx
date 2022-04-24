@@ -1,14 +1,13 @@
 import React, { memo, HTMLAttributes, RefObject } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.styles';
 
-export interface RadioProps extends HTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
   ref?: RefObject<HTMLInputElement>;
   checked: boolean;
   disabled?: boolean;
-  customStyle?: SerializedStyles;
 }
 
 function Radio({ ref, checked, disabled, customStyle, ...props }: RadioProps) {

@@ -1,17 +1,17 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { TabsProps } from '.';
 
 export const StyledTabs = styled.div<Pick<TabsProps, 'centered'>>`
   display: flex;
 
-  ${({ centered }) =>
+  ${({ centered }): CSSObject =>
     centered
-      ? css`
-          justify-content: center;
-        `
-      : ''}
+      ? {
+          justifyContent: 'center'
+        }
+      : {}}
 `;
 
 export const TabsInner = styled.div`

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 export const StyledTypography = styled.h1<{
   textFontSize?: string;
@@ -10,40 +10,40 @@ export const StyledTypography = styled.h1<{
 }>`
   color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
-  ${({ textFontSize }) =>
+  ${({ textFontSize }): CSSObject =>
     textFontSize
-      ? css`
-          font-size: ${textFontSize};
-        `
-      : ''};
+      ? {
+          fontSize: textFontSize
+        }
+      : {}};
 
-  ${({ textFontWeight }) =>
+  ${({ textFontWeight }): CSSObject =>
     textFontWeight
-      ? css`
-          font-weight: ${textFontWeight};
-        `
-      : ''};
+      ? {
+          fontWeight: textFontWeight
+        }
+      : {}};
 
   ${({ textLineHeight }) =>
     textLineHeight
-      ? css`
-          line-height: ${textLineHeight};
-        `
-      : ''};
+      ? {
+          lineHeight: textLineHeight
+        }
+      : {}};
 
   ${({ textColor }) =>
     textColor
-      ? css`
-          color: ${textColor};
-        `
-      : ''};
+      ? {
+          color: textColor
+        }
+      : {}};
 
   ${({ textLetterSpacing }) =>
     textLetterSpacing
-      ? css`
-          letter-spacing: ${textLetterSpacing};
-        `
-      : ''};
+      ? {
+          letterSpacing: textLetterSpacing
+        }
+      : {}};
 
   & > strong {
     font-weight: 700;

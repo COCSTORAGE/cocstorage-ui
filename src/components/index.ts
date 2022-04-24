@@ -14,3 +14,4 @@ export { default as Pagination } from './Pagination';
 export { default as Box } from './Box';
 export { default as Typography } from './Typography';
 export { default as Avatar } from './Avatar';
+export { default as Alert } from './Alert';

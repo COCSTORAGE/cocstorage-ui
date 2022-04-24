@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { BottomSheetProps } from '.';
 
@@ -19,20 +19,20 @@ export const Wrapper = styled.div<
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms cubic-bezier(0, 0, 0.2, 1)
     0ms;
 
-  ${({ sheetOpen }) =>
+  ${({ sheetOpen }): CSSObject =>
     sheetOpen
-      ? css`
-          opacity: 1;
-          visibility: visible;
-        `
-      : ''};
+      ? {
+          opacity: 1,
+          visibility: 'visible'
+        }
+      : {}};
 
-  ${({ sheetClose }) =>
+  ${({ sheetClose }): CSSObject =>
     sheetClose
-      ? css`
-          opacity: 0;
-        `
-      : ''};
+      ? {
+          opacity: 0
+        }
+      : {}};
 `;
 
 export const StyledBottomSheet = styled.div<
@@ -49,14 +49,14 @@ export const StyledBottomSheet = styled.div<
 
   ${({ sheetOpen }) =>
     sheetOpen
-      ? css`
+      ? `
           transform: translateY(0);
         `
       : ''};
 
   ${({ sheetClose }) =>
     sheetClose
-      ? css`
+      ? `
           transform: translateY(100%);
         `
       : ''};
@@ -73,13 +73,13 @@ export const SwipeZone = styled.div`
 `;
 
 export const Content = styled.div<{ maxHeight: number; swipeZoneHeight: number }>`
-  ${({ maxHeight, swipeZoneHeight }) => {
+  ${({ maxHeight, swipeZoneHeight }): CSSObject => {
     let calcMaxHeight = maxHeight ? `${maxHeight}px` : '100%';
     if (swipeZoneHeight) calcMaxHeight = `calc(${calcMaxHeight} - ${swipeZoneHeight}px)`;
 
-    return css`
-      max-height: ${calcMaxHeight};
-    `;
+    return {
+      maxHeight: calcMaxHeight
+    };
   }};
   overflow-x: hidden;
   overflow-y: auto;

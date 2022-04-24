@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { TagProps } from '.';
 
@@ -16,36 +16,33 @@ const DefaultTag = styled.span`
 `;
 
 export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'variant'>>`
-  ${({ theme: { type, palette }, variant }) => {
+  ${({ theme: { type, palette }, variant }): CSSObject => {
     switch (variant) {
       case 'semiAccent':
-        return css`
-          background-color: ${palette.primary.bg1};
-          color: ${palette.primary.main};
-          font-weight: 700;
-
-          & svg path {
-            fill: ${palette.primary.main};
+        return {
+          backgroundColor: palette.primary.bg1,
+          color: palette.primary.main,
+          fontWeight: 700,
+          '& svg path': {
+            fill: palette.primary.main
           }
-        `;
+        };
       case 'transparent':
-        return css`
-          background-color: transparent;
-          color: ${palette.text[type].text2};
-
-          & svg path {
-            fill: ${palette.text[type].text2};
+        return {
+          backgroundColor: 'transparent',
+          color: palette.text[type].text2,
+          '& svg path': {
+            fill: palette.text[type].text2
           }
-        `;
+        };
       default:
-        return css`
-          background-color: ${palette.box.filled.normal};
-          color: ${palette.text[type].main};
-
-          & svg path {
-            fill: ${palette.text[type].main};
+        return {
+          backgroundColor: palette.box.filled.normal,
+          color: palette.text[type].main,
+          '& svg path': {
+            fill: palette.text[type].main
           }
-        `;
+        };
     }
   }}
 `;

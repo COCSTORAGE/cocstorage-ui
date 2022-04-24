@@ -8,18 +8,17 @@ import React, {
   MouseEvent,
   RefObject
 } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
-import { ThemeType } from '@types';
+import { GenericComponentProps, ThemeType } from '../../types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
-export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'> {
+export interface TabsProps
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>> {
   ref?: RefObject<HTMLDivElement>;
   centered?: boolean;
   onChange: (value: number | string) => void;
   value: number | string;
-  customStyle?: SerializedStyles;
 }
 
 function Tabs({

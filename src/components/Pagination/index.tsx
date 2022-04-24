@@ -7,23 +7,22 @@ import React, {
   MouseEvent,
   RefObject
 } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
-// Components
-import Icon from '@components/Icon';
-
+import { GenericComponentProps } from '../../types';
 import { StyledPagination, PaginationItem } from './Pagination.styles';
 
+// Components
+import Icon from '../Icon';
+
 export interface PaginationProps
-  extends Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'> {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>> {
   ref?: RefObject<HTMLUListElement>;
   count: number;
   page: number;
   rowPerPage?: number;
   itemCount?: number;
   onChange: (value: number) => void;
-  customStyle?: SerializedStyles;
 }
 
 function Pagination({

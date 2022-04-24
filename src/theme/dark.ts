@@ -76,5 +76,3 @@ export const dark: Theme = {
     }
   }
 };
-
-export default dark;

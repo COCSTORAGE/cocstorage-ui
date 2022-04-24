@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { RadioProps } from '.';
 
@@ -13,13 +13,13 @@ export const Wrapper = styled.div<Pick<RadioProps, 'disabled'>>`
   border-radius: 20px;
   overflow: hidden;
 
-  ${({ theme: { palette }, disabled }) =>
+  ${({ theme: { palette }, disabled }): CSSObject =>
     disabled
-      ? css`
-          border-color: transparent;
-          background-color: ${palette.box.filled.normal};
-        `
-      : ''};
+      ? {
+          borderColor: 'transparent',
+          backgroundColor: palette.box.filled.normal
+        }
+      : {}};
 `;
 
 export const StyledRadio = styled.input`

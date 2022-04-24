@@ -1,14 +1,13 @@
 import React, { useState, useCallback, memo, HTMLAttributes, RefObject } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.styles';
 
-export interface CheckBoxProps extends HTMLAttributes<HTMLInputElement> {
+export interface CheckBoxProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
   ref?: RefObject<HTMLInputElement>;
   checked: boolean;
   disabled?: boolean;
-  customStyle?: SerializedStyles;
 }
 
 function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckBoxProps) {

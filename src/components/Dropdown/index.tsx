@@ -8,13 +8,13 @@ import React, {
   MouseEvent,
   RefObject
 } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
 export interface DropdownProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'> {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>> {
   ref?: RefObject<HTMLButtonElement>;
   options: Array<{
     name: string;
@@ -23,7 +23,6 @@ export interface DropdownProps
   value: number | string;
   fullWidth?: boolean;
   onChange: (value: number | string) => void;
-  customStyle?: SerializedStyles;
 }
 
 function Dropdown({

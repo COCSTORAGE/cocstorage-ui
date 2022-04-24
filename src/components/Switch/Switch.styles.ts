@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { SwitchProps } from '.';
 
@@ -15,24 +15,24 @@ export const StyledSwitch = styled(DefaultSwitch)<Pick<SwitchProps, 'checked' | 
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
 
-  ${({ theme: { type, palette }, checked, disabled }) => {
+  ${({ theme: { type, palette }, checked, disabled }): CSSObject => {
+    let cssObject: CSSObject = {};
     switch (type) {
       default:
-        return css`
-          ${checked
-            ? css`
-                border-color: transparent;
-                background-color: ${palette.primary.main};
-              `
-            : ''}
+        if (checked) {
+          cssObject = {
+            borderColor: 'transparent',
+            backgroundColor: palette.primary.main
+          };
+        }
 
-          ${disabled
-            ? css`
-                border-color: transparent;
-                background-color: ${palette.box.filled.normal};
-              `
-            : ''}
-        `;
+        if (disabled) {
+          cssObject = {
+            borderColor: 'transparent',
+            backgroundColor: palette.box.filled.normal
+          };
+        }
+        return cssObject;
     }
   }};
 `;
@@ -45,48 +45,55 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
   height: 16px;
   border-radius: 50%;
 
-  ${({ theme: { type, palette }, checked, disabled }) => {
+  ${({ theme: { type, palette }, checked, disabled }): CSSObject => {
+    let cssObject: CSSObject;
     switch (type) {
       case 'dark':
-        return css`
-          background-color: ${palette.text.dark.main};
+        cssObject = {
+          backgroundColor: palette.text.dark.main
+        };
 
-          ${checked
-            ? css`
-                left: auto;
-                right: 4px;
-                background-color: ${palette.text.dark.main};
-              `
-            : ''}
+        if (checked) {
+          cssObject = {
+            ...cssObject,
+            left: 'auto',
+            right: 4,
+            backgroundColor: palette.text.dark.main
+          };
+        }
 
-          ${disabled
-            ? css`
-                left: 4px;
-                right: auto;
-                background-color: ${palette.text.dark.text3};
-              `
-            : ''}
-        `;
+        if (disabled) {
+          cssObject = {
+            ...cssObject,
+            left: 4,
+            right: 'auto',
+            backgroundColor: palette.text.dark.text3
+          };
+        }
+        return cssObject;
       default:
-        return css`
-          background-color: ${palette.text.light.main};
+        cssObject = {
+          backgroundColor: palette.text.light.main
+        };
 
-          ${checked
-            ? css`
-                left: auto;
-                right: 4px;
-                background-color: ${palette.text.dark.main};
-              `
-            : ''}
+        if (checked) {
+          cssObject = {
+            ...cssObject,
+            left: 'auto',
+            right: 4,
+            backgroundColor: palette.text.dark.main
+          };
+        }
 
-          ${disabled
-            ? css`
-                left: 4px;
-                right: auto;
-                background-color: ${palette.text.light.text3};
-              `
-            : ''}
-        `;
+        if (disabled) {
+          cssObject = {
+            ...cssObject,
+            left: 4,
+            right: 'auto',
+            backgroundColor: palette.text.light.text3
+          };
+        }
+        return cssObject;
     }
   }};
 `;

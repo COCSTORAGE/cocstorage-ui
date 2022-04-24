@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { CSSObject } from '@emotion/react';
 
-import { css } from '@emotion/react';
 import { AvatarProps } from '.';
 
 export const StyledAvatar = styled.img<
@@ -11,27 +11,27 @@ export const StyledAvatar = styled.img<
 >`
   background-color: ${({ theme: { palette } }) => palette.background.fg2};
 
-  ${({ avatarWidth }) =>
+  ${({ avatarWidth }): CSSObject =>
     avatarWidth
-      ? css`
-          width: ${avatarWidth};
-        `
-      : ''};
+      ? {
+          width: avatarWidth
+        }
+      : {}};
 
-  ${({ avatarHeight }) =>
+  ${({ avatarHeight }): CSSObject =>
     avatarHeight
-      ? css`
-          height: ${avatarHeight};
-        `
-      : ''};
+      ? {
+          height: avatarHeight
+        }
+      : {}};
 
   max-width: 100%;
   border-radius: 50%;
 
-  ${({ round }) =>
+  ${({ round }): CSSObject =>
     round
-      ? css`
-          border-radius: 6px;
-        `
-      : ''};
+      ? {
+          borderRadius: 6
+        }
+      : {}};
 `;

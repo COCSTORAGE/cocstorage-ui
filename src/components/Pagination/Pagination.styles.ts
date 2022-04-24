@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 export const StyledPagination = styled.ul`
   display: flex;
@@ -27,31 +27,31 @@ export const PaginationItem = styled.li<{
     fill: ${({ theme: { type, palette } }) => palette.text[type].text1};
   }
 
-  ${({ isNextItemButton }) =>
+  ${({ isNextItemButton }): CSSObject =>
     isNextItemButton
-      ? css`
-          & svg {
-            transform: rotate(180deg);
+      ? {
+          '& svg': {
+            transform: 'rotate(180deg)'
           }
-        `
-      : ''};
+        }
+      : {}};
 
-  ${({ theme: { palette }, selected }) =>
+  ${({ theme: { palette }, selected }): CSSObject =>
     selected
-      ? css`
-          background-color: ${palette.primary.main};
-          color: ${palette.text.dark.main};
-        `
-      : ''};
+      ? {
+          backgroundColor: palette.primary.main,
+          color: palette.text.dark.main
+        }
+      : {}};
 
-  ${({ theme: { type, palette }, disabled }) =>
+  ${({ theme: { type, palette }, disabled }): CSSObject =>
     disabled
-      ? css`
-          color: ${palette.text[type].text3};
-          & svg path {
-            fill: ${palette.text[type].text3};
-          }
-          cursor: default;
-        `
-      : ''};
+      ? {
+          color: palette.text[type].text3,
+          '& svg path': {
+            fill: palette.text[type].text3
+          },
+          cursor: 'default'
+        }
+      : {}};
 `;

@@ -11,18 +11,17 @@ import React, {
   TouchEvent
 } from 'react';
 import { createPortal } from 'react-dom';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledBottomSheet, SwipeZone, Content, Rectangle } from './BottomSheet.styles';
 
-export interface BottomSheetProps extends HTMLAttributes<HTMLDivElement> {
+export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   ref?: RefObject<HTMLDivElement>;
   open: boolean;
   transitionDuration?: number;
   disableSwipeable?: boolean;
   onClose: () => void;
-  customStyle?: SerializedStyles;
 }
 
 function BottomSheet({

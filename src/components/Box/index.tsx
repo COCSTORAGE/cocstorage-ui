@@ -1,11 +1,10 @@
 import React, { memo, HTMLAttributes, ElementType, PropsWithChildren } from 'react';
-import { SerializedStyles } from '@emotion/react';
 
+import { GenericComponentProps } from '../../types';
 import { StyledBox } from './Box.styles';
 
-export interface BoxProps extends HTMLAttributes<HTMLElement> {
+export interface BoxProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
   component?: ElementType;
-  customStyle?: SerializedStyles;
 }
 
 function Box({ children, component = 'div', customStyle, ...props }: PropsWithChildren<BoxProps>) {

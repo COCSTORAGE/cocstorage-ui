@@ -1,17 +1,16 @@
 import React, { memo, HTMLAttributes, PropsWithChildren } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledTypography } from './Typography.styles';
 
-export interface TypographyProps extends HTMLAttributes<HTMLElement> {
+export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
   fontSize?: string;
   fontWeight?: number;
   lineHeight?: string;
   color?: string;
   letterSpacing?: string;
-  customStyle?: SerializedStyles;
 }
 
 // TODO 추후 피그마에 Typography 정의가 되면 보완

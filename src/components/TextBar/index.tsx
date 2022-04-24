@@ -7,12 +7,12 @@ import React, {
   RefObject,
   ReactElement
 } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
 
-export interface TextBarProps extends HTMLAttributes<HTMLInputElement> {
+export interface TextBarProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
   ref?: RefObject<HTMLInputElement>;
   variant?: 'filled' | 'focused';
   size?: 'small' | 'medium' | 'large';
@@ -20,7 +20,6 @@ export interface TextBarProps extends HTMLAttributes<HTMLInputElement> {
   startIcon?: ReactElement;
   label?: string;
   value: string;
-  customStyle?: SerializedStyles;
 }
 
 function TextBar({

@@ -76,5 +76,3 @@ export const light: Theme = {
     }
   }
 };
-
-export default light;

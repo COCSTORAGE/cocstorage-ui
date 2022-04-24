@@ -1,16 +1,15 @@
 import React, { memo, HTMLAttributes } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledAvatar } from './Avatar.styles';
 
-export interface AvatarProps extends HTMLAttributes<HTMLImageElement> {
+export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLImageElement>> {
   src: string;
   alt: string;
   width?: string;
   height?: string;
   round?: boolean;
-  customStyle?: SerializedStyles;
 }
 
 function Avatar({ src, alt, width, height, round, customStyle, ...props }: AvatarProps) {

@@ -10,18 +10,18 @@ import React, {
   RefObject
 } from 'react';
 import { createPortal } from 'react-dom';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledDialog } from './Dialog.styles';
 
-export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
+export interface DialogProps
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
   ref?: RefObject<HTMLDivElement>;
   open: boolean;
   transitionDuration?: number;
   fullScreen?: boolean;
   onClose: () => void;
-  customStyle?: SerializedStyles;
 }
 
 function Dialog({
@@ -115,6 +115,7 @@ function Dialog({
         transitionDuration={transitionDuration}
         fullScreen={fullScreen}
         onClick={handleClose}
+        role="dialog"
       >
         <StyledDialog
           theme={theme}

@@ -17,16 +17,13 @@
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
       "@theme": ["./src/theme"],
-      "@theme/*": ["./src/theme/*"],
-      "@types": ["./src/types"],
-      "@types/*": ["./src/types/*"]
+      "@theme/*": ["./src/theme/*"]
     },
     "jsxImportSource": "@emotion/react"
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "types/*.d.ts",
     "global.d.ts"
   ],
   "exclude": [

@@ -1,16 +1,15 @@
 import React, { memo, ReactElement, HTMLAttributes, RefObject } from 'react';
-import { SerializedStyles } from '@emotion/react';
 import useTheme from '@theme/useTheme';
 
+import { GenericComponentProps } from '../../types';
 import { StyledTag } from './Tag.styles';
 
-export interface TagProps extends HTMLAttributes<HTMLDivElement> {
+export interface TagProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   ref?: RefObject<HTMLDivElement>;
   variant?: 'semiAccent' | 'text' | 'transparent';
   text: string;
   startIcon?: ReactElement;
   iconOnly?: boolean;
-  customStyle?: SerializedStyles;
 }
 
 function Tag({

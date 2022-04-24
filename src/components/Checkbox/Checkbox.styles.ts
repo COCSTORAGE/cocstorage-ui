@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { CheckBoxProps } from '.';
 
@@ -13,21 +13,21 @@ export const Wrapper = styled.div<Pick<CheckBoxProps, 'checked' | 'disabled'>>`
   border-radius: 4px;
   overflow: hidden;
 
-  ${({ theme: { palette }, checked }) =>
+  ${({ theme: { palette }, checked }): CSSObject =>
     checked
-      ? css`
-          border-color: transparent;
-          background-color: ${palette.primary.main};
-        `
-      : ''};
+      ? {
+          borderColor: 'transparent',
+          backgroundColor: palette.primary.main
+        }
+      : {}};
 
-  ${({ theme: { palette }, disabled }) =>
+  ${({ theme: { palette }, disabled }): CSSObject =>
     disabled
-      ? css`
-          border-color: transparent;
-          background-color: ${palette.box.filled.normal};
-        `
-      : ''};
+      ? {
+          borderColor: 'transparent',
+          backgroundColor: palette.box.filled.normal
+        }
+      : {}};
 `;
 
 export const StyledCheckbox = styled.input`
@@ -67,10 +67,10 @@ export const Check = styled.div<
 
   border-color: ${({ theme: { type, palette } }) => palette.text[type].text2};
 
-  ${({ theme: { palette }, checked }) =>
+  ${({ theme: { palette }, checked }): CSSObject =>
     checked
-      ? css`
-          border-color: ${palette.text.dark.main};
-        `
-      : ''};
+      ? {
+          borderColor: palette.text.dark.main
+        }
+      : {}};
 `;

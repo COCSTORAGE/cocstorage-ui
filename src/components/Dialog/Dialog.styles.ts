@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { DialogProps } from '.';
 
@@ -15,12 +15,12 @@ export const Wrapper = styled.div<
   width: 100%;
   height: 100%;
 
-  ${({ fullScreen }) =>
+  ${({ fullScreen }): CSSObject =>
     !fullScreen
-      ? css`
-          padding: 20px;
-        `
-      : ''};
+      ? {
+          padding: 20
+        }
+      : {}};
 
   background-color: rgba(0, 0, 0, 0.6);
   overflow: hidden;
@@ -31,20 +31,20 @@ export const Wrapper = styled.div<
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms cubic-bezier(0, 0, 0.2, 1)
     0ms;
 
-  ${({ dialogOpen }) =>
+  ${({ dialogOpen }): CSSObject =>
     dialogOpen
-      ? css`
-          opacity: 1;
-          visibility: visible;
-        `
-      : ''};
+      ? {
+          opacity: 1,
+          visibility: 'visible'
+        }
+      : {}};
 
-  ${({ dialogClose }) =>
+  ${({ dialogClose }): CSSObject =>
     dialogClose
-      ? css`
-          opacity: 0;
-        `
-      : ''};
+      ? {
+          opacity: 0
+        }
+      : {}};
 `;
 
 export const StyledDialog = styled.div<
@@ -53,15 +53,15 @@ export const StyledDialog = styled.div<
     dialogClose: boolean;
   }
 >`
-  ${({ fullScreen }) =>
+  ${({ fullScreen }): CSSObject =>
     !fullScreen
-      ? css`
-          border-radius: 16px;
-        `
-      : css`
-          width: 100%;
-          height: 100%;
-        `};
+      ? {
+          borderRadius: 16
+        }
+      : {
+          width: '100%',
+          height: '100%'
+        }};
 
   background-color: ${({ theme: { palette } }) => palette.background.bg};
 
@@ -72,18 +72,18 @@ export const StyledDialog = styled.div<
 
   z-index: 1003;
 
-  ${({ dialogOpen }) =>
+  ${({ dialogOpen }): CSSObject =>
     dialogOpen
-      ? css`
-          opacity: 1;
-          visibility: visible;
-        `
-      : ''};
+      ? {
+          opacity: 1,
+          visibility: 'visible'
+        }
+      : {}};
 
-  ${({ dialogClose }) =>
+  ${({ dialogClose }): CSSObject =>
     dialogClose
-      ? css`
-          opacity: 0;
-        `
-      : ''};
+      ? {
+          opacity: 0
+        }
+      : {}};
 `;
