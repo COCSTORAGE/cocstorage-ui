@@ -17,7 +17,7 @@ const outputs = [
   },
   {
     file: packageJson.module,
-    format: 'esm',
+    format: 'es',
     sourcemap: true
   }
 ];
@@ -43,7 +43,6 @@ export default outputs.map((output) => {
       }),
       typescript({ tsconfig: './tsconfig.json' }),
       resolve({
-        moduleDirectories: ['node_modules'],
         extensions
       }),
       svgr()

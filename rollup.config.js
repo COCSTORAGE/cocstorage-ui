@@ -41,7 +41,6 @@ export default outputs.map((output) => {
       }),
       typescript({ tsconfig: './tsconfig.json' }),
       resolve({
-        moduleDirectories: ['node_modules'],
         extensions
       }),
       svgr(),

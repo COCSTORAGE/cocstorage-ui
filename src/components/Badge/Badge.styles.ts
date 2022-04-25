@@ -1,24 +1,26 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { AlertProps } from '.';
+import { BadgeProps } from '.';
 
-const DefaultAlert = styled.div`
+const DefaultBadge = styled.label`
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: 100%;
-  min-width: 0;
-  padding: 0 20px;
-  height: 50px;
-  border-radius: 12px;
-  overflow: hidden;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 4.7px;
+  gap: 2px;
+  height: 16px;
+  line-height: 18px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
   white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
-export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
-  ${({ theme: { palette }, severity }): CSSObject => {
-    switch (severity) {
+export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'variant'>>`
+  ${({ theme: { palette }, variant }): CSSObject => {
+    switch (variant) {
       case 'success':
         return {
           backgroundColor: palette.secondary.green.bg,
@@ -53,15 +55,4 @@ export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
         };
     }
   }};
-`;
-
-export const Message = styled.div`
-  flex: 1;
-  text-align: left;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.04em;
 `;

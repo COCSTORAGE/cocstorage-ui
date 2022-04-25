@@ -36,7 +36,7 @@ function Button({
       css={customStyle}
       {...props}
     >
-      {startIcon && startIcon}
+      {startIcon}
       {!iconOnly && children}
     </StyledButton>
   );
