@@ -22,8 +22,8 @@ export interface TabsProps
 }
 
 function Tabs({
-  ref,
   children,
+  ref,
   centered = false,
   onChange,
   value,

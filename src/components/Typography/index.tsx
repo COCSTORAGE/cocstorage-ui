@@ -5,7 +5,7 @@ import { GenericComponentProps } from '../../types';
 import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
-  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
+  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span';
   fontSize?: string;
   fontWeight?: number;
   lineHeight?: string;

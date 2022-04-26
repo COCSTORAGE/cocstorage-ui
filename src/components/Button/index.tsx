@@ -1,10 +1,17 @@
-import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes, RefObject } from 'react';
+import React, {
+  memo,
+  PropsWithChildren,
+  RefObject,
+  ReactElement,
+  ButtonHTMLAttributes
+} from 'react';
 import useTheme from '@theme/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledButton } from './Button.styles';
 
-export interface ButtonProps extends GenericComponentProps<HTMLAttributes<HTMLButtonElement>> {
+export interface ButtonProps
+  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
   ref?: RefObject<HTMLButtonElement>;
   variant?: 'text' | 'accent' | 'semiAccent' | 'transparent';
   size?: 'big' | 'medium' | 'small' | 'pico';
@@ -14,8 +21,8 @@ export interface ButtonProps extends GenericComponentProps<HTMLAttributes<HTMLBu
 }
 
 function Button({
-  ref,
   children,
+  ref,
   variant = 'text',
   size = 'medium',
   fullWidth = false,

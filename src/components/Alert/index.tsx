@@ -1,10 +1,11 @@
-import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import React, { memo, PropsWithChildren, RefObject, ReactElement, HTMLAttributes } from 'react';
 import useTheme from '@theme/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledAlert, Message } from './Alert.styles';
 
 export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
+  ref?: RefObject<HTMLDivElement>;
   severity?: 'info' | 'success' | 'warning' | 'error';
   icon?: ReactElement;
   action?: ReactElement;
@@ -12,6 +13,7 @@ export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
 
 function Alert({
   children,
+  ref,
   severity = 'info',
   icon,
   action,
@@ -21,7 +23,14 @@ function Alert({
   const { theme } = useTheme();
 
   return (
-    <StyledAlert theme={theme} severity={severity} css={customStyle} {...props} role="alert">
+    <StyledAlert
+      ref={ref}
+      theme={theme}
+      severity={severity}
+      css={customStyle}
+      {...props}
+      role="alert"
+    >
       {icon}
       <Message>{children}</Message>
       {action}

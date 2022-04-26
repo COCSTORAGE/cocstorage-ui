@@ -16,6 +16,7 @@ import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
+  ref?: RefObject<HTMLDivElement>;
   anchorRef?: RefObject<HTMLElement>;
   open: boolean;
   centered?: boolean;
@@ -24,6 +25,7 @@ export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivE
 }
 
 function Menu({
+  ref,
   children,
   anchorRef,
   open,
@@ -160,7 +162,7 @@ function Menu({
 
   if (isMounted && menuPortalRef.current) {
     return createPortal(
-      <Wrapper menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
+      <Wrapper ref={ref} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
         <StyledMenu
           theme={theme}
           ref={menuRef}
