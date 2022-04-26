@@ -16,7 +16,7 @@ const DefaultButton = styled.button`
 `;
 
 export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>`
-  ${({ theme: { palette }, variant }) => {
+  ${({ theme: { type, palette }, variant }) => {
     switch (variant) {
       case 'accent':
         return {
@@ -33,7 +33,7 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text.light.text2
+            color: palette.text[type].text2
           }
         };
       case 'semiAccent':
@@ -51,7 +51,7 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text.light.text2
+            color: palette.text[type].text2
           }
         };
       case 'transparent':
@@ -59,9 +59,9 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           padding: '5px 6px !important',
           backgroundColor: 'transparent',
           borderRadius: 6,
-          color: palette.text.light.main,
+          color: palette.text[type].main,
           '& svg path': {
-            fill: palette.text.light.main
+            fill: palette.text[type].main
           },
           '&:hover': {
             backgroundColor: palette.box.filled.focused
@@ -70,15 +70,15 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
             backgroundColor: palette.box.filled.pressed
           },
           '&:disabled': {
-            color: palette.text.light.text2
+            color: palette.text[type].text2
           }
         };
       default:
         return {
           backgroundColor: palette.box.filled.normal,
-          color: palette.text.light.main,
+          color: palette.text[type].main,
           '& svg path': {
-            fill: palette.text.light.main
+            fill: palette.text[type].main
           },
           '&:hover': {
             backgroundColor: palette.box.filled.focused
@@ -88,7 +88,7 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text.light.text2
+            color: palette.text[type].text2
           }
         };
     }

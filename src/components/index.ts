@@ -16,3 +16,4 @@ export { default as Typography } from './Typography';
 export { default as Avatar } from './Avatar';
 export { default as Alert } from './Alert';
 export { default as Badge } from './Badge';
+export { default as Menu } from './Menu';

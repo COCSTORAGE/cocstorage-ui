@@ -10,11 +10,18 @@ export interface BadgeProps extends GenericComponentProps<HTMLAttributes<HTMLLab
   iconOnly?: boolean;
 }
 
-function Badge({ children, variant, startIcon, iconOnly = false }: PropsWithChildren<BadgeProps>) {
+function Badge({
+  children,
+  variant,
+  startIcon,
+  iconOnly = false,
+  customStyle,
+  ...props
+}: PropsWithChildren<BadgeProps>) {
   const { theme } = useTheme();
 
   return (
-    <StyledBadge theme={theme} variant={variant}>
+    <StyledBadge theme={theme} variant={variant} css={customStyle} {...props}>
       {startIcon}
       {!iconOnly && children}
     </StyledBadge>
