@@ -17,8 +17,16 @@ const DefaultAlert = styled.div`
 `;
 
 export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
-  ${({ theme: { palette }, severity }): CSSObject => {
+  ${({ theme: { type, palette }, severity }): CSSObject => {
     switch (severity) {
+      case 'info':
+        return {
+          backgroundColor: palette.primary.bg2,
+          color: palette.primary.main,
+          '& svg path': {
+            fill: palette.primary.main
+          }
+        };
       case 'success':
         return {
           backgroundColor: palette.secondary.green.bg,
@@ -45,10 +53,10 @@ export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
         };
       default:
         return {
-          backgroundColor: palette.primary.bg2,
-          color: palette.primary.main,
+          backgroundColor: palette.box.filled.normal,
+          color: palette.text[type].main,
           '& svg path': {
-            fill: palette.primary.main
+            fill: palette.text[type].main
           }
         };
     }

@@ -6,7 +6,7 @@ import { StyledAlert, Message } from './Alert.styles';
 
 export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   ref?: RefObject<HTMLDivElement>;
-  severity?: 'info' | 'success' | 'warning' | 'error';
+  severity?: 'normal' | 'info' | 'success' | 'warning' | 'error';
   icon?: ReactElement;
   action?: ReactElement;
 }
@@ -14,7 +14,7 @@ export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
 function Alert({
   children,
   ref,
-  severity = 'info',
+  severity = 'normal',
   icon,
   action,
   customStyle,
