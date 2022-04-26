@@ -11,17 +11,21 @@ export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HT
   lineHeight?: string;
   color?: string;
   letterSpacing?: string;
+  noWrap?: boolean;
+  lineClamp?: number;
 }
 
 // TODO 추후 피그마에 Typography 정의가 되면 보완
 function Typography({
   children,
   component = 'h1',
-  fontSize,
+  fontSize = '14px',
   fontWeight,
   lineHeight,
   color,
   letterSpacing = '-0.04em',
+  noWrap,
+  lineClamp = 1,
   customStyle,
   ...props
 }: PropsWithChildren<TypographyProps>) {
@@ -35,6 +39,8 @@ function Typography({
       textLineHeight={lineHeight}
       textColor={color}
       textLetterSpacing={letterSpacing}
+      noWrap={noWrap}
+      lineClamp={lineClamp}
       css={customStyle}
       {...props}
     >

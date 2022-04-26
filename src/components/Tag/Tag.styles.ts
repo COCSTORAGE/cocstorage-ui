@@ -17,6 +17,15 @@ const DefaultTag = styled.span`
 export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'variant'>>`
   ${({ theme: { type, palette }, variant }): CSSObject => {
     switch (variant) {
+      case 'accent':
+        return {
+          backgroundColor: palette.primary.main,
+          color: palette.text.dark.main,
+          fontWeight: 700,
+          '& svg path': {
+            fill: palette.text.dark.main
+          }
+        };
       case 'semiAccent':
         return {
           backgroundColor: palette.primary.bg1,

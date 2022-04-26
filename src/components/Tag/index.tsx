@@ -6,7 +6,7 @@ import { StyledTag } from './Tag.styles';
 
 export interface TagProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   ref?: RefObject<HTMLDivElement>;
-  variant?: 'semiAccent' | 'text' | 'transparent';
+  variant?: 'accent' | 'semiAccent' | 'text' | 'transparent';
   text: string;
   startIcon?: ReactElement;
   iconOnly?: boolean;

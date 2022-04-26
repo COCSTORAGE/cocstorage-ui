@@ -1,12 +1,16 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-export const StyledTypography = styled.h1<{
-  textFontSize?: string;
-  textFontWeight?: number;
-  textLineHeight?: string;
-  textColor?: string;
-  textLetterSpacing?: string;
-}>`
+import { TypographyProps } from '.';
+
+export const StyledTypography = styled.h1<
+  Pick<TypographyProps, 'noWrap' | 'lineClamp'> & {
+    textFontSize?: string;
+    textFontWeight?: number;
+    textLineHeight?: string;
+    textColor?: string;
+    textLetterSpacing?: string;
+  }
+>`
   color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
   ${({ textFontSize }): CSSObject =>
@@ -41,6 +45,16 @@ export const StyledTypography = styled.h1<{
     textLetterSpacing
       ? {
           letterSpacing: textLetterSpacing
+        }
+      : {}};
+
+  ${({ noWrap, lineClamp }): CSSObject =>
+    noWrap
+      ? {
+          display: '-webkit-box',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          WebkitLineClamp: lineClamp
         }
       : {}};
 
