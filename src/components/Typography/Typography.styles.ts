@@ -54,6 +54,7 @@ export const StyledTypography = styled.h1<
           display: '-webkit-box',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
+          WebkitBoxOrient: 'vertical',
           WebkitLineClamp: lineClamp
         }
       : {}};

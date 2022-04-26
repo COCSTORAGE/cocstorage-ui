@@ -5,7 +5,7 @@ export { default as CaretLeftOutlined } from './caret-left-outlined.svg';
 export { default as CaretSemiLeftOutlined } from './caret-semi-left-outlined.svg';
 export { default as CompleteOutlined } from './complete-outlined.svg';
 export { default as ClockOutlined } from './clock-outlined.svg';
-export { default as CommentOutlined } from './community-outlined.svg';
+export { default as CommentOutlined } from './comment-outlined.svg';
 export { default as CommunityOutlined } from './community-outlined.svg';
 export { default as CopyOutlined } from './copy-outlined.svg';
 export { default as EmailOutlined } from './email-outlined.svg';
