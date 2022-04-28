@@ -11,7 +11,7 @@ import React, {
   TouchEvent
 } from 'react';
 import { createPortal } from 'react-dom';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledBottomSheet, SwipeZone, Content, Rectangle } from './BottomSheet.styles';

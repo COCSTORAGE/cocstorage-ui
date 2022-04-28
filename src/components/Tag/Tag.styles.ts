@@ -22,8 +22,8 @@ export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'variant'>>`
           backgroundColor: palette.primary.main,
           color: palette.text.dark.main,
           fontWeight: 700,
-          '& svg path': {
-            fill: palette.text.dark.main
+          '& svg': {
+            color: palette.text.dark.main
           }
         };
       case 'semiAccent':
@@ -31,24 +31,24 @@ export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'variant'>>`
           backgroundColor: palette.primary.bg1,
           color: palette.primary.main,
           fontWeight: 700,
-          '& svg path': {
-            fill: palette.primary.main
+          '& svg': {
+            color: palette.primary.main
           }
         };
       case 'transparent':
         return {
           backgroundColor: 'transparent',
           color: palette.text[type].text2,
-          '& svg path': {
-            fill: palette.text[type].text2
+          '& svg': {
+            color: palette.text[type].text2
           }
         };
       default:
         return {
           backgroundColor: palette.box.filled.normal,
           color: palette.text[type].main,
-          '& svg path': {
-            fill: palette.text[type].main
+          '& svg': {
+            color: palette.text[type].main
           }
         };
     }

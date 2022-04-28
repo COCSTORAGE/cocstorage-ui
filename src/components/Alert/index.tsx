@@ -1,5 +1,5 @@
 import React, { memo, PropsWithChildren, RefObject, ReactElement, HTMLAttributes } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledAlert, Message } from './Alert.styles';

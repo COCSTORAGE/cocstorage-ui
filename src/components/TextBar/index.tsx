@@ -7,7 +7,7 @@ import React, {
   RefObject,
   ReactElement
 } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
@@ -51,6 +51,7 @@ function TextBar({
       variant={variant}
       isFocused={isFocused}
       textBarSize={size}
+      role="textbox"
     >
       {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
       <Input

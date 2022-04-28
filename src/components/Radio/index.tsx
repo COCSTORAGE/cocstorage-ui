@@ -1,13 +1,11 @@
-import React, { memo, HTMLAttributes, RefObject } from 'react';
-import useTheme from '@theme/useTheme';
+import React, { memo, InputHTMLAttributes, RefObject } from 'react';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.styles';
 
-export interface RadioProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
+export interface RadioProps extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>> {
   ref?: RefObject<HTMLInputElement>;
-  checked: boolean;
-  disabled?: boolean;
 }
 
 function Radio({ ref, checked, disabled, customStyle, ...props }: RadioProps) {

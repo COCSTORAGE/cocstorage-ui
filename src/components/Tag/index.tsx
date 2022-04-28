@@ -1,5 +1,5 @@
 import React, { memo, ReactElement, HTMLAttributes, RefObject } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledTag } from './Tag.styles';

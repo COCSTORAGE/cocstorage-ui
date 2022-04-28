@@ -5,7 +5,7 @@ import React, {
   ReactElement,
   ButtonHTMLAttributes
 } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledButton } from './Button.styles';
@@ -17,6 +17,7 @@ export interface ButtonProps
   size?: 'big' | 'medium' | 'small' | 'pico';
   fullWidth?: boolean;
   startIcon?: ReactElement;
+  endIcon?: ReactElement;
   iconOnly?: boolean;
 }
 
@@ -27,6 +28,7 @@ function Button({
   size = 'medium',
   fullWidth = false,
   startIcon,
+  endIcon,
   iconOnly = false,
   customStyle,
   ...props
@@ -43,8 +45,9 @@ function Button({
       css={customStyle}
       {...props}
     >
-      {startIcon}
+      {!endIcon && startIcon && startIcon}
       {!iconOnly && children}
+      {!startIcon && endIcon && endIcon}
     </StyledButton>
   );
 }

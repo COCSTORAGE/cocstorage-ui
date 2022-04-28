@@ -25,32 +25,32 @@ export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'variant'>>`
         return {
           backgroundColor: palette.secondary.green.bg,
           color: palette.secondary.green.main,
-          '& svg path': {
-            fill: palette.secondary.green.main
+          '& svg': {
+            color: palette.secondary.green.main
           }
         };
       case 'warning':
         return {
           backgroundColor: palette.secondary.yellow.bg,
           color: palette.secondary.yellow.main,
-          '& svg path': {
-            fill: palette.secondary.yellow.main
+          '& svg': {
+            color: palette.secondary.yellow.main
           }
         };
       case 'error':
         return {
           backgroundColor: palette.secondary.red.bg,
           color: palette.secondary.red.main,
-          '& svg path': {
-            fill: palette.secondary.red.main
+          '& svg': {
+            color: palette.secondary.red.main
           }
         };
       default:
         return {
           backgroundColor: palette.primary.bg2,
           color: palette.primary.main,
-          '& svg path': {
-            fill: palette.primary.main
+          '& svg': {
+            color: palette.primary.main
           }
         };
     }

@@ -8,7 +8,7 @@ import React, {
   MouseEvent,
   RefObject
 } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';

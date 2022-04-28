@@ -7,7 +7,7 @@ import React, {
   MouseEvent,
   RefObject
 } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledPagination, PaginationItem } from './Pagination.styles';
@@ -80,12 +80,13 @@ function Pagination({
   }, [firstItem, lastItem]);
 
   return (
-    <StyledPagination ref={ref} {...props} css={customStyle}>
+    <StyledPagination ref={ref} css={customStyle} {...props}>
       <PaginationItem
         theme={theme}
         data-page={page - 1}
         disabled={page - 1 <= 0}
         onClick={handleClick}
+        tabIndex={0}
       >
         <Icon name="CaretSemiLeftOutlined" width={18} height={18} />
       </PaginationItem>
@@ -96,6 +97,7 @@ function Pagination({
           data-page={item}
           selected={item === page}
           onClick={handleClick}
+          tabIndex={0}
         >
           {item}
         </PaginationItem>
@@ -106,6 +108,7 @@ function Pagination({
         disabled={page + 1 > totalPage}
         isNextItemButton
         onClick={handleClick}
+        tabIndex={0}
       >
         <Icon name="CaretSemiLeftOutlined" width={18} height={18} />
       </PaginationItem>

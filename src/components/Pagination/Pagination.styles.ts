@@ -22,8 +22,8 @@ export const PaginationItem = styled.li<{
   color: ${({ theme: { type, palette } }) => palette.text[type].text1};
   cursor: pointer;
 
-  & svg path {
-    fill: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  & svg {
+    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
   }
 
   ${({ isNextItemButton }): CSSObject =>
@@ -47,8 +47,8 @@ export const PaginationItem = styled.li<{
     disabled
       ? {
           color: palette.text[type].text3,
-          '& svg path': {
-            fill: palette.text[type].text3
+          '& svg': {
+            color: palette.text[type].text3
           },
           cursor: 'default'
         }

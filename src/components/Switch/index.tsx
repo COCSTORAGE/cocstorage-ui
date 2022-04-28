@@ -1,5 +1,5 @@
 import React, { memo, HTMLAttributes, MouseEvent, RefObject } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledSwitch, Circle } from './Switch.styles';

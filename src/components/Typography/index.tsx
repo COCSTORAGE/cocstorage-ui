@@ -1,15 +1,15 @@
 import React, { memo, HTMLAttributes, PropsWithChildren } from 'react';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps } from '../../types';
+import { GenericComponentProps, CSSValue, Color } from '../../types';
 import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span';
-  fontSize?: string;
+  fontSize?: CSSValue;
   fontWeight?: number;
   lineHeight?: string;
-  color?: string;
+  color?: Color;
   letterSpacing?: string;
   noWrap?: boolean;
   lineClamp?: number;
@@ -19,7 +19,7 @@ export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HT
 function Typography({
   children,
   component = 'h1',
-  fontSize = '14px',
+  fontSize = 14,
   fontWeight,
   lineHeight,
   color,

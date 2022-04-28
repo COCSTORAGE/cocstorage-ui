@@ -10,7 +10,7 @@ import React, {
   MouseEvent
 } from 'react';
 import { createPortal } from 'react-dom';
-import useTheme from '@theme/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';

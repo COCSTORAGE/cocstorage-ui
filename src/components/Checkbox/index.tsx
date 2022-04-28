@@ -1,16 +1,15 @@
-import React, { useState, useCallback, memo, HTMLAttributes, RefObject } from 'react';
-import useTheme from '@theme/useTheme';
+import React, { useState, useCallback, memo, InputHTMLAttributes, RefObject } from 'react';
+import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.styles';
 
-export interface CheckBoxProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
+export interface CheckboxProps
+  extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>> {
   ref?: RefObject<HTMLInputElement>;
-  checked: boolean;
-  disabled?: boolean;
 }
 
-function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckBoxProps) {
+function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckboxProps) {
   const { theme } = useTheme();
 
   const [hover, setHover] = useState<boolean>(false);

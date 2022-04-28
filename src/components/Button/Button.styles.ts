@@ -22,8 +22,8 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
         return {
           backgroundColor: palette.primary.main,
           color: palette.text.dark.main,
-          '& svg path': {
-            fill: palette.text.dark.main
+          '& svg': {
+            color: palette.text.dark.main
           },
           '&:hover': {
             backgroundColor: palette.primary.sub1
@@ -40,8 +40,8 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
         return {
           backgroundColor: palette.primary.bg2,
           color: palette.primary.main,
-          '& svg path': {
-            fill: palette.primary.main
+          '& svg': {
+            color: palette.primary.main
           },
           '&:hover': {
             backgroundColor: palette.primary.bg3
@@ -60,8 +60,8 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           backgroundColor: 'transparent',
           borderRadius: 6,
           color: palette.text[type].main,
-          '& svg path': {
-            fill: palette.text[type].main
+          '& svg': {
+            color: palette.text[type].main
           },
           '&:hover': {
             backgroundColor: palette.box.filled.focused
@@ -77,8 +77,8 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
         return {
           backgroundColor: palette.box.filled.normal,
           color: palette.text[type].main,
-          '& svg path': {
-            fill: palette.text[type].main
+          '& svg': {
+            color: palette.text[type].main
           },
           '&:hover': {
             backgroundColor: palette.box.filled.focused

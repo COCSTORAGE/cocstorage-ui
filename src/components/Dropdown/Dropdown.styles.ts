@@ -28,15 +28,15 @@ export const StyledDropdown = styled(DefaultDropdown)<
       case 'dark':
         return {
           color: palette.text.dark.text2,
-          '& svg path': {
-            fill: palette.text.dark.main
+          '& svg': {
+            color: palette.text.dark.main
           }
         };
       default:
         return {
           color: palette.text.light.text1,
-          '& svg path': {
-            fill: palette.text.light.main
+          '& svg': {
+            color: palette.text.light.main
           }
         };
     }
@@ -47,8 +47,8 @@ export const StyledDropdown = styled(DefaultDropdown)<
       ? {
           borderColor: palette.primary.main,
           color: palette.text[type].main,
-          '& svg path': {
-            fill: palette.primary.main
+          '& svg': {
+            color: palette.primary.main
           }
         }
       : {}};

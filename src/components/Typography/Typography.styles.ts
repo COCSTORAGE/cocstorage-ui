@@ -1,13 +1,14 @@
 import styled, { CSSObject } from '@emotion/styled';
 
 import { TypographyProps } from '.';
+import { CSSValue, Color } from '../../types';
 
 export const StyledTypography = styled.h1<
   Pick<TypographyProps, 'noWrap' | 'lineClamp'> & {
-    textFontSize?: string;
+    textFontSize?: CSSValue;
     textFontWeight?: number;
     textLineHeight?: string;
-    textColor?: string;
+    textColor?: Color;
     textLetterSpacing?: string;
   }
 >`

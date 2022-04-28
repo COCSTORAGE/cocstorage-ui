@@ -26,22 +26,22 @@ export const StyledTextBar = styled.div<
         if (isFocused) {
           cssObject = {
             borderColor: palette.primary.main,
-            '& svg path': {
-              fill: palette.primary.main
+            '& svg': {
+              color: palette.primary.main
             }
           };
         } else {
           cssObject = {
-            '& svg path': {
-              fill: palette.text[type].text1
+            '& svg': {
+              color: palette.text[type].text1
             }
           };
         }
         return cssObject;
       default:
         return {
-          '& svg path': {
-            fill: palette.text[type].text1
+          '& svg': {
+            color: palette.text[type].text1
           }
         };
     }

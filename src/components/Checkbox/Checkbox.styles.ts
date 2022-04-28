@@ -1,8 +1,8 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { CheckBoxProps } from '.';
+import { CheckboxProps } from '.';
 
-export const Wrapper = styled.div<Pick<CheckBoxProps, 'checked' | 'disabled'>>`
+export const Wrapper = styled.div<Pick<CheckboxProps, 'checked' | 'disabled'>>`
   position: relative;
   display: inline-block;
   width: 20px;
@@ -54,7 +54,7 @@ export const MarkerInner = styled.div`
 `;
 
 export const Check = styled.div<
-  Pick<CheckBoxProps, 'checked'> & {
+  Pick<CheckboxProps, 'checked'> & {
     hover: boolean;
   }
 >`
