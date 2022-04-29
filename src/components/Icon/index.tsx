@@ -16,12 +16,16 @@ function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: Ico
   const SvgIcon = SvgIcons[name];
   const StyledSvgIcon = StyledIcon(SvgIcon);
 
+  const splitNames = name.split('_');
+  const hasSpecifyViewBox = splitNames.length === 3;
+  const newViewBox = `0 0 ${splitNames[1]} ${splitNames[2]}`;
+
   return (
     <StyledSvgIcon
       theme={theme}
       name={name}
       color={color}
-      viewBox={viewBox}
+      viewBox={hasSpecifyViewBox ? newViewBox : viewBox}
       css={customStyle}
       {...props}
     />

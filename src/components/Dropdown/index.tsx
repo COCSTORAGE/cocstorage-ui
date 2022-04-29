@@ -12,6 +12,9 @@ import useTheme from '@theme/provider/useTheme';
 import { GenericComponentProps } from '../../types';
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
+// Components
+import Icon from '../Icon';
+
 export interface DropdownProps
   extends GenericComponentProps<
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>,
@@ -88,7 +91,7 @@ function Dropdown({
     >
       {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
       {value && selectedValue && <span>{selectedValue.name}</span>}
-      <DropDownIcon />
+      <Icon name="PolyGon_12_12" width={12} height={12} />
       <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
         {options.map((option) => (
           <Option
@@ -106,18 +109,3 @@ function Dropdown({
 }
 
 export default memo(Dropdown);
-
-function DropDownIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clipPath="url(#clip0_2_600)">
-        <path d="M6 10L1.66987 2.5L10.3301 2.5L6 10Z" fill="currentColor" fillOpacity="0.7" />
-      </g>
-      <defs>
-        <clipPath id="clip0_2_600">
-          <rect width="12" height="12" fill="currentColor" />
-        </clipPath>
-      </defs>
-    </svg>
-  );
-}
