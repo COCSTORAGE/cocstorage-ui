@@ -5,8 +5,7 @@ import React, {
   memo,
   PropsWithChildren,
   HTMLAttributes,
-  MouseEvent,
-  RefObject
+  MouseEvent
 } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
@@ -14,8 +13,10 @@ import { GenericComponentProps, ThemeType } from '../../types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
 export interface TabsProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>> {
-  ref?: RefObject<HTMLDivElement>;
+  extends GenericComponentProps<
+    Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>,
+    HTMLDivElement
+  > {
   centered?: boolean;
   onChange: (value: number | string) => void;
   value: number | string;
@@ -88,8 +89,8 @@ function Tabs({
       css={customStyle}
       centered={centered}
       onClick={handleClick}
-      role="tablist"
       {...props}
+      role="tablist"
     >
       <TabsInner ref={tabsInnerRef}>{children}</TabsInner>
     </StyledTabs>

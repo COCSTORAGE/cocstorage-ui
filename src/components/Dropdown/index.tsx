@@ -4,9 +4,8 @@ import React, {
   useRef,
   useCallback,
   memo,
-  HTMLAttributes,
-  MouseEvent,
-  RefObject
+  ButtonHTMLAttributes,
+  MouseEvent
 } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
@@ -14,8 +13,10 @@ import { GenericComponentProps } from '../../types';
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
 export interface DropdownProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>> {
-  ref?: RefObject<HTMLButtonElement>;
+  extends GenericComponentProps<
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>,
+    HTMLButtonElement
+  > {
   options: Array<{
     name: string;
     value: number | string;
@@ -110,11 +111,11 @@ function DropDownIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_2_600)">
-        <path d="M6 10L1.66987 2.5L10.3301 2.5L6 10Z" fill="current" fillOpacity="0.7" />
+        <path d="M6 10L1.66987 2.5L10.3301 2.5L6 10Z" fill="currentColor" fillOpacity="0.7" />
       </g>
       <defs>
         <clipPath id="clip0_2_600">
-          <rect width="12" height="12" fill="white" />
+          <rect width="12" height="12" fill="currentColor" />
         </clipPath>
       </defs>
     </svg>

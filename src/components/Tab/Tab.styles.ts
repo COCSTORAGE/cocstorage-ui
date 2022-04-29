@@ -6,8 +6,6 @@ const DefaultTab = styled.button`
   align-items: center;
   flex-direction: column;
   padding-top: 11px;
-  background: none;
-  border: 0;
   gap: 7px;
   font-weight: 500;
   font-size: 14px;

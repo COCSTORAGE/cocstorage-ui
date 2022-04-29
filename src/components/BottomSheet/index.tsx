@@ -5,7 +5,6 @@ import React, {
   useRef,
   memo,
   PropsWithChildren,
-  RefObject,
   HTMLAttributes,
   MouseEvent,
   TouchEvent
@@ -16,8 +15,8 @@ import useTheme from '@theme/provider/useTheme';
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledBottomSheet, SwipeZone, Content, Rectangle } from './BottomSheet.styles';
 
-export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  ref?: RefObject<HTMLDivElement>;
+export interface BottomSheetProps
+  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   open: boolean;
   transitionDuration?: number;
   disableSwipeable?: boolean;

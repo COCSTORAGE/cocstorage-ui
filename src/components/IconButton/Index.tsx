@@ -1,11 +1,10 @@
-import React, { memo, PropsWithChildren, ButtonHTMLAttributes, RefObject } from 'react';
+import React, { memo, PropsWithChildren, ButtonHTMLAttributes } from 'react';
 
 import { GenericComponentProps } from '../../types';
 import { StyledIconButton } from './IconButton.styles';
 
 export interface IconButtonProps
-  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
-  ref?: RefObject<HTMLButtonElement>;
+  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   rotation?: number;
 }
 

@@ -6,7 +6,7 @@ import * as SvgIcons from '../../assets/icons';
 import { GenericComponentProps, Color } from '../../types';
 import { StyledIcon } from './Icon.styles';
 
-export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>> {
+export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>, SVGElement> {
   name: keyof typeof SvgIcons;
   color?: Color;
 }

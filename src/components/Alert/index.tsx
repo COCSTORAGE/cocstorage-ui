@@ -1,12 +1,12 @@
-import React, { memo, PropsWithChildren, RefObject, ReactElement, HTMLAttributes } from 'react';
+import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps } from '../../types';
+import { GenericComponentProps, Severity } from '../../types';
 import { StyledAlert, Message } from './Alert.styles';
 
-export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  ref?: RefObject<HTMLDivElement>;
-  severity?: 'normal' | 'info' | 'success' | 'warning' | 'error';
+export interface AlertProps
+  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  severity?: Severity;
   icon?: ReactElement;
   action?: ReactElement;
 }

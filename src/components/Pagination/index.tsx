@@ -1,12 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  memo,
-  HTMLAttributes,
-  MouseEvent,
-  RefObject
-} from 'react';
+import React, { useEffect, useState, useCallback, memo, HTMLAttributes, MouseEvent } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
@@ -16,8 +8,10 @@ import { StyledPagination, PaginationItem } from './Pagination.styles';
 import Icon from '../Icon';
 
 export interface PaginationProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>> {
-  ref?: RefObject<HTMLUListElement>;
+  extends GenericComponentProps<
+    Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>,
+    HTMLUListElement
+  > {
   count: number;
   page: number;
   rowPerPage?: number;

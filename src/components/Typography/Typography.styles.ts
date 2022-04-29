@@ -1,15 +1,15 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { TypographyProps } from '.';
 import { CSSValue, Color } from '../../types';
+import { TypographyProps } from '.';
 
 export const StyledTypography = styled.h1<
   Pick<TypographyProps, 'noWrap' | 'lineClamp'> & {
     textFontSize?: CSSValue;
     textFontWeight?: number;
-    textLineHeight?: string;
+    textLineHeight?: CSSValue;
     textColor?: Color;
-    textLetterSpacing?: string;
+    textLetterSpacing?: CSSValue;
   }
 >`
   color: ${({ theme: { type, palette } }) => palette.text[type].main};

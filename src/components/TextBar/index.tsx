@@ -3,19 +3,20 @@ import React, {
   useRef,
   useCallback,
   memo,
-  HTMLAttributes,
-  RefObject,
+  InputHTMLAttributes,
   ReactElement
 } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps } from '../../types';
+import { GenericComponentProps, Size } from '../../types';
 import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
 
-export interface TextBarProps extends GenericComponentProps<HTMLAttributes<HTMLInputElement>> {
-  ref?: RefObject<HTMLInputElement>;
-  variant?: 'filled' | 'focused';
-  size?: 'small' | 'medium' | 'large';
+export interface TextBarProps
+  extends GenericComponentProps<
+    Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
+    HTMLInputElement
+  > {
+  size?: Exclude<Size, 'pico'>;
   fullWidth?: boolean;
   startIcon?: ReactElement;
   label?: string;
@@ -24,7 +25,6 @@ export interface TextBarProps extends GenericComponentProps<HTMLAttributes<HTMLI
 
 function TextBar({
   ref,
-  variant = 'filled',
   size = 'medium',
   fullWidth,
   startIcon,
@@ -48,9 +48,8 @@ function TextBar({
       theme={theme}
       css={customStyle}
       fullWidth={fullWidth}
-      variant={variant}
       isFocused={isFocused}
-      textBarSize={size}
+      size={size}
       role="textbox"
     >
       {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
@@ -66,13 +65,7 @@ function TextBar({
         {...props}
       />
       {label && (
-        <Label
-          theme={theme}
-          variant={variant}
-          size={size}
-          isFocused={isFocused}
-          hasValue={!!value || !!startIcon}
-        >
+        <Label theme={theme} size={size} isFocused={isFocused} hasValue={!!value || !!startIcon}>
           {label}
         </Label>
       )}

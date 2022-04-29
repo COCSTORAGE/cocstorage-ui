@@ -7,17 +7,14 @@ const DefaultButton = styled.button`
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 0;
-  background: none;
-  border: 0;
   text-align: center;
   font-weight: 500;
   cursor: pointer;
 `;
 
 export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>`
-  ${({ theme: { type, palette }, variant }) => {
-    switch (variant) {
+  ${({ theme: { type, palette }, color }) => {
+    switch (color) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,

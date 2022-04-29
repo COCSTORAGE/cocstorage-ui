@@ -3,7 +3,8 @@ import React, { memo, HTMLAttributes, ElementType, PropsWithChildren } from 'rea
 import { GenericComponentProps } from '../../types';
 import { StyledBox } from './Box.styles';
 
-export interface BoxProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
+export interface BoxProps
+  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   component?: ElementType;
 }
 

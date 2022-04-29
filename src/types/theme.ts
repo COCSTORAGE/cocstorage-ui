@@ -1,5 +1,4 @@
-import { Interpolation, Theme as EmotionTheme } from '@emotion/react';
-import { ColorCode } from './css';
+import type { ColorCode } from './css';
 
 export type ThemeType = 'light' | 'dark';
 
@@ -79,10 +78,6 @@ export interface COCTheme {
     };
   };
 }
-
-export type GenericComponentProps<T> = T & {
-  customStyle?: Interpolation<EmotionTheme>;
-};
 
 declare module '@emotion/react' {
   export interface Theme extends COCTheme {}

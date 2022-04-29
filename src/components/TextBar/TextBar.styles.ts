@@ -1,11 +1,11 @@
 import styled, { CSSObject } from '@emotion/styled';
 
+import { Size } from '../../types';
 import { TextBarProps } from '.';
 
 export const StyledTextBar = styled.div<
-  Pick<TextBarProps, 'variant' | 'fullWidth'> & {
+  Pick<TextBarProps, 'fullWidth' | 'size'> & {
     isFocused?: boolean;
-    textBarSize?: 'small' | 'medium' | 'large';
     hasStartIcon?: boolean;
   }
 >`
@@ -19,41 +19,34 @@ export const StyledTextBar = styled.div<
 
   border-radius: 8px;
 
-  ${({ theme: { type, palette }, variant, isFocused }): CSSObject => {
+  ${({ theme: { type, palette }, isFocused }): CSSObject => {
     let cssObject: CSSObject;
-    switch (variant) {
-      case 'focused':
-        if (isFocused) {
-          cssObject = {
-            borderColor: palette.primary.main,
-            '& svg': {
-              color: palette.primary.main
-            }
-          };
-        } else {
-          cssObject = {
-            '& svg': {
-              color: palette.text[type].text1
-            }
-          };
+
+    if (isFocused) {
+      cssObject = {
+        borderColor: palette.primary.main,
+        '& svg': {
+          color: palette.primary.main
         }
-        return cssObject;
-      default:
-        return {
-          '& svg': {
-            color: palette.text[type].text1
-          }
-        };
+      };
+    } else {
+      cssObject = {
+        '& svg': {
+          color: palette.text[type].text1
+        }
+      };
     }
+
+    return cssObject;
   }};
 
-  ${({ textBarSize }): CSSObject => {
-    switch (textBarSize) {
+  ${({ size }): CSSObject => {
+    switch (size) {
       case 'small':
         return {
           height: 36
         };
-      case 'large':
+      case 'big':
         return {
           height: 48
         };
@@ -81,7 +74,7 @@ const DefaultInput = styled.input`
 
 export const Input = styled(DefaultInput)<
   Pick<TextBarProps, 'fullWidth'> & {
-    textBarSize?: 'small' | 'medium' | 'large';
+    textBarSize?: Exclude<Size, 'pico'>;
     hasStartIcon?: boolean;
   }
 >`
@@ -117,7 +110,7 @@ export const Input = styled(DefaultInput)<
 `;
 
 export const Label = styled.label<
-  Pick<TextBarProps, 'variant' | 'size'> & {
+  Pick<TextBarProps, 'size'> & {
     isFocused: boolean;
     hasValue: boolean;
   }
@@ -137,24 +130,24 @@ export const Label = styled.label<
 
   color: ${({ theme: { type, palette } }) => palette.text[type].text1};
 
-  ${({ theme: { palette }, variant, isFocused, hasValue, size }): CSSObject => {
+  ${({ theme: { palette }, isFocused, hasValue, size }): CSSObject => {
     let cssObject: CSSObject;
     const translateX = size === 'small' ? '7px' : '9px';
 
     let translateY = size === 'small' ? '-35%' : '-50%';
 
-    if (size === 'large') translateY = '-60%';
+    if (size === 'big') translateY = '-60%';
 
     if (isFocused || hasValue) {
       translateY = size === 'small' ? '-105%' : '-130%';
 
-      if (size === 'large') translateY = '-160%';
+      if (size === 'big') translateY = '-160%';
 
       cssObject = {
         transform: `translate(${translateX}, ${translateY}) scale(0.75)`
       };
 
-      if (variant === 'focused' && isFocused) {
+      if (isFocused) {
         cssObject = {
           ...cssObject,
           color: palette.primary.main
@@ -171,6 +164,10 @@ export const Label = styled.label<
 `;
 
 export const StartIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
   ${({ size }): CSSObject => {
     const paddingL = size === 'small' ? '7px' : '9px';
 

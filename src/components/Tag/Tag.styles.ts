@@ -14,9 +14,9 @@ const DefaultTag = styled.span`
   cursor: default;
 `;
 
-export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'variant'>>`
-  ${({ theme: { type, palette }, variant }): CSSObject => {
-    switch (variant) {
+export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'color'>>`
+  ${({ theme: { type, palette }, color }): CSSObject => {
+    switch (color) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,

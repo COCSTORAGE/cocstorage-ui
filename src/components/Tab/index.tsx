@@ -1,11 +1,11 @@
-import React, { memo, HTMLAttributes, RefObject } from 'react';
+import React, { memo, ButtonHTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledTab, SelectedBar } from './Tab.styles';
 
-export interface TabProps extends GenericComponentProps<HTMLAttributes<HTMLButtonElement>> {
-  ref?: RefObject<HTMLButtonElement>;
+export interface TabProps
+  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   text: string;
   value: number | string;
 }
@@ -14,7 +14,7 @@ function Tab({ ref, text, value, customStyle, ...props }: TabProps) {
   const { theme } = useTheme();
 
   return (
-    <StyledTab ref={ref} theme={theme} css={customStyle} data-value={value} role="tab" {...props}>
+    <StyledTab ref={ref} theme={theme} css={customStyle} data-value={value} {...props} role="tab">
       {text}
       <SelectedBar theme={theme} />
     </StyledTab>

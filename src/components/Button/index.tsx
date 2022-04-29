@@ -1,30 +1,42 @@
-import React, {
-  memo,
-  PropsWithChildren,
-  RefObject,
-  ReactElement,
-  ButtonHTMLAttributes
-} from 'react';
+import React, { memo, PropsWithChildren, ReactElement, ButtonHTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps } from '../../types';
+import { GenericComponentProps, ComponentColor, Size } from '../../types';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
-  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
-  ref?: RefObject<HTMLButtonElement>;
-  variant?: 'text' | 'accent' | 'semiAccent' | 'transparent';
-  size?: 'big' | 'medium' | 'small' | 'pico';
+  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  color?: ComponentColor;
+  size?: Size;
   fullWidth?: boolean;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
   iconOnly?: boolean;
 }
 
+export type RequireAtOnlyOneIcon<T> = T &
+  (
+    | {
+        iconOnly?: boolean;
+        startIcon: ReactElement;
+        endIcon?: never;
+      }
+    | {
+        iconOnly?: boolean;
+        startIcon?: never;
+        endIcon: ReactElement;
+      }
+    | {
+        iconOnly?: never;
+        startIcon?: ReactElement;
+        endIcon?: ReactElement;
+      }
+  );
+
 function Button({
   children,
   ref,
-  variant = 'text',
+  color = 'text',
   size = 'medium',
   fullWidth = false,
   startIcon,
@@ -32,22 +44,22 @@ function Button({
   iconOnly = false,
   customStyle,
   ...props
-}: PropsWithChildren<ButtonProps>) {
+}: PropsWithChildren<RequireAtOnlyOneIcon<ButtonProps>>) {
   const { theme } = useTheme();
 
   return (
     <StyledButton
       ref={ref}
       theme={theme}
-      variant={variant}
+      color={color}
       size={size}
       fullWidth={fullWidth}
       css={customStyle}
       {...props}
     >
-      {!endIcon && startIcon && startIcon}
+      {startIcon}
       {!iconOnly && children}
-      {!startIcon && endIcon && endIcon}
+      {endIcon}
     </StyledButton>
   );
 }

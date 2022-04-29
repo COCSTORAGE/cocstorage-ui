@@ -15,8 +15,8 @@ import useTheme from '@theme/provider/useTheme';
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';
 
-export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  ref?: RefObject<HTMLDivElement>;
+export interface MenuProps
+  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   anchorRef?: RefObject<HTMLElement>;
   open: boolean;
   centered?: boolean;
@@ -172,8 +172,8 @@ function Menu({
           triangleLeft={triangleLeft}
           onClick={handleClick}
           css={customStyle}
-          role="menu"
           {...props}
+          role="menu"
         >
           {children}
         </StyledMenu>

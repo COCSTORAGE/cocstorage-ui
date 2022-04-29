@@ -1,12 +1,14 @@
-import React, { memo, HTMLAttributes, MouseEvent, RefObject } from 'react';
+import React, { memo, ButtonHTMLAttributes, MouseEvent } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledSwitch, Circle } from './Switch.styles';
 
 export interface SwitchProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>> {
-  ref?: RefObject<HTMLButtonElement>;
+  extends GenericComponentProps<
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>,
+    HTMLButtonElement
+  > {
   checked: boolean;
   disabled?: boolean;
   onChange: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -23,8 +25,8 @@ function Switch({ ref, checked, disabled, onChange, customStyle, ...props }: Swi
       checked={checked}
       disabled={disabled}
       onClick={!disabled ? onChange : undefined}
-      role="switch"
       {...props}
+      role="switch"
     >
       <Circle theme={theme} checked={checked} disabled={disabled} />
     </StyledSwitch>

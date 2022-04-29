@@ -1,11 +1,11 @@
-import React, { memo, HTMLAttributes, RefObject } from 'react';
+import React, { memo, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, CSSValue } from '../../types';
 import { StyledAvatar } from './Avatar.styles';
 
-export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLImageElement>> {
-  ref?: RefObject<HTMLImageElement>;
+export interface AvatarProps
+  extends GenericComponentProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement> {
   src: string;
   alt: string;
   width?: CSSValue;

@@ -6,8 +6,7 @@ import React, {
   memo,
   PropsWithChildren,
   HTMLAttributes,
-  MouseEvent,
-  RefObject
+  MouseEvent
 } from 'react';
 import { createPortal } from 'react-dom';
 import useTheme from '@theme/provider/useTheme';
@@ -16,8 +15,7 @@ import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledDialog } from './Dialog.styles';
 
 export interface DialogProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
-  ref?: RefObject<HTMLDivElement>;
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>, HTMLDivElement> {
   open: boolean;
   transitionDuration?: number;
   fullScreen?: boolean;

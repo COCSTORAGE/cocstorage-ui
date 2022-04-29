@@ -18,9 +18,9 @@ const DefaultBadge = styled.label`
   white-space: nowrap;
 `;
 
-export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'variant'>>`
-  ${({ theme: { palette }, variant }): CSSObject => {
-    switch (variant) {
+export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'severity'>>`
+  ${({ theme: { palette }, severity }): CSSObject => {
+    switch (severity) {
       case 'success':
         return {
           backgroundColor: palette.secondary.green.bg,
