@@ -3,12 +3,9 @@ import styled, { CSSObject } from '@emotion/styled';
 import { BadgeProps } from '.';
 
 const DefaultBadge = styled.label`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   width: fit-content;
   padding: 0 4.7px;
-  gap: 2px;
   height: 16px;
   line-height: 18px;
   border-radius: 4px;
@@ -55,4 +52,11 @@ export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'severity'>>`
         };
     }
   }};
+`;
+
+export const BadgeInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 `;

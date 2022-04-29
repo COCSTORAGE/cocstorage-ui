@@ -3,10 +3,8 @@ import styled, { CSSObject } from '@emotion/styled';
 import { ButtonProps } from '.';
 
 const DefaultButton = styled.button`
+  display: inline-block;
   width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 4px;
   text-align: center;
   font-weight: 500;
   cursor: pointer;
@@ -130,4 +128,11 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           width: '100%'
         }
       : {}};
+`;
+
+export const ButtonInner = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
 `;

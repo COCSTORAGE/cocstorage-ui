@@ -1,11 +1,9 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { TagProps } from '.';
+import { Color } from '../../types';
 
-const DefaultTag = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 4px;
+const DefaultTag = styled.label`
+  display: inline-block;
   width: fit-content;
   padding: 7px 10px;
   border-radius: 8px;
@@ -14,9 +12,11 @@ const DefaultTag = styled.span`
   cursor: default;
 `;
 
-export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'color'>>`
-  ${({ theme: { type, palette }, color }): CSSObject => {
-    switch (color) {
+export const StyledTag = styled(DefaultTag)<{
+  tagColor: Color;
+}>`
+  ${({ theme: { type, palette }, tagColor }): CSSObject => {
+    switch (tagColor) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,
@@ -53,4 +53,10 @@ export const StyledTag = styled(DefaultTag)<Pick<TagProps, 'color'>>`
         };
     }
   }}
+`;
+
+export const TagInner = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;

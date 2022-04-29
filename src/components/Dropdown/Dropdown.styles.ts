@@ -4,10 +4,7 @@ import { DropdownProps } from '.';
 
 const DefaultDropdown = styled.button`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  display: inline-block;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 14px;
@@ -59,6 +56,13 @@ export const StyledDropdown = styled(DefaultDropdown)<
           width: '100%'
         }
       : {}};
+`;
+
+export const DropdownInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 `;
 
 export const OptionWrapper = styled.ul<{

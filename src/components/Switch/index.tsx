@@ -9,9 +9,9 @@ export interface SwitchProps
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>,
     HTMLButtonElement
   > {
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
-  onChange: (event: MouseEvent<HTMLButtonElement>) => void;
+  onChange?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Switch({ ref, checked, disabled, onChange, customStyle, ...props }: SwitchProps) {
