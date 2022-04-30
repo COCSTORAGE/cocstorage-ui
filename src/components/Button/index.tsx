@@ -2,7 +2,7 @@ import React, { memo, PropsWithChildren, ReactElement, ButtonHTMLAttributes } fr
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, ComponentColor, Size } from '../../types';
-import { StyledButton, ButtonInner } from './Button.styles';
+import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
   extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
@@ -57,11 +57,9 @@ function Button({
       css={customStyle}
       {...props}
     >
-      <ButtonInner>
-        {startIcon}
-        {!iconOnly && children}
-        {endIcon}
-      </ButtonInner>
+      {startIcon}
+      {!iconOnly && children}
+      {endIcon}
     </StyledButton>
   );
 }

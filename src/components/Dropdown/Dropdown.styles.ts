@@ -4,7 +4,10 @@ import { DropdownProps } from '.';
 
 const DefaultDropdown = styled.button`
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 14px;
@@ -58,13 +61,6 @@ export const StyledDropdown = styled(DefaultDropdown)<
       : {}};
 `;
 
-export const DropdownInner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-`;
-
 export const OptionWrapper = styled.ul<{
   open: boolean;
   top: number;
@@ -80,6 +76,9 @@ export const OptionWrapper = styled.ul<{
 
   visibility: hidden;
   pointer-events: none;
+
+  padding: 0;
+  list-style: none;
 
   ${({ open }): CSSObject =>
     open

@@ -3,9 +3,13 @@ import styled, { CSSObject } from '@emotion/styled';
 import { ButtonProps } from '.';
 
 const DefaultButton = styled.button`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   width: fit-content;
   text-align: center;
+  border: none;
+  background: none;
   font-weight: 500;
   cursor: pointer;
 `;

@@ -2,10 +2,10 @@ import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 're
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, Severity } from '../../types';
-import { StyledBadge, BadgeInner } from './Badge.styles';
+import { StyledBadge } from './Badge.styles';
 
 export interface BadgeProps
-  extends GenericComponentProps<HTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+  extends GenericComponentProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   severity?: Exclude<Severity, 'normal'>;
   startIcon?: ReactElement;
   iconOnly?: boolean;
@@ -24,10 +24,8 @@ function Badge({
 
   return (
     <StyledBadge ref={ref} theme={theme} severity={severity} css={customStyle} {...props}>
-      <BadgeInner>
-        {startIcon}
-        {!iconOnly && children}
-      </BadgeInner>
+      {startIcon}
+      {!iconOnly && children}
     </StyledBadge>
   );
 }

@@ -2,10 +2,10 @@ import React, { memo, ReactElement, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, ComponentColor } from '../../types';
-import { StyledTag, TagInner } from './Tag.styles';
+import { StyledTag } from './Tag.styles';
 
 export interface TagProps
-  extends GenericComponentProps<HTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   color?: ComponentColor;
   text: string;
   startIcon?: ReactElement;
@@ -17,10 +17,8 @@ function Tag({ ref, color = 'text', text, startIcon, iconOnly, customStyle, ...p
 
   return (
     <StyledTag ref={ref} theme={theme} tagColor={color} css={customStyle} {...props}>
-      <TagInner>
-        {startIcon && startIcon}
-        {!iconOnly && text}
-      </TagInner>
+      {startIcon && startIcon}
+      {!iconOnly && text}
     </StyledTag>
   );
 }

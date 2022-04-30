@@ -2,8 +2,10 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { Color } from '../../types';
 
-const DefaultTag = styled.label`
-  display: inline-block;
+const DefaultTag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   width: fit-content;
   padding: 7px 10px;
   border-radius: 8px;
@@ -53,10 +55,4 @@ export const StyledTag = styled(DefaultTag)<{
         };
     }
   }}
-`;
-
-export const TagInner = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
 `;

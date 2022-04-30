@@ -10,7 +10,7 @@ import React, {
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
-import { StyledDropdown, DropdownInner, OptionWrapper, Option } from './Dropdown.styles';
+import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
 
 // Components
 import Icon from '../Icon';
@@ -89,23 +89,21 @@ function Dropdown({
       onClick={handleClickDropdown}
       {...props}
     >
-      <DropdownInner>
-        {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
-        {value && selectedValue && <span>{selectedValue.name}</span>}
-        <Icon name="PolyGon_12_12" width={12} height={12} />
-        <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
-          {options.map((option) => (
-            <Option
-              key={`dropdown-option-${option.name}`}
-              theme={theme}
-              data-value={option.value}
-              onClick={handleClickOption}
-            >
-              {option.name}
-            </Option>
-          ))}
-        </OptionWrapper>
-      </DropdownInner>
+      {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
+      {value && selectedValue && <span>{selectedValue.name}</span>}
+      <Icon name="PolyGon_12_12" width={12} height={12} />
+      <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
+        {options.map((option) => (
+          <Option
+            key={`dropdown-option-${option.name}`}
+            theme={theme}
+            data-value={option.value}
+            onClick={handleClickOption}
+          >
+            {option.name}
+          </Option>
+        ))}
+      </OptionWrapper>
     </StyledDropdown>
   );
 }
