@@ -43,6 +43,9 @@ function GlobalStyles() {
           display: 'block',
           maxWidth: '100%'
         },
+        'img, svg, video': {
+          verticalAlign: 'middle'
+        },
         button: {
           background: 'none',
           border: 0,

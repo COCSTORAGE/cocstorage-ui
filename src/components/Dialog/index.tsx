@@ -36,13 +36,10 @@ function Dialog({
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-  const [dialogClose, setDialogClose] = useState<boolean>(false);
 
   const dialogPortalRef = useRef<HTMLElement | null>(null);
   const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleClose = useCallback(() => setDialogClose(true), []);
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLDivElement>) => event.stopPropagation(),
@@ -82,43 +79,38 @@ function Dialog({
   }, [open]);
 
   useEffect(() => {
-    if (dialogClose) {
+    if (!open && dialogOpen && dialogPortalRef.current) {
       if (dialogOpenTimerRef.current) {
         clearTimeout(dialogOpenTimerRef.current);
       }
 
-      dialogCloseTimerRef.current = setTimeout(onClose, transitionDuration + 100);
+      dialogCloseTimerRef.current = setTimeout(() => {
+        dialogPortalRef.current?.remove();
+        dialogPortalRef.current = null;
+
+        setIsMounted(false);
+        setDialogOpen(false);
+
+        document.body.removeAttribute('style');
+      }, transitionDuration + 100);
     }
-  }, [dialogClose, transitionDuration, onClose]);
-
-  useEffect(() => {
-    if (!open && dialogClose && dialogPortalRef.current) {
-      dialogPortalRef.current?.remove();
-      dialogPortalRef.current = null;
-
-      setIsMounted(false);
-      setDialogOpen(false);
-      setDialogClose(false);
-
-      document.body.removeAttribute('style');
-    }
-  }, [open, dialogClose]);
+  }, [open, dialogOpen, transitionDuration]);
 
   if (isMounted && dialogPortalRef.current) {
     return createPortal(
       <Wrapper
         ref={ref}
         dialogOpen={dialogOpen}
-        dialogClose={dialogClose}
+        dialogClose={!open}
         transitionDuration={transitionDuration}
         fullScreen={fullScreen}
-        onClick={handleClose}
+        onClick={onClose}
         role="dialog"
       >
         <StyledDialog
           theme={theme}
           dialogOpen={dialogOpen}
-          dialogClose={dialogClose}
+          dialogClose={!open}
           transitionDuration={transitionDuration}
           fullScreen={fullScreen}
           onClick={handleClick}

@@ -37,7 +37,6 @@ function BottomSheet({
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [sheetOpen, setSheetOpen] = useState<boolean>(false);
-  const [sheetClose, setSheetClose] = useState<boolean>(false);
   const [swipeable, setSwipeable] = useState<boolean>(false);
   const [sheetContentHeight, setSheetContentHeight] = useState<number>(0);
   const [sheetSwipeZoneHeight, setSheetSwipeZoneHeight] = useState<number>(0);
@@ -48,8 +47,6 @@ function BottomSheet({
   const sheetOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sheetCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sheetTranslateYRef = useRef<number>(0);
-
-  const handleClose = useCallback(() => setSheetClose(true), []);
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLDivElement>) => event.stopPropagation(),
@@ -99,12 +96,12 @@ function BottomSheet({
       sheetRef.current?.removeAttribute('style');
 
       if (swipedPercentage > 25) {
-        setSheetClose(true);
+        onClose();
       }
     }
 
     setSwipeable(false);
-  }, [swipeable]);
+  }, [swipeable, onClose]);
 
   useEffect(() => {
     if (open) {
@@ -139,16 +136,6 @@ function BottomSheet({
   }, [open]);
 
   useEffect(() => {
-    if (sheetClose) {
-      if (sheetOpenTimerRef.current) {
-        clearTimeout(sheetOpenTimerRef.current);
-      }
-
-      sheetCloseTimerRef.current = setTimeout(onClose, transitionDuration + 100);
-    }
-  }, [sheetClose, transitionDuration, onClose]);
-
-  useEffect(() => {
     if (sheetOpen && sheetRef.current) {
       setSheetContentHeight(sheetRef.current?.clientHeight);
     }
@@ -159,27 +146,32 @@ function BottomSheet({
   }, [sheetOpen]);
 
   useEffect(() => {
-    if (!open && sheetClose && sheetPortalRef.current) {
-      sheetPortalRef.current?.remove();
-      sheetPortalRef.current = null;
+    if (!open && sheetOpen && sheetPortalRef.current) {
+      if (sheetOpenTimerRef.current) {
+        clearTimeout(sheetOpenTimerRef.current);
+      }
 
-      setIsMounted(false);
-      setSheetOpen(false);
-      setSheetClose(false);
-      setSwipeable(false);
+      sheetCloseTimerRef.current = setTimeout(() => {
+        sheetPortalRef.current?.remove();
+        sheetPortalRef.current = null;
 
-      document.body.removeAttribute('style');
+        setIsMounted(false);
+        setSheetOpen(false);
+        setSwipeable(false);
+
+        document.body.removeAttribute('style');
+      }, transitionDuration + 100);
     }
-  }, [open, sheetClose]);
+  }, [open, sheetOpen, transitionDuration]);
 
   if (isMounted && sheetPortalRef.current) {
     return createPortal(
       <Wrapper
         ref={ref}
         sheetOpen={sheetOpen}
-        sheetClose={sheetClose}
+        sheetClose={!open}
         transitionDuration={transitionDuration}
-        onClick={handleClose}
+        onClick={onClose}
         onMouseMove={handleMouseMove}
         onMouseUp={handleEndSwipeable}
       >
@@ -187,7 +179,7 @@ function BottomSheet({
           ref={sheetRef}
           theme={theme}
           sheetOpen={sheetOpen}
-          sheetClose={sheetClose}
+          sheetClose={!open}
           transitionDuration={transitionDuration}
           onClick={handleClick}
           css={customStyle}

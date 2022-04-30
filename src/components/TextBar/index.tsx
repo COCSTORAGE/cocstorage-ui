@@ -50,7 +50,6 @@ function TextBar({
       fullWidth={fullWidth}
       isFocused={isFocused}
       size={size}
-      role="textbox"
     >
       {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
       <Input

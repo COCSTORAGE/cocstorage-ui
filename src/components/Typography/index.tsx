@@ -1,4 +1,4 @@
-import React, { memo, HTMLAttributes, PropsWithChildren } from 'react';
+import React, { memo, ElementType, HTMLAttributes, PropsWithChildren } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, CSSValue, Color } from '../../types';
@@ -6,7 +6,7 @@ import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps
   extends GenericComponentProps<HTMLAttributes<HTMLElement>, HTMLDivElement> {
-  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span';
+  component?: Extract<ElementType, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span'>;
   fontSize?: CSSValue;
   fontWeight?: number;
   lineHeight?: CSSValue;
