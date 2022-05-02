@@ -1,9 +1,9 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { LayoutProps } from '.';
+import { FlexboxProps } from '.';
 
-export const StyledLayout = styled.div<
-  Pick<LayoutProps, 'alignment' | 'justifyContent' | 'gap'> & {
+export const StyledFlexbox = styled.div<
+  Pick<FlexboxProps, 'alignment' | 'justifyContent' | 'gap'> & {
     layoutDirection: 'horizontal' | 'vertical';
   }
 >`

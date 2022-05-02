@@ -19,4 +19,4 @@ export { default as Alert } from './Alert';
 export { default as Badge } from './Badge';
 export { default as Menu } from './Menu';
 export { default as Grid } from './Grid';
-export { default as Layout } from './Layout';
+export { default as Flexbox } from './Flexbox';

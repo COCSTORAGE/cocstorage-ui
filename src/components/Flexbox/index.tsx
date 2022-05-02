@@ -1,9 +1,9 @@
 import React, { PropsWithChildren, ElementType, HTMLAttributes, memo } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { StyledLayout } from './Layout.styles';
+import { StyledFlexbox } from './Flexbox.styles';
 
-export interface LayoutProps
+export interface FlexboxProps
   extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article'>;
   direction?: 'horizontal' | 'vertical';
@@ -12,7 +12,7 @@ export interface LayoutProps
   gap?: number;
 }
 
-function Layout({
+function Flexbox({
   children,
   ref,
   component = 'div',
@@ -21,9 +21,9 @@ function Layout({
   justifyContent,
   gap,
   customStyle
-}: PropsWithChildren<LayoutProps>) {
+}: PropsWithChildren<FlexboxProps>) {
   return (
-    <StyledLayout
+    <StyledFlexbox
       as={component}
       ref={ref}
       layoutDirection={direction}
@@ -33,8 +33,8 @@ function Layout({
       css={customStyle}
     >
       {children}
-    </StyledLayout>
+    </StyledFlexbox>
   );
 }
 
-export default memo(Layout);
+export default memo(Flexbox);
