@@ -24,7 +24,7 @@ export interface TabsProps
 
 function Tabs({
   children,
-  ref,
+  componentRef,
   centered = false,
   onChange,
   value,
@@ -85,7 +85,7 @@ function Tabs({
 
   return (
     <StyledTabs
-      ref={ref}
+      ref={componentRef}
       css={customStyle}
       centered={centered}
       onClick={handleClick}

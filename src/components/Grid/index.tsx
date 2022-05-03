@@ -66,7 +66,7 @@ export type ConditionalSetGrid<T> = T &
 
 function Grid({
   children,
-  ref,
+  componentRef,
   component = 'div',
   container,
   rowGap = 0,
@@ -91,7 +91,7 @@ function Grid({
   return (
     <StyledGrid
       as={component}
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       container={container}
       className={item ? 'grid-item' : undefined}

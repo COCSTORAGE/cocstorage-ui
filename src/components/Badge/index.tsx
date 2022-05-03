@@ -13,7 +13,7 @@ export interface BadgeProps
 
 function Badge({
   children,
-  ref,
+  componentRef,
   severity,
   startIcon,
   iconOnly = false,
@@ -23,7 +23,7 @@ function Badge({
   const { theme } = useTheme();
 
   return (
-    <StyledBadge ref={ref} theme={theme} severity={severity} css={customStyle} {...props}>
+    <StyledBadge ref={componentRef} theme={theme} severity={severity} css={customStyle} {...props}>
       {startIcon}
       {!iconOnly && children}
     </StyledBadge>

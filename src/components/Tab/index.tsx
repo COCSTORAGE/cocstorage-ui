@@ -10,11 +10,18 @@ export interface TabProps
   value: number | string;
 }
 
-function Tab({ ref, text, value, customStyle, ...props }: TabProps) {
+function Tab({ componentRef, text, value, customStyle, ...props }: TabProps) {
   const { theme } = useTheme();
 
   return (
-    <StyledTab ref={ref} theme={theme} css={customStyle} data-value={value} {...props} role="tab">
+    <StyledTab
+      ref={componentRef}
+      theme={theme}
+      css={customStyle}
+      data-value={value}
+      {...props}
+      role="tab"
+    >
       {text}
       <SelectedBar theme={theme} />
     </StyledTab>

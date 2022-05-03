@@ -35,7 +35,7 @@ export type RequireAtOnlyOneIcon<T> = T &
 
 function Button({
   children,
-  ref,
+  componentRef,
   color = 'text',
   size = 'medium',
   fullWidth = false,
@@ -49,7 +49,7 @@ function Button({
 
   return (
     <StyledButton
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       color={color}
       size={size}

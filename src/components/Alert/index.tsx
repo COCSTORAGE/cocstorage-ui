@@ -13,7 +13,7 @@ export interface AlertProps
 
 function Alert({
   children,
-  ref,
+  componentRef,
   severity = 'normal',
   icon,
   action,
@@ -24,7 +24,7 @@ function Alert({
 
   return (
     <StyledAlert
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       severity={severity}
       css={customStyle}

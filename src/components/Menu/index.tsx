@@ -25,8 +25,8 @@ export interface MenuProps
 }
 
 function Menu({
-  ref,
   children,
+  componentRef,
   anchorRef,
   open,
   centered,
@@ -162,7 +162,7 @@ function Menu({
 
   if (isMounted && menuPortalRef.current) {
     return createPortal(
-      <Wrapper ref={ref} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
+      <Wrapper ref={componentRef} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
         <StyledMenu
           theme={theme}
           ref={menuRef}

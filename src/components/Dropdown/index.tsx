@@ -30,7 +30,7 @@ export interface DropdownProps
 }
 
 function Dropdown({
-  ref,
+  componentRef,
   options = [],
   value,
   fullWidth,
@@ -81,7 +81,7 @@ function Dropdown({
 
   return (
     <StyledDropdown
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       open={open && top > 0}
       css={customStyle}

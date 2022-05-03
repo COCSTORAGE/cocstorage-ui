@@ -7,7 +7,7 @@ import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.
 export interface CheckboxProps
   extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
 
-function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckboxProps) {
+function Checkbox({ componentRef, checked, disabled, customStyle, ...props }: CheckboxProps) {
   const { theme } = useTheme();
 
   const [hover, setHover] = useState<boolean>(false);
@@ -17,7 +17,7 @@ function Checkbox({ ref, checked, disabled, customStyle, ...props }: CheckboxPro
 
   return (
     <Wrapper
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       css={customStyle}
       checked={checked}

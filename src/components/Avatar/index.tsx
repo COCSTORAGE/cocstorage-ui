@@ -13,12 +13,21 @@ export interface AvatarProps
   round?: boolean;
 }
 
-function Avatar({ ref, src, alt, width, height, round, customStyle, ...props }: AvatarProps) {
+function Avatar({
+  componentRef,
+  src,
+  alt,
+  width,
+  height,
+  round,
+  customStyle,
+  ...props
+}: AvatarProps) {
   const { theme } = useTheme();
 
   return (
     <StyledAvatar
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       src={src}
       alt={alt}

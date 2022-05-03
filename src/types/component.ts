@@ -6,6 +6,6 @@ export type Size = 'big' | 'medium' | 'small' | 'pico';
 export type Severity = 'normal' | 'info' | 'success' | 'warning' | 'error';
 
 export type GenericComponentProps<T, K> = T & {
-  ref?: RefObject<K>;
+  componentRef?: RefObject<K>;
   customStyle?: Interpolation<EmotionTheme>;
 };

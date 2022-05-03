@@ -20,7 +20,7 @@ export interface PaginationProps
 }
 
 function Pagination({
-  ref,
+  componentRef,
   count,
   page,
   rowPerPage = 20,
@@ -74,7 +74,7 @@ function Pagination({
   }, [firstItem, lastItem]);
 
   return (
-    <StyledPagination ref={ref} css={customStyle} {...props}>
+    <StyledPagination ref={componentRef} css={customStyle} {...props}>
       <PaginationItem
         theme={theme}
         data-page={page - 1}

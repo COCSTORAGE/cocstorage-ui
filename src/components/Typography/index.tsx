@@ -19,6 +19,7 @@ export interface TypographyProps
 // TODO 추후 피그마에 Typography 정의가 되면 보완
 function Typography({
   children,
+  componentRef,
   component = 'h1',
   fontSize = 14,
   fontWeight,
@@ -34,6 +35,7 @@ function Typography({
   return (
     <StyledTypography
       as={component}
+      ref={componentRef}
       theme={theme}
       textFontSize={fontSize}
       textFontWeight={fontWeight}

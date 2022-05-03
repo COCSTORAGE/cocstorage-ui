@@ -24,7 +24,7 @@ export interface TextBarProps
 }
 
 function TextBar({
-  ref,
+  componentRef,
   size = 'medium',
   fullWidth,
   startIcon,
@@ -44,7 +44,7 @@ function TextBar({
 
   return (
     <StyledTextBar
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       css={customStyle}
       fullWidth={fullWidth}

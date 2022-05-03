@@ -14,7 +14,7 @@ export interface FlexboxProps
 
 function Flexbox({
   children,
-  ref,
+  componentRef,
   component = 'div',
   direction = 'horizontal',
   alignment,
@@ -25,7 +25,7 @@ function Flexbox({
   return (
     <StyledFlexbox
       as={component}
-      ref={ref}
+      ref={componentRef}
       layoutDirection={direction}
       alignment={alignment}
       justifyContent={justifyContent}

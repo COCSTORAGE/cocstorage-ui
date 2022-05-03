@@ -10,13 +10,13 @@ export interface IconButtonProps
 
 function IconButton({
   children,
-  ref,
+  componentRef,
   rotation = 0,
   customStyle,
   ...props
 }: PropsWithChildren<IconButtonProps>) {
   return (
-    <StyledIconButton ref={ref} rotation={rotation} css={customStyle} {...props}>
+    <StyledIconButton ref={componentRef} rotation={rotation} css={customStyle} {...props}>
       {children}
     </StyledIconButton>
   );

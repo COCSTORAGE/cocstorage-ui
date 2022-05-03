@@ -25,7 +25,7 @@ export interface BottomSheetProps
 
 function BottomSheet({
   children,
-  ref,
+  componentRef,
   open,
   transitionDuration = 225,
   disableSwipeable = false,
@@ -167,7 +167,7 @@ function BottomSheet({
   if (isMounted && sheetPortalRef.current) {
     return createPortal(
       <Wrapper
-        ref={ref}
+        ref={componentRef}
         sheetOpen={sheetOpen}
         sheetClose={!open}
         transitionDuration={transitionDuration}

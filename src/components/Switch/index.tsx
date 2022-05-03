@@ -14,12 +14,12 @@ export interface SwitchProps
   onChange?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function Switch({ ref, checked, disabled, onChange, customStyle, ...props }: SwitchProps) {
+function Switch({ componentRef, checked, disabled, onChange, customStyle, ...props }: SwitchProps) {
   const { theme } = useTheme();
 
   return (
     <StyledSwitch
-      ref={ref}
+      ref={componentRef}
       theme={theme}
       css={customStyle}
       checked={checked}

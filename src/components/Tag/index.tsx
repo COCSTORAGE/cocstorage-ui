@@ -12,11 +12,19 @@ export interface TagProps
   iconOnly?: boolean;
 }
 
-function Tag({ ref, color = 'text', text, startIcon, iconOnly, customStyle, ...props }: TagProps) {
+function Tag({
+  componentRef,
+  color = 'text',
+  text,
+  startIcon,
+  iconOnly,
+  customStyle,
+  ...props
+}: TagProps) {
   const { theme } = useTheme();
 
   return (
-    <StyledTag ref={ref} theme={theme} tagColor={color} css={customStyle} {...props}>
+    <StyledTag ref={componentRef} theme={theme} tagColor={color} css={customStyle} {...props}>
       {startIcon && startIcon}
       {!iconOnly && text}
     </StyledTag>

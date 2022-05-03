@@ -7,11 +7,11 @@ import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.style
 export interface RadioProps
   extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
 
-function Radio({ ref, checked, disabled, customStyle, ...props }: RadioProps) {
+function Radio({ componentRef, checked, disabled, customStyle, ...props }: RadioProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper ref={ref} theme={theme} css={customStyle} disabled={disabled} role="radio">
+    <Wrapper ref={componentRef} theme={theme} css={customStyle} disabled={disabled} role="radio">
       <StyledRadio type="radio" checked={checked} disabled={disabled} {...props} />
       <Marker>
         {checked && !disabled && (
