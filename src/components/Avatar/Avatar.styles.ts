@@ -3,7 +3,7 @@ import styled, { CSSObject } from '@emotion/styled';
 import { AvatarProps } from '.';
 
 export const StyledAvatar = styled.img<Pick<AvatarProps, 'round'>>`
-  background-color: ${({ theme: { palette } }) => palette.background.fg2};
+  background-color: ${({ theme: { palette } }) => palette.background.fg1};
 
   max-width: 100%;
   border-radius: 50%;
