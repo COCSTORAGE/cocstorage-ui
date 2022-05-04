@@ -1,11 +1,10 @@
-import React, { memo, HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, CSSValue } from '../../types';
 import { StyledAvatar } from './Avatar.styles';
 
-export interface AvatarProps
-  extends GenericComponentProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement> {
+export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLImageElement>> {
   src: string;
   alt: string;
   width?: CSSValue;
@@ -13,21 +12,15 @@ export interface AvatarProps
   round?: boolean;
 }
 
-function Avatar({
-  componentRef,
-  src,
-  alt,
-  width,
-  height,
-  round,
-  customStyle,
-  ...props
-}: AvatarProps) {
+const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
+  { src, alt, width, height, round, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   return (
     <StyledAvatar
-      ref={componentRef}
+      ref={ref}
       theme={theme}
       src={src}
       alt={alt}
@@ -38,6 +31,6 @@ function Avatar({
       {...props}
     />
   );
-}
+});
 
-export default memo(Avatar);
+export default Avatar;

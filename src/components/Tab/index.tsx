@@ -1,31 +1,26 @@
-import React, { memo, ButtonHTMLAttributes } from 'react';
+import React, { forwardRef, ButtonHTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledTab, SelectedBar } from './Tab.styles';
 
-export interface TabProps
-  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface TabProps extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
   text: string;
   value: number | string;
 }
 
-function Tab({ componentRef, text, value, customStyle, ...props }: TabProps) {
+const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
+  { text, value, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   return (
-    <StyledTab
-      ref={componentRef}
-      theme={theme}
-      css={customStyle}
-      data-value={value}
-      {...props}
-      role="tab"
-    >
+    <StyledTab ref={ref} theme={theme} css={customStyle} data-value={value} {...props} role="tab">
       {text}
       <SelectedBar theme={theme} />
     </StyledTab>
   );
-}
+});
 
-export default memo(Tab);
+export default Tab;

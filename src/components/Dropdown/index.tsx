@@ -2,8 +2,7 @@ import React, {
   useEffect,
   useState,
   useRef,
-  useCallback,
-  memo,
+  forwardRef,
   ButtonHTMLAttributes,
   MouseEvent
 } from 'react';
@@ -17,8 +16,7 @@ import Icon from '../Icon';
 
 export interface DropdownProps
   extends GenericComponentProps<
-    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>,
-    HTMLButtonElement
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>
   > {
   options: Array<{
     name: string;
@@ -29,16 +27,10 @@ export interface DropdownProps
   onChange: (value: number | string) => void;
 }
 
-function Dropdown({
-  componentRef,
-  options = [],
-  value,
-  fullWidth,
-  onChange,
-  placeholder,
-  customStyle,
-  ...props
-}: DropdownProps) {
+const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
+  { options = [], value, fullWidth, onChange, placeholder, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -50,26 +42,23 @@ function Dropdown({
 
   const optionWrapperRef = useRef<HTMLUListElement | null>(null);
 
-  const handleClickDropdown = useCallback(() => setOpen(!open), [open]);
+  const handleClickDropdown = () => setOpen(!open);
 
-  const handleClickOption = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
-      event.stopPropagation();
+  const handleClickOption = (event: MouseEvent<HTMLLIElement>) => {
+    event.stopPropagation();
 
-      const dataValue = event.currentTarget.getAttribute('data-value');
+    const dataValue = event.currentTarget.getAttribute('data-value');
 
-      if (!dataValue) return;
+    if (!dataValue) return;
 
-      if (!Number.isNaN(Number(dataValue))) {
-        onChange(Number(dataValue));
-      } else {
-        onChange(dataValue);
-      }
+    if (!Number.isNaN(Number(dataValue))) {
+      onChange(Number(dataValue));
+    } else {
+      onChange(dataValue);
+    }
 
-      setOpen(false);
-    },
-    [onChange]
-  );
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (optionWrapperRef.current) setTop(Number(optionWrapperRef.current?.clientHeight || 0) + 8);
@@ -81,7 +70,7 @@ function Dropdown({
 
   return (
     <StyledDropdown
-      ref={componentRef}
+      ref={ref}
       theme={theme}
       open={open && top > 0}
       css={customStyle}
@@ -106,6 +95,6 @@ function Dropdown({
       </OptionWrapper>
     </StyledDropdown>
   );
-}
+});
 
-export default memo(Dropdown);
+export default Dropdown;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, memo, HTMLAttributes, MouseEvent } from 'react';
+import React, { useEffect, useState, forwardRef, HTMLAttributes, MouseEvent } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
@@ -8,10 +8,7 @@ import { StyledPagination, PaginationItem } from './Pagination.styles';
 import Icon from '../Icon';
 
 export interface PaginationProps
-  extends GenericComponentProps<
-    Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>,
-    HTMLUListElement
-  > {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>> {
   count: number;
   page: number;
   rowPerPage?: number;
@@ -19,16 +16,10 @@ export interface PaginationProps
   onChange: (value: number) => void;
 }
 
-function Pagination({
-  componentRef,
-  count,
-  page,
-  rowPerPage = 20,
-  itemCount = 10,
-  onChange,
-  customStyle,
-  ...props
-}: PaginationProps) {
+const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagination(
+  { count, page, rowPerPage = 20, itemCount = 10, onChange, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const [totalPage, setTotalPage] = useState<number>(0);
@@ -37,16 +28,13 @@ function Pagination({
 
   const [items, setItems] = useState<Array<number>>([]);
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
-      const dataPage = Number(event.currentTarget.getAttribute('data-page') || 0);
+  const handleClick = (event: MouseEvent<HTMLLIElement>) => {
+    const dataPage = Number(event.currentTarget.getAttribute('data-page') || 0);
 
-      if (dataPage < 1 || dataPage === page || dataPage > totalPage) return;
+    if (dataPage < 1 || dataPage === page || dataPage > totalPage) return;
 
-      onChange(dataPage);
-    },
-    [page, totalPage, onChange]
-  );
+    onChange(dataPage);
+  };
 
   useEffect(() => {
     const newTotalPage = Math.ceil(count / rowPerPage);
@@ -74,7 +62,7 @@ function Pagination({
   }, [firstItem, lastItem]);
 
   return (
-    <StyledPagination ref={componentRef} css={customStyle} {...props}>
+    <StyledPagination ref={ref} css={customStyle} {...props}>
       <PaginationItem
         theme={theme}
         data-page={page - 1}
@@ -108,6 +96,6 @@ function Pagination({
       </PaginationItem>
     </StyledPagination>
   );
-}
+});
 
-export default memo(Pagination);
+export default Pagination;

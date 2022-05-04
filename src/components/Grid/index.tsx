@@ -1,11 +1,10 @@
-import React, { memo, PropsWithChildren, ElementType, HTMLAttributes } from 'react';
+import React, { forwardRef, PropsWithChildren, ElementType, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledGrid } from './Grid.styles';
 
-export interface GridProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface GridProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article'>;
 }
 
@@ -64,56 +63,60 @@ export type ConditionalSetGrid<T> = T &
       }
   );
 
-function Grid({
-  children,
-  componentRef,
-  component = 'div',
-  container,
-  rowGap = 0,
-  columnGap = 0,
-  item,
-  auto,
-  xs,
-  sm,
-  md,
-  lg,
-  xl,
-  xsHidden,
-  smHidden,
-  mdHidden,
-  lgHidden,
-  xlHidden,
-  customStyle,
-  ...props
-}: PropsWithChildren<ConditionalSetGrid<GridProps>>) {
-  const { theme } = useTheme();
+const Grid = forwardRef<HTMLDivElement, PropsWithChildren<ConditionalSetGrid<GridProps>>>(
+  function Grid(
+    {
+      children,
+      component = 'div',
+      container,
+      rowGap = 0,
+      columnGap = 0,
+      item,
+      auto,
+      xs,
+      sm,
+      md,
+      lg,
+      xl,
+      xsHidden,
+      smHidden,
+      mdHidden,
+      lgHidden,
+      xlHidden,
+      customStyle,
+      ...props
+    },
+    ref
+  ) {
+    const { theme } = useTheme();
 
-  return (
-    <StyledGrid
-      as={component}
-      ref={componentRef}
-      theme={theme}
-      container={container}
-      className={item ? 'grid-item' : undefined}
-      rowGap={rowGap}
-      columnGap={columnGap}
-      auto={auto}
-      xs={xs}
-      sm={sm}
-      md={md}
-      lg={lg}
-      xl={xl}
-      xsHidden={xsHidden}
-      smHidden={smHidden}
-      mdHidden={mdHidden}
-      lgHidden={lgHidden}
-      xlHidden={xlHidden}
-      css={customStyle}
-      {...props}
-    >
-      {children}
-    </StyledGrid>
-  );
-}
+    return (
+      <StyledGrid
+        as={component}
+        ref={ref}
+        theme={theme}
+        container={container}
+        className={item ? 'grid-item' : undefined}
+        rowGap={rowGap}
+        columnGap={columnGap}
+        auto={auto}
+        xs={xs}
+        sm={sm}
+        md={md}
+        lg={lg}
+        xl={xl}
+        xsHidden={xsHidden}
+        smHidden={smHidden}
+        mdHidden={mdHidden}
+        lgHidden={lgHidden}
+        xlHidden={xlHidden}
+        css={customStyle}
+        {...props}
+      >
+        {children}
+      </StyledGrid>
+    );
+  }
+);
 
-export default memo(Grid);
+export default Grid;

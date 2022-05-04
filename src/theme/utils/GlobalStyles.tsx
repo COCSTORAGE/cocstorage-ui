@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Global } from '@emotion/react';
 import useTheme from '@theme/provider/useTheme';
 
@@ -66,4 +66,4 @@ function GlobalStyles() {
   );
 }
 
-export default memo(GlobalStyles);
+export default GlobalStyles;

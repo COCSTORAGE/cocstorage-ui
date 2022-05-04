@@ -1,4 +1,4 @@
-import React, { memo, SVGProps } from 'react';
+import React, { SVGProps } from 'react';
 import { useTheme } from '@theme';
 
 import * as SvgIcons from '../../assets/icons';
@@ -6,7 +6,7 @@ import * as SvgIcons from '../../assets/icons';
 import { GenericComponentProps, Color } from '../../types';
 import { StyledIcon } from './Icon.styles';
 
-export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>, SVGElement> {
+export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>> {
   name: keyof typeof SvgIcons;
   color?: Color;
 }
@@ -32,4 +32,4 @@ function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: Ico
   );
 }
 
-export default memo(Icon);
+export default Icon;

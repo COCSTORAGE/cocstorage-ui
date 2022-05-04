@@ -1,21 +1,11 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  memo,
-  InputHTMLAttributes,
-  ReactElement
-} from 'react';
+import React, { useState, useRef, forwardRef, InputHTMLAttributes, ReactElement } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, Size } from '../../types';
 import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
 
 export interface TextBarProps
-  extends GenericComponentProps<
-    Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
-    HTMLInputElement
-  > {
+  extends GenericComponentProps<Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>> {
   size?: Exclude<Size, 'pico'>;
   fullWidth?: boolean;
   startIcon?: ReactElement;
@@ -23,28 +13,21 @@ export interface TextBarProps
   value: string;
 }
 
-function TextBar({
-  componentRef,
-  size = 'medium',
-  fullWidth,
-  startIcon,
-  label,
-  value,
-  placeholder,
-  customStyle,
-  ...props
-}: TextBarProps) {
+const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
+  { size = 'medium', fullWidth, startIcon, label, value, placeholder, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const TextBarRef = useRef<HTMLInputElement | null>(null);
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const handleFocus = useCallback(() => setIsFocused(!isFocused), [isFocused]);
+  const handleFocus = () => setIsFocused(!isFocused);
 
   return (
     <StyledTextBar
-      ref={componentRef}
+      ref={ref}
       theme={theme}
       css={customStyle}
       fullWidth={fullWidth}
@@ -70,6 +53,6 @@ function TextBar({
       )}
     </StyledTextBar>
   );
-}
+});
 
-export default memo(TextBar);
+export default TextBar;

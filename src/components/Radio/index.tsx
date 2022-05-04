@@ -1,17 +1,19 @@
-import React, { memo, InputHTMLAttributes } from 'react';
+import React, { forwardRef, InputHTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.styles';
 
-export interface RadioProps
-  extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+export interface RadioProps extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>> {}
 
-function Radio({ componentRef, checked, disabled, customStyle, ...props }: RadioProps) {
+const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
+  { checked, disabled, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper ref={componentRef} theme={theme} css={customStyle} disabled={disabled} role="radio">
+    <Wrapper ref={ref} theme={theme} css={customStyle} disabled={disabled} role="radio">
       <StyledRadio type="radio" checked={checked} disabled={disabled} {...props} />
       <Marker>
         {checked && !disabled && (
@@ -22,6 +24,6 @@ function Radio({ componentRef, checked, disabled, customStyle, ...props }: Radio
       </Marker>
     </Wrapper>
   );
-}
+});
 
-export default memo(Radio);
+export default Radio;

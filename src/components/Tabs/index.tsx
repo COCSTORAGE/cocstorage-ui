@@ -1,8 +1,7 @@
 import React, {
   useEffect,
   useRef,
-  useCallback,
-  memo,
+  forwardRef,
   PropsWithChildren,
   HTMLAttributes,
   MouseEvent
@@ -13,24 +12,16 @@ import { GenericComponentProps, ThemeType } from '../../types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
 export interface TabsProps
-  extends GenericComponentProps<
-    Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>,
-    HTMLDivElement
-  > {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>> {
   centered?: boolean;
   onChange: (value: number | string) => void;
   value: number | string;
 }
 
-function Tabs({
-  children,
-  componentRef,
-  centered = false,
-  onChange,
-  value,
-  customStyle,
-  ...props
-}: PropsWithChildren<TabsProps>) {
+const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function Tabs(
+  { children, centered = false, onChange, value, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const tabsInnerRef = useRef<HTMLDivElement | null>(null);
@@ -38,20 +29,17 @@ function Tabs({
   const prevThemeType = useRef<ThemeType | null>(null);
   const isMountedRef = useRef<boolean>(false);
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement>) => {
-      const dataValue = (event.target as Element).getAttribute('data-value');
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    const dataValue = (event.target as Element).getAttribute('data-value');
 
-      if (!dataValue) return;
+    if (!dataValue) return;
 
-      if (!Number.isNaN(Number(dataValue))) {
-        onChange(Number(dataValue));
-      } else {
-        onChange(dataValue);
-      }
-    },
-    [onChange]
-  );
+    if (!Number.isNaN(Number(dataValue))) {
+      onChange(Number(dataValue));
+    } else {
+      onChange(dataValue);
+    }
+  };
 
   useEffect(() => {
     if (prevThemeType.current && prevThemeType.current !== theme.type) {
@@ -85,7 +73,7 @@ function Tabs({
 
   return (
     <StyledTabs
-      ref={componentRef}
+      ref={ref}
       css={customStyle}
       centered={centered}
       onClick={handleClick}
@@ -95,6 +83,6 @@ function Tabs({
       <TabsInner ref={tabsInnerRef}>{children}</TabsInner>
     </StyledTabs>
   );
-}
+});
 
-export default memo(Tabs);
+export default Tabs;

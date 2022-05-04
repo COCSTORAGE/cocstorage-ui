@@ -1,23 +1,26 @@
-import React, { useState, useCallback, memo, InputHTMLAttributes } from 'react';
+import React, { useState, forwardRef, InputHTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledCheckbox, Marker, MarkerInner, Check } from './Checkbox.styles';
 
 export interface CheckboxProps
-  extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+  extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>> {}
 
-function Checkbox({ componentRef, checked, disabled, customStyle, ...props }: CheckboxProps) {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
+  { checked, disabled, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const [hover, setHover] = useState<boolean>(false);
 
-  const handleMouseOver = useCallback(() => setHover(true), []);
-  const handleMouseOut = useCallback(() => setHover(false), []);
+  const handleMouseOver = () => setHover(true);
+  const handleMouseOut = () => setHover(false);
 
   return (
     <Wrapper
-      ref={componentRef}
+      ref={ref}
       theme={theme}
       css={customStyle}
       checked={checked}
@@ -36,6 +39,6 @@ function Checkbox({ componentRef, checked, disabled, customStyle, ...props }: Ch
       </Marker>
     </Wrapper>
   );
-}
+});
 
-export default memo(Checkbox);
+export default Checkbox;

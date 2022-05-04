@@ -1,10 +1,9 @@
-import React, { PropsWithChildren, ElementType, HTMLAttributes, memo } from 'react';
+import React, { forwardRef, PropsWithChildren, ElementType, HTMLAttributes } from 'react';
 
 import { GenericComponentProps } from '../../types';
 import { StyledFlexbox } from './Flexbox.styles';
 
-export interface FlexboxProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface FlexboxProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article'>;
   direction?: 'horizontal' | 'vertical';
   alignment?: 'flex-start' | 'flex-end' | 'center';
@@ -12,20 +11,22 @@ export interface FlexboxProps
   gap?: number;
 }
 
-function Flexbox({
-  children,
-  componentRef,
-  component = 'div',
-  direction = 'horizontal',
-  alignment,
-  justifyContent,
-  gap,
-  customStyle
-}: PropsWithChildren<FlexboxProps>) {
+const Flexbox = forwardRef<HTMLDivElement, PropsWithChildren<FlexboxProps>>(function Flexbox(
+  {
+    children,
+    component = 'div',
+    direction = 'horizontal',
+    alignment,
+    justifyContent,
+    gap,
+    customStyle
+  },
+  ref
+) {
   return (
     <StyledFlexbox
       as={component}
-      ref={componentRef}
+      ref={ref}
       layoutDirection={direction}
       alignment={alignment}
       justifyContent={justifyContent}
@@ -35,6 +36,6 @@ function Flexbox({
       {children}
     </StyledFlexbox>
   );
-}
+});
 
-export default memo(Flexbox);
+export default Flexbox;

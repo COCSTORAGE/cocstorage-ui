@@ -1,9 +1,9 @@
 import React, {
   useEffect,
   useState,
-  useCallback,
   useRef,
-  memo,
+  useCallback,
+  forwardRef,
   PropsWithChildren,
   RefObject,
   HTMLAttributes,
@@ -15,8 +15,7 @@ import useTheme from '@theme/provider/useTheme';
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';
 
-export interface MenuProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   anchorRef?: RefObject<HTMLElement>;
   open: boolean;
   centered?: boolean;
@@ -24,17 +23,10 @@ export interface MenuProps
   onClose: () => void;
 }
 
-function Menu({
-  children,
-  componentRef,
-  anchorRef,
-  open,
-  centered,
-  triangleLeft = '17px',
-  onClose,
-  customStyle,
-  ...props
-}: PropsWithChildren<MenuProps>) {
+const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function Menu(
+  { children, anchorRef, open, centered, triangleLeft = '17px', onClose, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -53,12 +45,9 @@ function Menu({
   const menuPortalRef = useRef<HTMLElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleClose = useCallback(() => setMenuClose(true), []);
+  const handleClose = () => setMenuClose(true);
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement>) => event.stopPropagation(),
-    []
-  );
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   const handleResize = useCallback(() => {
     if (
@@ -71,7 +60,7 @@ function Menu({
     ) {
       handleClose();
     }
-  }, [isMounted, menuOpen, menuContentOpen, anchorRef, handleClose]);
+  }, [isMounted, menuOpen, menuContentOpen, anchorRef]);
 
   useEffect(() => {
     if (open && anchorRef && anchorRef.current) {
@@ -162,7 +151,7 @@ function Menu({
 
   if (isMounted && menuPortalRef.current) {
     return createPortal(
-      <Wrapper ref={componentRef} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
+      <Wrapper ref={ref} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
         <StyledMenu
           theme={theme}
           ref={menuRef}
@@ -183,6 +172,6 @@ function Menu({
   }
 
   return null;
-}
+});
 
-export default memo(Menu);
+export default Menu;

@@ -1,9 +1,8 @@
 import React, {
   useEffect,
   useState,
-  useCallback,
   useRef,
-  memo,
+  forwardRef,
   PropsWithChildren,
   HTMLAttributes,
   MouseEvent
@@ -15,23 +14,17 @@ import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledDialog } from './Dialog.styles';
 
 export interface DialogProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>, HTMLDivElement> {
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
   open: boolean;
   transitionDuration?: number;
   fullScreen?: boolean;
   onClose: () => void;
 }
 
-function Dialog({
-  children,
-  componentRef,
-  open,
-  transitionDuration = 225,
-  fullScreen,
-  onClose,
-  customStyle,
-  ...props
-}: PropsWithChildren<DialogProps>) {
+const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(function Dialog(
+  { children, open, transitionDuration = 225, fullScreen, onClose, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -41,10 +34,7 @@ function Dialog({
   const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement>) => event.stopPropagation(),
-    []
-  );
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   useEffect(() => {
     if (open) {
@@ -99,7 +89,7 @@ function Dialog({
   if (isMounted && dialogPortalRef.current) {
     return createPortal(
       <Wrapper
-        ref={componentRef}
+        ref={ref}
         dialogOpen={dialogOpen}
         dialogClose={!open}
         transitionDuration={transitionDuration}
@@ -125,6 +115,6 @@ function Dialog({
   }
 
   return null;
-}
+});
 
-export default memo(Dialog);
+export default Dialog;

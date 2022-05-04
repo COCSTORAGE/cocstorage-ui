@@ -1,34 +1,28 @@
-import React, { memo, ReactElement, HTMLAttributes } from 'react';
+import React, { forwardRef, ReactElement, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, ComponentColor } from '../../types';
 import { StyledTag } from './Tag.styles';
 
-export interface TagProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface TagProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   color?: ComponentColor;
   text: string;
   startIcon?: ReactElement;
   iconOnly?: boolean;
 }
 
-function Tag({
-  componentRef,
-  color = 'text',
-  text,
-  startIcon,
-  iconOnly,
-  customStyle,
-  ...props
-}: TagProps) {
+const Tag = forwardRef<HTMLDivElement, TagProps>(function Tag(
+  { color = 'text', text, startIcon, iconOnly, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   return (
-    <StyledTag ref={componentRef} theme={theme} tagColor={color} css={customStyle} {...props}>
+    <StyledTag ref={ref} theme={theme} tagColor={color} css={customStyle} {...props}>
       {startIcon && startIcon}
       {!iconOnly && text}
     </StyledTag>
   );
-}
+});
 
-export default memo(Tag);
+export default Tag;

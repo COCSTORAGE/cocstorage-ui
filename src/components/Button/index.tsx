@@ -1,11 +1,11 @@
-import React, { memo, PropsWithChildren, ReactElement, ButtonHTMLAttributes } from 'react';
+import React, { PropsWithChildren, ReactElement, ButtonHTMLAttributes, forwardRef } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, ComponentColor, Size } from '../../types';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
-  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
   color?: ComponentColor;
   size?: Size;
   fullWidth?: boolean;
@@ -33,35 +33,39 @@ export type RequireAtOnlyOneIcon<T> = T &
       }
   );
 
-function Button({
-  children,
-  componentRef,
-  color = 'text',
-  size = 'medium',
-  fullWidth = false,
-  startIcon,
-  endIcon,
-  iconOnly = false,
-  customStyle,
-  ...props
-}: PropsWithChildren<RequireAtOnlyOneIcon<ButtonProps>>) {
-  const { theme } = useTheme();
+const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneIcon<ButtonProps>>>(
+  function Button(
+    {
+      children,
+      color = 'text',
+      size = 'medium',
+      fullWidth = false,
+      startIcon,
+      endIcon,
+      iconOnly = false,
+      customStyle,
+      ...props
+    },
+    ref
+  ) {
+    const { theme } = useTheme();
 
-  return (
-    <StyledButton
-      ref={componentRef}
-      theme={theme}
-      color={color}
-      size={size}
-      fullWidth={fullWidth}
-      css={customStyle}
-      {...props}
-    >
-      {startIcon}
-      {!iconOnly && children}
-      {endIcon}
-    </StyledButton>
-  );
-}
+    return (
+      <StyledButton
+        ref={ref}
+        theme={theme}
+        color={color}
+        size={size}
+        fullWidth={fullWidth}
+        css={customStyle}
+        {...props}
+      >
+        {startIcon}
+        {!iconOnly && children}
+        {endIcon}
+      </StyledButton>
+    );
+  }
+);
 
-export default memo(Button);
+export default Button;

@@ -1,25 +1,21 @@
-import React, { memo, HTMLAttributes, ElementType, PropsWithChildren } from 'react';
+import React, { forwardRef, HTMLAttributes, ElementType, PropsWithChildren } from 'react';
 
 import { GenericComponentProps } from '../../types';
 import { StyledBox } from './Box.styles';
 
-export interface BoxProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface BoxProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   component?: ElementType;
 }
 
-function Box({
-  children,
-  componentRef,
-  component = 'div',
-  customStyle,
-  ...props
-}: PropsWithChildren<BoxProps>) {
+const Box = forwardRef<HTMLDivElement, PropsWithChildren<BoxProps>>(function Box(
+  { children, component = 'div', customStyle, ...props },
+  ref
+) {
   return (
-    <StyledBox as={component} ref={componentRef} css={customStyle} {...props}>
+    <StyledBox as={component} ref={ref} css={customStyle} {...props}>
       {children}
     </StyledBox>
   );
-}
+});
 
-export default memo(Box);
+export default Box;

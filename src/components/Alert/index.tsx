@@ -1,30 +1,24 @@
-import React, { memo, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import React, { forwardRef, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, Severity } from '../../types';
 import { StyledAlert, Message } from './Alert.styles';
 
-export interface AlertProps
-  extends GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   severity?: Severity;
   icon?: ReactElement;
   action?: ReactElement;
 }
 
-function Alert({
-  children,
-  componentRef,
-  severity = 'normal',
-  icon,
-  action,
-  customStyle,
-  ...props
-}: PropsWithChildren<AlertProps>) {
+const Alert = forwardRef<HTMLDivElement, PropsWithChildren<AlertProps>>(function Alert(
+  { children, severity = 'normal', icon, action, customStyle, ...props },
+  ref
+) {
   const { theme } = useTheme();
 
   return (
     <StyledAlert
-      ref={componentRef}
+      ref={ref}
       theme={theme}
       severity={severity}
       css={customStyle}
@@ -36,6 +30,6 @@ function Alert({
       {action}
     </StyledAlert>
   );
-}
+});
 
-export default memo(Alert);
+export default Alert;
