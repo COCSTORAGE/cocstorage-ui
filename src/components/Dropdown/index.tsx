@@ -80,7 +80,7 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
     >
       {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
       {value && selectedValue && <span>{selectedValue.name}</span>}
-      <Icon name="ArrowDropBottomSpecify_12_12" />
+      <Icon name="ArrowDropDownSpecify_12_12" />
       <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
         {options.map((option) => (
           <Option

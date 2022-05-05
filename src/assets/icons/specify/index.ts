@@ -1,3 +1,3 @@
 /* eslint camelcase: "off" */
-export { default as ArrowDropBottomSpecify_12_12 } from './arrow-drop-bottom-specify.svg';
-export { default as ArrowDropTopSpecify_12_12 } from './arrow-drop-top-specify.svg';
+export { default as ArrowDropDownSpecify_12_12 } from './arrow-drop-down-specify.svg';
+export { default as ArrowDropUpSpecify_12_12 } from './arrow-drop-up-specify.svg';
