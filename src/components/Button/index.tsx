@@ -1,12 +1,12 @@
 import React, { PropsWithChildren, ReactElement, ButtonHTMLAttributes, forwardRef } from 'react';
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps, ComponentColor, Size } from '../../types';
+import { GenericComponentProps, BrandColor, Size } from '../../types';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
   extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
-  color?: ComponentColor;
+  color?: BrandColor;
   size?: Size;
   fullWidth?: boolean;
   startIcon?: ReactElement;
