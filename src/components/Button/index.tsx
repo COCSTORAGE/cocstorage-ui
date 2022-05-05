@@ -54,7 +54,7 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneI
       <StyledButton
         ref={ref}
         theme={theme}
-        color={color}
+        brandColor={color}
         size={size}
         fullWidth={fullWidth}
         css={customStyle}

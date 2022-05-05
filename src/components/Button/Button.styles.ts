@@ -1,6 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
 import { ButtonProps } from '.';
+import { BrandColor } from '../../types';
 
 const DefaultButton = styled.button`
   display: inline-flex;
@@ -14,9 +15,13 @@ const DefaultButton = styled.button`
   cursor: pointer;
 `;
 
-export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>`
-  ${({ theme: { type, palette }, color }) => {
-    switch (color) {
+export const StyledButton = styled(DefaultButton)<
+  Pick<ButtonProps, 'size' | 'fullWidth'> & {
+    brandColor: BrandColor;
+  }
+>`
+  ${({ theme: { type, palette }, brandColor }) => {
+    switch (brandColor) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,
@@ -132,11 +137,4 @@ export const StyledButton = styled(DefaultButton)<Omit<ButtonProps, 'iconOnly'>>
           width: '100%'
         }
       : {}};
-`;
-
-export const ButtonInner = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
 `;
