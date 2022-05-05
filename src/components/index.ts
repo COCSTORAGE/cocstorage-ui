@@ -20,3 +20,4 @@ export { default as Badge } from './Badge';
 export { default as Menu } from './Menu';
 export { default as Grid } from './Grid';
 export { default as Flexbox } from './Flexbox';
+export { default as Hidden } from './Hidden';
