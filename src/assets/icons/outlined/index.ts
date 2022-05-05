@@ -1,7 +1,10 @@
 export { default as ArrowLeftOutlined } from './arrow-left-outlined.svg';
 export { default as BellOutlined } from './bell-outlined.svg';
 export { default as BulbOutlined } from './bulb-outlined.svg';
+export { default as CaretTopOutlined } from './caret-top-outlined.svg';
 export { default as CaretLeftOutlined } from './caret-left-outlined.svg';
+export { default as CaretRightOutlined } from './caret-right-outlined.svg';
+export { default as CaretBottomOutlined } from './caret-bottom-outlined.svg';
 export { default as CaretSemiLeftOutlined } from './caret-semi-left-outlined.svg';
 export { default as CompleteOutlined } from './complete-outlined.svg';
 export { default as ClockOutlined } from './clock-outlined.svg';
