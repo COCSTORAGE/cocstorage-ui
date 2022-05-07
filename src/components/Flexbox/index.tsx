@@ -4,7 +4,7 @@ import { GenericComponentProps } from '../../types';
 import { StyledFlexbox } from './Flexbox.styles';
 
 export interface FlexboxProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article'>;
+  component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article' | 'button'>;
   direction?: 'horizontal' | 'vertical';
   alignment?: 'flex-start' | 'flex-end' | 'center';
   justifyContent?: 'center' | 'space-between';
