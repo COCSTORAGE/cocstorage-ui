@@ -20,7 +20,7 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
   function Typography(
     {
       children,
-      component = 'h1',
+      component = 'div',
       fontSize = 14,
       fontWeight,
       lineHeight,
