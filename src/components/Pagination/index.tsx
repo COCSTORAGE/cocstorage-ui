@@ -2,7 +2,7 @@ import React, { useEffect, useState, forwardRef, HTMLAttributes, MouseEvent } fr
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
-import { StyledPagination, PaginationItem } from './Pagination.styles';
+import { StyledPagination, PaginationItem, PaginationDot } from './Pagination.styles';
 
 // Components
 import Icon from '../Icon';
@@ -84,6 +84,20 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
           {item}
         </PaginationItem>
       ))}
+      {totalPage && !items.includes(totalPage) && (
+        <>
+          <PaginationDot theme={theme} />
+          <PaginationItem
+            theme={theme}
+            data-page={totalPage}
+            selected={false}
+            onClick={handleClick}
+            tabIndex={0}
+          >
+            {totalPage}
+          </PaginationItem>
+        </>
+      )}
       <PaginationItem
         theme={theme}
         data-page={page + 1}

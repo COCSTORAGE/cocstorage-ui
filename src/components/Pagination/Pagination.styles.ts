@@ -14,8 +14,9 @@ export const PaginationItem = styled.li<{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
+  min-width: 24px;
   height: 24px;
+  padding: 0 7px;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
@@ -53,4 +54,12 @@ export const PaginationItem = styled.li<{
           cursor: 'default'
         }
       : {}};
+`;
+
+export const PaginationDot = styled.li`
+  width: 2px;
+  height: 2px;
+  margin: 0 7px;
+  border-radius: 50%;
+  background-color: ${({ theme: { type, palette } }) => palette.text[type].text1};
 `;
