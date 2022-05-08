@@ -16,7 +16,7 @@ import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  anchorRef?: RefObject<HTMLElement>;
+  anchorRef: RefObject<HTMLElement>;
   open: boolean;
   centered?: boolean;
   triangleLeft?: string;

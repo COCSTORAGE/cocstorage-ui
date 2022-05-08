@@ -1,3 +1,3 @@
 export * from './components';
 export * from './theme';
-export { CustomStyle } from './types';
+export { CustomStyle, CSSValue } from './types';
