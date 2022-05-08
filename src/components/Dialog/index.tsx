@@ -8,7 +8,6 @@ import React, {
   MouseEvent
 } from 'react';
 import { createPortal } from 'react-dom';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledDialog } from './Dialog.styles';
@@ -25,8 +24,6 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
   { children, open, transitionDuration = 225, fullScreen, onClose, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
@@ -98,7 +95,6 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         role="dialog"
       >
         <StyledDialog
-          theme={theme}
           dialogOpen={dialogOpen}
           dialogClose={!open}
           transitionDuration={transitionDuration}

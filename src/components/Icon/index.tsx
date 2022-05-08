@@ -1,5 +1,4 @@
 import React, { SVGProps } from 'react';
-import { useTheme } from '@theme';
 
 import * as SvgIcons from '../../assets/icons';
 
@@ -12,7 +11,6 @@ export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>> {
 }
 
 function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: IconProps) {
-  const { theme } = useTheme();
   const SvgIcon = SvgIcons[name];
   const StyledSvgIcon = StyledIcon(SvgIcon);
 
@@ -22,7 +20,6 @@ function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: Ico
 
   return (
     <StyledSvgIcon
-      theme={theme}
       name={name}
       color={color}
       viewBox={hasSpecifyViewBox ? newViewBox : viewBox}

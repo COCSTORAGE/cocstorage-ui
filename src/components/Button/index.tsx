@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, ReactElement, ButtonHTMLAttributes, forwardRef } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, BrandColor, Size } from '../../types';
 import { StyledButton } from './Button.styles';
@@ -48,12 +47,9 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneI
     },
     ref
   ) {
-    const { theme } = useTheme();
-
     return (
       <StyledButton
         ref={ref}
-        theme={theme}
         brandColor={color}
         size={size}
         fullWidth={fullWidth}

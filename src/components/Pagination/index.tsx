@@ -1,5 +1,4 @@
 import React, { useEffect, useState, forwardRef, HTMLAttributes, MouseEvent } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledPagination, PaginationItem, PaginationDot } from './Pagination.styles';
@@ -20,8 +19,6 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
   { count, page, rowPerPage = 20, itemCount = 10, onChange, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   const [totalPage, setTotalPage] = useState<number>(0);
   const [firstItem, setFirstItem] = useState<number>(0);
   const [lastItem, setLastItem] = useState<number>(0);
@@ -64,7 +61,6 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
   return (
     <StyledPagination ref={ref} css={customStyle} {...props}>
       <PaginationItem
-        theme={theme}
         data-page={page - 1}
         disabled={page - 1 <= 0}
         onClick={handleClick}
@@ -75,7 +71,6 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
       {items.map((item) => (
         <PaginationItem
           key={`pagination-item-${item}`}
-          theme={theme}
           data-page={item}
           selected={item === page}
           onClick={handleClick}
@@ -86,20 +81,13 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
       ))}
       {totalPage && !items.includes(totalPage) && (
         <>
-          <PaginationDot theme={theme} />
-          <PaginationItem
-            theme={theme}
-            data-page={totalPage}
-            selected={false}
-            onClick={handleClick}
-            tabIndex={0}
-          >
+          <PaginationDot />
+          <PaginationItem data-page={totalPage} selected={false} onClick={handleClick} tabIndex={0}>
             {totalPage}
           </PaginationItem>
         </>
       )}
       <PaginationItem
-        theme={theme}
         data-page={page + 1}
         disabled={page + 1 > totalPage}
         isNextItemButton

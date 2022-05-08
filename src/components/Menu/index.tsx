@@ -10,7 +10,6 @@ import React, {
   MouseEvent
 } from 'react';
 import { createPortal } from 'react-dom';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { Wrapper, StyledMenu } from './Menu.styles';
@@ -27,8 +26,6 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
   { children, anchorRef, open, centered, triangleLeft = '17px', onClose, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [menuClose, setMenuClose] = useState<boolean>(false);
@@ -153,7 +150,6 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
     return createPortal(
       <Wrapper ref={ref} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
         <StyledMenu
-          theme={theme}
           ref={menuRef}
           menuContentOpen={menuContentOpen}
           menuPosition={menuPosition}

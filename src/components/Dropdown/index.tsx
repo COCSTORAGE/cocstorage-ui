@@ -6,7 +6,6 @@ import React, {
   ButtonHTMLAttributes,
   MouseEvent
 } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
@@ -31,8 +30,6 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
   { options = [], value, fullWidth, onChange, placeholder, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   const [open, setOpen] = useState<boolean>(false);
   const [top, setTop] = useState<number>(0);
   const [selectedValue, setSelectedValue] = useState<{
@@ -71,7 +68,6 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
   return (
     <StyledDropdown
       ref={ref}
-      theme={theme}
       open={open && top > 0}
       css={customStyle}
       fullWidth={fullWidth}
@@ -81,11 +77,10 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
       {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
       {value && selectedValue && <span>{selectedValue.name}</span>}
       <Icon name="ArrowDropDownSpecify_12_12" />
-      <OptionWrapper ref={optionWrapperRef} theme={theme} top={top} open={open && top > 0}>
+      <OptionWrapper ref={optionWrapperRef} top={top} open={open && top > 0}>
         {options.map((option) => (
           <Option
             key={`dropdown-option-${option.name}`}
-            theme={theme}
             data-value={option.value}
             onClick={handleClickOption}
           >

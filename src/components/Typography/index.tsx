@@ -1,5 +1,4 @@
 import React, { forwardRef, ElementType, HTMLAttributes, PropsWithChildren } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, CSSValue, Color } from '../../types';
 import { StyledTypography } from './Typography.styles';
@@ -33,12 +32,10 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
     },
     ref
   ) {
-    const { theme } = useTheme();
     return (
       <StyledTypography
         as={component}
         ref={ref}
-        theme={theme}
         textFontSize={fontSize}
         textFontWeight={fontWeight}
         textLineHeight={lineHeight}

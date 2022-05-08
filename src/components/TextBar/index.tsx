@@ -1,5 +1,4 @@
 import React, { useState, useRef, forwardRef, InputHTMLAttributes, ReactElement } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, Size } from '../../types';
 import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
@@ -17,8 +16,6 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
   { size = 'medium', fullWidth, startIcon, label, value, placeholder, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   const TextBarRef = useRef<HTMLInputElement | null>(null);
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -28,7 +25,6 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
   return (
     <StyledTextBar
       ref={ref}
-      theme={theme}
       css={customStyle}
       fullWidth={fullWidth}
       isFocused={isFocused}
@@ -37,7 +33,6 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
       {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
       <Input
         ref={TextBarRef}
-        theme={theme}
         fullWidth={fullWidth}
         hasStartIcon={!!startIcon}
         value={value}
@@ -47,7 +42,7 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
         {...props}
       />
       {label && (
-        <Label theme={theme} size={size} isFocused={isFocused} hasValue={!!value || !!startIcon}>
+        <Label size={size} isFocused={isFocused} hasValue={!!value || !!startIcon}>
           {label}
         </Label>
       )}

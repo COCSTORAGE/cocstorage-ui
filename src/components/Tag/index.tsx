@@ -1,5 +1,4 @@
 import React, { forwardRef, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, BrandColor } from '../../types';
 import { StyledTag } from './Tag.styles';
@@ -14,10 +13,8 @@ const Tag = forwardRef<HTMLDivElement, PropsWithChildren<TagProps>>(function Tag
   { color = 'text', children, startIcon, iconOnly, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   return (
-    <StyledTag ref={ref} theme={theme} tagColor={color} css={customStyle} {...props}>
+    <StyledTag ref={ref} tagColor={color} css={customStyle} {...props}>
       {startIcon && startIcon}
       {!iconOnly && children}
     </StyledTag>

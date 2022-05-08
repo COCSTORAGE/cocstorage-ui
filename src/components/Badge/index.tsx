@@ -1,5 +1,4 @@
 import React, { forwardRef, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, Severity } from '../../types';
 import { StyledBadge } from './Badge.styles';
@@ -14,10 +13,8 @@ const Badge = forwardRef<HTMLSpanElement, PropsWithChildren<BadgeProps>>(functio
   { children, severity, startIcon, iconOnly = false, customStyle, ...props },
   ref
 ) {
-  const { theme } = useTheme();
-
   return (
-    <StyledBadge ref={ref} theme={theme} severity={severity} css={customStyle} {...props}>
+    <StyledBadge ref={ref} severity={severity} css={customStyle} {...props}>
       {startIcon}
       {!iconOnly && children}
     </StyledBadge>

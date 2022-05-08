@@ -1,5 +1,4 @@
 import React, { forwardRef, PropsWithChildren, ElementType, HTMLAttributes } from 'react';
-import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps } from '../../types';
 import { StyledHidden } from './Hidden.styles';
@@ -17,12 +16,10 @@ const Hidden = forwardRef<HTMLDivElement, PropsWithChildren<HiddenProps>>(functi
   { children, component = 'div', xsHidden, smHidden, mdHidden, lgHidden, xlHidden, customStyle },
   ref
 ) {
-  const { theme } = useTheme();
   return (
     <StyledHidden
       ref={ref}
       as={component}
-      theme={theme}
       xsHidden={xsHidden}
       smHidden={smHidden}
       mdHidden={mdHidden}
