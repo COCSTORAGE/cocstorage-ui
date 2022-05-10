@@ -1,4 +1,4 @@
-import React, { forwardRef, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
 import { GenericComponentProps, Severity } from '../../types';
 import { StyledBadge } from './Badge.styles';

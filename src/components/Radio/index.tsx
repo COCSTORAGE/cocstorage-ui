@@ -1,7 +1,7 @@
-import React, { forwardRef, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { Wrapper, StyledRadio, Marker, MarkerInner, Circle } from './Radio.styles';
+import { Circle, Marker, MarkerInner, StyledRadio, Wrapper } from './Radio.styles';
 
 export interface RadioProps extends GenericComponentProps<InputHTMLAttributes<HTMLInputElement>> {}
 

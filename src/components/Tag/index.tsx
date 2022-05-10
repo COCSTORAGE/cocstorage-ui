@@ -1,6 +1,6 @@
-import React, { forwardRef, PropsWithChildren, ReactElement, HTMLAttributes } from 'react';
+import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, BrandColor } from '../../types';
+import { BrandColor, GenericComponentProps } from '../../types';
 import { StyledTag } from './Tag.styles';
 
 export interface TagProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {

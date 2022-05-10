@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, ReactElement, ButtonHTMLAttributes, forwardRef } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, BrandColor, Size } from '../../types';
+import { BrandColor, GenericComponentProps, Size } from '../../types';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps

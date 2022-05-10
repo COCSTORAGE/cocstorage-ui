@@ -1,7 +1,7 @@
-import React, { forwardRef, ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { StyledTab, SelectedBar } from './Tab.styles';
+import { SelectedBar, StyledTab } from './Tab.styles';
 
 export interface TabProps extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
   text: string;

@@ -1,4 +1,5 @@
 import styled, { CSSObject } from '@emotion/styled';
+
 import type { BellOutlined } from '../../assets/icons';
 
 import { IconProps } from '.';

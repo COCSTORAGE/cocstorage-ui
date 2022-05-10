@@ -1,18 +1,19 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-  forwardRef,
+import {
+  HTMLAttributes,
+  MouseEvent,
   PropsWithChildren,
   RefObject,
-  HTMLAttributes,
-  MouseEvent
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
 } from 'react';
+
 import { createPortal } from 'react-dom';
 
 import { GenericComponentProps } from '../../types';
-import { Wrapper, StyledMenu } from './Menu.styles';
+import { StyledMenu, Wrapper } from './Menu.styles';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   anchorRef: RefObject<HTMLElement>;

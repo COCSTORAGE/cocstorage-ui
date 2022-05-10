@@ -1,6 +1,6 @@
-import React, { forwardRef, HTMLAttributes } from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 
-import { GenericComponentProps, CSSValue } from '../../types';
+import { CSSValue, GenericComponentProps } from '../../types';
 import { StyledAvatar } from './Avatar.styles';
 
 export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLImageElement>> {

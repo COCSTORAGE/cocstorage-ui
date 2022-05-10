@@ -1,6 +1,7 @@
-import { useMemo, useContext } from 'react';
-import { light } from '@theme/light';
+import { useContext, useMemo } from 'react';
+
 import { dark } from '@theme/dark';
+import { light } from '@theme/light';
 
 import ThemeContext from './ThemeContext';
 

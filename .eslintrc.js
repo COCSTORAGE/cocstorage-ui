@@ -24,14 +24,50 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
     'react/jsx-props-no-spreading': 'off',
+    'react/react-in-jsx-scope': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index'],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'builtin',
+            position: 'before'
+          },
+          {
+            pattern: '@components',
+            group: 'internal',
+            position: 'before'
+          },
+          {
+            pattern: '@theme',
+            group: 'internal',
+            position: 'before'
+          },
+          {
+            pattern: '@types',
+            group: 'internal',
+            position: 'before'
+          }
+        ],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true
+        },
+        pathGroupsExcludedImportTypes: ['builtin'],
+        'newlines-between': 'always-and-inside-groups'
+      }
+    ],
+    'sort-imports': [
+      'error',
+      {
+        ignoreDeclarationSort: true
+      }
+    ],
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-interface': 'off'
-  },
-  settings: {
-    react: {
-      version: '18.0.0'
-    }
   }
 };

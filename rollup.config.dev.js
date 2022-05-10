@@ -1,11 +1,10 @@
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from '@rollup/plugin-typescript';
 import svgr from '@svgr/rollup';
-
-import { DEFAULT_EXTENSIONS } from '@babel/core';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 import packageJson from './package.json';
 

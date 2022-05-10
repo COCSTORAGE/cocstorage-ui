@@ -1,6 +1,4 @@
-import React from 'react';
 import { Global } from '@emotion/react';
-
 import useTheme from '@theme/provider/useTheme';
 
 function GlobalStyles() {

@@ -1,6 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
 import { Size } from '../../types';
+
 import { TextBarProps } from '.';
 
 export const StyledTextBar = styled.div<

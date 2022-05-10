@@ -1,7 +1,7 @@
-import React, { useState, useRef, forwardRef, InputHTMLAttributes, ReactElement } from 'react';
+import { InputHTMLAttributes, ReactElement, forwardRef, useRef, useState } from 'react';
 
 import { GenericComponentProps, Size } from '../../types';
-import { StyledTextBar, Input, Label, StartIconWrapper } from './TextBar.styles';
+import { Input, Label, StartIconWrapper, StyledTextBar } from './TextBar.styles';
 
 export interface TextBarProps
   extends GenericComponentProps<Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>> {

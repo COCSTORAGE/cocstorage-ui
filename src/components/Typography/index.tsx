@@ -1,6 +1,6 @@
-import React, { forwardRef, ElementType, HTMLAttributes, PropsWithChildren } from 'react';
+import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { GenericComponentProps, CSSValue, Color } from '../../types';
+import { CSSValue, Color, GenericComponentProps } from '../../types';
 import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {

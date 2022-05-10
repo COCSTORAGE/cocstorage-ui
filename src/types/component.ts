@@ -1,4 +1,4 @@
-import { Interpolation, Theme as EmotionTheme } from '@emotion/react';
+import { Theme as EmotionTheme, Interpolation } from '@emotion/react';
 
 export type BrandColor = 'text' | 'accent' | 'semiAccent' | 'transparent';
 export type Size = 'big' | 'medium' | 'small' | 'pico';

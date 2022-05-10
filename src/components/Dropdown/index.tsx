@@ -1,17 +1,10 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  forwardRef,
-  ButtonHTMLAttributes,
-  MouseEvent
-} from 'react';
+import { ButtonHTMLAttributes, MouseEvent, forwardRef, useEffect, useRef, useState } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { StyledDropdown, OptionWrapper, Option } from './Dropdown.styles';
+import Icon from '../Icon';
+import { Option, OptionWrapper, StyledDropdown } from './Dropdown.styles';
 
 // Components
-import Icon from '../Icon';
 
 export interface DropdownProps
   extends GenericComponentProps<

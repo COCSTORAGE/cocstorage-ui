@@ -1,4 +1,4 @@
-import React, { forwardRef, PropsWithChildren, ElementType, HTMLAttributes } from 'react';
+import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
 import { GenericComponentProps } from '../../types';
 import { StyledHidden } from './Hidden.styles';

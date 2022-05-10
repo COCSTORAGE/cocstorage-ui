@@ -1,6 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
 import { CSSValue, Color } from '../../types';
+
 import { TypographyProps } from '.';
 
 export const StyledTypography = styled.h1<

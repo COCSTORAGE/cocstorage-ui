@@ -1,8 +1,7 @@
-import React, { SVGProps } from 'react';
+import { SVGProps } from 'react';
 
 import * as SvgIcons from '../../assets/icons';
-
-import { GenericComponentProps, Color } from '../../types';
+import { Color, GenericComponentProps } from '../../types';
 import { StyledIcon } from './Icon.styles';
 
 export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>> {

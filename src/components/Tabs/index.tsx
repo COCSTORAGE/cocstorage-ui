@@ -1,11 +1,12 @@
-import React, {
-  useEffect,
-  useRef,
-  forwardRef,
-  PropsWithChildren,
+import {
   HTMLAttributes,
-  MouseEvent
+  MouseEvent,
+  PropsWithChildren,
+  forwardRef,
+  useEffect,
+  useRef
 } from 'react';
+
 import useTheme from '@theme/provider/useTheme';
 
 import { GenericComponentProps, ThemeType } from '../../types';

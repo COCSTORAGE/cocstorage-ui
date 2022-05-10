@@ -1,10 +1,8 @@
-import React, { useEffect, useState, forwardRef, HTMLAttributes, MouseEvent } from 'react';
+import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useState } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { StyledPagination, PaginationItem, PaginationDot } from './Pagination.styles';
-
-// Components
 import Icon from '../Icon';
+import { PaginationDot, PaginationItem, StyledPagination } from './Pagination.styles';
 
 export interface PaginationProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>> {

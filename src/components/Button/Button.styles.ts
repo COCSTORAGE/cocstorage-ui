@@ -1,7 +1,8 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { ButtonProps } from '.';
 import { BrandColor } from '../../types';
+
+import { ButtonProps } from '.';
 
 const DefaultButton = styled.button`
   display: inline-flex;
