@@ -38,7 +38,10 @@ export const StyledButton = styled(DefaultButton)<
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2
+            color: palette.text[type].text2,
+            '& svg': {
+              color: palette.text[type].text2
+            }
           }
         };
       case 'semiAccent':
@@ -56,7 +59,10 @@ export const StyledButton = styled(DefaultButton)<
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2
+            color: palette.text[type].text2,
+            '& svg': {
+              color: palette.text[type].text2
+            }
           }
         };
       case 'transparent':
@@ -75,7 +81,10 @@ export const StyledButton = styled(DefaultButton)<
             backgroundColor: palette.box.filled.pressed
           },
           '&:disabled': {
-            color: palette.text[type].text2
+            color: palette.text[type].text2,
+            '& svg': {
+              color: palette.text[type].text2
+            }
           }
         };
       default:
@@ -93,7 +102,10 @@ export const StyledButton = styled(DefaultButton)<
           },
           '&:disabled': {
             backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2
+            color: palette.text[type].text2,
+            '& svg': {
+              color: palette.text[type].text2
+            }
           }
         };
     }
