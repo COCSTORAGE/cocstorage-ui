@@ -1,5 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
+import { getBrandColorCode } from '@utils';
+
 import { CSSValue, Color } from '../../types';
 
 import { TypographyProps } from '.';
@@ -36,12 +38,19 @@ export const StyledTypography = styled.h1<
         }
       : {}};
 
-  ${({ textColor }) =>
-    textColor
-      ? {
-          color: textColor
-        }
-      : {}};
+  ${({ theme, textColor }): CSSObject => {
+    const brandColorCode = getBrandColorCode(theme, textColor);
+
+    if (brandColorCode) {
+      return {
+        color: brandColorCode
+      };
+    }
+
+    return {
+      color: textColor
+    };
+  }}
 
   ${({ textLetterSpacing }) =>
     textLetterSpacing

@@ -1,9 +1,10 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { BrandColor, GenericComponentProps } from '../../types';
+import { BrandColor, GenericComponentProps, Variant } from '../../types';
 import { StyledTag } from './Tag.styles';
 
 export interface TagProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
+  variant?: Variant;
   color?: BrandColor;
   startIcon?: ReactElement;
   iconOnly?: boolean;

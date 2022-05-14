@@ -1,10 +1,11 @@
 import { ButtonHTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { BrandColor, GenericComponentProps, Size } from '../../types';
+import { BrandColor, GenericComponentProps, Size, Variant } from '../../types';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
   extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {
+  variant?: Variant;
   color?: BrandColor;
   size?: Size;
   fullWidth?: boolean;
@@ -36,7 +37,8 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneI
   function Button(
     {
       children,
-      color = 'text',
+      variant = 'text',
+      color = 'primary',
       size = 'medium',
       fullWidth = false,
       startIcon,
@@ -50,6 +52,7 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneI
     return (
       <StyledButton
         ref={ref}
+        variant={variant}
         brandColor={color}
         size={size}
         fullWidth={fullWidth}

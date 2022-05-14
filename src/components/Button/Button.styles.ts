@@ -17,12 +17,12 @@ const DefaultButton = styled.button`
 `;
 
 export const StyledButton = styled(DefaultButton)<
-  Pick<ButtonProps, 'size' | 'fullWidth'> & {
+  Pick<ButtonProps, 'variant' | 'size' | 'fullWidth'> & {
     brandColor: BrandColor;
   }
 >`
-  ${({ theme: { type, palette }, brandColor }) => {
-    switch (brandColor) {
+  ${({ theme: { type, palette }, variant }) => {
+    switch (variant) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,

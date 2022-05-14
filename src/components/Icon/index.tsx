@@ -1,12 +1,12 @@
 import { SVGProps } from 'react';
 
 import * as SvgIcons from '../../assets/icons';
-import { Color, GenericComponentProps } from '../../types';
+import { BrandColor, Color, GenericComponentProps } from '../../types';
 import { StyledIcon } from './Icon.styles';
 
 export interface IconProps extends GenericComponentProps<SVGProps<SVGElement>> {
   name: keyof typeof SvgIcons;
-  color?: Color;
+  color?: BrandColor | Color;
 }
 
 function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: IconProps) {

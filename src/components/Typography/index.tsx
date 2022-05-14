@@ -1,6 +1,6 @@
 import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { CSSValue, Color, GenericComponentProps } from '../../types';
+import { BrandColor, CSSValue, Color, GenericComponentProps } from '../../types';
 import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
@@ -8,7 +8,7 @@ export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HT
   fontSize?: CSSValue;
   fontWeight?: number;
   lineHeight?: CSSValue;
-  color?: Color;
+  color?: BrandColor | Color;
   letterSpacing?: CSSValue;
   noWrap?: boolean;
   lineClamp?: number;

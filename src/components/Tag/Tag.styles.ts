@@ -2,6 +2,8 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { Color } from '../../types';
 
+import { TagProps } from '.';
+
 const DefaultTag = styled.span`
   display: inline-flex;
   align-items: center;
@@ -14,11 +16,13 @@ const DefaultTag = styled.span`
   cursor: default;
 `;
 
-export const StyledTag = styled(DefaultTag)<{
-  tagColor: Color;
-}>`
-  ${({ theme: { type, palette }, tagColor }): CSSObject => {
-    switch (tagColor) {
+export const StyledTag = styled(DefaultTag)<
+  Pick<TagProps, 'variant'> & {
+    tagColor: Color;
+  }
+>`
+  ${({ theme: { type, palette }, variant }): CSSObject => {
+    switch (variant) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,
