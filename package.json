@@ -1,7 +1,7 @@
 {
   "name": "cocstorage-ui",
   "version": "0.1.0",
-  "description": "Cocstorage UI React Components",
+  "description": "Cocstorage React UI Components",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,9 @@
   "repository": "https://github.com/kimjh96/cocstorage-ui",
   "keywords": [
     "react",
-    "react-component"
+    "react-component",
+    "compoent",
+    "ui"
   ],
   "author": "cocstorage",
   "license": "MIT",
@@ -20,7 +22,8 @@
     "build:dev": "rollup -c rollup.config.dev.js --watch",
     "build": "rollup -c",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
-    "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
+    "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\"",
+    "prepare": "rm -rf dist && yarn build"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
