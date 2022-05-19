@@ -3,7 +3,7 @@ import styled, { CSSObject } from '@emotion/styled';
 import { DialogProps } from '.';
 
 export const Wrapper = styled.div<
-  Pick<DialogProps, 'fullScreen' | 'transitionDuration'> & {
+  Pick<DialogProps, 'fullWidth' | 'fullScreen' | 'transitionDuration'> & {
     dialogOpen: boolean;
     dialogClose: boolean;
   }
@@ -47,11 +47,18 @@ export const Wrapper = styled.div<
 `;
 
 export const StyledDialog = styled.div<
-  Pick<DialogProps, 'fullScreen' | 'transitionDuration'> & {
+  Pick<DialogProps, 'fullWidth' | 'fullScreen' | 'transitionDuration'> & {
     dialogOpen: boolean;
     dialogClose: boolean;
   }
 >`
+  ${({ fullWidth }): CSSObject =>
+    fullWidth
+      ? {
+          width: '100%'
+        }
+      : {}}
+
   ${({ fullScreen }): CSSObject =>
     !fullScreen
       ? {

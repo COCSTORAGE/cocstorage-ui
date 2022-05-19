@@ -17,12 +17,22 @@ export interface DialogProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
   open: boolean;
   transitionDuration?: number;
+  fullWidth?: boolean;
   fullScreen?: boolean;
   onClose: () => void;
 }
 
 const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(function Dialog(
-  { children, open, transitionDuration = 225, fullScreen, onClose, customStyle, ...props },
+  {
+    children,
+    open,
+    transitionDuration = 225,
+    fullWidth,
+    fullScreen,
+    onClose,
+    customStyle,
+    ...props
+  },
   ref
 ) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -91,6 +101,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         dialogOpen={dialogOpen}
         dialogClose={!open}
         transitionDuration={transitionDuration}
+        fullWidth={fullWidth}
         fullScreen={fullScreen}
         onClick={onClose}
         role="dialog"
