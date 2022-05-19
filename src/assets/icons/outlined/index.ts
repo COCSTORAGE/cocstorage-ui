@@ -11,6 +11,7 @@ export { default as CaretSemiRightOutlined } from './caret-semi-right-outlined.s
 export { default as CaretSemiDownOutlined } from './caret-semi-down-outlined.svg';
 export { default as CompleteOutlined } from './complete-outlined.svg';
 export { default as ClockOutlined } from './clock-outlined.svg';
+export { default as CloseOutlined } from './close-outlined.svg';
 export { default as CommentOutlined } from './comment-outlined.svg';
 export { default as CommunityOutlined } from './community-outlined.svg';
 export { default as CopyOutlined } from './copy-outlined.svg';
