@@ -40,7 +40,7 @@ export const StyledHidden = styled.div<HiddenProps>`
     }
     if (xsHidden) {
       cssObject = {
-        [`@media (max-width: ${breakpoints.xs}px)`]: {
+        [`@media (min-width: ${breakpoints.xs}px)`]: {
           display: 'none'
         }
       };
