@@ -29,14 +29,14 @@ export const StyledDropdown = styled(DefaultDropdown)<
         return {
           color: palette.text.dark.text2,
           '& svg': {
-            color: palette.text.dark.main
+            color: palette.text.dark.text2
           }
         };
       default:
         return {
           color: palette.text.light.text1,
           '& svg': {
-            color: palette.text.light.main
+            color: palette.text.light.text1
           }
         };
     }
