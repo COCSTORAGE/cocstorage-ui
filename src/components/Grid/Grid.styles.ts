@@ -46,7 +46,7 @@ export const StyledGrid = styled.div<
           flexWrap: 'wrap',
           width: `calc(100% + ${columnGap}px)`,
           margin: `-${rowGap / 2}px -${columnGap / 2}px -${rowGap / 2}px -${columnGap / 2}px`,
-          '& > div.grid-item': {
+          '& > .grid-item': {
             padding: `${rowGap / 2}px ${columnGap / 2}px ${rowGap / 2}px ${columnGap / 2}px`
           }
         };
