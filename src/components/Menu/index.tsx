@@ -126,6 +126,10 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
   }, [menuClose, onClose]);
 
   useEffect(() => {
+    if (!open && isMounted && menuPortalRef.current) setMenuClose(true);
+  }, [open, isMounted]);
+
+  useEffect(() => {
     if (!open && menuClose && menuContentOpen && menuPortalRef.current) {
       menuPortalRef.current?.remove();
       menuPortalRef.current = null;
