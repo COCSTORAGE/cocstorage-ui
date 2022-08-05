@@ -23,8 +23,8 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
       width={width}
       height={height}
       round={round}
-      css={customStyle}
       {...props}
+      css={customStyle}
     />
   );
 });

@@ -94,6 +94,25 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
     }
   }, [open, dialogOpen, transitionDuration]);
 
+  useEffect(() => {
+    return () => {
+      if (dialogOpenTimerRef.current) {
+        clearTimeout(dialogOpenTimerRef.current);
+      }
+      if (dialogCloseTimerRef.current) {
+        clearTimeout(dialogCloseTimerRef.current);
+      }
+      if (dialogPortalRef.current) {
+        dialogPortalRef.current?.remove();
+        dialogPortalRef.current = null;
+
+        setIsMounted(false);
+        setDialogOpen(false);
+      }
+      document.body.removeAttribute('style');
+    };
+  }, []);
+
   if (isMounted && dialogPortalRef.current) {
     return createPortal(
       <Wrapper
@@ -112,8 +131,8 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
           fullWidth={fullWidth}
           fullScreen={fullScreen}
           onClick={handleClick}
-          css={customStyle}
           {...props}
+          css={customStyle}
         >
           {children}
         </StyledDialog>

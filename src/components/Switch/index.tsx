@@ -19,11 +19,11 @@ const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
   return (
     <StyledSwitch
       ref={ref}
-      css={customStyle}
       checked={checked}
       disabled={disabled}
       onClick={!disabled ? onChange : undefined}
       {...props}
+      css={customStyle}
       role="switch"
     >
       <Circle checked={checked} disabled={disabled} />

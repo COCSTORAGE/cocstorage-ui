@@ -75,10 +75,10 @@ const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function T
   return (
     <StyledTabs
       ref={ref}
-      css={customStyle}
       centered={centered}
       onClick={handleClick}
       {...props}
+      css={customStyle}
       role="tablist"
     >
       <TabsInner ref={tabsInnerRef}>{children}</TabsInner>

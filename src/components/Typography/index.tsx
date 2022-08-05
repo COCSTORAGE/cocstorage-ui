@@ -43,8 +43,8 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
         textLetterSpacing={letterSpacing}
         noWrap={noWrap}
         lineClamp={lineClamp}
-        css={customStyle}
         {...props}
+        css={customStyle}
       >
         {children}
       </StyledTypography>

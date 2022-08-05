@@ -106,8 +106,8 @@ const Grid = forwardRef<HTMLDivElement, PropsWithChildren<ConditionalSetGrid<Gri
         mdHidden={mdHidden}
         lgHidden={lgHidden}
         xlHidden={xlHidden}
-        css={customStyle}
         {...props}
+        css={customStyle}
       >
         {children}
       </StyledGrid>

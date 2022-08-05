@@ -13,7 +13,7 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
   ref
 ) {
   return (
-    <StyledTab ref={ref} css={customStyle} data-value={value} {...props} role="tab">
+    <StyledTab ref={ref} data-value={value} {...props} css={customStyle} role="tab">
       {text}
       <SelectedBar />
     </StyledTab>

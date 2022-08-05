@@ -57,7 +57,7 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
   }, [firstItem, lastItem]);
 
   return (
-    <StyledPagination ref={ref} css={customStyle} {...props}>
+    <StyledPagination ref={ref} {...props} css={customStyle}>
       <PaginationItem
         data-page={page - 1}
         disabled={page - 1 <= 0}

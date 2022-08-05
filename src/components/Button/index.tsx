@@ -56,8 +56,8 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<RequireAtOnlyOneI
         brandColor={color}
         size={size}
         fullWidth={fullWidth}
-        css={customStyle}
         {...props}
+        css={customStyle}
       >
         {startIcon}
         {!iconOnly && children}

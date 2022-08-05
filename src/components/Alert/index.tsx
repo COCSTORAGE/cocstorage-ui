@@ -14,7 +14,7 @@ const Alert = forwardRef<HTMLDivElement, PropsWithChildren<AlertProps>>(function
   ref
 ) {
   return (
-    <StyledAlert ref={ref} severity={severity} css={customStyle} {...props} role="alert">
+    <StyledAlert ref={ref} severity={severity} {...props} css={customStyle} role="alert">
       {icon}
       <Message>{children}</Message>
       {action}

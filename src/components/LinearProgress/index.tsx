@@ -8,11 +8,11 @@ export interface LinearProgressProps extends GenericComponentProps<HTMLAttribute
 }
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(function LinearProgress(
-  { value = 0, customStyle },
+  { value = 0, customStyle, ...props },
   ref
 ) {
   return (
-    <StyledLinearProgress ref={ref} css={customStyle}>
+    <StyledLinearProgress ref={ref} {...props} css={customStyle}>
       <ProgressBar value={100 - value} />
     </StyledLinearProgress>
   );

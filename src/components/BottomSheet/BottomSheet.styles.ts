@@ -37,6 +37,8 @@ export const Wrapper = styled.div<
 export const StyledBottomSheet = styled.div<
   Pick<BottomSheetProps, 'transitionDuration'> & { sheetOpen: boolean; sheetClose: boolean }
 >`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-height: 90%;
   background-color: ${({ theme: { palette } }) => palette.background.bg};
@@ -71,15 +73,8 @@ export const SwipeZone = styled.div`
   touch-action: none;
 `;
 
-export const Content = styled.div<{ maxHeight: number; swipeZoneHeight: number }>`
-  ${({ maxHeight, swipeZoneHeight }): CSSObject => {
-    let calcMaxHeight = maxHeight ? `${maxHeight}px` : '100%';
-    if (swipeZoneHeight) calcMaxHeight = `calc(${calcMaxHeight} - ${swipeZoneHeight}px)`;
-
-    return {
-      maxHeight: calcMaxHeight
-    };
-  }};
+export const Content = styled.div`
+  flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
 `;

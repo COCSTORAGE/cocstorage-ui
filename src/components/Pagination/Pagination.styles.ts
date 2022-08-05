@@ -4,6 +4,7 @@ export const StyledPagination = styled.ul`
   display: flex;
   align-items: center;
   gap: 2px;
+  user-select: none;
 `;
 
 export const PaginationItem = styled.li<{

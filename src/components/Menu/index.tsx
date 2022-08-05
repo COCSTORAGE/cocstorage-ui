@@ -4,7 +4,6 @@ import {
   PropsWithChildren,
   RefObject,
   forwardRef,
-  useCallback,
   useEffect,
   useRef,
   useState
@@ -46,19 +45,6 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
   const handleClose = () => setMenuClose(true);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
-
-  const handleResize = useCallback(() => {
-    if (
-      isMounted &&
-      menuOpen &&
-      menuContentOpen &&
-      menuRef.current &&
-      anchorRef &&
-      anchorRef.current
-    ) {
-      handleClose();
-    }
-  }, [isMounted, menuOpen, menuContentOpen, anchorRef]);
 
   useEffect(() => {
     if (open && anchorRef && anchorRef.current) {
@@ -144,12 +130,18 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
   }, [open, menuClose, menuContentOpen]);
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
-
     return () => {
-      window.removeEventListener('resize', handleResize);
+      menuPortalRef.current?.remove();
+      menuPortalRef.current = null;
+
+      setIsMounted(false);
+      setMenuOpen(false);
+      setMenuClose(false);
+      setMenuContentOpen(false);
+
+      document.body.removeAttribute('style');
     };
-  }, [handleResize]);
+  }, []);
 
   if (isMounted && menuPortalRef.current) {
     return createPortal(

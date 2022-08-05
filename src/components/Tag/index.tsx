@@ -15,7 +15,7 @@ const Tag = forwardRef<HTMLDivElement, PropsWithChildren<TagProps>>(function Tag
   ref
 ) {
   return (
-    <StyledTag ref={ref} tagColor={color} css={customStyle} {...props}>
+    <StyledTag ref={ref} tagColor={color} {...props} css={customStyle}>
       {startIcon && startIcon}
       {!iconOnly && children}
     </StyledTag>

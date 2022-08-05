@@ -14,7 +14,7 @@ const Badge = forwardRef<HTMLSpanElement, PropsWithChildren<BadgeProps>>(functio
   ref
 ) {
   return (
-    <StyledBadge ref={ref} severity={severity} css={customStyle} {...props}>
+    <StyledBadge ref={ref} severity={severity} {...props} css={customStyle}>
       {startIcon}
       {!iconOnly && children}
     </StyledBadge>

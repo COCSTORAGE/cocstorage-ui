@@ -22,8 +22,8 @@ function Icon({ name, viewBox = '0 0 24 24', color, customStyle, ...props }: Ico
       name={name}
       color={color}
       viewBox={hasSpecifyViewBox ? newViewBox : viewBox}
-      css={customStyle}
       {...props}
+      css={customStyle}
     />
   );
 }

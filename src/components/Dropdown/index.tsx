@@ -4,8 +4,6 @@ import { GenericComponentProps } from '../../types';
 import Icon from '../Icon';
 import { Option, OptionWrapper, StyledDropdown } from './Dropdown.styles';
 
-// Components
-
 export interface DropdownProps
   extends GenericComponentProps<
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange'>
@@ -62,10 +60,10 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
     <StyledDropdown
       ref={ref}
       open={open && top > 0}
-      css={customStyle}
       fullWidth={fullWidth}
       onClick={handleClickDropdown}
       {...props}
+      css={customStyle}
     >
       {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
       {value && selectedValue && <span>{selectedValue.name}</span>}
