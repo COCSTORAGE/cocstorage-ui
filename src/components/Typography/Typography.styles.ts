@@ -14,18 +14,17 @@ export const StyledTypography = styled.h1<
     textColor?: Color;
   }
 >`
-  ${({ theme: { typography }, variant = 'p2', textFontWeight = 'regular' }): CSSObject => ({
+  ${({
+    theme: { typography },
+    variant = 'p2',
+    textFontWeight = 'regular',
+    textLineHeight = 'default'
+  }): CSSObject => ({
     fontSize: typography[variant].size,
     fontWeight: typography[variant].weight[textFontWeight],
+    lineHeight: typography[variant].lineHeight[textLineHeight],
     letterSpacing: typography[variant].letterSpacing
   })};
-
-  ${({ theme: { typography }, variant = 'p2', textLineHeight }) =>
-    textLineHeight
-      ? {
-          lineHeight: typography[variant].lineHeight[textLineHeight]
-        }
-      : {}};
 
   ${({ textLetterSpacing }) =>
     textLetterSpacing

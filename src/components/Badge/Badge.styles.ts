@@ -18,6 +18,7 @@ const DefaultBadge = styled.span`
   }): CSSObject => ({
     fontSize: s2.size,
     fontWeight: s2.weight.bold,
+    lineHeight: s2.lineHeight.default,
     letterSpacing: s2.letterSpacing
   })}
 `;
