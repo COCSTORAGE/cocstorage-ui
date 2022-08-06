@@ -81,5 +81,119 @@ export const light: Theme = {
     md: 768,
     lg: 1024,
     xl: 1440
+  },
+  typography: {
+    h1: {
+      component: 'h1',
+      size: '24px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    h2: {
+      component: 'h2',
+      size: '22px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    h3: {
+      component: 'h3',
+      size: '18px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    h4: {
+      component: 'h4',
+      size: '16px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    p1: {
+      component: 'div',
+      size: '16px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    p2: {
+      component: 'div',
+      size: '14px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    s1: {
+      component: 'span',
+      size: '12px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    },
+    s2: {
+      component: 'span',
+      size: '10px',
+      weight: {
+        bold: 700,
+        medium: 500,
+        regular: 400
+      },
+      lineHeight: {
+        default: 1.25,
+        main: 1.75
+      },
+      letterSpacing: '-0.04em'
+    }
   }
 };

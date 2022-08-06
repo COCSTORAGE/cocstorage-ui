@@ -8,14 +8,18 @@ const DefaultBadge = styled.span`
   justify-content: center;
   gap: 2px;
   width: fit-content;
-  padding: 0 4.7px;
-  height: 16px;
-  line-height: 18px;
+  padding: 2px 4.7px;
   border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
   white-space: nowrap;
+  ${({
+    theme: {
+      typography: { s2 }
+    }
+  }): CSSObject => ({
+    fontSize: s2.size,
+    fontWeight: s2.weight.bold,
+    letterSpacing: s2.letterSpacing
+  })}
 `;
 
 export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'severity'>>`

@@ -11,9 +11,15 @@ const DefaultTag = styled.span`
   width: fit-content;
   padding: 7px 10px;
   border-radius: 8px;
-  line-height: 18px;
-  font-size: 14px;
-  cursor: default;
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.regular,
+    letterSpacing: p2.letterSpacing
+  })}
 `;
 
 export const StyledTag = styled(DefaultTag)<
@@ -21,13 +27,20 @@ export const StyledTag = styled(DefaultTag)<
     tagColor: Color;
   }
 >`
-  ${({ theme: { type, palette }, variant }): CSSObject => {
+  ${({
+    theme: {
+      type,
+      typography: { p2 },
+      palette
+    },
+    variant
+  }): CSSObject => {
     switch (variant) {
       case 'accent':
         return {
           backgroundColor: palette.primary.main,
           color: palette.text.dark.main,
-          fontWeight: 700,
+          fontWeight: p2.weight.bold,
           '& svg': {
             color: palette.text.dark.main
           }
@@ -36,7 +49,7 @@ export const StyledTag = styled(DefaultTag)<
         return {
           backgroundColor: palette.primary.bg1,
           color: palette.primary.main,
-          fontWeight: 700,
+          fontWeight: p2.weight.bold,
           '& svg': {
             color: palette.primary.main
           }

@@ -13,7 +13,7 @@ export interface TextBarProps
 }
 
 const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
-  { size = 'medium', fullWidth, startIcon, label, value, placeholder, customStyle, ...props },
+  { size = 'medium', fullWidth, startIcon, label, value = '', placeholder, customStyle, ...props },
   ref
 ) {
   const TextBarRef = useRef<HTMLInputElement | null>(null);

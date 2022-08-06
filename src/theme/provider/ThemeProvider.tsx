@@ -1,12 +1,12 @@
 import { PropsWithChildren, useMemo } from 'react';
 
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
-import { dark } from '@theme/dark';
-import { light } from '@theme/light';
-
-import GlobalStyles from '@theme/utils/GlobalStyles';
 
 import { ThemeType } from '../../types';
+import { dark } from '../dark';
+import { light } from '../light';
+import GlobalStyles from '../utils/GlobalStyles';
+
 import ThemeContext from './ThemeContext';
 
 export interface ThemeProviderProps {

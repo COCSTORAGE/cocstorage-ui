@@ -70,7 +70,15 @@ const DefaultInput = styled.input`
   outline: 0;
   border: none;
   border-radius: 8px;
-  font-size: 14px;
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.regular,
+    letterSpacing: p2.letterSpacing
+  })}
 `;
 
 export const Input = styled(DefaultInput)<
@@ -120,7 +128,7 @@ export const Label = styled.label<
   left: 0;
   bottom: 0;
   padding: 0 5px;
-  font-size: 14px;
+  font-size: ${({ theme: { typography } }) => typography.p2.size};
   background-color: ${({ theme: { palette } }) => palette.background.bg};
   z-index: 1;
   transform-origin: top left;

@@ -10,7 +10,15 @@ const DefaultDropdown = styled.button`
   gap: 8px;
   padding: 10px 12px;
   border-radius: 8px;
-  font-size: 14px;
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.medium,
+    letterSpacing: p2.letterSpacing
+  })}
 `;
 
 export const StyledDropdown = styled(DefaultDropdown)<

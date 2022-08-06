@@ -8,12 +8,9 @@ const DefaultAlert = styled.div`
   gap: 8px;
   width: 100%;
   min-width: 0;
-  padding: 0 20px;
-  height: 50px;
+  min-height: 56px;
+  padding: 16px 20px;
   border-radius: 12px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
@@ -65,11 +62,15 @@ export const StyledAlert = styled(DefaultAlert)<Pick<AlertProps, 'severity'>>`
 
 export const Message = styled.div`
   flex: 1;
+  word-break: break-all;
   text-align: left;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.04em;
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.regular,
+    letterSpacing: p2.letterSpacing
+  })}
 `;

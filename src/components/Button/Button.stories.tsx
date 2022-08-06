@@ -22,7 +22,9 @@ const Template: ComponentStory<typeof Button> = function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
-  variant: 'text'
+  variant: 'text',
+  size: 'medium',
+  color: 'primary'
 };
 Default.argTypes = {
   iconOnly: {
@@ -33,11 +35,15 @@ Default.argTypes = {
 export const WithStartIcon = Template.bind({});
 WithStartIcon.args = {
   variant: 'text',
+  size: 'medium',
+  color: 'primary',
   startIcon: <Icon name="SendFilled" />
 };
 
 export const WithEndIcon = Template.bind({});
 WithEndIcon.args = {
   variant: 'text',
+  size: 'medium',
+  color: 'primary',
   endIcon: <Icon name="SendFilled" />
 };

@@ -1,9 +1,14 @@
 import { Global } from '@emotion/react';
-import useTheme from '@theme/provider/useTheme';
+
+import useTheme from '../provider/useTheme';
 
 function GlobalStyles() {
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      typography: { p2 },
+      palette
+    }
   } = useTheme();
   return (
     <Global
@@ -12,7 +17,12 @@ function GlobalStyles() {
           margin: 0,
           padding: 0,
           font: 'inherit',
-          color: 'inherit'
+          color: 'inherit',
+          fontSize: p2.size,
+          fontWeight: p2.weight.medium,
+          letterSpacing: p2.letterSpacing,
+          WebkitTabHighlightColor: 'transparent',
+          userSelect: 'none'
         },
         '*, :after, :before': {
           boxSizing: 'border-box',
@@ -21,11 +31,9 @@ function GlobalStyles() {
           WebkitFontSmoothing: 'antialiased'
         },
         ':root': {
-          WebkitTabHighlightColor: 'transparent',
           WebkitTextSizeAdjust: '100%',
           textSizeAdjust: '100%',
           cursor: 'default',
-          lineHeight: 1.5,
           overflowWrap: 'break-word',
           MozTabSize: 4,
           tabSize: 4

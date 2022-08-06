@@ -1,88 +1,43 @@
-import type { ColorCode } from './css';
+import type {
+  TypographyComponent,
+  TypographyLineHeight,
+  TypographyVariant,
+  TypographyWeight
+} from './component';
+import type { CSSValue, ColorCode } from './css';
 
 export type ThemeType = 'light' | 'dark';
 
 export interface COCTheme {
   type: ThemeType;
   palette: {
-    primary: {
-      main: ColorCode;
-      sub1: ColorCode;
-      sub2: ColorCode;
-      sub3: ColorCode;
-      bg1: ColorCode;
-      bg2: ColorCode;
-      bg3: ColorCode;
-    };
+    primary: Record<'main' | 'sub1' | 'sub2' | 'sub3' | 'bg1' | 'bg2' | 'bg3', ColorCode>;
     secondary: {
-      red: {
-        main: ColorCode;
-        sub1: ColorCode;
-        sub2: ColorCode;
-        sub3: ColorCode;
-        bg: ColorCode;
-      };
-      green: {
-        main: ColorCode;
-        sub1: ColorCode;
-        sub2: ColorCode;
-        sub3: ColorCode;
-        bg: ColorCode;
-      };
-      yellow: {
-        main: ColorCode;
-        sub1: ColorCode;
-        sub2: ColorCode;
-        sub3: ColorCode;
-        bg: ColorCode;
-      };
+      red: Record<'main' | 'sub1' | 'sub2' | 'sub3' | 'bg', ColorCode>;
+      green: Record<'main' | 'sub1' | 'sub2' | 'sub3' | 'bg', ColorCode>;
+      yellow: Record<'main' | 'sub1' | 'sub2' | 'sub3' | 'bg', ColorCode>;
     };
     text: {
-      light: {
-        main: ColorCode;
-        text1: ColorCode;
-        text2: ColorCode;
-        text3: ColorCode;
-      };
-      dark: {
-        main: ColorCode;
-        text1: ColorCode;
-        text2: ColorCode;
-        text3: ColorCode;
-      };
+      light: Record<'main' | 'text1' | 'text2' | 'text3', ColorCode>;
+      dark: Record<'main' | 'text1' | 'text2' | 'text3', ColorCode>;
     };
     box: {
-      filled: {
-        normal: ColorCode;
-        focused: ColorCode;
-        pressed: ColorCode;
-        disabled: ColorCode;
-      };
-      stroked: {
-        normal: ColorCode;
-      };
+      filled: Record<'normal' | 'focused' | 'pressed' | 'disabled', ColorCode>;
+      stroked: Record<'normal', ColorCode>;
     };
-    background: {
-      bg: ColorCode;
-      fg1: ColorCode;
-      fg2: ColorCode;
-    };
-    gradation: {
-      first: ColorCode;
-      second: ColorCode;
-      third: ColorCode;
-    };
-    common: {
-      white: ColorCode;
-      black: ColorCode;
-    };
+    background: Record<'bg' | 'fg1' | 'fg2', ColorCode>;
+    gradation: Record<'first' | 'second' | 'third', ColorCode>;
+    common: Record<'white' | 'black', ColorCode>;
   };
-  breakpoints: {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
+  breakpoints: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>;
+  typography: {
+    [key in TypographyVariant]: {
+      component: TypographyComponent;
+      size: CSSValue;
+      weight: TypographyWeight;
+      lineHeight: TypographyLineHeight;
+      letterSpacing: CSSValue;
+    };
   };
 }
 

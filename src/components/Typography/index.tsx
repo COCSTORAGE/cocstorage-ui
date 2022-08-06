@@ -1,15 +1,26 @@
-import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
+import { HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { BrandColor, CSSValue, Color, GenericComponentProps } from '../../types';
+import useTheme from '@theme/provider/useTheme';
+
+import {
+  BrandColor,
+  CSSValue,
+  Color,
+  GenericComponentProps,
+  TypographyComponent,
+  TypographyLineHeight,
+  TypographyVariant,
+  TypographyWeight
+} from '../../types';
 import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
-  component?: Extract<ElementType, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span'>;
-  fontSize?: CSSValue;
-  fontWeight?: number;
-  lineHeight?: CSSValue;
-  color?: BrandColor | Color;
+  variant?: TypographyVariant;
+  component?: TypographyComponent;
+  fontWeight?: keyof TypographyWeight;
+  lineHeight?: keyof TypographyLineHeight;
   letterSpacing?: CSSValue;
+  color?: BrandColor | Color;
   noWrap?: boolean;
   lineClamp?: number;
 }
@@ -19,12 +30,12 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
   function Typography(
     {
       children,
-      component = 'div',
-      fontSize = 14,
-      fontWeight,
+      variant = 'p2',
+      component,
+      fontWeight = 'regular',
       lineHeight,
+      letterSpacing,
       color,
-      letterSpacing = '-0.04em',
       noWrap,
       lineClamp = 1,
       customStyle,
@@ -32,11 +43,15 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
     },
     ref
   ) {
+    const {
+      theme: { typography }
+    } = useTheme();
+
     return (
       <StyledTypography
-        as={component}
+        as={component || typography[variant].component}
         ref={ref}
-        textFontSize={fontSize}
+        variant={variant}
         textFontWeight={fontWeight}
         textLineHeight={lineHeight}
         textColor={color}

@@ -4,7 +4,6 @@ export const StyledPagination = styled.ul`
   display: flex;
   align-items: center;
   gap: 2px;
-  user-select: none;
 `;
 
 export const PaginationItem = styled.li<{
@@ -16,11 +15,19 @@ export const PaginationItem = styled.li<{
   align-items: center;
   justify-content: center;
   min-width: 24px;
-  height: 24px;
-  padding: 0 7px;
+  padding: 3px 7px;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.medium,
+    letterSpacing: p2.letterSpacing
+  })}
+
   color: ${({ theme: { type, palette } }) => palette.text[type].text1};
   cursor: pointer;
 
@@ -37,10 +44,17 @@ export const PaginationItem = styled.li<{
         }
       : {}};
 
-  ${({ theme: { palette }, selected }): CSSObject =>
+  ${({
+    theme: {
+      typography: { p2 },
+      palette
+    },
+    selected
+  }): CSSObject =>
     selected
       ? {
           backgroundColor: palette.primary.main,
+          fontWeight: p2.weight.bold,
           color: palette.text.dark.main
         }
       : {}};
@@ -51,8 +65,7 @@ export const PaginationItem = styled.li<{
           color: palette.text[type].text3,
           '& svg': {
             color: palette.text[type].text3
-          },
-          cursor: 'default'
+          }
         }
       : {}};
 `;

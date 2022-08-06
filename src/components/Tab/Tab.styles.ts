@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled, { CSSObject } from '@emotion/styled';
 
 const DefaultTab = styled.button`
   position: relative;
@@ -9,11 +9,16 @@ const DefaultTab = styled.button`
   border: none;
   padding-top: 11px;
   gap: 7px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
   text-align: center;
-  letter-spacing: -0.333333px;
+  ${({
+    theme: {
+      typography: { p2 }
+    }
+  }): CSSObject => ({
+    fontSize: p2.size,
+    fontWeight: p2.weight.medium,
+    letterSpacing: p2.letterSpacing
+  })}
 `;
 
 export const StyledTab = styled(DefaultTab)`

@@ -2,41 +2,39 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { getBrandColorCode } from '@utils';
 
-import { CSSValue, Color } from '../../types';
+import { CSSValue, Color, TypographyLineHeight, TypographyWeight } from '../../types';
 
 import { TypographyProps } from '.';
 
 export const StyledTypography = styled.h1<
-  Pick<TypographyProps, 'noWrap' | 'lineClamp'> & {
-    textFontSize?: CSSValue;
-    textFontWeight?: number;
-    textLineHeight?: CSSValue;
-    textColor?: Color;
+  Pick<TypographyProps, 'variant' | 'noWrap' | 'lineClamp'> & {
+    textFontWeight?: keyof TypographyWeight;
+    textLineHeight?: keyof TypographyLineHeight;
     textLetterSpacing?: CSSValue;
+    textColor?: Color;
   }
 >`
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  ${({ theme: { typography }, variant = 'p2', textFontWeight = 'regular' }): CSSObject => ({
+    fontSize: typography[variant].size,
+    fontWeight: typography[variant].weight[textFontWeight],
+    letterSpacing: typography[variant].letterSpacing
+  })};
 
-  ${({ textFontSize }): CSSObject =>
-    textFontSize
-      ? {
-          fontSize: textFontSize
-        }
-      : {}};
-
-  ${({ textFontWeight }): CSSObject =>
-    textFontWeight
-      ? {
-          fontWeight: textFontWeight
-        }
-      : {}};
-
-  ${({ textLineHeight }) =>
+  ${({ theme: { typography }, variant = 'p2', textLineHeight }) =>
     textLineHeight
       ? {
-          lineHeight: textLineHeight
+          lineHeight: typography[variant].lineHeight[textLineHeight]
         }
       : {}};
+
+  ${({ textLetterSpacing }) =>
+    textLetterSpacing
+      ? {
+          letterSpacing: textLetterSpacing
+        }
+      : {}};
+
+  color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
   ${({ theme, textColor }): CSSObject => {
     const brandColorCode = getBrandColorCode(theme, textColor);
@@ -50,14 +48,7 @@ export const StyledTypography = styled.h1<
     return {
       color: textColor
     };
-  }}
-
-  ${({ textLetterSpacing }) =>
-    textLetterSpacing
-      ? {
-          letterSpacing: textLetterSpacing
-        }
-      : {}};
+  }};
 
   ${({ noWrap, lineClamp }): CSSObject =>
     noWrap
@@ -69,12 +60,4 @@ export const StyledTypography = styled.h1<
           WebkitLineClamp: lineClamp
         }
       : {}};
-
-  & > strong {
-    font-weight: 700;
-  }
-
-  & > a {
-    text-decoration: underline;
-  }
 `;

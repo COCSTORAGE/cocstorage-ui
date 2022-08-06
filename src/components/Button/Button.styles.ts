@@ -12,7 +12,6 @@ const DefaultButton = styled.button`
   text-align: center;
   border: none;
   background: none;
-  font-weight: 500;
   cursor: pointer;
 `;
 
@@ -111,35 +110,44 @@ export const StyledButton = styled(DefaultButton)<
     }
   }}
 
-  ${({ size }): CSSObject => {
+  ${({
+    theme: {
+      typography: { p1, p2, s1 }
+    },
+    size
+  }): CSSObject => {
     switch (size) {
       case 'big':
         return {
           padding: '18px 24px',
           borderRadius: 12,
-          lineHeight: '20px',
-          fontSize: 16
+          fontSize: p1.size,
+          fontWeight: p1.weight.medium,
+          letterSpacing: p1.letterSpacing
         };
       case 'small':
         return {
           padding: '10px 15px',
           borderRadius: 8,
-          lineHeight: '15px',
-          fontSize: 12
+          fontSize: s1.size,
+          fontWeight: s1.weight.medium,
+          letterSpacing: s1.letterSpacing
         };
       case 'pico':
         return {
           padding: '5px 10px',
           borderRadius: 6,
-          lineHeight: '15px',
-          fontSize: 12
+          fontSize: s1.size,
+          fontWeight: s1.weight.medium,
+          letterSpacing: s1.letterSpacing
         };
       default:
         return {
           padding: '13px 21px',
           borderRadius: 10,
-          lineHeight: '18px',
-          fontSize: 14
+          fontSize: p2.size,
+          fontWeight: p2.weight.medium,
+          letterSpacing: p2.letterSpacing
         };
     }
   }}
