@@ -4,11 +4,7 @@ import useTheme from '../provider/useTheme';
 
 function GlobalStyles() {
   const {
-    theme: {
-      type,
-      typography: { p2 },
-      palette
-    }
+    theme: { type, palette }
   } = useTheme();
   return (
     <Global
@@ -18,9 +14,6 @@ function GlobalStyles() {
           padding: 0,
           font: 'inherit',
           color: 'inherit',
-          fontSize: p2.size,
-          fontWeight: p2.weight.regular,
-          letterSpacing: p2.letterSpacing,
           WebkitTabHighlightColor: 'transparent',
           userSelect: 'none'
         },
