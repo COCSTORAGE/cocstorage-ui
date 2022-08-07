@@ -39,6 +39,9 @@ function GlobalStyles() {
             Apple SD Gothic Neo, Malgun Gothic, 맑은 고딕, 나눔고딕, Nanum Gothic,
             Noto Sans KR, Noto Sans CJK KR, arial, 돋움, Dotum, Tahoma, Geneva, sans-serif`
         },
+        'input, textarea': {
+          userSelect: 'text'
+        },
         'picture, video, canvas': {
           display: 'block',
           maxWidth: '100%'
