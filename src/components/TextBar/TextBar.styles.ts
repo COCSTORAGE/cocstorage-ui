@@ -126,7 +126,8 @@ export const Label = styled.label<
   }
 >`
   position: absolute;
-  left: 0;
+  top: 50%;
+  left: ${({ size }) => (size === 'small' ? 0 : -2)}px;
   bottom: 0;
   padding: 0 5px;
   font-size: ${({ theme: { typography } }) => typography.p2.size};
@@ -144,14 +145,14 @@ export const Label = styled.label<
     let cssObject: CSSObject;
     const translateX = size === 'small' ? '7px' : '9px';
 
-    let translateY = size === 'small' ? '-35%' : '-50%';
+    let translateY = size === 'small' ? '-55%' : '-45%';
 
-    if (size === 'big') translateY = '-60%';
+    if (size === 'big') translateY = '-40%';
 
     if (isFocused || hasValue) {
-      translateY = size === 'small' ? '-105%' : '-130%';
+      translateY = size === 'small' ? '-140%' : '-135%';
 
-      if (size === 'big') translateY = '-160%';
+      if (size === 'big') translateY = '-130%';
 
       cssObject = {
         transform: `translate(${translateX}, ${translateY}) scale(0.75)`

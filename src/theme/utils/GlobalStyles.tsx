@@ -19,7 +19,7 @@ function GlobalStyles() {
           font: 'inherit',
           color: 'inherit',
           fontSize: p2.size,
-          fontWeight: p2.weight.medium,
+          fontWeight: p2.weight.regular,
           letterSpacing: p2.letterSpacing,
           WebkitTabHighlightColor: 'transparent',
           userSelect: 'none'
