@@ -1,6 +1,6 @@
 import { Theme } from '@emotion/react';
 
-import { BrandColor, Color } from '../types';
+import { AbsoluteUnit, BrandColor, CSSValue, Color, RelativeUnit } from '../types';
 
 export function getBrandColorCode(theme: Theme, brandColor?: BrandColor | Color): Color | null {
   const {
@@ -10,4 +10,11 @@ export function getBrandColorCode(theme: Theme, brandColor?: BrandColor | Color)
     return primary.main;
   }
   return null;
+}
+
+export function parseNumberToCSSValue(value: CSSValue, unit?: AbsoluteUnit & RelativeUnit) {
+  if (typeof value === 'number') {
+    return `${value}${unit || 'px'}`;
+  }
+  return value;
 }
