@@ -66,6 +66,14 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
       >
         <Icon name="CaretSemiLeftOutlined" width={18} height={18} />
       </PaginationItem>
+      {totalPage && !items.includes(1) && (
+        <>
+          <PaginationItem data-page={1} selected={false} onClick={handleClick} tabIndex={0}>
+            1
+          </PaginationItem>
+          <PaginationDot />
+        </>
+      )}
       {items.map((item) => (
         <PaginationItem
           key={`pagination-item-${item}`}
