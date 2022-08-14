@@ -123,7 +123,6 @@ export const StyledButton = styled(DefaultButton)<
           borderRadius: 12,
           fontSize: p1.size,
           fontWeight: p1.weight.medium,
-          lineHeight: p1.lineHeight.default,
           letterSpacing: p1.letterSpacing
         };
       case 'small':
@@ -132,7 +131,6 @@ export const StyledButton = styled(DefaultButton)<
           borderRadius: 8,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
-          lineHeight: p1.lineHeight.default,
           letterSpacing: s1.letterSpacing
         };
       case 'pico':
@@ -141,7 +139,6 @@ export const StyledButton = styled(DefaultButton)<
           borderRadius: 6,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
-          lineHeight: p1.lineHeight.default,
           letterSpacing: s1.letterSpacing
         };
       default:
@@ -150,7 +147,6 @@ export const StyledButton = styled(DefaultButton)<
           borderRadius: 10,
           fontSize: p2.size,
           fontWeight: p2.weight.medium,
-          lineHeight: p1.lineHeight.default,
           letterSpacing: p2.letterSpacing
         };
     }

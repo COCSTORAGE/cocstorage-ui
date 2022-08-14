@@ -26,7 +26,14 @@ export const StyledTypography = styled.h1<
     letterSpacing: typography[variant].letterSpacing
   })};
 
-  ${({ textLetterSpacing }) =>
+  ${({ theme: { typography }, variant = 'p2', textLineHeight }): CSSObject =>
+    textLineHeight
+      ? {
+          lineHeight: typography[variant].lineHeight[textLineHeight]
+        }
+      : {}};
+
+  ${({ textLetterSpacing }): CSSObject =>
     textLetterSpacing
       ? {
           letterSpacing: textLetterSpacing

@@ -13,7 +13,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(function 
 ) {
   return (
     <StyledLinearProgress ref={ref} {...props} css={customStyle}>
-      <ProgressBar value={100 - value} />
+      <ProgressBar dataValue={100 - value} />
     </StyledLinearProgress>
   );
 });

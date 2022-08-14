@@ -25,7 +25,6 @@ export const PaginationItem = styled.li<{
   }): CSSObject => ({
     fontSize: p2.size,
     fontWeight: p2.weight.medium,
-    lineHeight: p2.lineHeight.default,
     letterSpacing: p2.letterSpacing
   })}
 
