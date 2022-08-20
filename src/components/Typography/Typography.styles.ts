@@ -51,13 +51,22 @@ export const StyledTypography = styled.h1<
   }};
 
   ${({ noWrap, lineClamp }): CSSObject =>
-    noWrap
+    noWrap && lineClamp
       ? {
           display: '-webkit-box',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           WebkitBoxOrient: 'vertical',
           WebkitLineClamp: lineClamp
+        }
+      : {}};
+
+  ${({ noWrap, lineClamp }): CSSObject =>
+    noWrap && !lineClamp
+      ? {
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
         }
       : {}};
 `;

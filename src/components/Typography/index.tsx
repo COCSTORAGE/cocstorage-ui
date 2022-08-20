@@ -37,7 +37,7 @@ const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>
       letterSpacing,
       color,
       noWrap,
-      lineClamp = 1,
+      lineClamp,
       customStyle,
       ...props
     },

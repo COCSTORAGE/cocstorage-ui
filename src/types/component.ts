@@ -8,7 +8,7 @@ export type Variant = 'text' | 'accent' | 'semiAccent' | 'transparent';
 export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2' | 's1' | 's2';
 export type TypographyComponent = Extract<
   ElementType,
-  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span'
+  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'span' | 'article'
 >;
 export type TypographyWeight = {
   bold: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
