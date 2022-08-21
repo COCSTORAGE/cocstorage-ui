@@ -19,7 +19,8 @@ const Flexbox = forwardRef<HTMLDivElement, PropsWithChildren<FlexboxProps>>(func
     alignment,
     justifyContent,
     gap,
-    customStyle
+    customStyle,
+    ...props
   },
   ref
 ) {
@@ -31,6 +32,7 @@ const Flexbox = forwardRef<HTMLDivElement, PropsWithChildren<FlexboxProps>>(func
       alignment={alignment}
       justifyContent={justifyContent}
       gap={gap}
+      {...props}
       css={customStyle}
     >
       {children}
