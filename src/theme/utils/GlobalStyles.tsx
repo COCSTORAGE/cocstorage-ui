@@ -14,7 +14,7 @@ function GlobalStyles() {
           padding: 0,
           font: 'inherit',
           color: 'inherit',
-          WebkitTabHighlightColor: 'transparent',
+          WebkitTapHighlightColor: 'transparent',
           userSelect: 'none'
         },
         '*, :after, :before': {
