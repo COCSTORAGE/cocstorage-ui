@@ -1,19 +1,30 @@
 import { InputHTMLAttributes, ReactElement, forwardRef, useRef, useState } from 'react';
 
 import { GenericComponentProps, Size } from '../../types';
-import { Input, Label, StartIconWrapper, StyledTextBar } from './TextBar.styles';
+import { EndIconWrapper, Input, Label, StartIconWrapper, StyledTextBar } from './TextBar.styles';
 
 export interface TextBarProps
   extends GenericComponentProps<Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>> {
   size?: Exclude<Size, 'pico'>;
   fullWidth?: boolean;
   startIcon?: ReactElement;
+  endIcon?: ReactElement;
   label?: string;
   value: string;
 }
 
 const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
-  { size = 'medium', fullWidth, startIcon, label, value = '', placeholder, customStyle, ...props },
+  {
+    size = 'medium',
+    fullWidth,
+    startIcon,
+    endIcon,
+    label,
+    value = '',
+    placeholder,
+    customStyle,
+    ...props
+  },
   ref
 ) {
   const TextBarRef = useRef<HTMLInputElement | null>(null);
@@ -41,6 +52,7 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
         onBlur={handleFocus}
         {...props}
       />
+      {endIcon && <EndIconWrapper size={size}>{endIcon}</EndIconWrapper>}
       {label && (
         <Label size={size} isFocused={isFocused} hasValue={!!value || !!startIcon}>
           {label}

@@ -43,3 +43,10 @@ WithStartIcon.args = {
   placeholder: 'TextBar',
   startIcon: <Icon name="SearchOutlined" />
 };
+
+export const WithEndIcon = Template.bind({});
+WithEndIcon.args = {
+  size: 'medium',
+  placeholder: 'TextBar',
+  endIcon: <Icon name="SearchOutlined" />
+};

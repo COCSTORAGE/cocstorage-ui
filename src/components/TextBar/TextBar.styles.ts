@@ -186,3 +186,17 @@ export const StartIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
     };
   }}};
 `;
+
+export const EndIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  ${({ size }): CSSObject => {
+    const paddingR = size === 'small' ? '7px' : '9px';
+
+    return {
+      padding: `0 ${paddingR} 0 4px`
+    };
+  }}};
+`;
