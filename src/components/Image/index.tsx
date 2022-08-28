@@ -4,7 +4,7 @@ import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
 import type * as SvgIcons from '../../assets/icons';
-import { CSSValue } from '../../types';
+import { CSSValue, GenericComponentProps } from '../../types';
 import {
   FallbackWrapper,
   ImageWrapper,
@@ -14,7 +14,7 @@ import {
   RatioImg
 } from './Image.styles';
 
-export interface ImageProps extends HTMLAttributes<HTMLDivElement> {
+export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;
   alt: string;
   width: CSSValue;
@@ -42,6 +42,7 @@ function Image({
     width: 24,
     height: 24
   },
+  customStyle,
   ...props
 }: ImageProps) {
   const [loaded, setLoaded] = useState(false);
@@ -52,7 +53,13 @@ function Image({
 
   if (disableAspectRatio) {
     return (
-      <ImageWrapper dataWidth={width} dataHeight={height} round={round} {...props}>
+      <ImageWrapper
+        dataWidth={width}
+        dataHeight={height}
+        round={round}
+        {...props}
+        css={customStyle}
+      >
         {!loadFailed && src && (
           <img
             width={width}
@@ -73,7 +80,7 @@ function Image({
 
   return (
     <RatioImageBox dataWidth={width} dataHeight={height}>
-      <RatioImageWrapper ratio={ratio} round={round} {...props}>
+      <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
         <RatioImageInner>
           {!loadFailed && src && (
             <RatioImg
