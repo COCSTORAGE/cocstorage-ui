@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
 
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
@@ -11,14 +11,15 @@ import {
   RatioImageBox,
   RatioImageInner,
   RatioImageWrapper,
-  RatioImg
+  RatioImg,
+  SkeletonWrapper
 } from './Image.styles';
 
 export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;
   alt: string;
-  width: CSSValue;
-  height: CSSValue;
+  width?: CSSValue;
+  height?: CSSValue;
   ratio?: '1:1' | '4:3' | '16:9';
   round?: CSSValue;
   disableAspectRatio?: boolean;
@@ -32,8 +33,8 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
 function Image({
   src,
   alt,
-  width = '100%',
-  height,
+  width = 'auto',
+  height = 'auto',
   ratio = '1:1',
   round = 6,
   disableAspectRatio = false,
@@ -48,8 +49,13 @@ function Image({
   const [loaded, setLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  const handleLoad = () => setLoaded(true);
   const handleError = () => setLoadFailed(true);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = src;
+    img.onload = () => setLoaded(true);
+  }, [src]);
 
   if (disableAspectRatio) {
     return (
@@ -61,16 +67,13 @@ function Image({
         css={customStyle}
       >
         {!loadFailed && src && (
-          <img
-            width={width}
-            height={height}
-            src={src}
-            alt={alt}
-            onLoad={handleLoad}
-            onError={handleError}
-          />
+          <img width={width} height={height} src={src} alt={alt} onError={handleError} />
         )}
-        {src && !loaded && !loadFailed && <Skeleton />}
+        {src && !loaded && !loadFailed && (
+          <SkeletonWrapper>
+            <Skeleton />
+          </SkeletonWrapper>
+        )}
         {(!src || loadFailed) && fallback && (
           <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
         )}
@@ -79,8 +82,8 @@ function Image({
   }
 
   return (
-    <RatioImageBox dataWidth={width} dataHeight={height}>
-      <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
+    <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
+      <RatioImageWrapper ratio={ratio} {...props} css={customStyle}>
         <RatioImageInner>
           {!loadFailed && src && (
             <RatioImg
@@ -88,7 +91,7 @@ function Image({
               height={height}
               src={src}
               alt={alt}
-              onLoad={handleLoad}
+              round={round}
               onError={handleError}
             />
           )}

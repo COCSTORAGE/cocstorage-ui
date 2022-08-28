@@ -6,15 +6,26 @@ import { CSSValue } from '../../types';
 
 import { ImageProps } from '.';
 
-export const RatioImageBox = styled.div<{
-  dataWidth: CSSValue;
-  dataHeight: CSSValue;
-}>`
-  width: ${({ dataWidth }) => parseNumberToCSSValue(dataWidth || 'auto')};
-  height: ${({ dataHeight }) => parseNumberToCSSValue(dataHeight || 'auto')};
+export const RatioImageBox = styled.div<
+  Pick<ImageProps, 'round'> & {
+    dataWidth: CSSValue;
+    dataHeight: CSSValue;
+  }
+>`
+  width: ${({ dataWidth }) => parseNumberToCSSValue(dataWidth)};
+  height: ${({ dataHeight }) => parseNumberToCSSValue(dataHeight)};
+
+  overflow: hidden;
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
-export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>`
+export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio'>>`
   position: relative;
   overflow: hidden;
 
@@ -36,13 +47,6 @@ export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>
         };
     }
   }}
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
 `;
 
 export const RatioImageInner = styled.div`
@@ -60,6 +64,7 @@ export const ImageWrapper = styled.div<
     dataHeight: CSSValue;
   }
 >`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,13 +83,20 @@ export const ImageWrapper = styled.div<
       : {}};
 `;
 
-export const RatioImg = styled.img`
+export const RatioImg = styled.img<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
 export const FallbackWrapper = styled.div`
@@ -94,4 +106,12 @@ export const FallbackWrapper = styled.div`
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
+`;
+
+export const SkeletonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
