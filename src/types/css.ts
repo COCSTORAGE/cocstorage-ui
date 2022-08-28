@@ -10,4 +10,4 @@ export type Color = ColorCode | ColorProperty;
 
 export type AbsoluteUnit = 'cm' | 'mm' | 'in' | 'px' | 'pt' | 'pc';
 export type RelativeUnit = 'em' | 'ex' | 'ch' | 'rem' | 'vw' | 'vh' | 'vmin' | 'vmax' | '%';
-export type CSSValue = number | `${number}${AbsoluteUnit | RelativeUnit}` | 'fit-content';
+export type CSSValue = number | `${number}${AbsoluteUnit | RelativeUnit}` | 'fit-content' | 'auto';

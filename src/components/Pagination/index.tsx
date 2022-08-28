@@ -1,7 +1,8 @@
 import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useState } from 'react';
 
+import Icon from '@components/Icon';
+
 import { GenericComponentProps } from '../../types';
-import Icon from '../Icon';
 import { PaginationDot, PaginationItem, StyledPagination } from './Pagination.styles';
 
 export interface PaginationProps

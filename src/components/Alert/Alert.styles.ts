@@ -8,7 +8,7 @@ const DefaultAlert = styled.div`
   gap: 8px;
   width: 100%;
   min-width: 0;
-  min-height: 56px;
+  min-height: 50px;
   padding: 16px 20px;
   border-radius: 12px;
 `;

@@ -1,6 +1,5 @@
+import Button from '@components/Button';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-
-import Button from '../Button';
 
 import Hidden from '.';
 

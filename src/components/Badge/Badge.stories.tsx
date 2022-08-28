@@ -1,6 +1,5 @@
+import Icon from '@components/Icon';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-
-import Icon from '../Icon';
 
 import Badge from '.';
 

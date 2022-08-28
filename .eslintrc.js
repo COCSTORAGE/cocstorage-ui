@@ -42,21 +42,6 @@ module.exports = {
             pattern: 'react',
             group: 'builtin',
             position: 'before'
-          },
-          {
-            pattern: '@components',
-            group: 'internal',
-            position: 'before'
-          },
-          {
-            pattern: '@theme',
-            group: 'internal',
-            position: 'before'
-          },
-          {
-            pattern: '@types',
-            group: 'internal',
-            position: 'before'
           }
         ],
         alphabetize: {

@@ -1,6 +1,6 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import useTheme from '../../theme/provider/useTheme';
+import useTheme from '@theme/provider/useTheme';
 
 import Grid from '.';
 

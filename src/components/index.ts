@@ -23,3 +23,4 @@ export { default as Flexbox } from './Flexbox';
 export { default as Hidden } from './Hidden';
 export { default as LinearProgress } from './LinearProgress';
 export { default as Skeleton } from './Skeleton';
+export { default as Image } from './Image';

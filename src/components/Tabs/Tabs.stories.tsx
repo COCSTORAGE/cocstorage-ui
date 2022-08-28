@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import Tab from '@components/Tab';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-
-import Tab from '../Tab';
 
 import Tabs from '.';
 
