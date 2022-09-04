@@ -25,7 +25,7 @@ export const RatioImageBox = styled.div<
       : {}};
 `;
 
-export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio'>>`
+export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>`
   position: relative;
   overflow: hidden;
 
@@ -46,7 +46,14 @@ export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio'>>`
           paddingTop: '100%'
         };
     }
-  }}
+  }};
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
 export const RatioImageInner = styled.div`
@@ -90,13 +97,6 @@ export const RatioImg = styled.img<Pick<ImageProps, 'round'>>`
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
 `;
 
 export const FallbackWrapper = styled.div`

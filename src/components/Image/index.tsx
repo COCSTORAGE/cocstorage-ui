@@ -83,7 +83,7 @@ function Image({
 
   return (
     <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
-      <RatioImageWrapper ratio={ratio} {...props} css={customStyle}>
+      <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
         <RatioImageInner>
           {!loadFailed && src && (
             <RatioImg
