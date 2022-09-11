@@ -72,7 +72,12 @@ export const StyledMenu = styled.div<
     border-top: 0 solid transparent;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom: 8px solid ${({ theme: { palette } }) => palette.background.bg};
+    border-bottom: 8px solid
+      ${({
+        theme: {
+          palette: { background }
+        }
+      }) => background.bg};
     position: absolute;
     top: -7px;
     right: ${({ centered, triangleLeft }) => (centered ? '50%' : triangleLeft)};
@@ -90,7 +95,12 @@ export const StyledMenu = styled.div<
     border-top: 0 solid transparent;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom: 8px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+    border-bottom: 8px solid
+      ${({
+        theme: {
+          palette: { box }
+        }
+      }) => box.stroked.normal};
     position: absolute;
     top: -8.2px;
     right: ${({ centered, triangleLeft }) => (centered ? '50%' : triangleLeft)};

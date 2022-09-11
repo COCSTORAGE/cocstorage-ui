@@ -17,7 +17,8 @@ import { Content, Rectangle, StyledBottomSheet, SwipeZone, Wrapper } from './Bot
 export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;
   transitionDuration?: number;
-  disableSwipeable?: boolean;
+  disableHeaderSwipeableClose?: boolean;
+  disableContentSwipeableClose?: boolean;
   onClose: () => void;
 }
 
@@ -27,49 +28,68 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       children,
       open,
       transitionDuration = 225,
-      disableSwipeable = false,
+      disableHeaderSwipeableClose = false,
+      disableContentSwipeableClose = false,
       onClose,
       customStyle,
       ...props
     },
     ref
   ) {
-    const [isMounted, setIsMounted] = useState<boolean>(false);
-    const [sheetOpen, setSheetOpen] = useState<boolean>(false);
-    const [swipeable, setSwipeable] = useState<boolean>(false);
+    const [isMounted, setIsMounted] = useState(false);
+    const [sheetOpen, setSheetOpen] = useState(false);
+    const [headerSwipeableClose, setHeaderSwipeableClose] = useState(false);
+    const [contentSwipeableClose, setContentSwipeableClose] = useState(false);
 
     const sheetPortalRef = useRef<HTMLElement | null>(null);
-    const sheetRef = useRef<HTMLDivElement | null>(null);
-    const sheetSwipeZoneRef = useRef<HTMLDivElement | null>(null);
+    const sheetRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const sheetSwipeZoneRef = useRef<HTMLDivElement>(null);
     const sheetOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sheetCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const sheetTranslateYRef = useRef<number>(0);
+    const sheetTranslateYRef = useRef(0);
+    const prevTouchMoveClientY = useRef(0);
+    const touchMoveTranslateYRef = useRef(0);
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
-    const handleMouseDown = () => setSwipeable(true);
+    const handleMouseDown = () => setHeaderSwipeableClose(true);
 
     const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
-      if (swipeable && sheetRef.current) {
+      if (headerSwipeableClose && sheetRef.current) {
         const translateY =
           event.clientY - (document.body.clientHeight - (sheetRef.current?.clientHeight || 0));
 
-        if (translateY < 0) return;
+        if (translateY <= 0) return;
 
+        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
+        sheetTranslateYRef.current = translateY;
+      } else if (contentSwipeableClose && sheetRef.current) {
+        if (prevTouchMoveClientY.current < event.clientY) {
+          touchMoveTranslateYRef.current += 3;
+        } else {
+          touchMoveTranslateYRef.current -= 3;
+        }
+
+        const translateY = touchMoveTranslateYRef.current;
+
+        if (translateY <= 0) return;
+
+        prevTouchMoveClientY.current = event.clientY;
         sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
         sheetTranslateYRef.current = translateY;
       }
     };
 
-    const handleTouchStart = () => setSwipeable(true);
+    const handleTouchStart = () => setHeaderSwipeableClose(true);
 
     const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
-      if (swipeable && sheetRef.current) {
+      if (headerSwipeableClose && sheetRef.current) {
         const translateY =
           event.touches.item(0).clientY -
           (document.body.clientHeight - (sheetRef.current?.clientHeight || 0));
 
-        if (translateY < 0) return;
+        if (translateY <= 0) return;
 
         sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
         sheetTranslateYRef.current = translateY;
@@ -77,18 +97,68 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     };
 
     const handleEndSwipeable = () => {
-      if (swipeable && sheetRef.current) {
+      if ((headerSwipeableClose || contentSwipeableClose) && sheetRef.current) {
         const swipedPercentage =
           (sheetTranslateYRef.current / (sheetRef.current?.clientHeight || 0)) * 100;
 
         sheetRef.current?.removeAttribute('style');
 
-        if (swipedPercentage > 25) {
+        const limit = headerSwipeableClose ? 25 : 10;
+
+        if (swipedPercentage >= limit) {
           onClose();
         }
       }
 
-      setSwipeable(false);
+      setHeaderSwipeableClose(false);
+      setContentSwipeableClose(false);
+    };
+
+    const handleMouseDownContent = () => {
+      if (disableContentSwipeableClose || !contentRef.current || contentRef.current.scrollTop)
+        return;
+
+      setContentSwipeableClose(true);
+    };
+
+    const handleTouchStartContent = () => {
+      if (disableContentSwipeableClose || !contentRef.current || contentRef.current.scrollTop)
+        return;
+
+      setContentSwipeableClose(true);
+    };
+
+    const handleTouchMoveContent = (event: TouchEvent<HTMLDivElement>) => {
+      if (contentSwipeableClose && sheetRef.current) {
+        if (prevTouchMoveClientY.current < event.touches.item(0).clientY) {
+          touchMoveTranslateYRef.current += 3;
+        } else {
+          touchMoveTranslateYRef.current -= 3;
+        }
+
+        const translateY = touchMoveTranslateYRef.current;
+
+        if (translateY <= 0) return;
+
+        prevTouchMoveClientY.current = event.touches.item(0).clientY;
+        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
+        sheetTranslateYRef.current = translateY;
+      }
+    };
+
+    const handleEndSwipeableContent = () => {
+      if (contentSwipeableClose && sheetRef.current) {
+        const swipedPercentage =
+          (sheetTranslateYRef.current / (sheetRef.current?.clientHeight || 0)) * 100;
+
+        sheetRef.current?.removeAttribute('style');
+
+        if (swipedPercentage >= 10) {
+          onClose();
+        }
+      }
+
+      setContentSwipeableClose(false);
     };
 
     useEffect(() => {
@@ -135,7 +205,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
 
           setIsMounted(false);
           setSheetOpen(false);
-          setSwipeable(false);
+          setHeaderSwipeableClose(false);
+          setContentSwipeableClose(false);
 
           document.body.removeAttribute('style');
         }, transitionDuration + 100);
@@ -156,11 +227,19 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
 
           setIsMounted(false);
           setSheetOpen(false);
-          setSwipeable(false);
+          setHeaderSwipeableClose(false);
+          setContentSwipeableClose(false);
         }
         document.body.removeAttribute('style');
       };
     }, []);
+
+    useEffect(() => {
+      if (!headerSwipeableClose || !contentSwipeableClose) {
+        prevTouchMoveClientY.current = 0;
+        touchMoveTranslateYRef.current = 0;
+      }
+    }, [headerSwipeableClose, contentSwipeableClose]);
 
     if (isMounted && sheetPortalRef.current) {
       return createPortal(
@@ -181,7 +260,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
             onClick={handleClick}
             css={customStyle}
           >
-            {!disableSwipeable && (
+            {!disableHeaderSwipeableClose && (
               <SwipeZone
                 ref={sheetSwipeZoneRef}
                 onMouseDown={handleMouseDown}
@@ -192,7 +271,16 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
                 <Rectangle />
               </SwipeZone>
             )}
-            <Content {...props}>{children}</Content>
+            <Content
+              {...props}
+              ref={contentRef}
+              onMouseDown={handleMouseDownContent}
+              onTouchStart={handleTouchStartContent}
+              onTouchMove={handleTouchMoveContent}
+              onTouchEnd={handleEndSwipeableContent}
+            >
+              {children}
+            </Content>
           </StyledBottomSheet>
         </Wrapper>,
         sheetPortalRef.current

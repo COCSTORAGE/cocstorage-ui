@@ -29,7 +29,11 @@ export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>
   position: relative;
   overflow: hidden;
 
-  background-color: ${({ theme: { palette } }) => palette.background.fg1};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.fg1};
 
   ${({ ratio }): CSSObject => {
     switch (ratio) {
@@ -80,7 +84,11 @@ export const ImageWrapper = styled.div<
   width: ${({ dataWidth }) => parseNumberToCSSValue(dataWidth)};
   height: ${({ dataHeight }) => parseNumberToCSSValue(dataHeight)};
 
-  background-color: ${({ theme: { palette } }) => palette.background.fg1};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.fg1};
 
   ${({ round }): CSSObject =>
     round

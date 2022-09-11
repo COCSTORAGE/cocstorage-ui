@@ -29,45 +29,45 @@ export const StyledTag = styled(DefaultTag)<
 >`
   ${({
     theme: {
-      type,
+      mode,
       typography: { p2 },
-      palette
+      palette: { primary, box, text }
     },
     variant
   }): CSSObject => {
     switch (variant) {
       case 'accent':
         return {
-          backgroundColor: palette.primary.main,
-          color: palette.text.dark.main,
+          backgroundColor: primary.main,
+          color: text.dark.main,
           fontWeight: p2.weight.bold,
           '& svg': {
-            color: palette.text.dark.main
+            color: text.dark.main
           }
         };
       case 'semiAccent':
         return {
-          backgroundColor: palette.primary.bg1,
-          color: palette.primary.main,
+          backgroundColor: primary.bg1,
+          color: primary.main,
           fontWeight: p2.weight.bold,
           '& svg': {
-            color: palette.primary.main
+            color: primary.main
           }
         };
       case 'transparent':
         return {
           backgroundColor: 'transparent',
-          color: palette.text[type].text2,
+          color: text[mode].text2,
           '& svg': {
-            color: palette.text[type].text2
+            color: text[mode].text2
           }
         };
       default:
         return {
-          backgroundColor: palette.box.filled.normal,
-          color: palette.text[type].main,
+          backgroundColor: box.filled.normal,
+          color: text[mode].main,
           '& svg': {
-            color: palette.text[type].main
+            color: text[mode].main
           }
         };
     }

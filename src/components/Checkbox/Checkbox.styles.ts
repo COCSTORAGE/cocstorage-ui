@@ -7,24 +7,43 @@ export const Wrapper = styled.div<Pick<CheckboxProps, 'checked' | 'disabled'>>`
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
   border-radius: 4px;
   overflow: hidden;
 
-  ${({ theme: { palette }, checked }): CSSObject =>
+  ${({
+    theme: {
+      palette: { primary }
+    },
+    checked
+  }): CSSObject =>
     checked
       ? {
           borderColor: 'transparent',
-          backgroundColor: palette.primary.main
+          backgroundColor: primary.main
         }
       : {}};
 
-  ${({ theme: { palette }, disabled }): CSSObject =>
+  ${({
+    theme: {
+      palette: { box }
+    },
+    disabled
+  }): CSSObject =>
     disabled
       ? {
           borderColor: 'transparent',
-          backgroundColor: palette.box.filled.normal
+          backgroundColor: box.filled.normal
         }
       : {}};
 `;
@@ -64,7 +83,12 @@ export const Check = styled.div<
   border-width: 0 2px 2px 0;
   transform: rotate(45deg) translate(-1px, -1px);
 
-  border-color: ${({ theme: { type, palette } }) => palette.text[type].text2};
+  border-color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text2};
 
   ${({ theme: { palette }, checked }): CSSObject =>
     checked

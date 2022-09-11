@@ -7,16 +7,30 @@ export const Wrapper = styled.div<Pick<RadioProps, 'disabled'>>`
   display: inline-block;
   width: 22px;
   height: 22px;
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
   border-radius: 20px;
   overflow: hidden;
 
-  ${({ theme: { palette }, disabled }): CSSObject =>
+  ${({
+    theme: {
+      palette: { box }
+    },
+    disabled
+  }): CSSObject =>
     disabled
       ? {
           borderColor: 'transparent',
-          backgroundColor: palette.box.filled.normal
+          backgroundColor: box.filled.normal
         }
       : {}};
 `;
@@ -49,5 +63,9 @@ export const Circle = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 20px;
-  background-color: ${({ theme: { palette } }) => palette.primary.main};
+  background-color: ${({
+    theme: {
+      palette: { primary }
+    }
+  }) => primary.main};
 `;

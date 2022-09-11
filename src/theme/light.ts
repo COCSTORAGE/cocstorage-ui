@@ -1,7 +1,7 @@
 import { Theme } from '@emotion/react';
 
 export const light: Theme = {
-  type: 'light',
+  mode: 'light',
   palette: {
     primary: {
       main: '#3C89FF',

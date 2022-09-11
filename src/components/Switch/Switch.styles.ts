@@ -11,24 +11,40 @@ const DefaultSwitch = styled.button`
 `;
 
 export const StyledSwitch = styled(DefaultSwitch)<Pick<SwitchProps, 'checked' | 'disabled'>>`
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
 
-  ${({ theme: { type, palette }, checked, disabled }): CSSObject => {
+  ${({
+    theme: {
+      mode,
+      palette: { primary, box }
+    },
+    checked,
+    disabled
+  }): CSSObject => {
     let cssObject: CSSObject = {};
-    switch (type) {
+    switch (mode) {
       default:
         if (checked) {
           cssObject = {
             borderColor: 'transparent',
-            backgroundColor: palette.primary.main
+            backgroundColor: primary.main
           };
         }
 
         if (disabled) {
           cssObject = {
             borderColor: 'transparent',
-            backgroundColor: palette.box.filled.normal
+            backgroundColor: box.filled.normal
           };
         }
         return cssObject;
@@ -44,12 +60,19 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
   height: 16px;
   border-radius: 50%;
 
-  ${({ theme: { type, palette }, checked, disabled }): CSSObject => {
+  ${({
+    theme: {
+      mode,
+      palette: { text }
+    },
+    checked,
+    disabled
+  }): CSSObject => {
     let cssObject: CSSObject;
-    switch (type) {
+    switch (mode) {
       case 'dark':
         cssObject = {
-          backgroundColor: palette.text.dark.main
+          backgroundColor: text.dark.main
         };
 
         if (checked) {
@@ -57,7 +80,7 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
             ...cssObject,
             left: 'auto',
             right: 4,
-            backgroundColor: palette.text.dark.main
+            backgroundColor: text.dark.main
           };
         }
 
@@ -66,13 +89,13 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
             ...cssObject,
             left: 4,
             right: 'auto',
-            backgroundColor: palette.text.dark.text3
+            backgroundColor: text.dark.text3
           };
         }
         return cssObject;
       default:
         cssObject = {
-          backgroundColor: palette.text.light.main
+          backgroundColor: text.light.main
         };
 
         if (checked) {
@@ -80,7 +103,7 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
             ...cssObject,
             left: 'auto',
             right: 4,
-            backgroundColor: palette.text.dark.main
+            backgroundColor: text.dark.main
           };
         }
 
@@ -89,7 +112,7 @@ export const Circle = styled.div<Pick<SwitchProps, 'checked' | 'disabled'>>`
             ...cssObject,
             left: 4,
             right: 'auto',
-            backgroundColor: palette.text.light.text3
+            backgroundColor: text.light.text3
           };
         }
         return cssObject;

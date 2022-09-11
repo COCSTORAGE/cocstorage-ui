@@ -28,11 +28,21 @@ export const PaginationItem = styled.li<{
     letterSpacing: p2.letterSpacing
   })}
 
-  color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text1};
   cursor: pointer;
 
   & svg {
-    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+    color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].text1};
   }
 
   ${({ isNextItemButton }): CSSObject =>
@@ -47,24 +57,30 @@ export const PaginationItem = styled.li<{
   ${({
     theme: {
       typography: { p2 },
-      palette
+      palette: { primary, text }
     },
     selected
   }): CSSObject =>
     selected
       ? {
-          backgroundColor: palette.primary.main,
+          backgroundColor: primary.main,
           fontWeight: p2.weight.bold,
-          color: palette.text.dark.main
+          color: text.dark.main
         }
       : {}};
 
-  ${({ theme: { type, palette }, disabled }): CSSObject =>
+  ${({
+    theme: {
+      mode,
+      palette: { text }
+    },
+    disabled
+  }): CSSObject =>
     disabled
       ? {
-          color: palette.text[type].text3,
+          color: text[mode].text3,
           '& svg': {
-            color: palette.text[type].text3
+            color: text[mode].text3
           }
         }
       : {}};
@@ -75,5 +91,10 @@ export const PaginationDot = styled.li`
   height: 2px;
   margin: 0 7px;
   border-radius: 50%;
-  background-color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  background-color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text1};
 `;

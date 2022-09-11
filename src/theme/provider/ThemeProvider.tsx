@@ -10,10 +10,10 @@ import ThemeContext from '@theme/provider/ThemeContext';
 
 import GlobalStyles from '@theme/utils/GlobalStyles';
 
-import { ThemeType } from '../../types';
+import { ThemeMode } from '../../types';
 
 export interface ThemeProviderProps {
-  theme: ThemeType;
+  theme: ThemeMode;
   globalStyles?: boolean;
 }
 

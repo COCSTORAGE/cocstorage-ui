@@ -6,10 +6,10 @@ import type {
 } from './component';
 import type { CSSValue, ColorCode } from './css';
 
-export type ThemeType = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark';
 
 export interface COCTheme {
-  type: ThemeType;
+  mode: ThemeMode;
   palette: {
     primary: Record<'main' | 'sub1' | 'sub2' | 'sub3' | 'bg1' | 'bg2' | 'bg3', ColorCode>;
     secondary: {

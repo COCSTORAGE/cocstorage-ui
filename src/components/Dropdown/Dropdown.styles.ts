@@ -28,11 +28,20 @@ export const StyledDropdown = styled(DefaultDropdown)<
 >`
   width: 170px;
 
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
 
-  ${({ theme: { type, palette } }): CSSObject => {
-    switch (type) {
+  ${({ theme: { mode, palette } }): CSSObject => {
+    switch (mode) {
       case 'dark':
         return {
           color: palette.text.dark.text2,
@@ -50,13 +59,19 @@ export const StyledDropdown = styled(DefaultDropdown)<
     }
   }};
 
-  ${({ theme: { type, palette }, open }): CSSObject =>
+  ${({
+    theme: {
+      mode,
+      palette: { primary, text }
+    },
+    open
+  }): CSSObject =>
     open
       ? {
-          borderColor: palette.primary.main,
-          color: palette.text[type].main,
+          borderColor: primary.main,
+          color: text[mode].main,
           '& svg': {
-            color: palette.primary.main
+            color: primary.main
           }
         }
       : {}};
@@ -101,9 +116,18 @@ export const Option = styled.li`
   padding: 11px 12px;
   text-align: left;
 
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].main};
 
   &:hover {
-    background-color: ${({ theme: { palette } }) => palette.box.filled.focused};
+    background-color: ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.filled.focused};
   }
 `;

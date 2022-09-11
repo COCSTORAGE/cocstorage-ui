@@ -22,10 +22,20 @@ const DefaultTab = styled.button`
 `;
 
 export const StyledTab = styled(DefaultTab)`
-  color: ${({ theme: { type, palette } }) => palette.text[type].text2};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text2};
 
   &.selected {
-    color: ${({ theme: { type, palette } }) => palette.text[type].main};
+    color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].main};
 
     & > div {
       visibility: visible;
@@ -38,5 +48,9 @@ export const SelectedBar = styled.div`
   width: 14px;
   height: 3px;
   border-radius: 3px 3px 0 0;
-  background-color: ${({ theme: { palette } }) => palette.primary.main};
+  background-color: ${({
+    theme: {
+      palette: { primary }
+    }
+  }) => primary.main};
 `;

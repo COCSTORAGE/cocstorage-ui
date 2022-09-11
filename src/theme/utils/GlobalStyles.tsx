@@ -4,7 +4,10 @@ import useTheme from '@theme/provider/useTheme';
 
 function GlobalStyles() {
   const {
-    theme: { type, palette }
+    theme: {
+      mode,
+      palette: { background, text }
+    }
   } = useTheme();
   return (
     <Global
@@ -33,8 +36,8 @@ function GlobalStyles() {
         },
         'html, body': {
           height: '100%',
-          backgroundColor: palette.background.bg,
-          color: palette.text[type].main,
+          backgroundColor: background.bg,
+          color: text[mode].main,
           fontFamily: `Spoqa Han Sans Neo, -apple-system, BlinkMacSystemFont, Helvetica Neue,
             Apple SD Gothic Neo, Malgun Gothic, 맑은 고딕, 나눔고딕, Nanum Gothic,
             Noto Sans KR, Noto Sans CJK KR, arial, 돋움, Dotum, Tahoma, Geneva, sans-serif`

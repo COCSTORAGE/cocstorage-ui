@@ -9,7 +9,7 @@ import {
 
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps, ThemeType } from '../../types';
+import { GenericComponentProps, ThemeMode } from '../../types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
 
 export interface TabsProps
@@ -27,7 +27,7 @@ const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function T
 
   const tabsInnerRef = useRef<HTMLDivElement | null>(null);
   const prevValueRef = useRef<number | string>(0);
-  const prevThemeType = useRef<ThemeType | null>(null);
+  const prevThemeType = useRef<ThemeMode | null>(null);
   const isMountedRef = useRef<boolean>(false);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -43,12 +43,12 @@ const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function T
   };
 
   useEffect(() => {
-    if (prevThemeType.current && prevThemeType.current !== theme.type) {
+    if (prevThemeType.current && prevThemeType.current !== theme.mode) {
       isMountedRef.current = false;
     }
 
-    prevThemeType.current = theme.type;
-  }, [theme.type]);
+    prevThemeType.current = theme.mode;
+  }, [theme.mode]);
 
   useEffect(() => {
     if (tabsInnerRef.current && (!isMountedRef.current || prevValueRef.current !== value)) {
@@ -70,7 +70,7 @@ const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function T
     }
 
     prevValueRef.current = value;
-  }, [value, theme.type]);
+  }, [value, theme.mode]);
 
   return (
     <StyledTabs

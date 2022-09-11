@@ -34,7 +34,12 @@ export const StyledTypography = styled.h1<
         }
       : {}};
 
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].main};
 
   ${({ theme, textColor }): CSSObject => {
     const brandColorCode = getBrandColorCode(theme, textColor);

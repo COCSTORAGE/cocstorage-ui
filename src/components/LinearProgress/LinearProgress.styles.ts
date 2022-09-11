@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 export const StyledLinearProgress = styled.div`
   width: 100%;
   height: 5px;
-  background-color: ${({ theme: { palette } }) => palette.primary.bg1};
+  background-color: ${({
+    theme: {
+      palette: { primary }
+    }
+  }) => primary.bg1};
 `;
 
 export const ProgressBar = styled.div<{
@@ -11,7 +15,11 @@ export const ProgressBar = styled.div<{
 }>`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme: { palette } }) => palette.primary.main};
+  background-color: ${({
+    theme: {
+      palette: { primary }
+    }
+  }) => primary.main};
 
   transform: translateX(-${({ dataValue }) => dataValue}%);
 

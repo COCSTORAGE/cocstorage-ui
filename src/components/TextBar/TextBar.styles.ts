@@ -15,25 +15,40 @@ export const StyledTextBar = styled.div<
   display: flex;
   align-items: center;
 
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
-  border: 1px solid ${({ theme: { palette } }) => palette.box.filled.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.filled.normal};
 
   border-radius: 8px;
 
-  ${({ theme: { type, palette }, isFocused }): CSSObject => {
+  ${({
+    theme: {
+      mode,
+      palette: { primary, text }
+    },
+    isFocused
+  }): CSSObject => {
     let cssObject: CSSObject;
 
     if (isFocused) {
       cssObject = {
-        borderColor: palette.primary.main,
+        borderColor: primary.main,
         '& svg': {
-          color: palette.primary.main
+          color: primary.main
         }
       };
     } else {
       cssObject = {
         '& svg': {
-          color: palette.text[type].text1
+          color: text[mode].text1
         }
       };
     }
@@ -89,10 +104,20 @@ export const Input = styled(DefaultInput)<
 >`
   height: 100%;
   background: none;
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].main};
 
   &::placeholder {
-    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+    color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].text1};
   }
 
   ${({ textBarSize, hasStartIcon }): CSSObject => {
@@ -130,7 +155,11 @@ export const Label = styled.label<
   bottom: 0;
   padding: 0 5px;
   font-size: ${({ theme: { typography } }) => typography.p2.size};
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
   z-index: 1;
   transform-origin: top left;
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
@@ -138,7 +167,12 @@ export const Label = styled.label<
 
   pointer-events: none;
 
-  color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text1};
 
   ${({ theme: { palette }, isFocused, hasValue, size }): CSSObject => {
     let cssObject: CSSObject;

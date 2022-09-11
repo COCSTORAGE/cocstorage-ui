@@ -9,6 +9,7 @@ const DefaultButton = styled.button`
   align-items: center;
   gap: 4px;
   width: fit-content;
+  justify-content: center;
   text-align: center;
   border: none;
   background: none;
@@ -20,47 +21,53 @@ export const StyledButton = styled(DefaultButton)<
     brandColor: BrandColor;
   }
 >`
-  ${({ theme: { type, palette }, variant }) => {
+  ${({
+    theme: {
+      mode,
+      palette: { primary, text, box }
+    },
+    variant
+  }) => {
     switch (variant) {
       case 'accent':
         return {
-          backgroundColor: palette.primary.main,
-          color: palette.text.dark.main,
+          backgroundColor: primary.main,
+          color: text.dark.main,
           '& svg': {
-            color: palette.text.dark.main
+            color: text.dark.main
           },
           '&:hover': {
-            backgroundColor: palette.primary.sub1
+            backgroundColor: primary.sub1
           },
           '&:active': {
-            backgroundColor: palette.primary.sub2
+            backgroundColor: primary.sub2
           },
           '&:disabled': {
-            backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2,
+            backgroundColor: box.filled.disabled,
+            color: text[mode].text2,
             '& svg': {
-              color: palette.text[type].text2
+              color: text[mode].text2
             }
           }
         };
       case 'semiAccent':
         return {
-          backgroundColor: palette.primary.bg2,
-          color: palette.primary.main,
+          backgroundColor: primary.bg2,
+          color: primary.main,
           '& svg': {
-            color: palette.primary.main
+            color: primary.main
           },
           '&:hover': {
-            backgroundColor: palette.primary.bg3
+            backgroundColor: primary.bg3
           },
           '&:active': {
-            backgroundColor: palette.primary.bg1
+            backgroundColor: primary.bg1
           },
           '&:disabled': {
-            backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2,
+            backgroundColor: box.filled.disabled,
+            color: text[mode].text2,
             '& svg': {
-              color: palette.text[type].text2
+              color: text[mode].text2
             }
           }
         };
@@ -69,41 +76,41 @@ export const StyledButton = styled(DefaultButton)<
           padding: '5px 6px !important',
           backgroundColor: 'transparent',
           borderRadius: 6,
-          color: palette.text[type].main,
+          color: text[mode].main,
           '& svg': {
-            color: palette.text[type].main
+            color: text[mode].main
           },
           '&:hover': {
-            backgroundColor: palette.box.filled.focused
+            backgroundColor: box.filled.focused
           },
           '&:active': {
-            backgroundColor: palette.box.filled.pressed
+            backgroundColor: box.filled.pressed
           },
           '&:disabled': {
-            color: palette.text[type].text2,
+            color: text[mode].text2,
             '& svg': {
-              color: palette.text[type].text2
+              color: text[mode].text2
             }
           }
         };
       default:
         return {
-          backgroundColor: palette.box.filled.normal,
-          color: palette.text[type].main,
+          backgroundColor: box.filled.normal,
+          color: text[mode].main,
           '& svg': {
-            color: palette.text[type].main
+            color: text[mode].main
           },
           '&:hover': {
-            backgroundColor: palette.box.filled.focused
+            backgroundColor: box.filled.focused
           },
           '&:active': {
-            backgroundColor: palette.box.filled.pressed
+            backgroundColor: box.filled.pressed
           },
           '&:disabled': {
-            backgroundColor: palette.box.filled.disabled,
-            color: palette.text[type].text2,
+            backgroundColor: box.filled.disabled,
+            color: text[mode].text2,
             '& svg': {
-              color: palette.text[type].text2
+              color: text[mode].text2
             }
           }
         };
