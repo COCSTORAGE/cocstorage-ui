@@ -10,7 +10,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
   { checked, disabled, customStyle, ...props },
   ref
 ) {
-  const [hover, setHover] = useState<boolean>(false);
+  const [hover, setHover] = useState(false);
 
   const handleMouseOver = () => setHover(true);
   const handleMouseOut = () => setHover(false);

@@ -35,8 +35,8 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
   },
   ref
 ) {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const dialogPortalRef = useRef<HTMLElement | null>(null);
   const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);

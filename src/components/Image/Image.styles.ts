@@ -60,13 +60,20 @@ export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>
       : {}};
 `;
 
-export const RatioImageInner = styled.div`
+export const RatioImageInner = styled.div<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   transform: translate(50%, 50%);
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
 export const ImageWrapper = styled.div<
@@ -98,60 +105,28 @@ export const ImageWrapper = styled.div<
       : {}};
 `;
 
-export const RatioImg = styled.img<Pick<ImageProps, 'round'>>`
+export const RatioImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
 `;
 
-export const Img = styled.img<Pick<ImageProps, 'round'>>`
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
-`;
-
-export const FallbackWrapper = styled.div<Pick<ImageProps, 'round'>>`
+export const FallbackWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
-  overflow: hidden;
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
 `;
 
-export const SkeletonWrapper = styled.div<Pick<ImageProps, 'round'>>`
+export const SkeletonWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
-        }
-      : {}};
 `;

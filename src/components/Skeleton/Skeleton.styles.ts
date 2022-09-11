@@ -50,13 +50,20 @@ export const SkeletonWrapper = styled.div<Pick<SkeletonProps, 'ratio' | 'round'>
       : {}};
 `;
 
-export const SkeletonInner = styled.div`
+export const SkeletonInner = styled.div<Pick<SkeletonProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   transform: translate(50%, 50%);
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
 export const StyledSkeleton = styled.div<

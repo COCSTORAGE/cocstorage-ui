@@ -115,14 +115,14 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     };
 
     const handleMouseDownContent = () => {
-      if (disableContentSwipeableClose || !contentRef.current || contentRef.current.scrollTop)
+      if (!contentRef.current || contentRef.current.scrollTop > 0 || disableContentSwipeableClose)
         return;
 
       setContentSwipeableClose(true);
     };
 
     const handleTouchStartContent = () => {
-      if (disableContentSwipeableClose || !contentRef.current || contentRef.current.scrollTop)
+      if (!contentRef.current || contentRef.current.scrollTop > 0 || disableContentSwipeableClose)
         return;
 
       setContentSwipeableClose(true);

@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof Pagination>;
 
 const Template: ComponentStory<typeof Pagination> = function Template(args) {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState(1);
 
   const handleChange = (newPage: number) => setPage(newPage);
 

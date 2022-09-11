@@ -18,11 +18,11 @@ const Pagination = forwardRef<HTMLUListElement, PaginationProps>(function Pagina
   { count, page, rowPerPage = 20, itemCount = 10, onChange, customStyle, ...props },
   ref
 ) {
-  const [totalPage, setTotalPage] = useState<number>(0);
-  const [firstItem, setFirstItem] = useState<number>(0);
-  const [lastItem, setLastItem] = useState<number>(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [firstItem, setFirstItem] = useState(0);
+  const [lastItem, setLastItem] = useState(0);
 
-  const [items, setItems] = useState<Array<number>>([]);
+  const [items, setItems] = useState<number[]>([]);
 
   const handleClick = (event: MouseEvent<HTMLLIElement>) => {
     const dataPage = Number(event.currentTarget.getAttribute('data-page') || 0);

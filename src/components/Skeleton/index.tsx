@@ -54,7 +54,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
 
   return (
     <SkeletonWrapper ratio={ratio} round={round}>
-      <SkeletonInner>
+      <SkeletonInner round={round}>
         <StyledSkeleton
           ref={ref}
           disableAspectRatio={disableAspectRatio}

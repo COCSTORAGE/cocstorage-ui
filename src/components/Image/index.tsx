@@ -8,7 +8,6 @@ import { CSSValue, GenericComponentProps } from '../../types';
 import {
   FallbackWrapper,
   ImageWrapper,
-  Img,
   RatioImageBox,
   RatioImageInner,
   RatioImageWrapper,
@@ -68,17 +67,10 @@ function Image({
         css={customStyle}
       >
         {!loadFailed && src && (
-          <Img
-            width={width}
-            height={height}
-            src={src}
-            alt={alt}
-            round={round}
-            onError={handleError}
-          />
+          <img width={width} height={height} src={src} alt={alt} onError={handleError} />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper round={round}>
+          <SkeletonWrapper>
             <Skeleton round={round} />
           </SkeletonWrapper>
         )}
@@ -92,20 +84,13 @@ function Image({
   return (
     <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
       <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
-        <RatioImageInner>
+        <RatioImageInner round={round}>
           {!loadFailed && src && (
-            <RatioImg
-              width={width}
-              height={height}
-              src={src}
-              alt={alt}
-              round={round}
-              onError={handleError}
-            />
+            <RatioImg width={width} height={height} src={src} alt={alt} onError={handleError} />
           )}
           {src && !loaded && !loadFailed && (
-            <FallbackWrapper round={round}>
-              <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
+            <FallbackWrapper>
+              <RatioImageBox dataWidth={width} dataHeight={height}>
                 <Skeleton round={round} />
               </RatioImageBox>
             </FallbackWrapper>

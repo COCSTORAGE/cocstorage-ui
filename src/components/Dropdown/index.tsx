@@ -22,8 +22,8 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
   { options = [], value, fullWidth, onChange, placeholder, customStyle, ...props },
   ref
 ) {
-  const [open, setOpen] = useState<boolean>(false);
-  const [top, setTop] = useState<number>(0);
+  const [open, setOpen] = useState(false);
+  const [top, setTop] = useState(0);
   const [selectedValue, setSelectedValue] = useState<{
     name: string;
     value: number | string;

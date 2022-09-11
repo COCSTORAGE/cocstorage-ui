@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof Dialog>;
 
 const Template: ComponentStory<typeof Dialog> = function Template(args) {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

@@ -16,9 +16,9 @@ export default {
 } as ComponentMeta<typeof Menu>;
 
 const Template: ComponentStory<typeof Menu> = function Template(args) {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
