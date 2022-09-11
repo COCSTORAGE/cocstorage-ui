@@ -105,21 +105,53 @@ export const RatioImg = styled.img<Pick<ImageProps, 'round'>>`
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
-export const FallbackWrapper = styled.div`
+export const Img = styled.img<Pick<ImageProps, 'round'>>`
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
+`;
+
+export const FallbackWrapper = styled.div<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
+  overflow: hidden;
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
-export const SkeletonWrapper = styled.div`
+export const SkeletonWrapper = styled.div<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;

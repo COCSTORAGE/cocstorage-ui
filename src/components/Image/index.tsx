@@ -8,6 +8,7 @@ import { CSSValue, GenericComponentProps } from '../../types';
 import {
   FallbackWrapper,
   ImageWrapper,
+  Img,
   RatioImageBox,
   RatioImageInner,
   RatioImageWrapper,
@@ -67,11 +68,18 @@ function Image({
         css={customStyle}
       >
         {!loadFailed && src && (
-          <img width={width} height={height} src={src} alt={alt} onError={handleError} />
+          <Img
+            width={width}
+            height={height}
+            src={src}
+            alt={alt}
+            round={round}
+            onError={handleError}
+          />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper>
-            <Skeleton />
+          <SkeletonWrapper round={round}>
+            <Skeleton round={round} />
           </SkeletonWrapper>
         )}
         {(!src || loadFailed) && fallback && (
@@ -96,9 +104,9 @@ function Image({
             />
           )}
           {src && !loaded && !loadFailed && (
-            <FallbackWrapper>
-              <RatioImageBox dataWidth={width} dataHeight={height}>
-                <Skeleton />
+            <FallbackWrapper round={round}>
+              <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
+                <Skeleton round={round} />
               </RatioImageBox>
             </FallbackWrapper>
           )}

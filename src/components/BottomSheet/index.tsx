@@ -66,9 +66,9 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         sheetTranslateYRef.current = translateY;
       } else if (contentSwipeableClose && sheetRef.current) {
         if (prevTouchMoveClientY.current < event.clientY) {
-          touchMoveTranslateYRef.current += 3;
+          touchMoveTranslateYRef.current += 5;
         } else {
-          touchMoveTranslateYRef.current -= 3;
+          touchMoveTranslateYRef.current -= 5;
         }
 
         const translateY = touchMoveTranslateYRef.current;
@@ -131,9 +131,9 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     const handleTouchMoveContent = (event: TouchEvent<HTMLDivElement>) => {
       if (contentSwipeableClose && sheetRef.current) {
         if (prevTouchMoveClientY.current < event.touches.item(0).clientY) {
-          touchMoveTranslateYRef.current += 3;
+          touchMoveTranslateYRef.current += 5;
         } else {
-          touchMoveTranslateYRef.current -= 3;
+          touchMoveTranslateYRef.current -= 5;
         }
 
         const translateY = touchMoveTranslateYRef.current;

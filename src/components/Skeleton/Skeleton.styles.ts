@@ -6,7 +6,7 @@ import { CSSValue } from '../../types';
 
 import { SkeletonProps } from '.';
 
-export const SkeletonWrapper = styled.div<Pick<SkeletonProps, 'ratio'>>`
+export const SkeletonWrapper = styled.div<Pick<SkeletonProps, 'ratio' | 'round'>>`
   position: relative;
   overflow: hidden;
 
@@ -40,7 +40,14 @@ export const SkeletonWrapper = styled.div<Pick<SkeletonProps, 'ratio'>>`
         break;
     }
     return cssObject;
-  }}
+  }};
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
 export const SkeletonInner = styled.div`
@@ -55,7 +62,13 @@ export const SkeletonInner = styled.div`
 export const StyledSkeleton = styled.div<
   Pick<
     SkeletonProps,
-    'maxWidth' | 'maxHeight' | 'minWidth' | 'minHeight' | 'disableAspectRatio' | 'disableAnimation'
+    | 'maxWidth'
+    | 'maxHeight'
+    | 'minWidth'
+    | 'minHeight'
+    | 'round'
+    | 'disableAspectRatio'
+    | 'disableAnimation'
   > & {
     customWidth?: CSSValue;
     customHeight?: CSSValue;
@@ -76,6 +89,13 @@ export const StyledSkeleton = styled.div<
       palette: { background }
     }
   }) => background.fg1};
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 
   ${({ disableAspectRatio }): CSSObject =>
     !disableAspectRatio

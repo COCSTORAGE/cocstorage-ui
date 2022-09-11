@@ -11,6 +11,7 @@ export interface SkeletonProps extends GenericComponentProps<HTMLAttributes<HTML
   maxHeight?: CSSValue;
   minWidth?: CSSValue;
   minHeight?: CSSValue;
+  round?: CSSValue;
   disableAspectRatio?: boolean;
   disableAnimation?: boolean;
 }
@@ -24,6 +25,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
     maxHeight,
     minWidth,
     minHeight,
+    round,
     disableAspectRatio,
     disableAnimation,
     customStyle,
@@ -43,6 +45,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
         minHeight={minHeight}
         disableAspectRatio={disableAspectRatio}
         disableAnimation={disableAnimation}
+        round={round}
         {...props}
         css={customStyle}
       />
@@ -50,12 +53,13 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
   }
 
   return (
-    <SkeletonWrapper ratio={ratio}>
+    <SkeletonWrapper ratio={ratio} round={round}>
       <SkeletonInner>
         <StyledSkeleton
           ref={ref}
           disableAspectRatio={disableAspectRatio}
           disableAnimation={disableAnimation}
+          round={round}
           {...props}
           css={customStyle}
         />
