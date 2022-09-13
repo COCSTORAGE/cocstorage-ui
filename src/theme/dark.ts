@@ -73,6 +73,9 @@ export const dark: Theme = {
     common: {
       white: '#FFFFFF',
       black: '#000000'
+    },
+    others: {
+      visited: '#95B7E9'
     }
   },
   breakpoints: {

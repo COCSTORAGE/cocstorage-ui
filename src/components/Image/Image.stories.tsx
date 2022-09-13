@@ -22,8 +22,7 @@ Default.args = {
   width: 150,
   height: 150,
   src: 'https://static.cocstorage.com/icons/hotlink-ok/internetcast.png',
-  alt: 'Image Img',
-  round: '50%'
+  alt: 'Image Img'
 };
 Fallback.args = {
   width: 150,

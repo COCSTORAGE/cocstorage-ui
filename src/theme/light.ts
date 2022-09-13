@@ -73,6 +73,9 @@ export const light: Theme = {
     common: {
       white: '#FFFFFF',
       black: '#000000'
+    },
+    others: {
+      visited: '#00388B'
     }
   },
   breakpoints: {

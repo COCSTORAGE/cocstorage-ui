@@ -28,6 +28,7 @@ export interface COCTheme {
     background: Record<'bg' | 'fg1' | 'fg2', ColorCode>;
     gradation: Record<'first' | 'second' | 'third', ColorCode>;
     common: Record<'white' | 'black', ColorCode>;
+    others: Record<'visited', ColorCode>;
   };
   breakpoints: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>;
   typography: {
