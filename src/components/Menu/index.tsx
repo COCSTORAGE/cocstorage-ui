@@ -4,14 +4,15 @@ import {
   PropsWithChildren,
   RefObject,
   forwardRef,
-  useCallback,
   useEffect,
   useRef,
   useState
 } from 'react';
 
+import { createPortal } from 'react-dom';
+
 import { GenericComponentProps } from '../../types';
-import { StyledMenu } from './Menu.styles';
+import { StyledMenu, Wrapper } from './Menu.styles';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   anchorRef: RefObject<HTMLElement>;
@@ -38,9 +39,10 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
     left: 0
   });
 
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuPortalRef = useRef<HTMLElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleClose = useCallback(() => setMenuClose(true), []);
+  const handleClose = () => setMenuClose(true);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
@@ -54,6 +56,26 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
         top: top + clientHeight,
         left: left + scrollX
       });
+
+      document.body.style.overflow = 'hidden';
+
+      let menu = document.getElementById('menu-root');
+
+      if (!menu) {
+        menu = document.createElement('div');
+        menu.id = 'menu-root';
+        menu.style.position = 'fixed';
+        menu.style.top = '0';
+        menu.style.left = '0';
+        menu.style.width = '100%';
+        menu.style.height = '100%';
+        menu.style.zIndex = '1000';
+        menu.setAttribute('role', 'presentation');
+
+        document.body.appendChild(menu);
+      }
+
+      menuPortalRef.current = menu;
 
       setIsMounted(true);
       setMenuOpen(true);
@@ -90,23 +112,14 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
   }, [menuClose, onClose]);
 
   useEffect(() => {
-    if (!open && isMounted) setMenuClose(true);
+    if (!open && isMounted && menuPortalRef.current) setMenuClose(true);
   }, [open, isMounted]);
 
   useEffect(() => {
-    if (menuContentOpen) {
-      window.addEventListener('click', handleClose);
-    } else {
-      window.removeEventListener('click', handleClose);
-    }
+    if (!open && menuClose && menuContentOpen && menuPortalRef.current) {
+      menuPortalRef.current?.remove();
+      menuPortalRef.current = null;
 
-    return () => {
-      window.removeEventListener('click', handleClose);
-    };
-  }, [menuContentOpen, handleClose]);
-
-  useEffect(() => {
-    if (!open && menuClose && menuContentOpen) {
       setIsMounted(false);
       setMenuOpen(false);
       setMenuClose(false);
@@ -118,6 +131,9 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
 
   useEffect(() => {
     return () => {
+      menuPortalRef.current?.remove();
+      menuPortalRef.current = null;
+
       setIsMounted(false);
       setMenuOpen(false);
       setMenuClose(false);
@@ -127,21 +143,24 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
     };
   }, []);
 
-  if (isMounted) {
-    return (
-      <StyledMenu
-        ref={menuRef || ref}
-        menuContentOpen={menuContentOpen}
-        menuPosition={menuPosition}
-        centered={centered}
-        triangleLeft={triangleLeft}
-        onClick={handleClick}
-        css={customStyle}
-        {...props}
-        role="menu"
-      >
-        {children}
-      </StyledMenu>
+  if (isMounted && menuPortalRef.current) {
+    return createPortal(
+      <Wrapper ref={ref} menuOpen={menuOpen} menuClose={menuClose} onClick={handleClose}>
+        <StyledMenu
+          ref={menuRef}
+          menuContentOpen={menuContentOpen}
+          menuPosition={menuPosition}
+          centered={centered}
+          triangleLeft={triangleLeft}
+          onClick={handleClick}
+          css={customStyle}
+          {...props}
+          role="menu"
+        >
+          {children}
+        </StyledMenu>
+      </Wrapper>,
+      menuPortalRef.current
     );
   }
 
