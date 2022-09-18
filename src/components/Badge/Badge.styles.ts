@@ -23,38 +23,43 @@ const DefaultBadge = styled.span`
 `;
 
 export const StyledBadge = styled(DefaultBadge)<Pick<BadgeProps, 'severity'>>`
-  ${({ theme: { palette }, severity }): CSSObject => {
+  ${({
+    theme: {
+      palette: { primary, secondary }
+    },
+    severity
+  }): CSSObject => {
     switch (severity) {
       case 'success':
         return {
-          backgroundColor: palette.secondary.green.bg,
-          color: palette.secondary.green.main,
+          backgroundColor: secondary.green.bg,
+          color: secondary.green.main,
           '& svg': {
-            color: palette.secondary.green.main
+            color: secondary.green.main
           }
         };
       case 'warning':
         return {
-          backgroundColor: palette.secondary.yellow.bg,
-          color: palette.secondary.yellow.main,
+          backgroundColor: secondary.yellow.bg,
+          color: secondary.yellow.main,
           '& svg': {
-            color: palette.secondary.yellow.main
+            color: secondary.yellow.main
           }
         };
       case 'error':
         return {
-          backgroundColor: palette.secondary.red.bg,
-          color: palette.secondary.red.main,
+          backgroundColor: secondary.red.bg,
+          color: secondary.red.main,
           '& svg': {
-            color: palette.secondary.red.main
+            color: secondary.red.main
           }
         };
       default:
         return {
-          backgroundColor: palette.primary.bg2,
-          color: palette.primary.main,
+          backgroundColor: primary.bg2,
+          color: primary.main,
           '& svg': {
-            color: palette.primary.main
+            color: primary.main
           }
         };
     }

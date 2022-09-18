@@ -2,37 +2,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { MenuProps } from '.';
 
-export const Wrapper = styled.div<{
-  menuOpen: boolean;
-  menuClose: boolean;
-}>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-  z-index: 1003;
-
-  opacity: 0;
-  visibility: hidden;
-
-  ${({ menuOpen }): CSSObject =>
-    menuOpen
-      ? {
-          opacity: 1,
-          visibility: 'visible'
-        }
-      : {}};
-
-  ${({ menuClose }): CSSObject =>
-    menuClose
-      ? {
-          opacity: 0
-        }
-      : {}};
-`;
+export const Wrapper = styled.div``;
 
 export const StyledMenu = styled.div<
   Pick<MenuProps, 'centered' | 'triangleLeft'> & {
@@ -47,9 +17,18 @@ export const StyledMenu = styled.div<
   width: fit-content;
   min-width: 100px;
 
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
   border-radius: 16px;
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
 
   visibility: hidden;
   pointer-events: none;
@@ -87,7 +66,7 @@ export const StyledMenu = styled.div<
         ? {
             transform: 'translateX(50%)'
           }
-        : {}}
+        : {}};
   }
 
   &:before {
@@ -102,15 +81,14 @@ export const StyledMenu = styled.div<
         }
       }) => box.stroked.normal};
     position: absolute;
-    top: -8.2px;
+    top: -8.3px;
     right: ${({ centered, triangleLeft }) => (centered ? '50%' : triangleLeft)};
-    z-index: -1;
 
     ${({ centered }): CSSObject =>
       centered
         ? {
             transform: 'translateX(50%)'
           }
-        : {}}
+        : {}};
   }
 `;

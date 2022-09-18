@@ -40,20 +40,25 @@ export const StyledDropdown = styled(DefaultDropdown)<
       }
     }) => box.stroked.normal};
 
-  ${({ theme: { mode, palette } }): CSSObject => {
+  ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }): CSSObject => {
     switch (mode) {
       case 'dark':
         return {
-          color: palette.text.dark.text2,
+          color: text.dark.text2,
           '& svg': {
-            color: palette.text.dark.text2
+            color: text.dark.text2
           }
         };
       default:
         return {
-          color: palette.text.light.text1,
+          color: text.light.text1,
           '& svg': {
-            color: palette.text.light.text1
+            color: text.light.text1
           }
         };
     }
@@ -94,7 +99,11 @@ export const OptionWrapper = styled.ul<{
   left: 0;
   border: none;
   border-radius: 8px;
-  background-color: ${({ theme: { palette } }) => palette.background.fg2};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.fg2};
   z-index: 1;
 
   visibility: hidden;

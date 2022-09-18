@@ -41,7 +41,11 @@ export const StyledBottomSheet = styled.div<
   flex-direction: column;
   width: 100%;
   max-height: 90%;
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
   border-radius: 10px 10px 0 0;
   transition: transform ${({ transitionDuration }) => transitionDuration}ms
     cubic-bezier(0, 0, 0.2, 1) 0ms;
@@ -82,6 +86,10 @@ export const Content = styled.div`
 export const Rectangle = styled.div`
   width: 30px;
   height: 4px;
-  background-color: ${({ theme: { palette } }) => palette.box.filled.normal};
+  background-color: ${({
+    theme: {
+      palette: { box }
+    }
+  }) => box.filled.normal};
   border-radius: 2px;
 `;

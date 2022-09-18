@@ -115,9 +115,10 @@ export const StyledSkeleton = styled.div<
           transform: 'translate(-50%, -50%)'
         }
       : {}};
+
   ${({
     theme: {
-      palette: { box }
+      palette: { background }
     },
     disableAnimation
   }) =>
@@ -125,26 +126,31 @@ export const StyledSkeleton = styled.div<
       ? {
           '&:after': {
             content: '""',
+            top: 0,
             position: 'absolute',
+            width: '100%',
+            height: '100%',
             background: `linear-gradient(
-      90deg,
-      transparent,
-      ${box.filled.normal},
-      transparent
+      -45deg,
+      ${background.bg} 30%,
+      transparent 50%,
+      ${background.bg} 70%
     )`,
-            animation: 'wave 1.5s infinite linear',
-            inset: 0
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '350% 350%',
+            animation: 'wave 1.2s ease-in-out infinite',
+            animationDelay: '-0.2s',
+            opacity: 0.6
           }
         }
       : {}};
 
   @keyframes wave {
     0% {
-      transform: translateX(-100%);
+      background-position: 0 0;
     }
-    50%,
     100% {
-      transform: translateX(200%);
+      background-position: 100% 100%;
     }
   }
 `;

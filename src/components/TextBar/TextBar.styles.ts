@@ -174,7 +174,14 @@ export const Label = styled.label<
     }
   }) => text[mode].text1};
 
-  ${({ theme: { palette }, isFocused, hasValue, size }): CSSObject => {
+  ${({
+    theme: {
+      palette: { primary }
+    },
+    isFocused,
+    hasValue,
+    size
+  }): CSSObject => {
     let cssObject: CSSObject;
     const translateX = size === 'small' ? '7px' : '9px';
 
@@ -194,7 +201,7 @@ export const Label = styled.label<
       if (isFocused) {
         cssObject = {
           ...cssObject,
-          color: palette.primary.main
+          color: primary.main
         };
       }
 

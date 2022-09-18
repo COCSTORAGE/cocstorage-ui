@@ -29,7 +29,7 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
     value: number | string;
   } | null>();
 
-  const optionWrapperRef = useRef<HTMLUListElement | null>(null);
+  const optionWrapperRef = useRef<HTMLUListElement>(null);
 
   const handleClickDropdown = () => setOpen(!open);
 

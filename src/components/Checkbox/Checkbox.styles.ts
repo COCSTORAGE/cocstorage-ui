@@ -90,10 +90,15 @@ export const Check = styled.div<
     }
   }) => text[mode].text2};
 
-  ${({ theme: { palette }, checked }): CSSObject =>
+  ${({
+    theme: {
+      palette: { text }
+    },
+    checked
+  }): CSSObject =>
     checked
       ? {
-          borderColor: palette.text.dark.main
+          borderColor: text.dark.main
         }
       : {}};
 `;

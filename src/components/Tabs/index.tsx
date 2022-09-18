@@ -25,10 +25,10 @@ const Tabs = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(function T
 ) {
   const { theme } = useTheme();
 
-  const tabsInnerRef = useRef<HTMLDivElement | null>(null);
+  const tabsInnerRef = useRef<HTMLDivElement>(null);
   const prevValueRef = useRef<number | string>(0);
   const prevThemeType = useRef<ThemeMode | null>(null);
-  const isMountedRef = useRef<boolean>(false);
+  const isMountedRef = useRef(false);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     const dataValue = (event.target as Element).getAttribute('data-value');

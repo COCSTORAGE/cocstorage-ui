@@ -25,7 +25,6 @@ export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HT
   lineClamp?: number;
 }
 
-// TODO 추후 피그마에 Typography 정의가 되면 보완
 const Typography = forwardRef<HTMLDivElement, PropsWithChildren<TypographyProps>>(
   function Typography(
     {

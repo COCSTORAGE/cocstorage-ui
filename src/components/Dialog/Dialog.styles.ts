@@ -69,7 +69,11 @@ export const StyledDialog = styled.div<
           height: '100%'
         }};
 
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
 
   opacity: 0;
   visibility: hidden;
