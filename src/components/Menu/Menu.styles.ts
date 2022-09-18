@@ -2,8 +2,6 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { MenuProps } from '.';
 
-export const Wrapper = styled.div``;
-
 export const StyledMenu = styled.div<
   Pick<MenuProps, 'centered' | 'triangleLeft'> & {
     menuContentOpen: boolean;
@@ -32,6 +30,7 @@ export const StyledMenu = styled.div<
 
   visibility: hidden;
   pointer-events: none;
+  z-index: 1003;
 
   ${({ menuPosition: { top, left } }): CSSObject => ({
     top,

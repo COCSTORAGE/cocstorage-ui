@@ -11,7 +11,7 @@ import {
 } from 'react';
 
 import { GenericComponentProps } from '../../types';
-import { StyledMenu, Wrapper } from './Menu.styles';
+import { StyledMenu } from './Menu.styles';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   anchorRef: RefObject<HTMLElement>;
@@ -129,21 +129,19 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
 
   if (isMounted) {
     return (
-      <Wrapper ref={ref}>
-        <StyledMenu
-          ref={menuRef}
-          menuContentOpen={menuContentOpen}
-          menuPosition={menuPosition}
-          centered={centered}
-          triangleLeft={triangleLeft}
-          onClick={handleClick}
-          css={customStyle}
-          {...props}
-          role="menu"
-        >
-          {children}
-        </StyledMenu>
-      </Wrapper>
+      <StyledMenu
+        ref={menuRef || ref}
+        menuContentOpen={menuContentOpen}
+        menuPosition={menuPosition}
+        centered={centered}
+        triangleLeft={triangleLeft}
+        onClick={handleClick}
+        css={customStyle}
+        {...props}
+        role="menu"
+      >
+        {children}
+      </StyledMenu>
     );
   }
 
