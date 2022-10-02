@@ -162,6 +162,7 @@ export const StyledGrid = styled.div<
 
         if (auto) {
           cssObject = {
+            width: '100%',
             flex: 1
           };
         }

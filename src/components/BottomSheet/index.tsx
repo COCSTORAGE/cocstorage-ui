@@ -58,7 +58,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
       if (headerSwipeableClose && sheetRef.current) {
         const translateY =
-          event.clientY - (document.body.clientHeight - (sheetRef.current?.clientHeight || 0));
+          event.clientY - (window.innerHeight - (sheetRef.current?.clientHeight || 0));
 
         if (translateY <= 0) return;
 
@@ -87,7 +87,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       if (headerSwipeableClose && sheetRef.current) {
         const translateY =
           event.touches.item(0).clientY -
-          (document.body.clientHeight - (sheetRef.current?.clientHeight || 0));
+          (window.innerHeight - (sheetRef.current?.clientHeight || 0));
 
         if (translateY <= 0) return;
 

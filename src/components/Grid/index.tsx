@@ -4,7 +4,7 @@ import { GenericComponentProps } from '../../types';
 import { StyledGrid } from './Grid.styles';
 
 export interface GridProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
-  component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article'>;
+  component?: Extract<ElementType, 'div' | 'section' | 'main' | 'article' | 'aside'>;
 }
 
 export type ConditionalSetGrid<T> = T &
