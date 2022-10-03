@@ -5,11 +5,14 @@ import { parseNumberToCSSValue } from '@utils';
 import { TooltipProps } from '.';
 
 export const Wrapper = styled.div`
-  width: fit-content;
+  width: max-content;
 `;
 
 export const StyledTooltip = styled.div<
-  Pick<TooltipProps, 'variant' | 'placement' | 'centered' | 'left' | 'triangleLeft'> & {
+  Pick<
+    TooltipProps,
+    'variant' | 'placement' | 'transitionDuration' | 'centered' | 'left' | 'triangleLeft'
+  > & {
     tooltipOpen: boolean;
     wrapperClientHeight: number;
     wrapperClientWidth: number;
@@ -20,7 +23,8 @@ export const StyledTooltip = styled.div<
   position: absolute;
   padding: 8px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
+  width: max-content;
   border-radius: 8px;
 
   ${({

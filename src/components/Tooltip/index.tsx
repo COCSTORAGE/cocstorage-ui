@@ -8,11 +8,13 @@ export interface TooltipProps extends GenericComponentProps<HTMLAttributes<HTMLD
   variant?: Extract<Variant, 'accent' | 'semiAccent'>;
   open: boolean;
   placement?: 'top' | 'left' | 'right' | 'bottom';
+  transitionDuration?: number;
   content: ReactElement | string;
   centered?: boolean;
   left?: number;
   triangleLeft?: number;
   onClose: () => void;
+  disableOnClose?: boolean;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
@@ -21,11 +23,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
     variant = 'accent',
     open,
     placement = 'bottom',
+    transitionDuration = 225,
     content,
     centered = true,
     left = 0,
     triangleLeft = 10,
     onClose,
+    disableOnClose,
     customStyle,
     ...props
   },
@@ -55,16 +59,16 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
   }, [open]);
 
   useEffect(() => {
-    if (tooltipOpen) {
+    if (!disableOnClose && tooltipOpen) {
       window.addEventListener('click', onClose);
     }
 
     return () => {
-      if (tooltipOpen) {
+      if (!disableOnClose && tooltipOpen) {
         window.removeEventListener('click', onClose);
       }
     };
-  }, [tooltipOpen, onClose]);
+  }, [tooltipOpen, disableOnClose, onClose]);
 
   return (
     <div ref={ref}>
@@ -74,6 +78,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
           ref={tooltipRef}
           variant={variant}
           placement={placement}
+          transitionDuration={transitionDuration}
           wrapperClientWidth={wrapperClientWidth}
           wrapperClientHeight={wrapperClientHeight}
           clientWidth={clientWidth}

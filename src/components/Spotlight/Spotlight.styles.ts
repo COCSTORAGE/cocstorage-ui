@@ -15,9 +15,9 @@ export const StyledSpotlight = styled.div<
   height: fit-content;
   background-color: ${({
     theme: {
-      palette: { common }
+      palette: { background }
     }
-  }) => common.white};
+  }) => background.bg};
 
   opacity: 0;
   pointer-events: none;
