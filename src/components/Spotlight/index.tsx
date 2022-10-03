@@ -1,4 +1,4 @@
-import { HTMLAttributes, RefObject, forwardRef, useEffect, useState } from 'react';
+import { HTMLAttributes, RefObject, forwardRef, useCallback, useEffect, useState } from 'react';
 
 import Backdrop from '@components/Backdrop';
 
@@ -19,12 +19,27 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
 
+  const handleResize = useCallback(() => {
+    if (open && targetRef.current) {
+      setTop(targetRef.current.offsetTop);
+      setLeft(targetRef.current.offsetLeft);
+    }
+  }, [open, targetRef]);
+
   useEffect(() => {
     if (open && targetRef.current) {
       setTop(targetRef.current.offsetTop);
       setLeft(targetRef.current.offsetLeft);
     }
   }, [open, targetRef]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   return (
     <Backdrop open={open} onClose={onClose} transitionDuration={transitionDuration}>
