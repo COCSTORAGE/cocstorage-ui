@@ -24,3 +24,6 @@ export { default as Hidden } from './Hidden';
 export { default as LinearProgress } from './LinearProgress';
 export { default as Skeleton } from './Skeleton';
 export { default as Image } from './Image';
+export { default as Tooltip } from './Tooltip';
+export { default as Backdrop } from './Backdrop';
+export { default as Spotlight } from './Spotlight';

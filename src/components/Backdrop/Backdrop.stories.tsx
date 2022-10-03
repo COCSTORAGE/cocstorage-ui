@@ -24,7 +24,9 @@ const Template: ComponentStory<typeof Backdrop> = function Template(args) {
 
   return (
     <>
-      <Button onClick={handleClick}>Backdrop Open</Button>
+      <Button variant="accent" onClick={handleClick}>
+        Backdrop Open
+      </Button>
       <Backdrop {...args} open={open} onClose={handleClose}>
         <Button variant="accent" onClick={handleClose}>
           Backdrop Close
@@ -35,3 +37,6 @@ const Template: ComponentStory<typeof Backdrop> = function Template(args) {
 };
 
 export const Default = Template.bind({});
+Default.args = {
+  centered: true
+};
