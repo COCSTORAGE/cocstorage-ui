@@ -15,8 +15,7 @@ export const Wrapper = styled.div<
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms cubic-bezier(0, 0, 0.2, 1)
-    0ms;
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
 
   ${({ sheetOpen }): CSSObject =>
     sheetOpen
@@ -47,8 +46,7 @@ export const StyledBottomSheet = styled.div<
     }
   }) => background.bg};
   border-radius: 10px 10px 0 0;
-  transition: transform ${({ transitionDuration }) => transitionDuration}ms
-    cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transition: transform ${({ transitionDuration }) => transitionDuration}ms ease 0ms;
   transform: translateY(100%);
   z-index: 1002;
 

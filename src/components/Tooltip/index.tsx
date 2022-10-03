@@ -25,7 +25,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
     centered = true,
     left = 0,
     triangleLeft = 10,
-    onClose
+    onClose,
+    customStyle,
+    ...props
   },
   ref
 ) {
@@ -80,6 +82,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
           centered={centered}
           left={left}
           triangleLeft={triangleLeft}
+          {...props}
+          css={customStyle}
         >
           {content}
         </StyledTooltip>

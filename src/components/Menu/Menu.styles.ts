@@ -47,9 +47,18 @@ export const StyledMenu = styled.div<
   width: fit-content;
   min-width: 100px;
 
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
   border-radius: 16px;
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
 
   visibility: hidden;
   pointer-events: none;

@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import Button from '@components/Button';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Tooltip from '.';
+import Backdrop from '.';
 
 export default {
-  title: 'Experiment/Tooltip',
-  component: Tooltip
-} as ComponentMeta<typeof Tooltip>;
+  title: 'Experiment/Backdrop',
+  component: Backdrop
+} as ComponentMeta<typeof Backdrop>;
 
-const Template: ComponentStory<typeof Tooltip> = function Template(args) {
+const Template: ComponentStory<typeof Backdrop> = function Template(args) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -23,14 +23,15 @@ const Template: ComponentStory<typeof Tooltip> = function Template(args) {
   }, [args.open]);
 
   return (
-    <Tooltip {...args} open={open} onClose={handleClose} content="Tooltip">
-      <Button onClick={handleClick}>Tooltip Open</Button>
-    </Tooltip>
+    <>
+      <Button onClick={handleClick}>Backdrop Open</Button>
+      <Backdrop {...args} open={open} onClose={handleClose}>
+        <Button variant="accent" onClick={handleClose}>
+          Backdrop Close
+        </Button>
+      </Backdrop>
+    </>
   );
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  variant: 'accent',
-  placement: 'bottom'
-};
