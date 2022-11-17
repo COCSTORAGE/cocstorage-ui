@@ -47,9 +47,10 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     const sheetSwipeZoneRef = useRef<HTMLDivElement>(null);
     const sheetOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sheetCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const sheetTranslateYRef = useRef(0);
-    const prevTouchMoveClientY = useRef(0);
-    const touchMoveTranslateYRef = useRef(0);
+    const measureRef = useRef({
+      startClientY: 0,
+      lastTranslateY: 0
+    });
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
@@ -57,108 +58,113 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
 
     const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
       if (headerSwipeableClose && sheetRef.current) {
-        const translateY =
-          event.clientY - (window.innerHeight - (sheetRef.current?.clientHeight || 0));
+        let translateY =
+          event.clientY - (window.innerHeight - (sheetRef.current.clientHeight || 0));
 
-        if (translateY <= 0) return;
-
-        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
-        sheetTranslateYRef.current = translateY;
-      } else if (contentSwipeableClose && sheetRef.current) {
-        if (prevTouchMoveClientY.current < event.clientY) {
-          touchMoveTranslateYRef.current += 5;
-        } else {
-          touchMoveTranslateYRef.current -= 5;
+        if (translateY <= 0) {
+          translateY = 0;
         }
 
-        const translateY = touchMoveTranslateYRef.current;
+        sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+        measureRef.current.lastTranslateY = translateY;
+      } else if (contentSwipeableClose && sheetRef.current && contentRef.current) {
+        let translateY = event.clientY - measureRef.current.startClientY;
 
-        if (translateY <= 0) return;
+        if (translateY <= 0) {
+          translateY = 0;
+        }
 
-        prevTouchMoveClientY.current = event.clientY;
-        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
-        sheetTranslateYRef.current = translateY;
+        sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+        measureRef.current.lastTranslateY = translateY;
       }
     };
 
     const handleTouchStart = () => setHeaderSwipeableClose(true);
 
     const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
-      if (headerSwipeableClose && sheetRef.current) {
-        const translateY =
-          event.touches.item(0).clientY -
-          (window.innerHeight - (sheetRef.current?.clientHeight || 0));
+      if (!headerSwipeableClose || !sheetRef.current) return;
 
-        if (translateY <= 0) return;
+      let translateY =
+        event.touches[0].clientY - (window.innerHeight - (sheetRef.current.clientHeight || 0));
 
-        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
-        sheetTranslateYRef.current = translateY;
+      if (translateY <= 0) {
+        translateY = 0;
       }
+
+      sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+      measureRef.current.lastTranslateY = translateY;
     };
 
     const handleEndSwipeable = () => {
-      if ((headerSwipeableClose || contentSwipeableClose) && sheetRef.current) {
-        const swipedPercentage =
-          (sheetTranslateYRef.current / (sheetRef.current?.clientHeight || 0)) * 100;
+      if ((!headerSwipeableClose && !contentSwipeableClose) || !sheetRef.current) return;
 
-        sheetRef.current?.removeAttribute('style');
+      const swipedPercentage =
+        (measureRef.current.lastTranslateY / (sheetRef.current.clientHeight || 0)) * 100;
 
-        const limit = headerSwipeableClose ? 25 : 10;
+      sheetRef.current.removeAttribute('style');
 
-        if (swipedPercentage >= limit) {
-          onClose();
-        }
+      if (swipedPercentage >= 10) {
+        onClose();
       }
+
+      measureRef.current = {
+        startClientY: 0,
+        lastTranslateY: 0
+      };
 
       setHeaderSwipeableClose(false);
       setContentSwipeableClose(false);
     };
 
-    const handleMouseDownContent = () => {
+    const handleMouseDownContent = (event: MouseEvent<HTMLDivElement>) => {
       if (!contentRef.current || contentRef.current.scrollTop > 0 || disableContentSwipeableClose)
         return;
 
+      measureRef.current.startClientY = event.clientY;
       setContentSwipeableClose(true);
     };
 
-    const handleTouchStartContent = () => {
-      if (!contentRef.current || contentRef.current.scrollTop > 0 || disableContentSwipeableClose)
-        return;
+    const handleTouchStartContent = (event: TouchEvent<HTMLDivElement>) => {
+      if (!sheetRef.current || !contentRef.current || disableContentSwipeableClose) return;
 
+      if (contentRef.current.scrollTop > 0) return;
+
+      measureRef.current.startClientY = event.touches[0].clientY;
       setContentSwipeableClose(true);
     };
 
     const handleTouchMoveContent = (event: TouchEvent<HTMLDivElement>) => {
-      if (contentSwipeableClose && sheetRef.current) {
-        if (prevTouchMoveClientY.current < event.touches.item(0).clientY) {
-          touchMoveTranslateYRef.current += 5;
-        } else {
-          touchMoveTranslateYRef.current -= 5;
-        }
+      if (!contentSwipeableClose || !sheetRef.current || !contentRef.current) return;
 
-        const translateY = touchMoveTranslateYRef.current;
+      event.preventDefault();
 
-        if (translateY <= 0) return;
+      let translateY = event.touches[0].clientY - measureRef.current.startClientY;
 
-        prevTouchMoveClientY.current = event.touches.item(0).clientY;
-        sheetRef.current?.setAttribute('style', `transform: translateY(${translateY}px)`);
-        sheetTranslateYRef.current = translateY;
+      if (translateY <= 0) {
+        translateY = 0;
       }
+
+      sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+      measureRef.current.lastTranslateY = translateY;
     };
 
     const handleEndSwipeableContent = () => {
-      if (contentSwipeableClose && sheetRef.current) {
-        const swipedPercentage =
-          (sheetTranslateYRef.current / (sheetRef.current?.clientHeight || 0)) * 100;
+      if (!contentSwipeableClose || !sheetRef.current || !contentRef.current) return;
 
-        sheetRef.current?.removeAttribute('style');
+      const swipedPercentage =
+        (measureRef.current.lastTranslateY / (sheetRef.current.clientHeight || 0)) * 100;
 
-        if (swipedPercentage >= 10) {
-          onClose();
-        }
+      sheetRef.current.removeAttribute('style');
+
+      if (swipedPercentage >= 10) {
+        onClose();
       }
 
       setContentSwipeableClose(false);
+      measureRef.current = {
+        startClientY: 0,
+        lastTranslateY: 0
+      };
     };
 
     useEffect(() => {
@@ -233,13 +239,6 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         document.body.removeAttribute('style');
       };
     }, []);
-
-    useEffect(() => {
-      if (!headerSwipeableClose || !contentSwipeableClose) {
-        prevTouchMoveClientY.current = 0;
-        touchMoveTranslateYRef.current = 0;
-      }
-    }, [headerSwipeableClose, contentSwipeableClose]);
 
     if (isMounted && sheetPortalRef.current) {
       return createPortal(

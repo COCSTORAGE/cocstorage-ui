@@ -27,7 +27,7 @@ export const Wrapper = styled.div<
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease 0ms;
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
 
   ${({ dialogOpen }): CSSObject =>
     dialogOpen
@@ -76,7 +76,7 @@ export const StyledDialog = styled.div<
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease 0ms;
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
 
   z-index: 1003;
 
