@@ -76,7 +76,8 @@ export const StyledDialog = styled.div<
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease,
+    transform ${({ transitionDuration }) => transitionDuration}ms ease;
 
   z-index: 1003;
 

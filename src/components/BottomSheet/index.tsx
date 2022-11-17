@@ -70,6 +70,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       } else if (contentSwipeableClose && sheetRef.current && contentRef.current) {
         let translateY = event.clientY - measureRef.current.startClientY;
 
+        event.preventDefault();
+
         if (translateY <= 0) {
           translateY = 0;
         }
@@ -117,7 +119,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     };
 
     const handleMouseDownContent = (event: MouseEvent<HTMLDivElement>) => {
-      if (!contentRef.current || contentRef.current.scrollTop > 0 || disableContentSwipeableClose)
+      if (disableContentSwipeableClose || !contentRef.current || contentRef.current.scrollTop > 0)
         return;
 
       measureRef.current.startClientY = event.clientY;
@@ -125,7 +127,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     };
 
     const handleTouchStartContent = (event: TouchEvent<HTMLDivElement>) => {
-      if (!sheetRef.current || !contentRef.current || disableContentSwipeableClose) return;
+      if (disableContentSwipeableClose || !sheetRef.current || !contentRef.current) return;
 
       if (contentRef.current.scrollTop > 0) return;
 
@@ -235,6 +237,10 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           setSheetOpen(false);
           setHeaderSwipeableClose(false);
           setContentSwipeableClose(false);
+          measureRef.current = {
+            startClientY: 0,
+            lastTranslateY: 0
+          };
         }
         document.body.removeAttribute('style');
       };

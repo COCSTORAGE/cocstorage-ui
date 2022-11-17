@@ -2,6 +2,7 @@ import {
   HTMLAttributes,
   MouseEvent,
   PropsWithChildren,
+  TouchEvent,
   forwardRef,
   useEffect,
   useRef,
@@ -19,6 +20,7 @@ export interface DialogProps
   transitionDuration?: number;
   fullWidth?: boolean;
   fullScreen?: boolean;
+  enableSwipeableClose?: boolean;
   onClose: () => void;
 }
 
@@ -29,6 +31,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
     transitionDuration = 225,
     fullWidth,
     fullScreen,
+    enableSwipeableClose = false,
     onClose,
     customStyle,
     ...props
@@ -37,12 +40,61 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
 ) {
   const [isMounted, setIsMounted] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [swipeableClose, setSwipeableClose] = useState(false);
 
   const dialogPortalRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dialogSwipeCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const measureRef = useRef({
+    startClientY: 0,
+    lastTranslateY: 0
+  });
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    if (!enableSwipeableClose || !fullScreen || !dialogRef.current) return;
+
+    measureRef.current.startClientY = event.touches[0].clientY;
+    setSwipeableClose(true);
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    if (!swipeableClose || !dialogRef.current) return;
+
+    event.preventDefault();
+
+    let translateY = event.touches[0].clientY - measureRef.current.startClientY;
+
+    if (translateY <= 0) {
+      translateY = 0;
+    }
+
+    dialogRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+    measureRef.current.lastTranslateY = translateY;
+  };
+
+  const handleEndSwipeable = () => {
+    if (!swipeableClose || !dialogRef.current) return;
+
+    const swipedPercentage =
+      (measureRef.current.lastTranslateY / (dialogRef.current.clientHeight || 0)) * 100;
+
+    if (swipedPercentage >= 10) {
+      dialogRef.current.setAttribute('style', 'transform: translateY(100%)');
+      dialogSwipeCloseTimerRef.current = setTimeout(() => {
+        onClose();
+      }, transitionDuration);
+    }
+
+    setSwipeableClose(false);
+    measureRef.current = {
+      startClientY: 0,
+      lastTranslateY: 0
+    };
+  };
 
   useEffect(() => {
     if (open) {
@@ -102,12 +154,19 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
       if (dialogCloseTimerRef.current) {
         clearTimeout(dialogCloseTimerRef.current);
       }
+      if (dialogSwipeCloseTimerRef.current) {
+        clearTimeout(dialogSwipeCloseTimerRef.current);
+      }
       if (dialogPortalRef.current) {
         dialogPortalRef.current?.remove();
         dialogPortalRef.current = null;
 
         setIsMounted(false);
         setDialogOpen(false);
+        measureRef.current = {
+          startClientY: 0,
+          lastTranslateY: 0
+        };
       }
       document.body.removeAttribute('style');
     };
@@ -125,12 +184,16 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         role="dialog"
       >
         <StyledDialog
+          ref={dialogRef}
           dialogOpen={dialogOpen}
           dialogClose={!open}
           transitionDuration={transitionDuration}
           fullWidth={fullWidth}
           fullScreen={fullScreen}
           onClick={handleClick}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleEndSwipeable}
           {...props}
           css={customStyle}
         >
