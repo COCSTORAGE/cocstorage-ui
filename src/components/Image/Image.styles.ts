@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { parseNumberToCSSValue } from '@utils';
+import { convertNumberToCSSValue } from '@utils';
 
 import { CSSValue } from '../../types';
 
@@ -12,8 +12,8 @@ export const RatioImageBox = styled.div<
     dataHeight: CSSValue;
   }
 >`
-  width: ${({ dataWidth }) => parseNumberToCSSValue(dataWidth)};
-  height: ${({ dataHeight }) => parseNumberToCSSValue(dataHeight)};
+  width: ${({ dataWidth }) => convertNumberToCSSValue(dataWidth)};
+  height: ${({ dataHeight }) => convertNumberToCSSValue(dataHeight)};
 
   overflow: hidden;
 
@@ -88,8 +88,8 @@ export const ImageWrapper = styled.div<
   justify-content: center;
   overflow: hidden;
 
-  width: ${({ dataWidth }) => parseNumberToCSSValue(dataWidth)};
-  height: ${({ dataHeight }) => parseNumberToCSSValue(dataHeight)};
+  width: ${({ dataWidth }) => convertNumberToCSSValue(dataWidth)};
+  height: ${({ dataHeight }) => convertNumberToCSSValue(dataHeight)};
 
   background-color: ${({
     theme: {

@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { parseNumberToCSSValue } from '@utils';
+import { convertNumberToCSSValue } from '@utils';
 
 import { CSSValue } from '../../types';
 
@@ -84,12 +84,12 @@ export const StyledSkeleton = styled.div<
   position: relative;
   overflow: hidden;
 
-  ${({ customWidth }) => (customWidth ? `width: ${parseNumberToCSSValue(customWidth)}` : '')};
-  ${({ customHeight }) => (customHeight ? `height: ${parseNumberToCSSValue(customHeight)}` : '')};
-  ${({ maxWidth }) => (maxWidth ? `max-width: ${parseNumberToCSSValue(maxWidth)}` : '')};
-  ${({ maxHeight }) => (maxHeight ? `max-height: ${parseNumberToCSSValue(maxHeight)}` : '')};
-  ${({ minWidth }) => (minWidth ? `min-width: ${parseNumberToCSSValue(minWidth)}` : '')};
-  ${({ minHeight }) => (minHeight ? `min-height: ${parseNumberToCSSValue(minHeight)}` : '')};
+  ${({ customWidth }) => (customWidth ? `width: ${convertNumberToCSSValue(customWidth)}` : '')};
+  ${({ customHeight }) => (customHeight ? `height: ${convertNumberToCSSValue(customHeight)}` : '')};
+  ${({ maxWidth }) => (maxWidth ? `max-width: ${convertNumberToCSSValue(maxWidth)}` : '')};
+  ${({ maxHeight }) => (maxHeight ? `max-height: ${convertNumberToCSSValue(maxHeight)}` : '')};
+  ${({ minWidth }) => (minWidth ? `min-width: ${convertNumberToCSSValue(minWidth)}` : '')};
+  ${({ minHeight }) => (minHeight ? `min-height: ${convertNumberToCSSValue(minHeight)}` : '')};
 
   background-color: ${({
     theme: {

@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { parseNumberToCSSValue } from '@utils';
+import { convertNumberToCSSValue } from '@utils';
 
 import { TooltipProps } from '.';
 
@@ -80,7 +80,7 @@ export const StyledTooltip = styled.div<
           transform: `translate(${
             centered
               ? `calc(${Math.floor(wrapperClientWidth / 2)}px - ${Math.floor(clientWidth / 2)}px)`
-              : parseNumberToCSSValue(left)
+              : convertNumberToCSSValue(left)
           }, -${wrapperClientHeight + clientHeight + 12}px)`
         };
         break;
@@ -103,7 +103,7 @@ export const StyledTooltip = styled.div<
           transform: `translate(${
             centered
               ? `calc(${Math.floor(wrapperClientWidth / 2)}px - ${Math.floor(clientWidth / 2)}px)`
-              : parseNumberToCSSValue(left)
+              : convertNumberToCSSValue(left)
           }, 12px)`
         };
         break;
@@ -153,7 +153,7 @@ export const StyledTooltip = styled.div<
           cssObject = {
             ...cssObject,
             bottom: -8,
-            left: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            left: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             transform: centered ? 'translateX(-50%) rotate(180deg)' : 'rotate(180deg)'
           };
           break;
@@ -161,14 +161,14 @@ export const StyledTooltip = styled.div<
           cssObject = {
             ...cssObject,
             bottom: -8,
-            left: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            left: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             transform: centered ? 'translateX(-50%) rotate(180deg)' : 'rotate(180deg)'
           };
           break;
         case 'accent-left':
           cssObject = {
             ...cssObject,
-            top: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            top: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             right: -12,
             transform: centered ? 'translateY(-50%) rotate(90deg)' : 'rotate(90deg)'
           };
@@ -176,7 +176,7 @@ export const StyledTooltip = styled.div<
         case 'semiAccent-left':
           cssObject = {
             ...cssObject,
-            top: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            top: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             right: -12,
             transform: centered ? 'translateY(-50%) rotate(90deg)' : 'rotate(90deg)'
           };
@@ -184,7 +184,7 @@ export const StyledTooltip = styled.div<
         case 'accent-right':
           cssObject = {
             ...cssObject,
-            top: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            top: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             left: -12,
             transform: centered ? 'translateY(-50%) rotate(270deg)' : 'rotate(270deg)'
           };
@@ -192,7 +192,7 @@ export const StyledTooltip = styled.div<
         case 'semiAccent-right':
           cssObject = {
             ...cssObject,
-            top: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            top: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             left: -12,
             transform: centered ? 'translateY(-50%) rotate(270deg)' : 'rotate(270deg)'
           };
@@ -201,7 +201,7 @@ export const StyledTooltip = styled.div<
           cssObject = {
             ...cssObject,
             top: -8,
-            left: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            left: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             transform: centered ? 'translateX(-50%)' : undefined
           };
           break;
@@ -209,7 +209,7 @@ export const StyledTooltip = styled.div<
           cssObject = {
             ...cssObject,
             top: -8,
-            left: centered ? '50%' : parseNumberToCSSValue(triangleLeft),
+            left: centered ? '50%' : convertNumberToCSSValue(triangleLeft),
             transform: centered ? 'translateX(-50%)' : undefined
           };
           break;

@@ -8,7 +8,7 @@ export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLIm
   alt: string;
   width?: CSSValue;
   height?: CSSValue;
-  round?: boolean;
+  round?: CSSValue;
 }
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(

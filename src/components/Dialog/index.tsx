@@ -54,6 +54,26 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
+  const handleMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+    if (!enableSwipeableClose || !fullScreen || !dialogRef.current) return;
+
+    measureRef.current.startClientY = event.clientY;
+    setSwipeableClose(true);
+  };
+
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (!swipeableClose || !dialogRef.current) return;
+
+    let translateY = event.clientY - measureRef.current.startClientY;
+
+    if (translateY <= 0) {
+      translateY = 0;
+    }
+
+    dialogRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+    measureRef.current.lastTranslateY = translateY;
+  };
+
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     if (!enableSwipeableClose || !fullScreen || !dialogRef.current) return;
 
@@ -63,8 +83,6 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
 
   const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
     if (!swipeableClose || !dialogRef.current) return;
-
-    event.preventDefault();
 
     let translateY = event.touches[0].clientY - measureRef.current.startClientY;
 
@@ -87,6 +105,8 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
       dialogSwipeCloseTimerRef.current = setTimeout(() => {
         onClose();
       }, transitionDuration);
+    } else {
+      dialogRef.current.removeAttribute('style');
     }
 
     setSwipeableClose(false);
@@ -135,13 +155,19 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
       }
 
       dialogCloseTimerRef.current = setTimeout(() => {
-        dialogPortalRef.current?.remove();
-        dialogPortalRef.current = null;
+        if (dialogPortalRef.current) {
+          dialogPortalRef.current.remove();
+          dialogPortalRef.current = null;
+        }
 
         setIsMounted(false);
         setDialogOpen(false);
 
         document.body.removeAttribute('style');
+        measureRef.current = {
+          startClientY: 0,
+          lastTranslateY: 0
+        };
       }, transitionDuration + 100);
     }
   }, [open, dialogOpen, transitionDuration]);
@@ -191,6 +217,9 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
           fullWidth={fullWidth}
           fullScreen={fullScreen}
           onClick={handleClick}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleEndSwipeable}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleEndSwipeable}

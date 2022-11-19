@@ -12,7 +12,7 @@ export function getBrandColorCode(theme: Theme, brandColor?: BrandColor | Color)
   return null;
 }
 
-export function parseNumberToCSSValue(value: CSSValue, unit?: AbsoluteUnit & RelativeUnit) {
+export function convertNumberToCSSValue(value: CSSValue, unit?: AbsoluteUnit & RelativeUnit) {
   if (typeof value === 'number') {
     return `${value}${unit || 'px'}`;
   }

@@ -65,8 +65,10 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
       }
 
       backdropCloseTimerRef.current = setTimeout(() => {
-        backdropPortalRef.current?.remove();
-        backdropPortalRef.current = null;
+        if (backdropPortalRef.current) {
+          backdropPortalRef.current.remove();
+          backdropPortalRef.current = null;
+        }
 
         setIsMounted(false);
         setBackdropOpen(false);
@@ -86,7 +88,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
       }
 
       if (backdropPortalRef.current) {
-        backdropPortalRef.current?.remove();
+        backdropPortalRef.current.remove();
         backdropPortalRef.current = null;
 
         setIsMounted(false);

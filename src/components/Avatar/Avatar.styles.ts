@@ -15,7 +15,7 @@ export const StyledAvatar = styled.img<Pick<AvatarProps, 'round'>>`
   ${({ round }): CSSObject =>
     round
       ? {
-          borderRadius: 6
+          borderRadius: round
         }
       : {}};
 `;

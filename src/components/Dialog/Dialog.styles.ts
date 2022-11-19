@@ -78,7 +78,7 @@ export const StyledDialog = styled.div<
   visibility: hidden;
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease,
     transform ${({ transitionDuration }) => transitionDuration}ms ease;
-
+  overflow-y: auto;
   z-index: 1003;
 
   ${({ dialogOpen }): CSSObject =>

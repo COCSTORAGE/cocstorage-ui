@@ -7,7 +7,7 @@ import Icon from '../Icon';
 import TextBar from '.';
 
 export default {
-  title: 'Components/TextBar',
+  title: 'Experiment/TextBar',
   component: TextBar,
   argTypes: {
     startIcon: {

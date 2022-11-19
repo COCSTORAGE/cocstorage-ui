@@ -70,8 +70,6 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       } else if (contentSwipeableClose && sheetRef.current && contentRef.current) {
         let translateY = event.clientY - measureRef.current.startClientY;
 
-        event.preventDefault();
-
         if (translateY <= 0) {
           translateY = 0;
         }
@@ -81,7 +79,9 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       }
     };
 
-    const handleTouchStart = () => setHeaderSwipeableClose(true);
+    const handleTouchStart = () => {
+      setHeaderSwipeableClose(true);
+    };
 
     const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
       if (!headerSwipeableClose || !sheetRef.current) return;
@@ -109,13 +109,12 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         onClose();
       }
 
+      setHeaderSwipeableClose(false);
+      setContentSwipeableClose(false);
       measureRef.current = {
         startClientY: 0,
         lastTranslateY: 0
       };
-
-      setHeaderSwipeableClose(false);
-      setContentSwipeableClose(false);
     };
 
     const handleMouseDownContent = (event: MouseEvent<HTMLDivElement>) => {
@@ -138,8 +137,6 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     const handleTouchMoveContent = (event: TouchEvent<HTMLDivElement>) => {
       if (!contentSwipeableClose || !sheetRef.current || !contentRef.current) return;
 
-      event.preventDefault();
-
       let translateY = event.touches[0].clientY - measureRef.current.startClientY;
 
       if (translateY <= 0) {
@@ -148,25 +145,6 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
 
       sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
       measureRef.current.lastTranslateY = translateY;
-    };
-
-    const handleEndSwipeableContent = () => {
-      if (!contentSwipeableClose || !sheetRef.current || !contentRef.current) return;
-
-      const swipedPercentage =
-        (measureRef.current.lastTranslateY / (sheetRef.current.clientHeight || 0)) * 100;
-
-      sheetRef.current.removeAttribute('style');
-
-      if (swipedPercentage >= 10) {
-        onClose();
-      }
-
-      setContentSwipeableClose(false);
-      measureRef.current = {
-        startClientY: 0,
-        lastTranslateY: 0
-      };
     };
 
     useEffect(() => {
@@ -208,8 +186,10 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         }
 
         sheetCloseTimerRef.current = setTimeout(() => {
-          sheetPortalRef.current?.remove();
-          sheetPortalRef.current = null;
+          if (sheetPortalRef.current) {
+            sheetPortalRef.current.remove();
+            sheetPortalRef.current = null;
+          }
 
           setIsMounted(false);
           setSheetOpen(false);
@@ -217,6 +197,10 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           setContentSwipeableClose(false);
 
           document.body.removeAttribute('style');
+          measureRef.current = {
+            startClientY: 0,
+            lastTranslateY: 0
+          };
         }, transitionDuration + 100);
       }
     }, [open, sheetOpen, transitionDuration]);
@@ -230,7 +214,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           clearTimeout(sheetCloseTimerRef.current);
         }
         if (sheetPortalRef.current) {
-          sheetPortalRef.current?.remove();
+          sheetPortalRef.current.remove();
           sheetPortalRef.current = null;
 
           setIsMounted(false);
@@ -282,7 +266,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
               onMouseDown={handleMouseDownContent}
               onTouchStart={handleTouchStartContent}
               onTouchMove={handleTouchMoveContent}
-              onTouchEnd={handleEndSwipeableContent}
+              onTouchEnd={handleEndSwipeable}
             >
               {children}
             </Content>
