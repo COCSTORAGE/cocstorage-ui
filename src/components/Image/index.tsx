@@ -70,7 +70,7 @@ function Image({
           <img width={width} height={height} src={src} alt={alt} onError={handleError} />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper>
+          <SkeletonWrapper round={round}>
             <Skeleton round={round} />
           </SkeletonWrapper>
         )}
@@ -82,21 +82,21 @@ function Image({
   }
 
   return (
-    <RatioImageBox dataWidth={width} dataHeight={height} round={round}>
+    <RatioImageBox round={round}>
       <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
         <RatioImageInner round={round}>
           {!loadFailed && src && (
             <RatioImg width={width} height={height} src={src} alt={alt} onError={handleError} />
           )}
           {src && !loaded && !loadFailed && (
-            <FallbackWrapper>
-              <RatioImageBox dataWidth={width} dataHeight={height}>
+            <FallbackWrapper round={round}>
+              <RatioImageBox round={round}>
                 <Skeleton round={round} />
               </RatioImageBox>
             </FallbackWrapper>
           )}
           {(!src || loadFailed) && fallback && (
-            <FallbackWrapper>
+            <FallbackWrapper round={round}>
               <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
             </FallbackWrapper>
           )}

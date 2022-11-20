@@ -22,11 +22,13 @@ Default.args = {
   width: 150,
   height: 150,
   src: 'https://static.cocstorage.com/icons/hotlink-ok/internetcast.png',
-  alt: 'Image Img'
+  alt: 'Image Img',
+  disableAspectRatio: true
 };
 Fallback.args = {
   width: 150,
   height: 150,
+  disableAspectRatio: true,
   fallback: {
     iconName: 'UserFilled',
     width: 24,

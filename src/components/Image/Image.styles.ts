@@ -6,15 +6,7 @@ import { CSSValue } from '../../types';
 
 import { ImageProps } from '.';
 
-export const RatioImageBox = styled.div<
-  Pick<ImageProps, 'round'> & {
-    dataWidth: CSSValue;
-    dataHeight: CSSValue;
-  }
->`
-  width: ${({ dataWidth }) => convertNumberToCSSValue(dataWidth)};
-  height: ${({ dataHeight }) => convertNumberToCSSValue(dataHeight)};
-
+export const RatioImageBox = styled.div<Pick<ImageProps, 'round'>>`
   overflow: hidden;
 
   ${({ round }): CSSObject =>
@@ -109,24 +101,39 @@ export const RatioImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
+  width: auto;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
 `;
 
-export const FallbackWrapper = styled.div`
+export const FallbackWrapper = styled.div<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   height: auto;
   transform: translate(-50%, -50%);
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
 
-export const SkeletonWrapper = styled.div`
+export const SkeletonWrapper = styled.div<Pick<ImageProps, 'round'>>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;
