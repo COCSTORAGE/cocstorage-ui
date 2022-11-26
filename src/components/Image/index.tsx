@@ -3,8 +3,7 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import type * as SvgIcons from '../../assets/icons';
-import { CSSValue, GenericComponentProps } from '../../types';
+import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import {
   FallbackWrapper,
   ImageWrapper,
@@ -24,7 +23,7 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
   round?: CSSValue;
   disableAspectRatio?: boolean;
   fallback?: {
-    iconName: keyof typeof SvgIcons;
+    iconName: IconName;
     width?: CSSValue;
     height?: CSSValue;
   };
@@ -37,7 +36,7 @@ function Image({
   height = 'auto',
   ratio = '1:1',
   round = 6,
-  disableAspectRatio = false,
+  disableAspectRatio,
   fallback = {
     iconName: 'ImageOutlined',
     width: 24,
@@ -54,6 +53,7 @@ function Image({
   useEffect(() => {
     const img = new window.Image();
     img.src = src;
+    img.onerror = () => setLoadFailed(true);
     img.onload = () => setLoaded(true);
   }, [src]);
 
@@ -66,12 +66,12 @@ function Image({
         {...props}
         css={customStyle}
       >
-        {!loadFailed && src && (
+        {src && !loadFailed && (
           <img width={width} height={height} src={src} alt={alt} onError={handleError} />
         )}
         {src && !loaded && !loadFailed && (
           <SkeletonWrapper round={round}>
-            <Skeleton round={round} />
+            <Skeleton width="100%" height="100%" round={round} disableAspectRatio />
           </SkeletonWrapper>
         )}
         {(!src || loadFailed) && fallback && (
@@ -82,18 +82,14 @@ function Image({
   }
 
   return (
-    <RatioImageBox round={round}>
-      <RatioImageWrapper ratio={ratio} round={round} {...props} css={customStyle}>
+    <RatioImageBox width={width} height={height} round={round} {...props} css={customStyle}>
+      <RatioImageWrapper ratio={ratio} round={round}>
         <RatioImageInner round={round}>
-          {!loadFailed && src && (
-            <RatioImg width={width} height={height} src={src} alt={alt} onError={handleError} />
-          )}
+          {src && loaded && !loadFailed && <RatioImg src={src} />}
           {src && !loaded && !loadFailed && (
-            <FallbackWrapper round={round}>
-              <RatioImageBox round={round}>
-                <Skeleton round={round} />
-              </RatioImageBox>
-            </FallbackWrapper>
+            <SkeletonWrapper isAspectRatio>
+              <Skeleton width="100%" height="100%" disableAspectRatio />
+            </SkeletonWrapper>
           )}
           {(!src || loadFailed) && fallback && (
             <FallbackWrapper round={round}>

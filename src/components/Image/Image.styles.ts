@@ -6,8 +6,11 @@ import { CSSValue } from '../../types';
 
 import { ImageProps } from '.';
 
-export const RatioImageBox = styled.div<Pick<ImageProps, 'round'>>`
+export const RatioImageBox = styled.div<Pick<ImageProps, 'width' | 'height' | 'round'>>`
+  position: relative;
   overflow: hidden;
+  width: ${({ width }) => (width ? convertNumberToCSSValue(width) : 'auto')};
+  height: ${({ height }) => (height ? convertNumberToCSSValue(height) : 'auto')};
 
   ${({ round }): CSSObject =>
     round
@@ -17,8 +20,12 @@ export const RatioImageBox = styled.div<Pick<ImageProps, 'round'>>`
       : {}};
 `;
 
-export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'round'>>`
+export const RatioImageWrapper = styled.div<
+  Pick<ImageProps, 'width' | 'height' | 'ratio' | 'round'>
+>`
   position: relative;
+  width: ${({ width }) => (width ? convertNumberToCSSValue(width) : 'auto')};
+  height: ${({ height }) => (height ? convertNumberToCSSValue(height) : 'auto')};
   overflow: hidden;
 
   background-color: ${({
@@ -97,13 +104,16 @@ export const ImageWrapper = styled.div<
       : {}};
 `;
 
-export const RatioImg = styled.img`
+export const RatioImg = styled.div<Pick<ImageProps, 'src'>>`
   position: absolute;
   top: 0;
   left: 0;
-  width: auto;
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  background-image: ${({ src }) => `url(${src})`};
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   transform: translate(-50%, -50%);
 `;
 
@@ -123,12 +133,23 @@ export const FallbackWrapper = styled.div<Pick<ImageProps, 'round'>>`
       : {}};
 `;
 
-export const SkeletonWrapper = styled.div<Pick<ImageProps, 'round'>>`
+export const SkeletonWrapper = styled.div<
+  Pick<ImageProps, 'round'> & {
+    isAspectRatio?: boolean;
+  }
+>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+
+  ${({ isAspectRatio }): CSSObject =>
+    isAspectRatio
+      ? {
+          transform: 'translate(-50%, -50%)'
+        }
+      : {}};
 
   ${({ round }): CSSObject =>
     round
