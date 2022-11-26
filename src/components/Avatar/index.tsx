@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef, useState } from 'react';
+import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
@@ -40,7 +40,14 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
   const [loadFailed, setLoadFailed] = useState(false);
 
   const handleLoad = () => setLoaded(true);
-  const handeError = () => setLoadFailed(true);
+  const handleError = () => setLoadFailed(true);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = src;
+    img.onerror = () => setLoadFailed(true);
+    img.onload = () => setLoaded(true);
+  }, [src]);
 
   return (
     <AvatarWrapper
@@ -60,7 +67,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
           loaded={loaded}
           loadFailed={loadFailed}
           onLoad={handleLoad}
-          onError={handeError}
+          onError={handleError}
         />
       )}
       {src && !loaded && !loadFailed && (

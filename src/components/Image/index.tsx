@@ -53,13 +53,11 @@ function Image({
   const handleError = () => setLoadFailed(true);
 
   useEffect(() => {
-    if (!disableAspectRatio) {
-      const img = new window.Image();
-      img.src = src;
-      img.onerror = () => setLoadFailed(true);
-      img.onload = () => setLoaded(true);
-    }
-  }, [src, disableAspectRatio]);
+    const img = new window.Image();
+    img.src = src;
+    img.onerror = () => setLoadFailed(true);
+    img.onload = () => setLoaded(true);
+  }, [src]);
 
   if (disableAspectRatio) {
     return (
