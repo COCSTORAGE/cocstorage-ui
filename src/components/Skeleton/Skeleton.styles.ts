@@ -127,6 +127,7 @@ export const StyledSkeleton = styled.div<
           '&:after': {
             content: '""',
             top: 0,
+            left: 0,
             position: 'absolute',
             width: '100%',
             height: '100%',

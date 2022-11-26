@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
+import { HTMLAttributes, forwardRef, useState } from 'react';
 
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
@@ -6,7 +6,7 @@ import Skeleton from '@components/Skeleton';
 import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import { AvatarWrapper, SkeletonWrapper, StyledAvatar } from './Avatar.styles';
 
-export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLImageElement>> {
+export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;
   alt: string;
   width?: CSSValue;
@@ -39,21 +39,33 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
   const [loaded, setLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = src;
-    img.onerror = () => setLoadFailed(true);
-    img.onload = () => setLoaded(true);
-  }, [src]);
+  const handleLoad = () => setLoaded(true);
+  const handeError = () => setLoadFailed(true);
 
   return (
-    <AvatarWrapper dataWidth={width} dataHeight={height} round={round} css={customStyle} {...props}>
+    <AvatarWrapper
+      ref={ref}
+      dataWidth={width}
+      dataHeight={height}
+      round={round}
+      {...props}
+      css={customStyle}
+    >
       {src && !loadFailed && (
-        <StyledAvatar ref={ref} src={src} alt={alt} width={width} height={height} />
+        <StyledAvatar
+          width={width}
+          height={height}
+          src={src}
+          alt={alt}
+          loaded={loaded}
+          loadFailed={loadFailed}
+          onLoad={handleLoad}
+          onError={handeError}
+        />
       )}
       {src && !loaded && !loadFailed && (
         <SkeletonWrapper>
-          <Skeleton width={width} height={height} disableAspectRatio />
+          <Skeleton width="100%" height="100%" disableAspectRatio />
         </SkeletonWrapper>
       )}
       {(!src || loadFailed) && fallback && (

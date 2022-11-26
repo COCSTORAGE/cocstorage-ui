@@ -7,6 +7,7 @@ import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import {
   FallbackWrapper,
   ImageWrapper,
+  Img,
   RatioImageBox,
   RatioImageInner,
   RatioImageWrapper,
@@ -48,14 +49,17 @@ function Image({
   const [loaded, setLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
+  const handleLoad = () => setLoaded(true);
   const handleError = () => setLoadFailed(true);
 
   useEffect(() => {
-    const img = new window.Image();
-    img.src = src;
-    img.onerror = () => setLoadFailed(true);
-    img.onload = () => setLoaded(true);
-  }, [src]);
+    if (!disableAspectRatio) {
+      const img = new window.Image();
+      img.src = src;
+      img.onerror = () => setLoadFailed(true);
+      img.onload = () => setLoaded(true);
+    }
+  }, [src, disableAspectRatio]);
 
   if (disableAspectRatio) {
     return (
@@ -67,10 +71,19 @@ function Image({
         css={customStyle}
       >
         {src && !loadFailed && (
-          <img width={width} height={height} src={src} alt={alt} onError={handleError} />
+          <Img
+            width={width}
+            height={height}
+            src={src}
+            alt={alt}
+            loaded={loaded}
+            loadFailed={loadFailed}
+            onLoad={handleLoad}
+            onError={handleError}
+          />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper round={round}>
+          <SkeletonWrapper>
             <Skeleton width="100%" height="100%" disableAspectRatio />
           </SkeletonWrapper>
         )}

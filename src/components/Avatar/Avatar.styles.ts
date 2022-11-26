@@ -35,12 +35,17 @@ export const AvatarWrapper = styled.div<
       : {}};
 `;
 
-export const StyledAvatar = styled.img`
-  max-width: 100%;
+export const StyledAvatar = styled.img<{
+  loaded: boolean;
+  loadFailed: boolean;
+}>`
+  visibility: ${({ loaded, loadFailed }) => (loaded && !loadFailed ? 'visible' : 'hidden')};
 `;
 
 export const SkeletonWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 `;

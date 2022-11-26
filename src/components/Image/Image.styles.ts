@@ -93,6 +93,13 @@ export const ImageWrapper = styled.div<
       : {}};
 `;
 
+export const Img = styled.img<{
+  loaded: boolean;
+  loadFailed: boolean;
+}>`
+  visibility: ${({ loaded, loadFailed }) => (loaded && !loadFailed ? 'visible' : 'hidden')};
+`;
+
 export const RatioImg = styled.div<Pick<ImageProps, 'src'>>`
   position: absolute;
   top: 0;
@@ -115,11 +122,9 @@ export const FallbackWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export const SkeletonWrapper = styled.div<
-  Pick<ImageProps, 'round'> & {
-    isAspectRatio?: boolean;
-  }
->`
+export const SkeletonWrapper = styled.div<{
+  isAspectRatio?: boolean;
+}>`
   position: absolute;
   top: 0;
   left: 0;
@@ -130,13 +135,6 @@ export const SkeletonWrapper = styled.div<
     isAspectRatio
       ? {
           transform: 'translate(-50%, -50%)'
-        }
-      : {}};
-
-  ${({ round }): CSSObject =>
-    round
-      ? {
-          borderRadius: round
         }
       : {}};
 `;
