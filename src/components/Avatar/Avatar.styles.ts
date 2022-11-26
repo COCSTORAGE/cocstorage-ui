@@ -1,16 +1,31 @@
 import styled, { CSSObject } from '@emotion/styled';
 
+import { convertNumberToCSSValue } from '@utils';
+
+import { CSSValue } from '../../types';
+
 import { AvatarProps } from '.';
 
-export const StyledAvatar = styled.img<Pick<AvatarProps, 'round'>>`
+export const AvatarWrapper = styled.div<
+  Pick<AvatarProps, 'round'> & {
+    dataWidth: CSSValue;
+    dataHeight: CSSValue;
+  }
+>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  width: ${({ dataWidth }) => (dataWidth ? convertNumberToCSSValue(dataWidth) : 'auto')};
+  height: ${({ dataHeight }) => (dataHeight ? convertNumberToCSSValue(dataHeight) : 'auto')};
+
   background-color: ${({
     theme: {
       palette: { background }
     }
   }) => background.fg1};
-
-  max-width: 100%;
-  border-radius: 50%;
 
   ${({ round }): CSSObject =>
     round
@@ -18,4 +33,14 @@ export const StyledAvatar = styled.img<Pick<AvatarProps, 'round'>>`
           borderRadius: round
         }
       : {}};
+`;
+
+export const StyledAvatar = styled.img`
+  max-width: 100%;
+`;
+
+export const SkeletonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

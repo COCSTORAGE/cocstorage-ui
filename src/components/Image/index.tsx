@@ -71,7 +71,7 @@ function Image({
         )}
         {src && !loaded && !loadFailed && (
           <SkeletonWrapper round={round}>
-            <Skeleton width="100%" height="100%" round={round} disableAspectRatio />
+            <Skeleton width="100%" height="100%" disableAspectRatio />
           </SkeletonWrapper>
         )}
         {(!src || loadFailed) && fallback && (
@@ -82,9 +82,9 @@ function Image({
   }
 
   return (
-    <RatioImageBox width={width} height={height} round={round} {...props} css={customStyle}>
-      <RatioImageWrapper ratio={ratio} round={round}>
-        <RatioImageInner round={round}>
+    <RatioImageBox dataWidth={width} dataHeight={height} round={round} {...props} css={customStyle}>
+      <RatioImageWrapper ratio={ratio}>
+        <RatioImageInner>
           {src && loaded && !loadFailed && <RatioImg src={src} />}
           {src && !loaded && !loadFailed && (
             <SkeletonWrapper isAspectRatio>
@@ -92,7 +92,7 @@ function Image({
             </SkeletonWrapper>
           )}
           {(!src || loadFailed) && fallback && (
-            <FallbackWrapper round={round}>
+            <FallbackWrapper>
               <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
             </FallbackWrapper>
           )}
