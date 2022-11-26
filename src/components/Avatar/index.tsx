@@ -39,8 +39,6 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
   const [loaded, setLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  const handleError = () => setLoadFailed(true);
-
   useEffect(() => {
     const img = new window.Image();
     img.src = src;
@@ -49,18 +47,9 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
   }, [src]);
 
   return (
-    <AvatarWrapper dataWidth={width} dataHeight={height} round={round}>
+    <AvatarWrapper dataWidth={width} dataHeight={height} round={round} css={customStyle} {...props}>
       {src && !loadFailed && (
-        <StyledAvatar
-          ref={ref}
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          {...props}
-          onError={handleError}
-          css={customStyle}
-        />
+        <StyledAvatar ref={ref} src={src} alt={alt} width={width} height={height} />
       )}
       {src && !loaded && !loadFailed && (
         <SkeletonWrapper>
