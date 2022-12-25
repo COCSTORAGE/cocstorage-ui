@@ -22,6 +22,7 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
   height?: CSSValue;
   ratio?: '1:1' | '4:3' | '16:9';
   round?: CSSValue;
+  disableBackgroundColor?: boolean;
   disableAspectRatio?: boolean;
   fallback?: {
     iconName: IconName;
@@ -37,6 +38,7 @@ function Image({
   height = 'auto',
   ratio = '1:1',
   round = 6,
+  disableBackgroundColor,
   disableAspectRatio,
   fallback = {
     iconName: 'ImageOutlined',
@@ -65,6 +67,7 @@ function Image({
         dataWidth={width}
         dataHeight={height}
         round={round}
+        disableBackgroundColor={disableBackgroundColor}
         {...props}
         css={customStyle}
       >

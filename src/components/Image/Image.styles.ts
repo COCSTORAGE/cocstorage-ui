@@ -25,17 +25,25 @@ export const RatioImageBox = styled.div<
       : {}};
 `;
 
-export const RatioImageWrapper = styled.div<Pick<ImageProps, 'width' | 'height' | 'ratio'>>`
+export const RatioImageWrapper = styled.div<
+  Pick<ImageProps, 'width' | 'height' | 'ratio' | 'disableBackgroundColor'>
+>`
   position: relative;
   width: ${({ width }) => (width ? convertNumberToCSSValue(width) : 'auto')};
   height: ${({ height }) => (height ? convertNumberToCSSValue(height) : 'auto')};
   overflow: hidden;
 
-  background-color: ${({
+  ${({
     theme: {
       palette: { background }
-    }
-  }) => background.fg1};
+    },
+    disableBackgroundColor
+  }): CSSObject =>
+    !disableBackgroundColor
+      ? {
+          backgroundColor: background.fg1
+        }
+      : {}};
 
   ${({ ratio }): CSSObject => {
     switch (ratio) {
@@ -65,7 +73,7 @@ export const RatioImageInner = styled.div`
 `;
 
 export const ImageWrapper = styled.div<
-  Pick<ImageProps, 'round'> & {
+  Pick<ImageProps, 'round' | 'disableBackgroundColor'> & {
     dataWidth: CSSValue;
     dataHeight: CSSValue;
   }
@@ -76,14 +84,21 @@ export const ImageWrapper = styled.div<
   justify-content: center;
   overflow: hidden;
 
+  max-width: fit-content;
   width: ${({ dataWidth }) => convertNumberToCSSValue(dataWidth)};
   height: ${({ dataHeight }) => convertNumberToCSSValue(dataHeight)};
 
-  background-color: ${({
+  ${({
     theme: {
       palette: { background }
-    }
-  }) => background.fg1};
+    },
+    disableBackgroundColor
+  }): CSSObject =>
+    !disableBackgroundColor
+      ? {
+          backgroundColor: background.fg1
+        }
+      : {}};
 
   ${({ round }): CSSObject =>
     round

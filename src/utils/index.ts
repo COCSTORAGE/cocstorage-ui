@@ -13,7 +13,7 @@ export function getBrandColorCode(theme: Theme, brandColor?: BrandColor | Color)
 }
 
 export function convertNumberToCSSValue(value: CSSValue, unit?: AbsoluteUnit & RelativeUnit) {
-  if (typeof value === 'number') {
+  if (!Number.isNaN(Number(value))) {
     return `${value}${unit || 'px'}`;
   }
   return value;
