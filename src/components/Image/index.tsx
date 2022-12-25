@@ -5,6 +5,7 @@ import Skeleton from '@components/Skeleton';
 
 import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import {
+  FallbackBox,
   FallbackWrapper,
   ImageWrapper,
   Img,
@@ -22,6 +23,7 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
   height?: CSSValue;
   ratio?: '1:1' | '4:3' | '16:9';
   round?: CSSValue;
+  disableResponsive?: boolean;
   disableBackgroundColor?: boolean;
   disableAspectRatio?: boolean;
   fallback?: {
@@ -38,6 +40,7 @@ function Image({
   height = 'auto',
   ratio = '1:1',
   round = 6,
+  disableResponsive,
   disableBackgroundColor,
   disableAspectRatio,
   fallback = {
@@ -55,6 +58,11 @@ function Image({
   const handleError = () => setLoadFailed(true);
 
   useEffect(() => {
+    setLoaded(false);
+    setLoadFailed(false);
+  }, [src]);
+
+  useEffect(() => {
     const img = new window.Image();
     img.src = src;
     img.onerror = () => setLoadFailed(true);
@@ -62,11 +70,26 @@ function Image({
   }, [src]);
 
   if (disableAspectRatio) {
+    if ((!src || loadFailed) && fallback) {
+      return (
+        <FallbackBox
+          dataWidth={width}
+          dataHeight={height}
+          round={round}
+          disableResponsive={disableResponsive}
+          disableBackgroundColor={disableBackgroundColor}
+        >
+          <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
+        </FallbackBox>
+      );
+    }
+
     return (
       <ImageWrapper
         dataWidth={width}
         dataHeight={height}
         round={round}
+        disableResponsive={disableResponsive}
         disableBackgroundColor={disableBackgroundColor}
         {...props}
         css={customStyle}
@@ -84,12 +107,9 @@ function Image({
           />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper>
-            <Skeleton width="100%" height="100%" disableAspectRatio />
+          <SkeletonWrapper dataWidth={width} dataHeight={height}>
+            <Skeleton width={width} height={height} disableAspectRatio />
           </SkeletonWrapper>
-        )}
-        {(!src || loadFailed) && fallback && (
-          <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
         )}
       </ImageWrapper>
     );
@@ -97,7 +117,7 @@ function Image({
 
   return (
     <RatioImageBox dataWidth={width} dataHeight={height} round={round} {...props} css={customStyle}>
-      <RatioImageWrapper ratio={ratio}>
+      <RatioImageWrapper ratio={ratio} disableBackgroundColor={disableBackgroundColor}>
         <RatioImageInner>
           {src && loaded && !loadFailed && <RatioImg src={src} />}
           {src && !loaded && !loadFailed && (
