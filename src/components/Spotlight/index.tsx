@@ -2,18 +2,19 @@ import { HTMLAttributes, RefObject, forwardRef, useCallback, useEffect, useState
 
 import Backdrop from '@components/Backdrop';
 
-import { GenericComponentProps } from '../../types';
+import { CSSValue, GenericComponentProps } from '../../types';
 import { StyledSpotlight } from './Spotlight.styles';
 
 export interface SpotlightProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;
   targetRef: RefObject<HTMLElement>;
+  round?: CSSValue;
   transitionDuration?: number;
   onClose: () => void;
 }
 
 const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
-  { children, open, targetRef, transitionDuration = 225, onClose, customStyle, ...props },
+  { children, open, targetRef, round, transitionDuration = 225, onClose, customStyle, ...props },
   ref
 ) {
   const [top, setTop] = useState(0);
@@ -48,6 +49,7 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
         top={top}
         left={left}
         open={open}
+        round={round}
         transitionDuration={transitionDuration}
         {...props}
         css={customStyle}

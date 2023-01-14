@@ -3,7 +3,7 @@ import styled, { CSSObject } from '@emotion/styled';
 import { SpotlightProps } from '.';
 
 export const StyledSpotlight = styled.div<
-  Pick<SpotlightProps, 'open' | 'transitionDuration'> & {
+  Pick<SpotlightProps, 'open' | 'round' | 'transitionDuration'> & {
     top: number;
     left: number;
   }
@@ -22,6 +22,13 @@ export const StyledSpotlight = styled.div<
   opacity: 0;
   pointer-events: none;
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 
   ${({ open }): CSSObject =>
     open
