@@ -4,8 +4,15 @@ import { convertNumberToCSSValue } from '@utils';
 
 import { TooltipProps } from '.';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<Pick<TooltipProps, 'fillWrapper'>>`
   width: max-content;
+
+  ${({ fillWrapper }): CSSObject =>
+    fillWrapper
+      ? {
+          width: '100%'
+        }
+      : {}}
 `;
 
 export const StyledTooltip = styled.div<
@@ -26,6 +33,7 @@ export const StyledTooltip = styled.div<
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
   width: max-content;
   border-radius: 8px;
+  pointer-events: none;
 
   ${({
     theme: {
@@ -111,7 +119,8 @@ export const StyledTooltip = styled.div<
     if (tooltipOpen) {
       cssObject = {
         ...cssObject,
-        opacity: 1
+        opacity: 1,
+        pointerEvents: 'visible'
       };
     }
 

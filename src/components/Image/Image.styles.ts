@@ -41,21 +41,11 @@ export const RatioImageWrapper = styled.div<Pick<ImageProps, 'ratio' | 'disableB
         }
       : {}};
 
-  ${({ ratio }): CSSObject => {
-    switch (ratio) {
-      case '4:3':
-        return {
-          paddingTop: '75%'
-        };
-      case '16:9':
-        return {
-          paddingTop: '56.25%'
-        };
-      default:
-        return {
-          paddingTop: '100%'
-        };
-    }
+  ${({ ratio = '1:1' }): CSSObject => {
+    const splitRatio = String(ratio).split(':');
+    return {
+      paddingTop: `calc(100% / ${splitRatio[0]} * ${splitRatio[1]})`
+    };
   }};
 `;
 
@@ -166,16 +156,13 @@ export const Img = styled.img<{
   visibility: ${({ loaded, loadFailed }) => (loaded && !loadFailed ? 'visible' : 'hidden')};
 `;
 
-export const RatioImg = styled.div<Pick<ImageProps, 'src'>>`
+export const RatioImg = styled.img<Pick<ImageProps, 'src'>>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: ${({ src }) => `url(${src})`};
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  object-fit: cover;
   transform: translate(-50%, -50%);
 `;
 

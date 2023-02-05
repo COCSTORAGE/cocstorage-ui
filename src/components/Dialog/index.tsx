@@ -11,7 +11,7 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { GenericComponentProps } from '../../types';
+import { CustomStyle, GenericComponentProps } from '../../types';
 import { StyledDialog, Wrapper } from './Dialog.styles';
 
 export interface DialogProps
@@ -22,6 +22,7 @@ export interface DialogProps
   fullScreen?: boolean;
   enableSwipeableClose?: boolean;
   onClose: () => void;
+  wrapperCustomStyle?: CustomStyle;
 }
 
 const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(function Dialog(
@@ -33,6 +34,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
     fullScreen,
     enableSwipeableClose = false,
     onClose,
+    wrapperCustomStyle,
     customStyle,
     ...props
   },
@@ -208,6 +210,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         fullScreen={fullScreen}
         onClick={onClose}
         role="dialog"
+        css={wrapperCustomStyle}
       >
         <StyledDialog
           ref={dialogRef}

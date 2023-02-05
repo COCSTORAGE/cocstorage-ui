@@ -11,7 +11,7 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { GenericComponentProps } from '../../types';
+import { CustomStyle, GenericComponentProps } from '../../types';
 import { Content, Rectangle, StyledBottomSheet, SwipeZone, Wrapper } from './BottomSheet.styles';
 
 export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
@@ -20,6 +20,7 @@ export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<H
   disableHeaderSwipeableClose?: boolean;
   disableContentSwipeableClose?: boolean;
   onClose: () => void;
+  wrapperCustomStyle?: CustomStyle;
 }
 
 const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProps>>(
@@ -31,6 +32,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       disableHeaderSwipeableClose = false,
       disableContentSwipeableClose = false,
       onClose,
+      wrapperCustomStyle,
       customStyle,
       ...props
     },
@@ -240,6 +242,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           onClick={onClose}
           onMouseMove={handleMouseMove}
           onMouseUp={handleEndSwipeable}
+          css={wrapperCustomStyle}
         >
           <StyledBottomSheet
             ref={sheetRef}

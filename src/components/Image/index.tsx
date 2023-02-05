@@ -21,7 +21,7 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
   alt: string;
   width?: CSSValue;
   height?: CSSValue;
-  ratio?: '1:1' | '4:3' | '16:9';
+  ratio?: `${number}:${number}`;
   round?: CSSValue;
   disableResponsive?: boolean;
   disableBackgroundColor?: boolean;
@@ -119,7 +119,7 @@ function Image({
     <RatioImageBox dataWidth={width} dataHeight={height} round={round} {...props} css={customStyle}>
       <RatioImageWrapper ratio={ratio} disableBackgroundColor={disableBackgroundColor}>
         <RatioImageInner>
-          {src && loaded && !loadFailed && <RatioImg src={src} />}
+          {src && loaded && !loadFailed && <RatioImg src={src} alt={alt} />}
           {src && !loaded && !loadFailed && (
             <SkeletonWrapper isAspectRatio>
               <Skeleton width="100%" height="100%" disableAspectRatio />

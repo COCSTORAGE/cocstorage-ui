@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactElement, forwardRef, useEffect, useRef, useState } from 'react';
 
-import { GenericComponentProps, Variant } from '../../types';
+import { CustomStyle, GenericComponentProps, Variant } from '../../types';
 
 import { StyledTooltip, Wrapper } from './Tooltip.styles';
 
@@ -10,11 +10,13 @@ export interface TooltipProps extends GenericComponentProps<HTMLAttributes<HTMLD
   placement?: 'top' | 'left' | 'right' | 'bottom';
   transitionDuration?: number;
   content: ReactElement | string;
+  fillWrapper?: boolean;
   centered?: boolean;
   left?: number;
   triangleLeft?: number;
   onClose: () => void;
   disableOnClose?: boolean;
+  wrapperCustomStyle?: CustomStyle;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
@@ -25,11 +27,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
     placement = 'bottom',
     transitionDuration = 225,
     content,
+    fillWrapper,
     centered = true,
     left = 0,
     triangleLeft = 10,
     onClose,
     disableOnClose,
+    wrapperCustomStyle,
     customStyle,
     ...props
   },
@@ -72,7 +76,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
 
   return (
     <div ref={ref}>
-      <Wrapper ref={wrapperRef}>
+      <Wrapper ref={wrapperRef} fillWrapper={fillWrapper} css={wrapperCustomStyle}>
         {children}
         <StyledTooltip
           ref={tooltipRef}
