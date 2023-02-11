@@ -45,7 +45,7 @@ export const StyledBottomSheet = styled.div<
       palette: { background }
     }
   }) => background.bg};
-  border-radius: 10px 10px 0 0;
+  border-radius: 16px 16px 0 0;
   transition: transform ${({ transitionDuration }) => transitionDuration}ms;
   transform: translateY(100%);
   z-index: 1002;
