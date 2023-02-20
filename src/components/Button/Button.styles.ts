@@ -126,35 +126,51 @@ export const StyledButton = styled(DefaultButton)<
     switch (size) {
       case 'big':
         return {
-          padding: '18px 24px',
+          padding: 12,
           borderRadius: 12,
           fontSize: p1.size,
           fontWeight: p1.weight.medium,
-          letterSpacing: p1.letterSpacing
+          letterSpacing: p1.letterSpacing,
+          '& svg': {
+            width: 20,
+            height: 20
+          }
         };
       case 'small':
         return {
-          padding: '10px 15px',
+          padding: 8,
           borderRadius: 8,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
-          letterSpacing: s1.letterSpacing
+          letterSpacing: s1.letterSpacing,
+          '& svg': {
+            width: 16,
+            height: 16
+          }
         };
       case 'pico':
         return {
-          padding: '5px 10px',
+          padding: 6,
           borderRadius: 6,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
-          letterSpacing: s1.letterSpacing
+          letterSpacing: s1.letterSpacing,
+          '& svg': {
+            width: 16,
+            height: 16
+          }
         };
       default:
         return {
-          padding: '13px 21px',
+          padding: 10,
           borderRadius: 10,
           fontSize: p2.size,
           fontWeight: p2.weight.medium,
-          letterSpacing: p2.letterSpacing
+          letterSpacing: p2.letterSpacing,
+          '& svg': {
+            width: 18,
+            height: 18
+          }
         };
     }
   }}
