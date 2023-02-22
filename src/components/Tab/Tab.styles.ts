@@ -7,8 +7,8 @@ const DefaultTab = styled.button`
   flex-direction: column;
   background: none;
   border: none;
-  padding-top: 11px;
-  gap: 7px;
+  padding: 10px 10px 0;
+  gap: 10px;
   text-align: center;
   ${({
     theme: {
@@ -45,9 +45,8 @@ export const StyledTab = styled(DefaultTab)`
 
 export const SelectedBar = styled.div`
   visibility: hidden;
-  width: 14px;
+  width: 100%;
   height: 3px;
-  border-radius: 3px 3px 0 0;
   background-color: ${({
     theme: {
       palette: { primary }

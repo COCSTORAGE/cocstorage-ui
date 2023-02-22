@@ -16,5 +16,5 @@ export const StyledTabs = styled.div<Pick<TabsProps, 'centered'>>`
 export const TabsInner = styled.div`
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 `;
