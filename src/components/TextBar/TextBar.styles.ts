@@ -5,7 +5,7 @@ import { Size } from '../../types';
 import { TextBarProps } from '.';
 
 export const StyledTextBar = styled.div<
-  Pick<TextBarProps, 'fullWidth' | 'size'> & {
+  Pick<TextBarProps, 'fullWidth' | 'variant' | 'size'> & {
     isFocused?: boolean;
     hasStartIcon?: boolean;
   }
@@ -14,12 +14,18 @@ export const StyledTextBar = styled.div<
   width: fit-content;
   display: flex;
   align-items: center;
+  gap: 4px;
+  border-radius: 8px;
 
-  background-color: ${({
+  ${({
     theme: {
-      palette: { background }
-    }
-  }) => background.bg};
+      palette: { background, box }
+    },
+    variant
+  }): CSSObject => ({
+    backgroundColor: variant === 'outline' ? background.bg : box.filled.normal
+  })};
+
   border: 1px solid
     ${({
       theme: {
@@ -27,29 +33,24 @@ export const StyledTextBar = styled.div<
       }
     }) => box.filled.normal};
 
-  border-radius: 8px;
-
   ${({
     theme: {
-      mode,
-      palette: { primary, text }
+      palette: { primary }
     },
+    variant,
     isFocused
   }): CSSObject => {
-    let cssObject: CSSObject;
+    let cssObject: CSSObject = {};
+
+    if (variant === 'fill') {
+      cssObject = {
+        borderColor: 'transparent'
+      };
+    }
 
     if (isFocused) {
       cssObject = {
-        borderColor: primary.main,
-        '& svg': {
-          color: primary.main
-        }
-      };
-    } else {
-      cssObject = {
-        '& svg': {
-          color: text[mode].text1
-        }
+        borderColor: primary.main
       };
     }
 
@@ -60,15 +61,27 @@ export const StyledTextBar = styled.div<
     switch (size) {
       case 'small':
         return {
-          height: 36
+          height: 32,
+          '& svg': {
+            width: 16,
+            height: 16
+          }
         };
       case 'big':
         return {
-          height: 48
+          height: 44,
+          '& svg': {
+            width: 20,
+            height: 20
+          }
         };
       default:
         return {
-          height: 42
+          height: 38,
+          '& svg': {
+            width: 18,
+            height: 18
+          }
         };
     }
   }};
@@ -85,21 +98,13 @@ const DefaultInput = styled.input`
   outline: 0;
   border: none;
   border-radius: 8px;
-  ${({
-    theme: {
-      typography: { p2 }
-    }
-  }): CSSObject => ({
-    fontSize: p2.size,
-    fontWeight: p2.weight.regular,
-    letterSpacing: p2.letterSpacing
-  })}
 `;
 
 export const Input = styled(DefaultInput)<
   Pick<TextBarProps, 'fullWidth'> & {
-    textBarSize?: Exclude<Size, 'pico'>;
+    textBarSize: Exclude<Size, 'pico'>;
     hasStartIcon?: boolean;
+    hasEndIcon?: boolean;
   }
 >`
   height: 100%;
@@ -117,23 +122,91 @@ export const Input = styled(DefaultInput)<
         mode,
         palette: { text }
       }
-    }) => text[mode].text1};
+    }) => text[mode].text2};
   }
 
-  ${({ textBarSize, hasStartIcon }): CSSObject => {
-    if (textBarSize === 'small' && !hasStartIcon) {
-      return {
-        padding: '0 9px'
-      };
+  ${({ textBarSize, hasStartIcon, hasEndIcon }): CSSObject => {
+    if (!hasStartIcon && !hasEndIcon) {
+      if (textBarSize === 'small') {
+        return {
+          padding: '0 8px'
+        };
+      }
+
+      if (textBarSize === 'medium') {
+        return {
+          padding: '0 10px'
+        };
+      }
+
+      if (textBarSize === 'big') {
+        return {
+          padding: '0 12px'
+        };
+      }
+    } else if (hasStartIcon) {
+      if (textBarSize === 'small') {
+        return {
+          paddingRight: 8
+        };
+      }
+
+      if (textBarSize === 'medium') {
+        return {
+          paddingRight: 10
+        };
+      }
+
+      if (textBarSize === 'big') {
+        return {
+          paddingRight: 12
+        };
+      }
+    } else if (hasEndIcon) {
+      if (textBarSize === 'small') {
+        return {
+          paddingLeft: 8
+        };
+      }
+
+      if (textBarSize === 'medium') {
+        return {
+          paddingLeft: 10
+        };
+      }
+
+      if (textBarSize === 'big') {
+        return {
+          paddingLeft: 12
+        };
+      }
     }
 
-    if (!hasStartIcon) {
-      return {
-        padding: '0 12px'
-      };
-    }
     return {};
   }};
+
+  ${({
+    theme: {
+      typography: { p2, s1 }
+    },
+    textBarSize
+  }): CSSObject => {
+    switch (textBarSize) {
+      case 'small':
+        return {
+          fontSize: s1.size,
+          fontWeight: s1.weight.regular,
+          letterSpacing: s1.letterSpacing
+        };
+
+      default:
+        return {
+          fontSize: p2.size,
+          fontWeight: p2.weight.regular,
+          letterSpacing: p2.letterSpacing
+        };
+    }
+  }}
 
   ${({ fullWidth, hasStartIcon }): CSSObject =>
     fullWidth || hasStartIcon
@@ -172,7 +245,7 @@ export const Label = styled.label<
       mode,
       palette: { text }
     }
-  }) => text[mode].text1};
+  }) => text[mode].text2};
 
   ${({
     theme: {
@@ -183,11 +256,13 @@ export const Label = styled.label<
     size
   }): CSSObject => {
     let cssObject: CSSObject;
-    const translateX = size === 'small' ? '7px' : '9px';
+    let translateX = size === 'small' ? '3px' : '7px';
+    let translateY = size === 'small' ? '-57%' : '-48%';
 
-    let translateY = size === 'small' ? '-55%' : '-45%';
-
-    if (size === 'big') translateY = '-40%';
+    if (size === 'big') {
+      translateX = '9px';
+      translateY = '-41%';
+    }
 
     if (isFocused || hasValue) {
       translateY = size === 'small' ? '-140%' : '-135%';
@@ -220,12 +295,21 @@ export const StartIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
   height: 100%;
 
   ${({ size }): CSSObject => {
-    const paddingL = size === 'small' ? '7px' : '9px';
-
-    return {
-      padding: `0 4px 0 ${paddingL}`
-    };
-  }}};
+    switch (size) {
+      case 'small':
+        return {
+          paddingLeft: 8
+        };
+      case 'big':
+        return {
+          paddingLeft: 12
+        };
+      default:
+        return {
+          paddingLeft: 10
+        };
+    }
+  }};
 `;
 
 export const EndIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
@@ -234,10 +318,19 @@ export const EndIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
   height: 100%;
 
   ${({ size }): CSSObject => {
-    const paddingR = size === 'small' ? '7px' : '9px';
-
-    return {
-      padding: `0 ${paddingR} 0 4px`
-    };
-  }}};
+    switch (size) {
+      case 'small':
+        return {
+          paddingRight: 8
+        };
+      case 'big':
+        return {
+          paddingRight: 12
+        };
+      default:
+        return {
+          paddingRight: 10
+        };
+    }
+  }};
 `;

@@ -6,6 +6,7 @@ import type * as SvgIcons from '../assets/icons';
 import type { CSSValue } from './css';
 
 export type Variant = 'text' | 'accent' | 'semiAccent' | 'transparent';
+export type TextBarVariant = 'outline' | 'fill';
 export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'p1' | 'p2' | 's1' | 's2';
 export type TypographyComponent = Extract<
   ElementType,
