@@ -95,7 +95,7 @@ export const light: Theme = {
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '32px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
@@ -109,7 +109,7 @@ export const light: Theme = {
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '30px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
@@ -123,35 +123,35 @@ export const light: Theme = {
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '24px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
     },
     h4: {
       component: 'h4',
-      size: '16px',
+      size: '15px',
       weight: {
         bold: 700,
         medium: 500,
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '20px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
     },
     p1: {
       component: 'div',
-      size: '16px',
+      size: '15px',
       weight: {
         bold: 700,
         medium: 500,
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '20px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
@@ -165,7 +165,7 @@ export const light: Theme = {
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '18px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
@@ -179,21 +179,21 @@ export const light: Theme = {
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '16px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
     },
     s2: {
       component: 'span',
-      size: '10px',
+      size: '10.5px',
       weight: {
         bold: 700,
         medium: 500,
         regular: 400
       },
       lineHeight: {
-        default: 1.25,
+        default: '14px',
         main: 1.75
       },
       letterSpacing: '-0.04em'
