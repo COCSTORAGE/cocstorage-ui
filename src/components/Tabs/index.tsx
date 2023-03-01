@@ -17,6 +17,7 @@ export interface TabsProps
   centered?: boolean;
   onChange: (value: number | string) => void;
   value: number | string;
+  fullWidth?: boolean;
   hideLine?: boolean;
 }
 
