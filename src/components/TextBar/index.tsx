@@ -43,6 +43,9 @@ const TextBar = forwardRef<HTMLInputElement, TextBarProps>(function TextBar(
       fullWidth={fullWidth}
       isFocused={isFocused}
       size={size}
+      textBarSize={size}
+      hasStartIcon={!!startIcon}
+      hasEndIcon={!!endIcon}
     >
       {startIcon && <StartIconWrapper size={size}>{startIcon}</StartIconWrapper>}
       <Input

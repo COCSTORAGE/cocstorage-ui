@@ -75,6 +75,14 @@ export const StyledTextBar = styled.div<
             height: 20
           }
         };
+      case 'xBig':
+        return {
+          height: 52,
+          '& svg': {
+            width: 20,
+            height: 20
+          }
+        };
       default:
         return {
           height: 38,
@@ -144,6 +152,11 @@ export const Input = styled(DefaultInput)<
           padding: '0 12px'
         };
       }
+      if (textBarSize === 'xBig') {
+        return {
+          padding: '0 16px'
+        };
+      }
     } else if (hasStartIcon) {
       if (textBarSize === 'small') {
         return {
@@ -160,6 +173,11 @@ export const Input = styled(DefaultInput)<
       if (textBarSize === 'big') {
         return {
           paddingRight: 12
+        };
+      }
+      if (textBarSize === 'xBig') {
+        return {
+          paddingRight: 16
         };
       }
     } else if (hasEndIcon) {
@@ -180,6 +198,11 @@ export const Input = styled(DefaultInput)<
           paddingLeft: 12
         };
       }
+      if (textBarSize === 'xBig') {
+        return {
+          paddingLeft: 16
+        };
+      }
     }
 
     return {};
@@ -187,7 +210,7 @@ export const Input = styled(DefaultInput)<
 
   ${({
     theme: {
-      typography: { p2, s1 }
+      typography: { p1, p2, s1 }
     },
     textBarSize
   }): CSSObject => {
@@ -198,6 +221,22 @@ export const Input = styled(DefaultInput)<
           fontWeight: s1.weight.regular,
           letterSpacing: s1.letterSpacing,
           lineHeight: s1.lineHeight.default
+        };
+
+      case 'big':
+        return {
+          fontSize: p1.size,
+          fontWeight: p1.weight.regular,
+          letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default
+        };
+
+      case 'xBig':
+        return {
+          fontSize: p1.size,
+          fontWeight: p1.weight.regular,
+          letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default
         };
 
       default:
@@ -242,6 +281,47 @@ export const Label = styled.label<
 
   pointer-events: none;
 
+  ${({
+    theme: {
+      typography: { p1, p2, s1 }
+    },
+    size
+  }): CSSObject => {
+    switch (size) {
+      case 'small':
+        return {
+          fontSize: s1.size,
+          fontWeight: s1.weight.regular,
+          letterSpacing: s1.letterSpacing,
+          lineHeight: s1.lineHeight.default
+        };
+
+      case 'big':
+        return {
+          fontSize: p1.size,
+          fontWeight: p1.weight.regular,
+          letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default
+        };
+
+      case 'xBig':
+        return {
+          fontSize: p1.size,
+          fontWeight: p1.weight.regular,
+          letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default
+        };
+
+      default:
+        return {
+          fontSize: p2.size,
+          fontWeight: p2.weight.regular,
+          letterSpacing: p2.letterSpacing,
+          lineHeight: p2.lineHeight.default
+        };
+    }
+  }}
+
   color: ${({
     theme: {
       mode,
@@ -259,17 +339,23 @@ export const Label = styled.label<
   }): CSSObject => {
     let cssObject: CSSObject;
     let translateX = size === 'small' ? '3px' : '7px';
-    let translateY = size === 'small' ? '-57%' : '-48%';
+    let translateY = size === 'small' ? '-55%' : '-48%';
 
     if (size === 'big') {
       translateX = '9px';
+      translateY = '-50%';
+    }
+
+    if (size === 'xBig') {
+      translateX = '13px';
       translateY = '-41%';
     }
 
     if (isFocused || hasValue) {
       translateY = size === 'small' ? '-140%' : '-135%';
 
-      if (size === 'big') translateY = '-130%';
+      if (size === 'big') translateY = '-135%';
+      if (size === 'xBig') translateY = '-130%';
 
       cssObject = {
         transform: `translate(${translateX}, ${translateY}) scale(0.75)`
@@ -306,6 +392,10 @@ export const StartIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
         return {
           paddingLeft: 12
         };
+      case 'xBig':
+        return {
+          paddingLeft: 16
+        };
       default:
         return {
           paddingLeft: 10
@@ -328,6 +418,10 @@ export const EndIconWrapper = styled.div<Pick<TextBarProps, 'size'>>`
       case 'big':
         return {
           paddingRight: 12
+        };
+      case 'xBig':
+        return {
+          paddingRight: 16
         };
       default:
         return {
