@@ -95,14 +95,16 @@ export const StyledTooltip = styled.div<
         break;
       case 'left':
         cssObject = {
-          top: '50%',
-          transform: `translate(-${clientWidth + 12}px, -50%)`
+          transform: `translate(-${clientWidth + 12}px, -${
+            wrapperClientHeight - Math.floor(clientHeight / 4)
+          }px)`
         };
         break;
       case 'right':
         cssObject = {
-          top: '50%',
-          transform: `translate(${wrapperClientWidth + 12}px, -50%)`
+          transform: `translate(${wrapperClientWidth + 12}px, -${
+            wrapperClientHeight - Math.floor(clientHeight / 4)
+          }px)`
         };
         break;
       default:
