@@ -124,6 +124,18 @@ export const StyledButton = styled(DefaultButton)<
     size
   }): CSSObject => {
     switch (size) {
+      case 'xBig':
+        return {
+          padding: 16,
+          fontSize: p1.size,
+          fontWeight: p1.weight.medium,
+          letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default,
+          '& svg': {
+            width: 20,
+            height: 20
+          }
+        };
       case 'big':
         return {
           padding: 12,

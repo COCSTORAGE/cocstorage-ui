@@ -22,7 +22,7 @@ export type TypographyLineHeight = {
   main: CSSValue;
 };
 export type BrandColor = 'primary';
-export type Size = 'big' | 'medium' | 'small' | 'pico';
+export type Size = 'xBig' | 'big' | 'medium' | 'small' | 'pico';
 export type Severity = 'normal' | 'info' | 'success' | 'warning' | 'error';
 
 export type CustomStyle = Interpolation<EmotionTheme>;
