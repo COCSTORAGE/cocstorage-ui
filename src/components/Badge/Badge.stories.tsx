@@ -30,5 +30,5 @@ Default.argTypes = {
 export const WithStartIcon = Template.bind({});
 WithStartIcon.args = {
   severity: 'info',
-  startIcon: <Icon name="ArrowDropUpSpecify_12_12" />
+  icon: <Icon name="ArrowDropUpFilled" />
 };

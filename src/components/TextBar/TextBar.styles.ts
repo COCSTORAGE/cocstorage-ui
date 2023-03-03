@@ -196,14 +196,16 @@ export const Input = styled(DefaultInput)<
         return {
           fontSize: s1.size,
           fontWeight: s1.weight.regular,
-          letterSpacing: s1.letterSpacing
+          letterSpacing: s1.letterSpacing,
+          lineHeight: s1.lineHeight.default
         };
 
       default:
         return {
           fontSize: p2.size,
           fontWeight: p2.weight.regular,
-          letterSpacing: p2.letterSpacing
+          letterSpacing: p2.letterSpacing,
+          lineHeight: p2.lineHeight.default
         };
     }
   }}

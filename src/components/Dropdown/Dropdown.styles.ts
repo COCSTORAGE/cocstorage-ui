@@ -17,7 +17,8 @@ const DefaultDropdown = styled.button`
   }): CSSObject => ({
     fontSize: p2.size,
     fontWeight: p2.weight.medium,
-    letterSpacing: p2.letterSpacing
+    letterSpacing: p2.letterSpacing,
+    lineHeight: p2.lineHeight.default
   })}
 `;
 

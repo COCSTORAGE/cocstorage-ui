@@ -12,6 +12,7 @@ const DefaultButton = styled.button`
   justify-content: center;
   text-align: center;
   border: none;
+  border-radius: 8px;
   background: none;
   cursor: pointer;
 `;
@@ -75,7 +76,6 @@ export const StyledButton = styled(DefaultButton)<
         return {
           padding: '5px 6px !important',
           backgroundColor: 'transparent',
-          borderRadius: 6,
           color: text[mode].main,
           '& svg': {
             color: text[mode].main
@@ -127,10 +127,10 @@ export const StyledButton = styled(DefaultButton)<
       case 'big':
         return {
           padding: 12,
-          borderRadius: 12,
           fontSize: p1.size,
           fontWeight: p1.weight.medium,
           letterSpacing: p1.letterSpacing,
+          lineHeight: p1.lineHeight.default,
           '& svg': {
             width: 20,
             height: 20
@@ -139,10 +139,10 @@ export const StyledButton = styled(DefaultButton)<
       case 'small':
         return {
           padding: 8,
-          borderRadius: 8,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
           letterSpacing: s1.letterSpacing,
+          lineHeight: s1.lineHeight.default,
           '& svg': {
             width: 16,
             height: 16
@@ -151,10 +151,10 @@ export const StyledButton = styled(DefaultButton)<
       case 'pico':
         return {
           padding: 6,
-          borderRadius: 6,
           fontSize: s1.size,
           fontWeight: s1.weight.medium,
           letterSpacing: s1.letterSpacing,
+          lineHeight: s1.lineHeight.default,
           '& svg': {
             width: 16,
             height: 16
@@ -163,10 +163,10 @@ export const StyledButton = styled(DefaultButton)<
       default:
         return {
           padding: 10,
-          borderRadius: 10,
           fontSize: p2.size,
           fontWeight: p2.weight.medium,
           letterSpacing: p2.letterSpacing,
+          lineHeight: p2.lineHeight.default,
           '& svg': {
             width: 18,
             height: 18

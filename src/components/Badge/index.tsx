@@ -3,19 +3,19 @@ import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'rea
 import { GenericComponentProps, Severity } from '../../types';
 import { StyledBadge } from './Badge.styles';
 
-export interface BadgeProps extends GenericComponentProps<HTMLAttributes<HTMLSpanElement>> {
+export interface BadgeProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   severity?: Exclude<Severity, 'normal'>;
-  startIcon?: ReactElement;
+  icon?: ReactElement;
   iconOnly?: boolean;
 }
 
-const Badge = forwardRef<HTMLSpanElement, PropsWithChildren<BadgeProps>>(function Badge(
-  { children, severity, startIcon, iconOnly = false, customStyle, ...props },
+const Badge = forwardRef<HTMLDivElement, PropsWithChildren<BadgeProps>>(function Badge(
+  { children, severity, icon, iconOnly = false, customStyle, ...props },
   ref
 ) {
   return (
-    <StyledBadge ref={ref} severity={severity} {...props} css={customStyle}>
-      {startIcon}
+    <StyledBadge ref={ref} severity={severity} hasIcon={!!icon} {...props} css={customStyle}>
+      {icon}
       {!iconOnly && children}
     </StyledBadge>
   );

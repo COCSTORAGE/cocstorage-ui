@@ -77,6 +77,7 @@ export const Message = styled.div`
   }): CSSObject => ({
     fontSize: p2.size,
     fontWeight: p2.weight.regular,
-    letterSpacing: p2.letterSpacing
+    letterSpacing: p2.letterSpacing,
+    lineHeight: p2.lineHeight.default
   })}
 `;

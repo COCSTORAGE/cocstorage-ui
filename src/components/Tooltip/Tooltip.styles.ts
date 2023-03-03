@@ -5,6 +5,7 @@ import { convertNumberToCSSValue } from '@utils';
 import { TooltipProps } from '.';
 
 export const Wrapper = styled.div<Pick<TooltipProps, 'fillWrapper'>>`
+  position: relative;
   width: max-content;
 
   ${({ fillWrapper }): CSSObject =>
@@ -42,7 +43,8 @@ export const StyledTooltip = styled.div<
   }): CSSObject => ({
     fontSize: s1.size,
     fontWeight: s1.weight.medium,
-    letterSpacing: s1.letterSpacing
+    letterSpacing: s1.letterSpacing,
+    lineHeight: s1.lineHeight.default
   })};
   
   ${({
@@ -94,16 +96,14 @@ export const StyledTooltip = styled.div<
         break;
       case 'left':
         cssObject = {
-          transform: `translate(-${clientWidth + 12}px, -${
-            wrapperClientHeight - Math.floor(clientHeight / 4)
-          }px)`
+          top: '50%',
+          transform: `translate(-${clientWidth + 12}px, -50%)`
         };
         break;
       case 'right':
         cssObject = {
-          transform: `translate(${wrapperClientWidth + 12}px, -${
-            wrapperClientHeight - Math.floor(clientHeight / 4)
-          }px)`
+          top: '50%',
+          transform: `translate(${wrapperClientWidth + 12}px, -50%)`
         };
         break;
       default:

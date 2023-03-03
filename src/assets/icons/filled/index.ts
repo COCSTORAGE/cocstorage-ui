@@ -6,3 +6,5 @@ export { default as ThumbsDownFilled } from './thumbs-down-filled.svg';
 export { default as ThumbsUpFilled } from './thumbs-up-filled.svg';
 export { default as UserFilled } from './user-filled.svg';
 export { default as WriteFilled } from './write-filled.svg';
+export { default as ArrowDropUpFilled } from './arrow-drop-up-filled.svg';
+export { default as ArrowDropDownFilled } from './arrow-drop-down-filled.svg';

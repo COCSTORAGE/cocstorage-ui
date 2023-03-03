@@ -17,7 +17,8 @@ export const StyledTypography = styled.h1<
   ${({ theme: { typography }, variant = 'p2', textFontWeight = 'regular' }): CSSObject => ({
     fontSize: typography[variant].size,
     fontWeight: typography[variant].weight[textFontWeight],
-    letterSpacing: typography[variant].letterSpacing
+    letterSpacing: typography[variant].letterSpacing,
+    lineHeight: typography[variant].lineHeight.default
   })};
 
   ${({ theme: { typography }, variant = 'p2', textLineHeight }): CSSObject =>
