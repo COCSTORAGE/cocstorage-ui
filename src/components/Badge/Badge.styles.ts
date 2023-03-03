@@ -4,6 +4,7 @@ import { BadgeProps } from '.';
 
 const DefaultBadge = styled.div<{
   hasIcon: boolean;
+  iconOnly: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -13,6 +14,13 @@ const DefaultBadge = styled.div<{
   padding: ${({ hasIcon }) => (hasIcon ? '1px 4px 1px 2px' : '1px 4px')};
   border-radius: 4px;
   white-space: nowrap;
+
+  ${({ iconOnly }): CSSObject =>
+    iconOnly
+      ? {
+          paddingRight: 2
+        }
+      : {}};
 
   ${({
     theme: {
