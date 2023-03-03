@@ -5,7 +5,6 @@ import { convertNumberToCSSValue } from '@utils';
 import { TooltipProps } from '.';
 
 export const Wrapper = styled.div<Pick<TooltipProps, 'fillWrapper'>>`
-  position: relative;
   width: max-content;
 
   ${({ fillWrapper }): CSSObject =>
