@@ -30,5 +30,5 @@ Default.argTypes = {
 export const WithStartIcon = Template.bind({});
 WithStartIcon.args = {
   variant: 'text',
-  startIcon: <Icon name="WriteOutlined" />
+  startIcon: <Icon name="CaretSemiRightOutlined" />
 };

@@ -3,7 +3,7 @@ import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps, IconName } from '../../types';
+import { CSSValue, GenericComponentProps } from '../../types';
 import { AvatarWrapper, SkeletonWrapper, StyledAvatar } from './Avatar.styles';
 
 export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
@@ -13,7 +13,6 @@ export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLDi
   height?: CSSValue;
   round?: CSSValue;
   fallback?: {
-    iconName: IconName;
     width?: CSSValue;
     height?: CSSValue;
   };
@@ -27,7 +26,6 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
     height = 'auto',
     round = '50%',
     fallback = {
-      iconName: 'ImageOutlined',
       width: 24,
       height: 24
     },
@@ -81,7 +79,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
         </SkeletonWrapper>
       )}
       {(!src || loadFailed) && fallback && (
-        <Icon name={fallback.iconName} width={fallback.width} height={fallback.height} />
+        <Icon name="UserFilled" width={fallback.width} height={fallback.height} />
       )}
     </AvatarWrapper>
   );

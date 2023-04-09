@@ -31,7 +31,6 @@ Fallback.args = {
   width: 50,
   height: 50,
   fallback: {
-    iconName: 'UserFilled',
     width: 24,
     height: 24
   }

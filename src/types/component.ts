@@ -2,7 +2,6 @@ import type { ElementType } from 'react';
 
 import type { Theme as EmotionTheme, Interpolation } from '@emotion/react';
 
-import type * as SvgIcons from '../assets/icons';
 import type { CSSValue } from './css';
 
 export type Variant = 'text' | 'accent' | 'semiAccent' | 'transparent';
@@ -30,5 +29,3 @@ export type CustomStyle = Interpolation<EmotionTheme>;
 export type GenericComponentProps<T> = T & {
   customStyle?: CustomStyle;
 };
-
-export type IconName = keyof typeof SvgIcons;

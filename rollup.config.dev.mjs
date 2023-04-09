@@ -6,16 +6,14 @@ import typescript from '@rollup/plugin-typescript';
 import svgr from '@svgr/rollup';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-import packageJson from './package.json';
-
 const outputs = [
   {
-    file: packageJson.main,
+    file: 'dist/index.js',
     format: 'cjs',
     sourcemap: true
   },
   {
-    file: packageJson.module,
+    file: 'dist/index.es.js',
     format: 'es',
     sourcemap: true
   }

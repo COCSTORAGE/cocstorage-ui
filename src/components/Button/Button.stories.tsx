@@ -37,7 +37,7 @@ WithStartIcon.args = {
   variant: 'text',
   size: 'medium',
   color: 'primary',
-  startIcon: <Icon name="SendFilled" />
+  startIcon: <Icon name="CaretSemiLeftOutlined" />
 };
 
 export const WithEndIcon = Template.bind({});
@@ -45,5 +45,5 @@ WithEndIcon.args = {
   variant: 'text',
   size: 'medium',
   color: 'primary',
-  endIcon: <Icon name="SendFilled" />
+  endIcon: <Icon name="CaretSemiRightOutlined" />
 };

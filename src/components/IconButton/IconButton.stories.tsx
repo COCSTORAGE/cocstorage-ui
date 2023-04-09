@@ -11,7 +11,7 @@ export default {
 const Template: ComponentStory<typeof IconButton> = function Template(args) {
   return (
     <IconButton {...args}>
-      <Icon name="CommunityFilled" color="primary" />
+      <Icon name="CaretSemiRightOutlined" color="primary" />
     </IconButton>
   );
 };

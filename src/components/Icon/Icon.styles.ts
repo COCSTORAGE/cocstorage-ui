@@ -2,11 +2,11 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { getBrandColorCode } from '@utils';
 
-import type { BellOutlined } from '../../assets/icons';
+import type { ImageOutlined } from '../../assets/icons';
 
 import { IconProps } from '.';
 
-export const StyledIcon = (icon: typeof BellOutlined) => styled(icon)<Pick<IconProps, 'color'>>`
+export const StyledIcon = (icon: typeof ImageOutlined) => styled(icon)<Pick<IconProps, 'color'>>`
   color: ${({
     theme: {
       mode,

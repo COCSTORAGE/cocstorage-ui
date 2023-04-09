@@ -28,7 +28,7 @@ Default.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   severity: 'normal',
-  icon: <Icon name="InfoOutlined" />
+  icon: <Icon name="CaretSemiLeftOutlined" />
 };
 
 export const WithAction = Template.bind({});

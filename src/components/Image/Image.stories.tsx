@@ -30,7 +30,6 @@ Fallback.args = {
   height: 150,
   disableAspectRatio: true,
   fallback: {
-    iconName: 'UserFilled',
     width: 24,
     height: 24
   }

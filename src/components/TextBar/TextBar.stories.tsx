@@ -41,12 +41,12 @@ export const WithStartIcon = Template.bind({});
 WithStartIcon.args = {
   size: 'medium',
   placeholder: 'TextBar',
-  startIcon: <Icon name="SearchOutlined" />
+  startIcon: <Icon name="CaretSemiLeftOutlined" />
 };
 
 export const WithEndIcon = Template.bind({});
 WithEndIcon.args = {
   size: 'medium',
   placeholder: 'TextBar',
-  endIcon: <Icon name="SearchOutlined" />
+  endIcon: <Icon name="CaretSemiRightOutlined" />
 };
