@@ -10,6 +10,7 @@ const outputs = [
   {
     file: 'dist/index.js',
     format: 'cjs',
+    interop: 'auto',
     sourcemap: true
   },
   {
