@@ -3,7 +3,7 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps } from '../../types';
+import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import {
   FallbackBox,
   FallbackWrapper,
@@ -27,6 +27,7 @@ export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDiv
   disableBackgroundColor?: boolean;
   disableAspectRatio?: boolean;
   fallback?: {
+    name?: IconName;
     width?: CSSValue;
     height?: CSSValue;
   };
@@ -43,6 +44,7 @@ function Image({
   disableBackgroundColor,
   disableAspectRatio,
   fallback = {
+    name: 'ImageOutlined',
     width: 24,
     height: 24
   },
@@ -77,7 +79,11 @@ function Image({
           disableResponsive={disableResponsive}
           disableBackgroundColor={disableBackgroundColor}
         >
-          <Icon name="ImageOutlined" width={fallback.width} height={fallback.height} />
+          <Icon
+            name={fallback.name || 'ImageOutlined'}
+            width={fallback.width}
+            height={fallback.height}
+          />
         </FallbackBox>
       );
     }
@@ -125,7 +131,11 @@ function Image({
           )}
           {(!src || loadFailed) && fallback && (
             <FallbackWrapper>
-              <Icon name="ImageOutlined" width={fallback.width} height={fallback.height} />
+              <Icon
+                name={fallback.name || 'ImageOutlined'}
+                width={fallback.width}
+                height={fallback.height}
+              />
             </FallbackWrapper>
           )}
         </RatioImageInner>
