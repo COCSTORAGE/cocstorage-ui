@@ -2,16 +2,16 @@ import { useRef, useState } from 'react';
 
 import Button from '@components/Button';
 import Tooltip from '@components/Tooltip';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Spotlight from '.';
 
 export default {
   title: 'Experiment/Spotlight',
   component: Spotlight
-} as ComponentMeta<typeof Spotlight>;
+} as Meta<typeof Spotlight>;
 
-const Template: ComponentStory<typeof Spotlight> = function Template(args) {
+const Template = function Template(args) {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 

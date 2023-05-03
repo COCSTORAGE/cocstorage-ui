@@ -1,5 +1,5 @@
 import Icon from '@components/Icon';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Tag from '.';
 
@@ -11,9 +11,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof Tag>;
+} as Meta<typeof Tag>;
 
-const Template: ComponentStory<typeof Tag> = function Template(args) {
+const Template = function Template(args) {
   return <Tag {...args}>Tag</Tag>;
 };
 

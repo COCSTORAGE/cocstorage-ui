@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Switch from '.';
 
 export default {
   title: 'Components/Switch',
   component: Switch
-} as ComponentMeta<typeof Switch>;
+} as Meta<typeof Switch>;
 
-const Template: ComponentStory<typeof Switch> = function Template(args) {
+const Template = function Template(args) {
   const [checked, setChecked] = useState<boolean | undefined>(false);
 
   const handleChange = () => setChecked(!checked);

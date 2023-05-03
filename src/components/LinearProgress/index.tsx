@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from 'react';
 
-import { GenericComponentProps } from '../../types';
 import { ProgressBar, StyledLinearProgress } from './LinearProgress.styles';
+import { GenericComponentProps } from '../../types';
 
 export interface LinearProgressProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   value?: number;

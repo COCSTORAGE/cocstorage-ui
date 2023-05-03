@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Radio from '.';
 
 export default {
   title: 'Components/Radio',
   component: Radio
-} as ComponentMeta<typeof Radio>;
+} as Meta<typeof Radio>;
 
-const Template: ComponentStory<typeof Radio> = function Template(args) {
+const Template = function Template(args) {
   const [checked, setChecked] = useState<boolean | undefined>(false);
 
   const handleChange = () => setChecked(true);

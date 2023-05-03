@@ -1,5 +1,5 @@
 import Icon from '@components/Icon';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Alert from '.';
 
@@ -14,9 +14,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof Alert>;
+} as Meta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = function Template(args) {
+const Template = function Template(args) {
   return <Alert {...args}>Alert</Alert>;
 };
 

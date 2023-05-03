@@ -1,13 +1,13 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Tab from '.';
 
 export default {
   title: 'Components/Tab',
   component: Tab
-} as ComponentMeta<typeof Tab>;
+} as Meta<typeof Tab>;
 
-const Template: ComponentStory<typeof Tab> = function Template(args) {
+const Template = function Template(args) {
   return <Tab {...args} />;
 };
 

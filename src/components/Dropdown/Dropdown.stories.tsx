@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Dropdown from '.';
 
 export default {
   title: 'Components/Dropdown',
   component: Dropdown
-} as ComponentMeta<typeof Dropdown>;
+} as Meta<typeof Dropdown>;
 
-const Template: ComponentStory<typeof Dropdown> = function Template(args) {
+const Template = function Template(args) {
   const [options, setOptions] = useState<
     Array<{
       name: string;

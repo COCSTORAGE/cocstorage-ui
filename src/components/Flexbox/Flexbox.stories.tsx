@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import useTheme from '@theme/provider/useTheme';
 
@@ -7,9 +7,9 @@ import Flexbox from '.';
 export default {
   title: 'Experiment/Flexbox',
   component: Flexbox
-} as ComponentMeta<typeof Flexbox>;
+} as Meta<typeof Flexbox>;
 
-const Template: ComponentStory<typeof Flexbox> = function Template(args) {
+const Template = function Template(args) {
   const {
     theme: {
       palette: { box }

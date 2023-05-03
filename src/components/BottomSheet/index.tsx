@@ -11,8 +11,8 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { CustomStyle, GenericComponentProps } from '../../types';
 import { Content, Rectangle, StyledBottomSheet, SwipeZone, Wrapper } from './BottomSheet.styles';
+import { CustomStyle, GenericComponentProps } from '../../types';
 
 export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;

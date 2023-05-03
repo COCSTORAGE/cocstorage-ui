@@ -1,5 +1,5 @@
 import Icon from '@components/Icon';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Button from '.';
 
@@ -14,9 +14,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = function Template(args) {
+const Template = function Template(args) {
   return <Button {...args}>Button</Button>;
 };
 

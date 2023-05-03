@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import BottomSheet from '.';
 
 export default {
   title: 'Components/BottomSheet',
   component: BottomSheet
-} as ComponentMeta<typeof BottomSheet>;
+} as Meta<typeof BottomSheet>;
 
-const Template: ComponentStory<typeof BottomSheet> = function Template(args) {
+const Template = function Template(args) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);

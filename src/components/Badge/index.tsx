@@ -1,7 +1,7 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, Severity } from '../../types';
 import { StyledBadge } from './Badge.styles';
+import { GenericComponentProps, Severity } from '../../types';
 
 export interface BadgeProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   severity?: Exclude<Severity, 'normal'>;

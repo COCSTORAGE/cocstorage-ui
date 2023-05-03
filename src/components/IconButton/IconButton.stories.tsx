@@ -1,14 +1,14 @@
 import Icon from '@components/Icon';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import IconButton from '.';
 
 export default {
   title: 'Components/IconButton',
   component: IconButton
-} as ComponentMeta<typeof IconButton>;
+} as Meta<typeof IconButton>;
 
-const Template: ComponentStory<typeof IconButton> = function Template(args) {
+const Template = function Template(args) {
   return (
     <IconButton {...args}>
       <Icon name="CaretSemiRightOutlined" color="primary" />

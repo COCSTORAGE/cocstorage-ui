@@ -3,7 +3,6 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import {
   FallbackBox,
   FallbackWrapper,
@@ -15,6 +14,7 @@ import {
   RatioImg,
   SkeletonWrapper
 } from './Image.styles';
+import { CSSValue, GenericComponentProps, IconName } from '../../types';
 
 export interface ImageProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;

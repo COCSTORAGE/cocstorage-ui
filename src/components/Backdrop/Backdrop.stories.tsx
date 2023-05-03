@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Backdrop from '.';
 
 export default {
   title: 'Experiment/Backdrop',
   component: Backdrop
-} as ComponentMeta<typeof Backdrop>;
+} as Meta<typeof Backdrop>;
 
-const Template: ComponentStory<typeof Backdrop> = function Template(args) {
+const Template = function Template(args) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);

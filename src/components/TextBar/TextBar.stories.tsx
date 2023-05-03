@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Icon from '../Icon';
 
@@ -14,9 +14,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof TextBar>;
+} as Meta<typeof TextBar>;
 
-const Template: ComponentStory<typeof TextBar> = function Template(args) {
+const Template = function Template(args) {
   const [value, setValue] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>

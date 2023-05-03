@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Tooltip from '.';
 
 export default {
   title: 'Experiment/Tooltip',
   component: Tooltip
-} as ComponentMeta<typeof Tooltip>;
+} as Meta<typeof Tooltip>;
 
-const Template: ComponentStory<typeof Tooltip> = function Template(args) {
+const Template = function Template(args) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);

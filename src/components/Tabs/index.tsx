@@ -9,8 +9,8 @@ import {
 
 import useTheme from '@theme/provider/useTheme';
 
-import { GenericComponentProps, ThemeMode } from '../../types';
 import { StyledTabs, TabsInner } from './Tabs.styles';
+import { GenericComponentProps, ThemeMode } from '../../types';
 
 export interface TabsProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'>> {

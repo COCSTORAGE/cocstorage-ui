@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Pagination from '.';
 
 export default {
   title: 'Components/Pagination',
   component: Pagination
-} as ComponentMeta<typeof Pagination>;
+} as Meta<typeof Pagination>;
 
-const Template: ComponentStory<typeof Pagination> = function Template(args) {
+const Template = function Template(args) {
   const [page, setPage] = useState(1);
 
   const handleChange = (newPage: number) => setPage(newPage);

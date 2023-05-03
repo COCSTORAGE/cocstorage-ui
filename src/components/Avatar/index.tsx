@@ -3,8 +3,8 @@ import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps, IconName } from '../../types';
 import { AvatarWrapper, SkeletonWrapper, StyledAvatar } from './Avatar.styles';
+import { CSSValue, GenericComponentProps, IconName } from '../../types';
 
 export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;

@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import useTheme from '@theme/provider/useTheme';
 
@@ -7,9 +7,9 @@ import Box from '.';
 export default {
   title: 'Components/Box',
   component: Box
-} as ComponentMeta<typeof Box>;
+} as Meta<typeof Box>;
 
-const Template: ComponentStory<typeof Box> = function Template(args) {
+const Template = function Template(args) {
   const {
     theme: {
       palette: { box }

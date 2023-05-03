@@ -1,7 +1,7 @@
 import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { GenericComponentProps } from '../../types';
 import { StyledFlexbox } from './Flexbox.styles';
+import { GenericComponentProps } from '../../types';
 
 export interface FlexboxProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   component?: ElementType;

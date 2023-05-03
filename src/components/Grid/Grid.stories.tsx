@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import useTheme from '@theme/provider/useTheme';
 
@@ -54,9 +54,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof Grid>;
+} as Meta<typeof Grid>;
 
-const Template: ComponentStory<typeof Grid> = function Template(args) {
+const Template = function Template(args) {
   const {
     theme: {
       palette: { box }

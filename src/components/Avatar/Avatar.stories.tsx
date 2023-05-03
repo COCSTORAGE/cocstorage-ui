@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Avatar from '.';
 
@@ -13,9 +13,9 @@ export default {
       control: 'number'
     }
   }
-} as ComponentMeta<typeof Avatar>;
+} as Meta<typeof Avatar>;
 
-const Template: ComponentStory<typeof Avatar> = function Template(args) {
+const Template = function Template(args) {
   return <Avatar {...args} />;
 };
 

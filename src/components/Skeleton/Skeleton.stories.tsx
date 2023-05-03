@@ -1,13 +1,13 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Skeleton from '.';
 
 export default {
   title: 'Components/Skeleton',
   component: Skeleton
-} as ComponentMeta<typeof Skeleton>;
+} as Meta<typeof Skeleton>;
 
-const Template: ComponentStory<typeof Skeleton> = function Template(args) {
+const Template = function Template(args) {
   return <Skeleton {...args} />;
 };
 

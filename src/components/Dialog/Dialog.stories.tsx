@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Dialog from '.';
 
 export default {
   title: 'Components/Dialog',
   component: Dialog
-} as ComponentMeta<typeof Dialog>;
+} as Meta<typeof Dialog>;
 
-const Template: ComponentStory<typeof Dialog> = function Template(args) {
+const Template = function Template(args) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);

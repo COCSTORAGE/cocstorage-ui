@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Checkbox from '.';
 
@@ -12,9 +12,9 @@ export default {
       control: 'boolean'
     }
   }
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
-const Template: ComponentStory<typeof Checkbox> = function Template(args) {
+const Template = function Template(args) {
   const [checked, setChecked] = useState<boolean | undefined>(false);
 
   const handleChange = () => setChecked(!checked);

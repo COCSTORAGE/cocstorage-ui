@@ -1,7 +1,7 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, Severity } from '../../types';
 import { Message, StyledAlert } from './Alert.styles';
+import { GenericComponentProps, Severity } from '../../types';
 
 export interface AlertProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   severity?: Severity;

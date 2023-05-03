@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Image from '.';
 
@@ -10,9 +10,9 @@ export default {
       control: false
     }
   }
-} as ComponentMeta<typeof Image>;
+} as Meta<typeof Image>;
 
-const Template: ComponentStory<typeof Image> = function Template(args) {
+const Template = function Template(args) {
   return <Image {...args} />;
 };
 

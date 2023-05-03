@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import Tab from '@components/Tab';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Tabs from '.';
 
 export default {
   title: 'Components/Tabs',
   component: Tabs
-} as ComponentMeta<typeof Tabs>;
+} as Meta<typeof Tabs>;
 
-const Template: ComponentStory<typeof Tabs> = function Template(args) {
+const Template = function Template(args) {
   const [value, setValue] = useState<string | number>('Tab1');
 
   const handleChange = (newValue: string | number) => setValue(newValue);

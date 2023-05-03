@@ -3,6 +3,7 @@ import * as path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import svgr from 'vite-plugin-svgr';
 
 import pkg from './package.json';
 
@@ -17,6 +18,7 @@ export default defineConfig(({ command }) => {
           fileName: (fileName) => (fileName === 'cjs' ? 'index.js' : 'index.es.js')
         }
       },
+      plugins: [svgr({ exportAsDefault: true })],
       resolve: {
         alias: [
           { find: '@', replacement: path.resolve(__dirname, 'src') },
@@ -66,7 +68,8 @@ export default defineConfig(({ command }) => {
           plugins: ['@emotion/babel-plugin']
         }
       }),
-      dts()
+      dts({ insertTypesEntry: true }),
+      svgr({ exportAsDefault: true })
     ],
     resolve: {
       alias: [

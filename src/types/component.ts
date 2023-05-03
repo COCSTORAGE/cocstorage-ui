@@ -2,9 +2,8 @@ import type { ElementType } from 'react';
 
 import type { Theme as EmotionTheme, Interpolation } from '@emotion/react';
 
-import * as SvgIcons from '../assets/icons';
-
 import type { CSSValue } from './css';
+import * as SvgIcons from '../assets/icons';
 
 export type Variant = 'text' | 'accent' | 'semiAccent' | 'transparent';
 export type TextBarVariant = 'outline' | 'fill';
