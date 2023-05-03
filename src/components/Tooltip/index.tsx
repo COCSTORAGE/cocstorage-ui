@@ -1,10 +1,10 @@
 import { HTMLAttributes, ReactElement, forwardRef, useEffect, useRef, useState } from 'react';
 
+import { StyledTooltip, Wrapper } from './Tooltip.styles';
 import { CustomStyle, GenericComponentProps, Variant } from '../../types';
 
-import { StyledTooltip, Wrapper } from './Tooltip.styles';
-
-export interface TooltipProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
+export interface TooltipProps
+  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'content'>> {
   variant?: Extract<Variant, 'accent' | 'semiAccent'>;
   open: boolean;
   placement?: 'top' | 'left' | 'right' | 'bottom';
@@ -45,18 +45,16 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
   const [clientWidth, setClientWidth] = useState(0);
   const [clientHeight, setClientHeight] = useState(0);
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (open) {
-      if (wrapperRef.current && tooltipRef.current) {
-        setWrapperClientWidth(wrapperRef.current.clientWidth);
-        setWrapperClientHeight(wrapperRef.current.clientHeight);
-        setClientWidth(tooltipRef.current.clientWidth);
-        setClientHeight(tooltipRef.current.clientHeight);
-        setTooltipOpen(true);
-      }
+      setWrapperClientWidth(wrapperRef.current?.clientWidth || 0);
+      setWrapperClientHeight(wrapperRef.current?.clientHeight || 0);
+      setClientWidth(tooltipRef.current?.clientWidth || 0);
+      setClientHeight(tooltipRef.current?.clientHeight || 0);
+      setTooltipOpen(true);
     } else {
       setTooltipOpen(false);
     }

@@ -1,16 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "jsx": "react-jsx",
-    "moduleResolution": "node",
-    "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "declarationDir": ".",
-    "skipLibCheck": true,
     "paths": {
       "@assets": ["./src/assets"],
       "@assets/*": ["./src/assets/*"],
@@ -21,12 +11,21 @@
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"]
     },
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "declarationDir": ".",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "jsxImportSource": "@emotion/react"
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",
-    "global.d.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",
