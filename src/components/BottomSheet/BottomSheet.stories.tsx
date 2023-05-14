@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
 
-import BottomSheet from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import BottomSheet, { BottomSheetProps } from '.';
+
+const meta: Meta<typeof BottomSheet> = {
   title: 'Components/BottomSheet',
   component: BottomSheet
-} as Meta<typeof BottomSheet>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof BottomSheet>;
+
+function BottomSheetWithHooks(args: BottomSheetProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -32,6 +36,8 @@ const Template = function Template(args) {
       </BottomSheet>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <BottomSheetWithHooks {...args} />
+};

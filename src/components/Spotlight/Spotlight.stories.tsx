@@ -1,17 +1,21 @@
-import { useRef, useState } from 'react';
+import { RefAttributes, useRef, useState } from 'react';
 
 import Button from '@components/Button';
 import Tooltip from '@components/Tooltip';
-import type { Meta } from '@storybook/react';
 
-import Spotlight from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import Spotlight, { SpotlightProps } from '.';
+
+const meta: Meta<typeof Spotlight> = {
   title: 'Experiment/Spotlight',
   component: Spotlight
-} as Meta<typeof Spotlight>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Spotlight>;
+
+function SpotlightWithHooks(args: SpotlightProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -36,6 +40,8 @@ const Template = function Template(args) {
       </Spotlight>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <SpotlightWithHooks {...args} />
+};

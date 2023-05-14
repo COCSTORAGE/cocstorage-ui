@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Dropdown from '.';
+import Dropdown, { DropdownProps } from '.';
 
-export default {
+const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
   component: Dropdown
-} as Meta<typeof Dropdown>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Dropdown>;
+
+function DropdownWithHooks(args: DropdownProps & RefAttributes<HTMLButtonElement>) {
   const [options, setOptions] = useState<
     Array<{
       name: string;
@@ -29,32 +32,21 @@ const Template = function Template(args) {
 
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
-    setOptions(args.options);
+    if (args.options) setOptions(args.options);
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.options]);
 
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
-    setValue(args.value);
+    if (args.value) setValue(args.value);
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.value]);
 
   const handleChange = (newValue: string | number) => setValue(newValue);
 
   return <Dropdown {...args} options={options} value={value} onChange={handleChange} />;
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  options: [
-    {
-      name: 'Option1',
-      value: 'Option1'
-    },
-    {
-      name: 'Option2',
-      value: 'Option2'
-    }
-  ],
-  value: 'Option1'
+export const Default: Story = {
+  render: (args) => <DropdownWithHooks {...args} />
 };

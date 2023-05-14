@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
 import Tab from '@components/Tab';
-import type { Meta } from '@storybook/react';
 
-import Tabs from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import Tabs, { TabsProps } from '.';
+
+const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs
-} as Meta<typeof Tabs>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Tabs>;
+
+function TabsWithHooks(args: TabsProps & RefAttributes<HTMLDivElement>) {
   const [value, setValue] = useState<string | number>('Tab1');
 
   const handleChange = (newValue: string | number) => setValue(newValue);
@@ -28,9 +32,8 @@ const Template = function Template(args) {
       <Tab text="Tab3" value="Tab3" />
     </Tabs>
   );
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  value: 'Tab1'
+export const Default: Story = {
+  render: (args) => <TabsWithHooks {...args} value="Tab1" />
 };

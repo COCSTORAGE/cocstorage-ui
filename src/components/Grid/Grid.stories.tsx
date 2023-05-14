@@ -1,74 +1,33 @@
-import type { Meta } from '@storybook/react';
+import { RefAttributes } from 'react';
 
+import { Meta, StoryObj } from '@storybook/react';
 import useTheme from '@theme/provider/useTheme';
 
-import Grid from '.';
+import Grid, { GridProps } from '.';
 
-export default {
-  title: 'Experiment/Grid',
-  component: Grid,
-  argTypes: {
-    container: {
-      control: false
-    },
-    item: {
-      control: false
-    },
-    columnGap: {
-      control: false
-    },
-    rowGap: {
-      control: false
-    },
-    auto: {
-      control: false
-    },
-    xs: {
-      control: false
-    },
-    sm: {
-      control: false
-    },
-    md: {
-      control: false
-    },
-    lg: {
-      control: false
-    },
-    xl: {
-      control: false
-    },
-    xsHidden: {
-      control: false
-    },
-    smHidden: {
-      control: false
-    },
-    mdHidden: {
-      control: false
-    },
-    lgHidden: {
-      control: false
-    },
-    xlHidden: {
-      control: false
-    }
-  }
-} as Meta<typeof Grid>;
+const meta: Meta<typeof Grid> = {
+  title: 'Components/Grid',
+  component: Grid
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Grid>;
+
+function GridWithHooks(args: GridProps & RefAttributes<HTMLDivElement>) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
+
   const style = {
     padding: 10,
     backgroundColor: box.filled.normal
   };
+
   return (
     <>
-      <Grid {...args}>
+      <Grid {...args} container>
         <Grid item xs={2} style={style}>
           Xs 2
         </Grid>
@@ -80,7 +39,7 @@ const Template = function Template(args) {
         </Grid>
       </Grid>
       <br />
-      <Grid {...args}>
+      <Grid {...args} container>
         <Grid item xs={2} style={style}>
           Xs 2
         </Grid>
@@ -90,9 +49,8 @@ const Template = function Template(args) {
       </Grid>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  container: true
+export const Default: Story = {
+  render: (args) => <GridWithHooks {...args} />
 };

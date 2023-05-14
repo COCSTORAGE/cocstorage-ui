@@ -2,8 +2,9 @@ import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useState } from 'rea
 
 import Icon from '@components/Icon';
 
+import { GenericComponentProps } from '@types';
+
 import { PaginationDot, PaginationItem, StyledPagination } from './Pagination.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface PaginationProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | 'onChange'>> {

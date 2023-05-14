@@ -1,9 +1,9 @@
 import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useRef, useState } from 'react';
 
+import { GenericComponentProps } from '@types';
 import { createPortal } from 'react-dom';
 
 import { Content, StyledBackdrop } from './Backdrop.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface BackdropProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;

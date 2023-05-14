@@ -1,29 +1,38 @@
-import type { Meta } from '@storybook/react';
+import { RefAttributes } from 'react';
 
+import { Meta, StoryObj } from '@storybook/react';
 import useTheme from '@theme/provider/useTheme';
 
-import Box from '.';
+import Box, { BoxProps } from '.';
 
-export default {
+const meta: Meta<typeof Box> = {
   title: 'Components/Box',
   component: Box
-} as Meta<typeof Box>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Box>;
+
+function BoxWithHooks(args: BoxProps & RefAttributes<HTMLDivElement>) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
-  const style = {
-    padding: 10,
-    backgroundColor: box.filled.normal
-  };
+
   return (
-    <Box {...args} style={style}>
+    <Box
+      {...args}
+      customStyle={{
+        padding: 10,
+        backgroundColor: box.filled.normal
+      }}
+    >
       Box
     </Box>
   );
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <BoxWithHooks {...args} />
+};

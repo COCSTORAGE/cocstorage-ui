@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
 
-import Dialog from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import Dialog, { DialogProps } from '.';
+
+const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog
-} as Meta<typeof Dialog>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Dialog>;
+
+function DialogWithHooks(args: DialogProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -32,6 +36,8 @@ const Template = function Template(args) {
       </Dialog>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <DialogWithHooks {...args} />
+};

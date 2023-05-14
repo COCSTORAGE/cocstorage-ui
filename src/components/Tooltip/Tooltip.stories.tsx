@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
 
-import Tooltip from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import Tooltip, { TooltipProps } from '.';
+
+const meta: Meta<typeof Tooltip> = {
   title: 'Experiment/Tooltip',
   component: Tooltip
-} as Meta<typeof Tooltip>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Tooltip>;
+
+function TooltipWithHooks(args: TooltipProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -27,10 +31,8 @@ const Template = function Template(args) {
       <Button onClick={handleClick}>Tooltip Open</Button>
     </Tooltip>
   );
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  variant: 'accent',
-  placement: 'bottom'
+export const Default: Story = {
+  render: (args) => <TooltipWithHooks {...args} />
 };

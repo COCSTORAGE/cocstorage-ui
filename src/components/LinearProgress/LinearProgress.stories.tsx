@@ -1,17 +1,15 @@
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import LinearProgress from '.';
 
-export default {
+const meta: Meta<typeof LinearProgress> = {
   title: 'Components/LinearProgress',
   component: LinearProgress
-} as Meta<typeof LinearProgress>;
-
-const Template = function Template(args) {
-  return <LinearProgress {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  value: 25
+export default meta;
+type Story = StoryObj<typeof LinearProgress>;
+
+export const Default: Story = {
+  render: (args) => <LinearProgress {...args} />
 };

@@ -1,24 +1,30 @@
-import type { Meta } from '@storybook/react';
+import { RefAttributes } from 'react';
 
+import { Meta, StoryObj } from '@storybook/react';
 import useTheme from '@theme/provider/useTheme';
 
-import Flexbox from '.';
+import Flexbox, { FlexboxProps } from '.';
 
-export default {
-  title: 'Experiment/Flexbox',
+const meta: Meta<typeof Flexbox> = {
+  title: 'Components/Flexbox',
   component: Flexbox
-} as Meta<typeof Flexbox>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Flexbox>;
+
+function FlexboxWithHooks(args: FlexboxProps & RefAttributes<HTMLDivElement>) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
+
   const style = {
     padding: 10,
     backgroundColor: box.filled.normal
   };
+
   return (
     <Flexbox {...args}>
       <div style={style}>Item1</div>
@@ -28,9 +34,8 @@ const Template = function Template(args) {
       <div style={style}>Item5</div>
     </Flexbox>
   );
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  direction: 'horizontal'
+export const Default: Story = {
+  render: (args) => <FlexboxWithHooks {...args} />
 };

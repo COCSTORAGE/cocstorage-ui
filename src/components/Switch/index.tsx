@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, MouseEvent, forwardRef } from 'react';
 
+import { GenericComponentProps } from '@types';
+
 import { Circle, StyledSwitch } from './Switch.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface SwitchProps
   extends GenericComponentProps<

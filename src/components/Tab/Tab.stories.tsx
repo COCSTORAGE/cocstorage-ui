@@ -1,19 +1,15 @@
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Tab from '.';
 
-export default {
+const meta: Meta<typeof Tab> = {
   title: 'Components/Tab',
   component: Tab
-} as Meta<typeof Tab>;
-
-const Template = function Template(args) {
-  return <Tab {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  text: 'Tab',
-  value: 'Tab',
-  className: 'selected'
+export default meta;
+type Story = StoryObj<typeof Tab>;
+
+export const Default: Story = {
+  render: (args) => <Tab {...args} text="Tab" value="Tab" className="selected" />
 };

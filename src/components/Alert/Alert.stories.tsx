@@ -1,39 +1,33 @@
 import Icon from '@components/Icon';
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Alert from '.';
 
-export default {
+const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
-  component: Alert,
-  argTypes: {
-    icon: {
-      control: false
-    },
-    action: {
-      control: false
-    }
-  }
-} as Meta<typeof Alert>;
-
-const Template = function Template(args) {
-  return <Alert {...args}>Alert</Alert>;
+  component: Alert
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  severity: 'normal'
+export default meta;
+type Story = StoryObj<typeof Alert>;
+
+export const Default: Story = {
+  render: (args) => <Alert {...args}>Alert</Alert>
 };
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  severity: 'normal',
-  icon: <Icon name="CaretSemiLeftOutlined" />
+export const WithIcon: Story = {
+  render: (args) => (
+    <Alert {...args} icon={<Icon name="CaretSemiLeftOutlined" />}>
+      Alert
+    </Alert>
+  )
 };
 
-export const WithAction = Template.bind({});
-WithAction.args = {
-  severity: 'normal',
-  // eslint-disable-next-line no-alert
-  action: <Icon name="CaretSemiRightOutlined" onClick={() => alert('action')} />
+export const WithAction: Story = {
+  render: (args) => (
+    // eslint-disable-next-line no-alert
+    <Alert {...args} action={<Icon name="CaretSemiLeftOutlined" onClick={() => alert('action')} />}>
+      Alert
+    </Alert>
+  )
 };

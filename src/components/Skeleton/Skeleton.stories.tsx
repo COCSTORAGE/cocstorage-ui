@@ -1,19 +1,15 @@
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Skeleton from '.';
 
-export default {
+const meta: Meta<typeof Skeleton> = {
   title: 'Components/Skeleton',
   component: Skeleton
-} as Meta<typeof Skeleton>;
-
-const Template = function Template(args) {
-  return <Skeleton {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  width: 100,
-  height: 30,
-  disableAspectRatio: true
+export default meta;
+type Story = StoryObj<typeof Skeleton>;
+
+export const Default: Story = {
+  render: (args) => <Skeleton {...args} width={150} height={30} disableAspectRatio />
 };

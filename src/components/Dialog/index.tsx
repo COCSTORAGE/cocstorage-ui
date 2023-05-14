@@ -9,10 +9,10 @@ import {
   useState
 } from 'react';
 
+import { CustomStyle, GenericComponentProps } from '@types';
 import { createPortal } from 'react-dom';
 
 import { StyledDialog, Wrapper } from './Dialog.styles';
-import { CustomStyle, GenericComponentProps } from '../../types';
 
 export interface DialogProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {

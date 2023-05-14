@@ -1,49 +1,41 @@
 import Icon from '@components/Icon';
-import type { Meta } from '@storybook/react';
+
+import { Meta, StoryObj } from '@storybook/react';
 
 import Button from '.';
 
-export default {
+const meta: Meta<typeof Button> = {
   title: 'Components/Button',
-  component: Button,
-  argTypes: {
-    startIcon: {
-      control: false
-    },
-    endIcon: {
-      control: false
-    }
-  }
-} as Meta<typeof Button>;
-
-const Template = function Template(args) {
-  return <Button {...args}>Button</Button>;
+  component: Button
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  variant: 'text',
-  size: 'medium',
-  color: 'primary'
-};
-Default.argTypes = {
-  iconOnly: {
-    control: false
-  }
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+export const Default: Story = {
+  render: (args) => <Button {...args}>Button</Button>
 };
 
-export const WithStartIcon = Template.bind({});
-WithStartIcon.args = {
-  variant: 'text',
-  size: 'medium',
-  color: 'primary',
-  startIcon: <Icon name="CaretSemiLeftOutlined" />
+export const WithStartIcon: Story = {
+  render: ({ endIcon, ...args }) => (
+    <Button
+      {...args}
+      startIcon={<Icon name="CaretSemiLeftOutlined" />}
+      endIcon={endIcon as undefined}
+    >
+      Button
+    </Button>
+  )
 };
 
-export const WithEndIcon = Template.bind({});
-WithEndIcon.args = {
-  variant: 'text',
-  size: 'medium',
-  color: 'primary',
-  endIcon: <Icon name="CaretSemiRightOutlined" />
+export const WithEndIcon: Story = {
+  render: ({ startIcon, ...args }) => (
+    <Button
+      {...args}
+      startIcon={startIcon as undefined}
+      endIcon={<Icon name="CaretSemiRightOutlined" />}
+    >
+      Button
+    </Button>
+  )
 };

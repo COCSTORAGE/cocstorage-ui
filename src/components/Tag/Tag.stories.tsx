@@ -1,34 +1,25 @@
 import Icon from '@components/Icon';
-import type { Meta } from '@storybook/react';
+
+import { Meta, StoryObj } from '@storybook/react';
 
 import Tag from '.';
 
-export default {
+const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',
-  component: Tag,
-  argTypes: {
-    startIcon: {
-      control: false
-    }
-  }
-} as Meta<typeof Tag>;
-
-const Template = function Template(args) {
-  return <Tag {...args}>Tag</Tag>;
+  component: Tag
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  variant: 'text'
-};
-Default.argTypes = {
-  iconOnly: {
-    control: false
-  }
+export default meta;
+type Story = StoryObj<typeof Tag>;
+
+export const Default: Story = {
+  render: (args) => <Tag {...args}>Tag</Tag>
 };
 
-export const WithStartIcon = Template.bind({});
-WithStartIcon.args = {
-  variant: 'text',
-  startIcon: <Icon name="CaretSemiRightOutlined" />
+export const WithStartIcon: Story = {
+  render: (args) => (
+    <Tag {...args} startIcon={<Icon name="CaretSemiRightOutlined" />}>
+      Tag
+    </Tag>
+  )
 };

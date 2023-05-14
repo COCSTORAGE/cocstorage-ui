@@ -1,22 +1,20 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, RefAttributes, useEffect, useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Icon from '../Icon';
 
-import TextBar from '.';
+import TextBar, { TextBarProps } from '.';
 
-export default {
-  title: 'Experiment/TextBar',
-  component: TextBar,
-  argTypes: {
-    startIcon: {
-      control: false
-    }
-  }
-} as Meta<typeof TextBar>;
+const meta: Meta<typeof TextBar> = {
+  title: 'Components/TextBar',
+  component: TextBar
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof TextBar>;
+
+function TextBarWithHooks(args: TextBarProps & RefAttributes<HTMLInputElement>) {
   const [value, setValue] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -28,25 +26,17 @@ const Template = function Template(args) {
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.value]);
 
-  return <TextBar {...args} value={value} onChange={handleChange} />;
+  return <TextBar {...args} placeholder="TextBar" value={value} onChange={handleChange} />;
+}
+
+export const Default: Story = {
+  render: (args) => <TextBarWithHooks {...args} />
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  size: 'medium',
-  placeholder: 'TextBar'
+export const WithStartIcon: Story = {
+  render: (args) => <TextBarWithHooks {...args} startIcon={<Icon name="CaretSemiLeftOutlined" />} />
 };
 
-export const WithStartIcon = Template.bind({});
-WithStartIcon.args = {
-  size: 'medium',
-  placeholder: 'TextBar',
-  startIcon: <Icon name="CaretSemiLeftOutlined" />
-};
-
-export const WithEndIcon = Template.bind({});
-WithEndIcon.args = {
-  size: 'medium',
-  placeholder: 'TextBar',
-  endIcon: <Icon name="CaretSemiRightOutlined" />
+export const WithEndIcon: Story = {
+  render: (args) => <TextBarWithHooks {...args} endIcon={<Icon name="CaretSemiRightOutlined" />} />
 };

@@ -1,18 +1,15 @@
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Typography from '.';
 
-export default {
+const meta: Meta<typeof Typography> = {
   title: 'Components/Typography',
   component: Typography
-} as Meta<typeof Typography>;
-
-const Template = function Template(args) {
-  return <Typography {...args}>Typography</Typography>;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  variant: 'p2',
-  fontWeight: 'regular'
+export default meta;
+type Story = StoryObj<typeof Typography>;
+
+export const Default: Story = {
+  render: (args) => <Typography {...args}>Typography</Typography>
 };

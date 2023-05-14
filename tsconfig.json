@@ -8,6 +8,8 @@
       "@components/*": ["./src/components/*"],
       "@theme": ["./src/theme"],
       "@theme/*": ["./src/theme/*"],
+      "@types": ["./src/types"],
+      "@types/*": ["./src/types/*"],
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"]
     },
@@ -21,6 +23,8 @@
     "declarationDir": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
     "jsxImportSource": "@emotion/react"
   },
   "include": [

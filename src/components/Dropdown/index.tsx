@@ -2,8 +2,9 @@ import { ButtonHTMLAttributes, MouseEvent, forwardRef, useEffect, useRef, useSta
 
 import Icon from '@components/Icon';
 
+import { GenericComponentProps } from '@types';
+
 import { Option, OptionWrapper, StyledDropdown } from './Dropdown.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface DropdownProps
   extends GenericComponentProps<

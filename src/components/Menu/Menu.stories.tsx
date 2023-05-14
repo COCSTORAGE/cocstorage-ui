@@ -1,21 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefAttributes, useEffect, useRef, useState } from 'react';
 
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
 
-import Menu from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+import Menu, { MenuProps } from '.';
+
+const meta: Meta<typeof Menu> = {
   title: 'Experiment/Menu',
-  component: Menu,
-  argTypes: {
-    anchorRef: {
-      control: false
-    }
-  }
-} as Meta<typeof Menu>;
+  component: Menu
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Menu>;
+
+function MenuWithHooks(args: MenuProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -41,6 +40,8 @@ const Template = function Template(args) {
       </Menu>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <MenuWithHooks {...args} />
+};

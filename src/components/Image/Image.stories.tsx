@@ -1,36 +1,40 @@
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Image from '.';
 
-export default {
+const meta: Meta<typeof Image> = {
   title: 'Experiment/Image',
-  component: Image,
-  argTypes: {
-    fallback: {
-      control: false
-    }
-  }
-} as Meta<typeof Image>;
-
-const Template = function Template(args) {
-  return <Image {...args} />;
+  component: Image
 };
 
-export const Default = Template.bind({});
-export const Fallback = Template.bind({});
-Default.args = {
-  width: 150,
-  height: 150,
-  src: 'https://static.cocstorage.com/icons/hotlink-ok/internetcast.png',
-  alt: 'Image Img',
-  disableAspectRatio: true
+export default meta;
+type Story = StoryObj<typeof Image>;
+
+export const Default: Story = {
+  render: (args) => (
+    <Image
+      {...args}
+      width={150}
+      height={150}
+      src="https://static.cocstorage.com/icons/hotlink-ok/internetcast.png"
+      alt="Image Img"
+      disableAspectRatio
+    />
+  )
 };
-Fallback.args = {
-  width: 150,
-  height: 150,
-  disableAspectRatio: true,
-  fallback: {
-    width: 24,
-    height: 24
-  }
+
+export const Fallback: Story = {
+  render: (args) => (
+    <Image
+      {...args}
+      width={150}
+      height={150}
+      alt="Image Img"
+      fallback={{
+        width: 24,
+        height: 24
+      }}
+      disableAspectRatio
+    />
+  )
 };

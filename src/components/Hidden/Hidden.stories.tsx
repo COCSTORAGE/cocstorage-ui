@@ -1,19 +1,21 @@
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
+
+import { Meta, StoryObj } from '@storybook/react';
 
 import Hidden from '.';
 
-export default {
-  title: 'Experiment/Hidden',
+const meta: Meta<typeof Hidden> = {
+  title: 'Components/Hidden',
   component: Hidden
-} as Meta<typeof Hidden>;
+};
 
-const Template = function Template(args) {
-  return (
+export default meta;
+type Story = StoryObj<typeof Hidden>;
+
+export const Default: Story = {
+  render: (args) => (
     <Hidden {...args}>
       <Button>Button</Button>
     </Hidden>
-  );
+  )
 };
-
-export const Default = Template.bind({});

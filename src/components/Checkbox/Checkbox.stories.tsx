@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Checkbox from '.';
+import Checkbox, { CheckboxProps } from '.';
 
-export default {
+const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
-  component: Checkbox,
-  argTypes: {
-    disabled: {
-      control: 'boolean'
-    }
-  }
-} as Meta<typeof Checkbox>;
+  component: Checkbox
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Checkbox>;
+
+function CheckboxWithHooks(args: CheckboxProps & RefAttributes<HTMLInputElement>) {
   const [checked, setChecked] = useState<boolean | undefined>(false);
 
   const handleChange = () => setChecked(!checked);
@@ -26,9 +24,8 @@ const Template = function Template(args) {
   }, [args.checked]);
 
   return <Checkbox {...args} checked={checked} onChange={handleChange} />;
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false
+export const Default: Story = {
+  render: (args) => <CheckboxWithHooks {...args} />
 };

@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react';
-import ThemeProvider from '../src/theme/provider/ThemeProvider';
+import ThemeProvider from '@theme/provider/ThemeProvider';
 
 const preview: Preview = {
   parameters: {
@@ -10,19 +10,16 @@ const preview: Preview = {
         date: /Date$/
       }
     }
-  }
+  },
+  argTypes: { darkMode: { control: 'boolean' }, customStyle: { control: false } },
+  args: { darkMode: false },
+  decorators: [
+    (Story, { args: { darkMode } }) => (
+      <ThemeProvider theme={darkMode ? 'dark' : 'light'}>
+        <Story />
+      </ThemeProvider>
+    )
+  ]
 };
-
-export const argTypes = { darkMode: { control: 'boolean' }, customStyle: { control: false } };
-
-export const args = { darkMode: false };
-
-export const decorators = [
-  (Story, { args: { darkMode } }) => (
-    <ThemeProvider theme={darkMode ? 'dark' : 'light'}>
-      <Story />
-    </ThemeProvider>
-  )
-];
 
 export default preview;

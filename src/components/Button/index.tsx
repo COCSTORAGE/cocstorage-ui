@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
+import { BrandColor, GenericComponentProps, Size, Variant } from '@types';
+
 import { StyledButton } from './Button.styles';
-import { BrandColor, GenericComponentProps, Size, Variant } from '../../types';
 
 export interface ButtonProps
   extends GenericComponentProps<ButtonHTMLAttributes<HTMLButtonElement>> {

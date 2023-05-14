@@ -2,8 +2,9 @@ import { HTMLAttributes, RefObject, forwardRef, useCallback, useEffect, useState
 
 import Backdrop from '@components/Backdrop';
 
+import { CSSValue, GenericComponentProps } from '@types';
+
 import { StyledSpotlight } from './Spotlight.styles';
-import { CSSValue, GenericComponentProps } from '../../types';
 
 export interface SpotlightProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;

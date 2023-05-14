@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Pagination from '.';
+import Pagination, { PaginationProps } from '.';
 
-export default {
+const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
   component: Pagination
-} as Meta<typeof Pagination>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Pagination>;
+
+function PaginationWithHooks(args: PaginationProps & RefAttributes<HTMLUListElement>) {
   const [page, setPage] = useState(1);
 
   const handleChange = (newPage: number) => setPage(newPage);
@@ -20,13 +23,9 @@ const Template = function Template(args) {
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.page]);
 
-  return <Pagination {...args} page={page} onChange={handleChange} />;
-};
+  return <Pagination {...args} count={1000} page={page} onChange={handleChange} />;
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  count: 1000,
-  rowPerPage: 20,
-  itemCount: 10,
-  page: 1
+export const Default: Story = {
+  render: (args) => <PaginationWithHooks {...args} />
 };

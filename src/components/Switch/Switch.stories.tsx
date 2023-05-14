@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Switch from '.';
+import Switch, { SwitchProps } from '.';
 
-export default {
+const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch
-} as Meta<typeof Switch>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Switch>;
+
+function SwitchWithHooks(args: SwitchProps & RefAttributes<HTMLButtonElement>) {
   const [checked, setChecked] = useState<boolean | undefined>(false);
 
   const handleChange = () => setChecked(!checked);
@@ -21,6 +24,8 @@ const Template = function Template(args) {
   }, [args.checked]);
 
   return <Switch {...args} checked={checked} onChange={handleChange} />;
-};
+}
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => <SwitchWithHooks {...args} />
+};

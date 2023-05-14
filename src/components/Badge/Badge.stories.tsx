@@ -1,34 +1,25 @@
 import Icon from '@components/Icon';
-import type { Meta } from '@storybook/react';
+
+import { Meta, StoryObj } from '@storybook/react';
 
 import Badge from '.';
 
-export default {
+const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
-  component: Badge,
-  argTypes: {
-    startIcon: {
-      control: false
-    }
-  }
-} as Meta<typeof Badge>;
-
-const Template = function Template(args) {
-  return <Badge {...args}>NEW</Badge>;
+  component: Badge
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  severity: 'info'
-};
-Default.argTypes = {
-  iconOnly: {
-    control: false
-  }
+export default meta;
+type Story = StoryObj<typeof Badge>;
+
+export const Default: Story = {
+  render: (args) => <Badge {...args}>NEW</Badge>
 };
 
-export const WithStartIcon = Template.bind({});
-WithStartIcon.args = {
-  severity: 'info',
-  icon: <Icon name="ArrowDropUpSpecify_12_12" />
+export const WithStartIcon: Story = {
+  render: (args) => (
+    <Badge {...args} icon={<Icon name="ArrowDropUpSpecify_12_12" />}>
+      NEW
+    </Badge>
+  )
 };

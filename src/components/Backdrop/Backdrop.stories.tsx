@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { RefAttributes, useEffect, useState } from 'react';
 
 import Button from '@components/Button';
-import type { Meta } from '@storybook/react';
 
-import Backdrop from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
-  title: 'Experiment/Backdrop',
+import Backdrop, { BackdropProps } from '.';
+
+const meta: Meta<typeof Backdrop> = {
+  title: 'Components/Backdrop',
   component: Backdrop
-} as Meta<typeof Backdrop>;
+};
 
-const Template = function Template(args) {
+export default meta;
+type Story = StoryObj<typeof Backdrop>;
+
+function BackdropWithHooks(args: BackdropProps & RefAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -34,9 +38,8 @@ const Template = function Template(args) {
       </Backdrop>
     </>
   );
-};
+}
 
-export const Default = Template.bind({});
-Default.args = {
-  centered: true
+export const Default: Story = {
+  render: (args) => <BackdropWithHooks {...args} />
 };

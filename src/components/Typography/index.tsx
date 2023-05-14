@@ -2,7 +2,6 @@ import { HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
 import useTheme from '@theme/provider/useTheme';
 
-import { StyledTypography } from './Typography.styles';
 import {
   BrandColor,
   CSSValue,
@@ -12,7 +11,9 @@ import {
   TypographyLineHeight,
   TypographyVariant,
   TypographyWeight
-} from '../../types';
+} from '@types';
+
+import { StyledTypography } from './Typography.styles';
 
 export interface TypographyProps extends GenericComponentProps<HTMLAttributes<HTMLElement>> {
   variant?: TypographyVariant;

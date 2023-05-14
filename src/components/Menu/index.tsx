@@ -9,10 +9,10 @@ import {
   useState
 } from 'react';
 
+import { GenericComponentProps } from '@types';
 import { createPortal } from 'react-dom';
 
 import { StyledMenu, Wrapper } from './Menu.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface MenuProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   anchorRef: RefObject<HTMLElement>;
