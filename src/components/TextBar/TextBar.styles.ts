@@ -103,6 +103,7 @@ export const StyledTextBar = styled.div<
 `;
 
 const DefaultInput = styled.input`
+  max-width: 100%;
   outline: 0;
   border: none;
   border-radius: 8px;
