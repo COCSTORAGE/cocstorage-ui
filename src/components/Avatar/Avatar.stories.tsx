@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof Avatar>;
 
 export const Default: Story = {
-  render: (args) => <Avatar {...args} />
+  render: (args) => <Avatar {...args} width={50} height={50} />
 };
 
 export const Fallback: Story = {

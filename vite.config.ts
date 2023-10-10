@@ -34,12 +34,17 @@ export default defineConfig(({ command }) => {
 
   if (command === 'serve') {
     return {
-      plugins: [svgr({ exportAsDefault: true })],
+      plugins: [
+        svgr({
+          include: '**/*.svg'
+        })
+      ],
       resolve: {
         alias
       }
     };
   }
+
   return {
     build: {
       lib: {
@@ -60,7 +65,9 @@ export default defineConfig(({ command }) => {
         jsxImportSource: '@emotion/react'
       }),
       dts({ insertTypesEntry: true }),
-      svgr({ exportAsDefault: true })
+      svgr({
+        include: '**/*.svg'
+      })
     ],
     resolve: {
       alias
