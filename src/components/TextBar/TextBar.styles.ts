@@ -277,7 +277,8 @@ export const Label = styled.label<
   }) => background.bg};
   z-index: 1;
   transform-origin: top left;
-  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+  transition:
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
     max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
   pointer-events: none;
