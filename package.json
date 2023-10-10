@@ -25,7 +25,9 @@
     "convention": "pnpm prettier && eslint --fix \"**/*.{js,ts,tsx}\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=ef676058c9ab"
+    "chromatic": "npx chromatic --project-token=ef676058c9ab",
+    "prepare": "husky install",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.1",
@@ -48,6 +50,8 @@
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
