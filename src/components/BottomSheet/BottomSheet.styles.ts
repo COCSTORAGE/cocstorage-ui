@@ -50,19 +50,19 @@ export const StyledBottomSheet = styled.div<
   transform: translateY(100%);
   z-index: 1002;
 
-  ${({ sheetOpen }) =>
+  ${({ sheetOpen }): CSSObject =>
     sheetOpen
-      ? `
-          transform: translateY(0);
-        `
-      : ''};
+      ? {
+          transform: 'translateY(0)'
+        }
+      : {}};
 
-  ${({ sheetClose }) =>
+  ${({ sheetClose }): CSSObject =>
     sheetClose
-      ? `
-          transform: translateY(100%);
-        `
-      : ''};
+      ? {
+          transform: 'translateY(100%)'
+        }
+      : {}};
 `;
 
 export const SwipeZone = styled.div`

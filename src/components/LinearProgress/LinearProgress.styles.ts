@@ -10,9 +10,7 @@ export const StyledLinearProgress = styled.div`
   }) => primary.bg1};
 `;
 
-export const ProgressBar = styled.div<{
-  dataValue?: number;
-}>`
+export const ProgressBar = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({
@@ -20,8 +18,6 @@ export const ProgressBar = styled.div<{
       palette: { primary }
     }
   }) => primary.main};
-
-  transform: translateX(-${({ dataValue }) => dataValue}%);
-
+  transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1) 0ms;
 `;

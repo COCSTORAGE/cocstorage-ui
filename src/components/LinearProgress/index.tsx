@@ -14,7 +14,12 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(function 
 ) {
   return (
     <StyledLinearProgress ref={ref} {...props} css={customStyle}>
-      <ProgressBar dataValue={100 - value} />
+      <ProgressBar
+        ref={ref}
+        style={{
+          transform: `translateX(-${100 - value}%)`
+        }}
+      />
     </StyledLinearProgress>
   );
 });

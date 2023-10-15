@@ -75,6 +75,7 @@ export const StyledDialog = styled.div<
   }) => background.bg};
 
   opacity: 0;
+  transform: scale(0.5, 0.5);
   visibility: hidden;
   transition:
     opacity ${({ transitionDuration }) => transitionDuration}ms ease,
@@ -86,6 +87,7 @@ export const StyledDialog = styled.div<
     dialogOpen
       ? {
           opacity: 1,
+          transform: 'scale(1, 1)',
           visibility: 'visible'
         }
       : {}};
@@ -93,7 +95,8 @@ export const StyledDialog = styled.div<
   ${({ dialogClose }): CSSObject =>
     dialogClose
       ? {
-          opacity: 0
+          opacity: 0,
+          transform: 'scale(0.5, 0.5)'
         }
       : {}};
 `;
