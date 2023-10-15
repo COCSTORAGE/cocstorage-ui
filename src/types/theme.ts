@@ -40,6 +40,7 @@ export interface COCTheme {
       letterSpacing: CSSValue;
     };
   };
+  zIndex: Record<'header' | 'bottomNavigation' | 'dialog' | 'bottomSheet' | 'tooltip', number>;
 }
 
 declare module '@emotion/react' {

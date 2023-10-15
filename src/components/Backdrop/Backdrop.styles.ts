@@ -17,6 +17,7 @@ export const StyledBackdrop = styled.div<
   pointer-events: none;
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
   overflow: hidden;
+  z-index: ${({ theme: { zIndex } }) => zIndex.dialog};
 
   ${({ open }): CSSObject =>
     open

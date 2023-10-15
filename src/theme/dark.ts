@@ -198,5 +198,12 @@ export const dark: Theme = {
       },
       letterSpacing: '-0.04em'
     }
+  },
+  zIndex: {
+    header: 10,
+    bottomNavigation: 10,
+    dialog: 20,
+    bottomSheet: 20,
+    tooltip: 20
   }
 };
