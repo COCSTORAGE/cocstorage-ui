@@ -92,11 +92,9 @@ export const StyledDropdown = styled(DefaultDropdown)<
 
 export const OptionWrapper = styled.ul<{
   open: boolean;
-  top: number;
 }>`
   position: absolute;
   width: 100%;
-  bottom: -${({ top }) => top}px;
   left: 0;
   border: none;
   border-radius: 8px;

@@ -12,7 +12,14 @@ export interface IconButtonProps
 const IconButton = forwardRef<HTMLButtonElement, PropsWithChildren<IconButtonProps>>(
   function IconButton({ children, rotation = 0, customStyle, ...props }, ref) {
     return (
-      <StyledIconButton ref={ref} rotation={rotation} {...props} css={customStyle}>
+      <StyledIconButton
+        ref={ref}
+        {...props}
+        css={customStyle}
+        style={{
+          transform: `rotate(${rotation}deg)`
+        }}
+      >
         {children}
       </StyledIconButton>
     );

@@ -17,3 +17,12 @@ export const fadeOut = keyframes`
     opacity: 0;
   }
   `;
+
+export const wave = keyframes`
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+  `;

@@ -3,9 +3,10 @@ import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
+import { convertNumberToCSSValue } from '@utils';
 import { CSSValue, GenericComponentProps, IconName } from 'src/typings';
 
-import { AvatarWrapper, SkeletonWrapper, StyledAvatar } from './Avatar.styles';
+import { AvatarWrapper, SkeletonWrapper } from './Avatar.styles';
 
 export interface AvatarProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   src: string;
@@ -58,22 +59,26 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(function Avatar(
   return (
     <AvatarWrapper
       ref={ref}
-      dataWidth={width}
-      dataHeight={height}
       round={round}
       {...props}
+      style={{
+        width: convertNumberToCSSValue(width),
+        height: convertNumberToCSSValue(height),
+        ...props.style
+      }}
       css={customStyle}
     >
       {src && !loadFailed && (
-        <StyledAvatar
+        <img
           width={width}
           height={height}
           src={src}
           alt={alt}
-          loaded={loaded}
-          loadFailed={loadFailed}
           onLoad={handleLoad}
           onError={handleError}
+          style={{
+            visibility: loaded && !loadFailed ? 'visible' : 'hidden'
+          }}
         />
       )}
       {src && !loaded && !loadFailed && (

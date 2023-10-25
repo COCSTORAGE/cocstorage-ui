@@ -149,12 +149,16 @@ const Menu = forwardRef<HTMLDivElement, PropsWithChildren<MenuProps>>(function M
         <StyledMenu
           ref={menuRef}
           menuContentOpen={menuContentOpen}
-          menuPosition={menuPosition}
           centered={centered}
           triangleLeft={triangleLeft}
           onClick={handleClick}
           css={customStyle}
           {...props}
+          style={{
+            top: menuPosition.top,
+            left: menuPosition.left,
+            ...props.style
+          }}
           role="menu"
         >
           {children}

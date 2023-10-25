@@ -37,10 +37,6 @@ export const Wrapper = styled.div<{
 export const StyledMenu = styled.div<
   Pick<MenuProps, 'centered' | 'triangleLeft'> & {
     menuContentOpen: boolean;
-    menuPosition: {
-      top: number;
-      left: number;
-    };
   }
 >`
   position: absolute;
@@ -62,11 +58,6 @@ export const StyledMenu = styled.div<
 
   visibility: hidden;
   pointer-events: none;
-
-  ${({ menuPosition: { top, left } }): CSSObject => ({
-    top,
-    left
-  })};
 
   ${({ menuContentOpen }): CSSObject =>
     menuContentOpen

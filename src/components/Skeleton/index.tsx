@@ -1,5 +1,6 @@
 import { HTMLAttributes, forwardRef } from 'react';
 
+import { convertNumberToCSSValue } from '@utils';
 import { CSSValue, GenericComponentProps } from 'src/typings';
 
 import { SkeletonInner, SkeletonWrapper, StyledSkeleton } from './Skeleton.styles';
@@ -38,17 +39,20 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(
     return (
       <StyledSkeleton
         ref={ref}
-        customWidth={width}
-        customHeight={height}
-        maxWidth={maxWidth}
-        maxHeight={maxHeight}
-        minWidth={minWidth}
-        minHeight={minHeight}
         disableAspectRatio={disableAspectRatio}
         disableAnimation={disableAnimation}
         round={round}
         {...props}
         css={customStyle}
+        style={{
+          width: width ? convertNumberToCSSValue(width) : undefined,
+          height: height ? convertNumberToCSSValue(height) : undefined,
+          maxWidth: maxWidth ? convertNumberToCSSValue(maxWidth) : undefined,
+          maxHeight: maxHeight ? convertNumberToCSSValue(maxHeight) : undefined,
+          minWidth: minWidth ? convertNumberToCSSValue(minWidth) : undefined,
+          minHeight: minHeight ? convertNumberToCSSValue(minHeight) : undefined,
+          ...props.style
+        }}
       />
     );
   }

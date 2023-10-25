@@ -65,8 +65,7 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
         style={{
           top,
           left,
-          opacity: open ? 1 : 0,
-          pointerEvents: open ? 'visible' : 'none'
+          ...props.style
         }}
       >
         {children}

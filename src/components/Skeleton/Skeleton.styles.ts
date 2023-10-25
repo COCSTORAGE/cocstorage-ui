@@ -1,7 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { convertNumberToCSSValue } from '@utils';
-import { CSSValue } from 'src/typings';
+import { wave } from '@styles/keyframes';
 
 import { SkeletonProps } from '.';
 
@@ -66,29 +65,10 @@ export const SkeletonInner = styled.div<Pick<SkeletonProps, 'round'>>`
 `;
 
 export const StyledSkeleton = styled.div<
-  Pick<
-    SkeletonProps,
-    | 'maxWidth'
-    | 'maxHeight'
-    | 'minWidth'
-    | 'minHeight'
-    | 'round'
-    | 'disableAspectRatio'
-    | 'disableAnimation'
-  > & {
-    customWidth?: CSSValue;
-    customHeight?: CSSValue;
-  }
+  Pick<SkeletonProps, 'round' | 'disableAspectRatio' | 'disableAnimation'>
 >`
   position: relative;
   overflow: hidden;
-
-  ${({ customWidth }) => (customWidth ? `width: ${convertNumberToCSSValue(customWidth)}` : '')};
-  ${({ customHeight }) => (customHeight ? `height: ${convertNumberToCSSValue(customHeight)}` : '')};
-  ${({ maxWidth }) => (maxWidth ? `max-width: ${convertNumberToCSSValue(maxWidth)}` : '')};
-  ${({ maxHeight }) => (maxHeight ? `max-height: ${convertNumberToCSSValue(maxHeight)}` : '')};
-  ${({ minWidth }) => (minWidth ? `min-width: ${convertNumberToCSSValue(minWidth)}` : '')};
-  ${({ minHeight }) => (minHeight ? `min-height: ${convertNumberToCSSValue(minHeight)}` : '')};
 
   background-color: ${({
     theme: {
@@ -138,19 +118,10 @@ export const StyledSkeleton = styled.div<
     )`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: '350% 350%',
-            animation: 'wave 1.2s ease-in-out infinite',
+            animation: `${wave} 1.2s ease-in-out infinite`,
             animationDelay: '-0.2s',
             opacity: 0.6
           }
         }
       : {}};
-
-  @keyframes wave {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 100% 100%;
-    }
-  }
 `;

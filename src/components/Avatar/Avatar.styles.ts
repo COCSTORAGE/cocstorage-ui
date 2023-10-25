@@ -1,24 +1,13 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { convertNumberToCSSValue } from '@utils';
-import { CSSValue } from 'src/typings';
-
 import { AvatarProps } from '.';
 
-export const AvatarWrapper = styled.div<
-  Pick<AvatarProps, 'round'> & {
-    dataWidth: CSSValue;
-    dataHeight: CSSValue;
-  }
->`
+export const AvatarWrapper = styled.div<Pick<AvatarProps, 'round'>>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-
-  width: ${({ dataWidth }) => (dataWidth ? convertNumberToCSSValue(dataWidth) : 'auto')};
-  height: ${({ dataHeight }) => (dataHeight ? convertNumberToCSSValue(dataHeight) : 'auto')};
 
   background-color: ${({
     theme: {
@@ -32,13 +21,6 @@ export const AvatarWrapper = styled.div<
           borderRadius: round
         }
       : {}};
-`;
-
-export const StyledAvatar = styled.img<{
-  loaded: boolean;
-  loadFailed: boolean;
-}>`
-  visibility: ${({ loaded, loadFailed }) => (loaded && !loadFailed ? 'visible' : 'hidden')};
 `;
 
 export const SkeletonWrapper = styled.div`

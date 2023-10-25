@@ -58,29 +58,13 @@ export const RatioImageInner = styled.div`
 `;
 
 export const ImageWrapper = styled.div<
-  Pick<ImageProps, 'round' | 'disableResponsive' | 'disableBackgroundColor'> & {
-    dataWidth: CSSValue;
-    dataHeight: CSSValue;
-  }
+  Pick<ImageProps, 'round' | 'disableResponsive' | 'disableBackgroundColor'>
 >`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-
-  ${({ disableResponsive, dataWidth, dataHeight }): CSSObject =>
-    disableResponsive
-      ? {
-          width: convertNumberToCSSValue(dataWidth),
-          height: convertNumberToCSSValue(dataHeight)
-        }
-      : {
-          width: '100%',
-          height: '100%',
-          maxWidth: convertNumberToCSSValue(dataWidth),
-          maxHeight: convertNumberToCSSValue(dataHeight)
-        }};
 
   ${({
     theme: {
@@ -103,28 +87,11 @@ export const ImageWrapper = styled.div<
 `;
 
 export const FallbackBox = styled.div<
-  Pick<ImageProps, 'round' | 'disableResponsive' | 'disableBackgroundColor'> & {
-    dataWidth: CSSValue;
-    dataHeight: CSSValue;
-  }
+  Pick<ImageProps, 'round' | 'disableResponsive' | 'disableBackgroundColor'>
 >`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  ${({ disableResponsive, dataWidth, dataHeight }): CSSObject =>
-    disableResponsive
-      ? {
-          width: convertNumberToCSSValue(dataWidth),
-          height: convertNumberToCSSValue(dataHeight)
-        }
-      : {
-          width: '100%',
-          height: '100%',
-          maxWidth: convertNumberToCSSValue(dataWidth),
-          maxHeight: convertNumberToCSSValue(dataHeight),
-          minHeight: convertNumberToCSSValue(dataHeight)
-        }};
 
   ${({
     theme: {
@@ -155,7 +122,7 @@ export const Img = styled.img<{
   visibility: ${({ loaded, loadFailed }) => (loaded && !loadFailed ? 'visible' : 'hidden')};
 `;
 
-export const RatioImg = styled.img<Pick<ImageProps, 'src'>>`
+export const RatioImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -174,21 +141,8 @@ export const FallbackWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export const SkeletonWrapper = styled.div<{
-  isAspectRatio?: boolean;
-  dataWidth?: CSSValue;
-  dataHeight?: CSSValue;
-}>`
+export const SkeletonWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${({ dataWidth }) => (dataWidth ? convertNumberToCSSValue(dataWidth) : '100%')};
-  height: ${({ dataHeight }) => (dataHeight ? convertNumberToCSSValue(dataHeight) : '100%')};
-
-  ${({ isAspectRatio }): CSSObject =>
-    isAspectRatio
-      ? {
-          transform: 'translate(-50%, -50%)'
-        }
-      : {}};
 `;

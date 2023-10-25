@@ -70,7 +70,13 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(function Dropdown(
       {!value && !selectedValue && placeholder && <span>{placeholder}</span>}
       {value && selectedValue && <span>{selectedValue.name}</span>}
       <Icon name="ArrowDropDownSpecify_12_12" />
-      <OptionWrapper ref={optionWrapperRef} top={top} open={open && top > 0}>
+      <OptionWrapper
+        ref={optionWrapperRef}
+        open={open && top > 0}
+        style={{
+          bottom: `-${top}px`
+        }}
+      >
         {options.map((option) => (
           <Option
             key={`dropdown-option-${option.name}`}

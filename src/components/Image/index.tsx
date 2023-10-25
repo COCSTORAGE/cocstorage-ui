@@ -3,6 +3,7 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
+import { convertNumberToCSSValue } from '@utils';
 import { CSSValue, GenericComponentProps, IconName } from 'src/typings';
 
 import {
@@ -74,11 +75,23 @@ function Image({
     if ((!src || loadFailed) && fallback) {
       return (
         <FallbackBox
-          dataWidth={width}
-          dataHeight={height}
           round={round}
           disableResponsive={disableResponsive}
           disableBackgroundColor={disableBackgroundColor}
+          style={
+            disableResponsive
+              ? {
+                  width: convertNumberToCSSValue(width),
+                  height: convertNumberToCSSValue(height)
+                }
+              : {
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: convertNumberToCSSValue(width),
+                  maxHeight: convertNumberToCSSValue(height),
+                  minHeight: convertNumberToCSSValue(height)
+                }
+          }
         >
           <Icon
             name={fallback.name || 'ImageOutlined'}
@@ -91,12 +104,25 @@ function Image({
 
     return (
       <ImageWrapper
-        dataWidth={width}
-        dataHeight={height}
         round={round}
         disableResponsive={disableResponsive}
         disableBackgroundColor={disableBackgroundColor}
         {...props}
+        style={
+          disableResponsive
+            ? {
+                width: convertNumberToCSSValue(width),
+                height: convertNumberToCSSValue(height),
+                ...props.style
+              }
+            : {
+                width: '100%',
+                height: '100%',
+                maxWidth: convertNumberToCSSValue(width),
+                maxHeight: convertNumberToCSSValue(height),
+                ...props.style
+              }
+        }
         css={customStyle}
       >
         {src && !loadFailed && (
@@ -112,7 +138,12 @@ function Image({
           />
         )}
         {src && !loaded && !loadFailed && (
-          <SkeletonWrapper dataWidth={width} dataHeight={height}>
+          <SkeletonWrapper
+            style={{
+              width: width ? convertNumberToCSSValue(width) : '100%',
+              height: height ? convertNumberToCSSValue(height) : '100%'
+            }}
+          >
             <Skeleton width={width} height={height} disableAspectRatio />
           </SkeletonWrapper>
         )}
@@ -126,7 +157,11 @@ function Image({
         <RatioImageInner>
           {src && loaded && !loadFailed && <RatioImg src={src} alt={alt} />}
           {src && !loaded && !loadFailed && (
-            <SkeletonWrapper isAspectRatio>
+            <SkeletonWrapper
+              style={{
+                transform: 'translate(-50%, -50%)'
+              }}
+            >
               <Skeleton width="100%" height="100%" disableAspectRatio />
             </SkeletonWrapper>
           )}
