@@ -9,7 +9,7 @@ import {
 
 import useTheme from '@theme/hooks/useTheme';
 
-import { GenericComponentProps, ThemeMode } from 'src/typings';
+import { GenericComponentProps, ThemeMode } from '@typings';
 
 import { StyledTabs, TabsInner } from './Tabs.styles';
 

@@ -3,8 +3,8 @@ import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
+import { CSSValue, GenericComponentProps, IconName } from '@typings';
 import { convertNumberToCSSValue } from '@utils';
-import { CSSValue, GenericComponentProps, IconName } from 'src/typings';
 
 import { AvatarWrapper, SkeletonWrapper } from './Avatar.styles';
 

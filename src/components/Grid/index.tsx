@@ -1,6 +1,6 @@
 import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { StyledGrid } from './Grid.styles';
 

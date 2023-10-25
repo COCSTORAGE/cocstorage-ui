@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { Circle, Marker, MarkerInner, StyledRadio, Wrapper } from './Radio.styles';
 

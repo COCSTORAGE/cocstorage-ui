@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, MouseEvent, forwardRef, useEffect, useRef, useSta
 
 import Icon from '@components/Icon';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { Option, OptionWrapper, StyledDropdown } from './Dropdown.styles';
 

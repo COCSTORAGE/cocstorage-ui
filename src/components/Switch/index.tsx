@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, MouseEvent, forwardRef } from 'react';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { Circle, StyledSwitch } from './Switch.styles';
 

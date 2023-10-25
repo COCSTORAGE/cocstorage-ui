@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, Severity } from 'src/typings';
+import { GenericComponentProps, Severity } from '@typings';
 
 import { StyledBadge } from './Badge.styles';
 

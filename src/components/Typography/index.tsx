@@ -11,7 +11,7 @@ import {
   TypographyLineHeight,
   TypographyVariant,
   TypographyWeight
-} from 'src/typings';
+} from '@typings';
 
 import { StyledTypography } from './Typography.styles';
 

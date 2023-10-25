@@ -3,11 +3,7 @@ import styled, { CSSObject } from '@emotion/styled';
 import { DialogProps } from '.';
 
 export const Wrapper = styled.div<Pick<DialogProps, 'fullWidth' | 'fullScreen'>>`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
+  max-width: 100%;
 
   ${({ fullWidth }): CSSObject =>
     fullWidth

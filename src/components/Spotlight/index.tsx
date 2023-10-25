@@ -3,7 +3,7 @@ import { HTMLAttributes, RefObject, forwardRef, useEffect, useState } from 'reac
 import Backdrop from '@components/Backdrop';
 
 import { defaultTransitionDuration } from '@constants';
-import { CSSValue, GenericComponentProps } from 'src/typings';
+import { CSSValue, GenericComponentProps } from '@typings';
 
 import { StyledSpotlight } from './Spotlight.styles';
 

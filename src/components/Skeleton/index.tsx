@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from 'react';
 
+import { CSSValue, GenericComponentProps } from '@typings';
 import { convertNumberToCSSValue } from '@utils';
-import { CSSValue, GenericComponentProps } from 'src/typings';
 
 import { SkeletonInner, SkeletonWrapper, StyledSkeleton } from './Skeleton.styles';
 

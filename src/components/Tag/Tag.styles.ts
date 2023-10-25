@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { Color } from 'src/typings';
+import { Color } from '@typings';
 
 import { TagProps } from '.';
 

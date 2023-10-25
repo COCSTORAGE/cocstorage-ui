@@ -9,7 +9,7 @@ import { light } from '@theme/light';
 import OverlayProvider from '@theme/provider/OverlayProvider';
 import GlobalStyles from '@theme/utils/GlobalStyles';
 
-import { ThemeMode } from 'src/typings';
+import { ThemeMode } from '@typings';
 
 export interface ThemeProviderProps {
   theme: ThemeMode;

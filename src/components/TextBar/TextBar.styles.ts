@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { Size } from 'src/typings';
+import { Size } from '@typings';
 
 import { TextBarProps } from '.';
 

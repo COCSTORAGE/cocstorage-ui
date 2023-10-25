@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef, useState } from 'react';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { Check, Marker, MarkerInner, StyledCheckbox, Wrapper } from './Checkbox.styles';
 

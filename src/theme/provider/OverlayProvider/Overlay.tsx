@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { fadeIn, fadeOut } from '@styles/keyframes';
@@ -13,6 +13,8 @@ function Overlay() {
   } = useOverlay();
 
   const currentOverlayState = states[states.length - 1];
+
+  const [open, setOpen] = useState(true);
 
   const ref = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout>>();
@@ -30,6 +32,9 @@ function Overlay() {
       rootElement.style.left = '0';
       rootElement.style.width = '100%';
       rootElement.style.height = '100%';
+      rootElement.style.display = 'flex';
+      rootElement.style.alignItems = 'center';
+      rootElement.style.justifyContent = 'center';
       rootElement.style.zIndex = '1000';
       rootElement.role = 'presentation';
 
@@ -44,11 +49,14 @@ function Overlay() {
 
     const isFulfilledAll =
       states.length === states.filter(({ status }) => status === 'fulfilled').length;
+    const hasPending = states.length === states.filter(({ status }) => status === 'pending').length;
 
     if (isFulfilledAll) {
-      ref.current.style.animation = `${fadeOut.name} ${currentOverlayState?.props?.transitionDuration}ms forwards`;
+      setOpen(false);
 
       closeTimerRef.current = setTimeout(reset, currentOverlayState?.props?.transitionDuration);
+    } else if (hasPending) {
+      setOpen(true);
     }
   }, [currentOverlayState?.props?.transitionDuration, reset, root, states]);
 
@@ -65,6 +73,7 @@ function Overlay() {
   return createPortal(
     <StyledOverlay
       ref={ref}
+      open={open}
       onClick={currentOverlayState?.props?.onClose}
       transitionDuration={currentOverlayState?.props?.transitionDuration}
       css={currentOverlayState?.props?.overlayCustomStyle}
@@ -76,6 +85,7 @@ function Overlay() {
 export default Overlay;
 
 const StyledOverlay = styled.div<{
+  open: boolean;
   transitionDuration?: number;
 }>`
   position: fixed;
@@ -87,7 +97,6 @@ const StyledOverlay = styled.div<{
   opacity: 0;
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms;
   z-index: ${({ theme: { zIndex } }) => zIndex.overlay};
-  animation: ${fadeIn} ${({ transitionDuration }) => transitionDuration}ms forwards;
-
-  ${fadeOut}
+  animation: ${({ open }) => (!open ? fadeOut : fadeIn)}
+    ${({ transitionDuration }) => transitionDuration}ms forwards;
 `;

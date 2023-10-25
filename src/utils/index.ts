@@ -1,6 +1,6 @@
 import { Theme } from '@emotion/react';
 
-import { AbsoluteUnit, BrandColor, CSSValue, Color, RelativeUnit } from 'src/typings';
+import { AbsoluteUnit, BrandColor, CSSValue, Color, RelativeUnit } from '@typings';
 
 export function getBrandColorCode(theme: Theme, brandColor?: BrandColor | Color): Color | null {
   const {

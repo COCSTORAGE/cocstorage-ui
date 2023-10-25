@@ -2,9 +2,9 @@ import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useRef } from 'react
 
 import { defaultTransitionDuration } from '@constants';
 import useOverlay from '@theme/hooks/useOverlay';
+import { GenericComponentProps } from '@typings';
 import createUniqueKey from '@utils';
 import { createPortal } from 'react-dom';
-import { GenericComponentProps } from 'src/typings';
 
 import { StyledBackdrop, Wrapper } from './Backdrop.styles';
 
@@ -56,7 +56,6 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
   useEffect(() => {
     if (activeOverlayState?.status === 'pending') {
       backdropOpenTimerRef.current = setTimeout(() => {
-        // TODO 추후 애니메이션 재사용 가능하도록 개선
         if (contentRef.current) {
           contentRef.current.style.opacity = '1';
         }

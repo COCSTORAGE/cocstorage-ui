@@ -9,9 +9,9 @@ import {
 
 import { defaultTransitionDuration } from '@constants';
 import useOverlay from '@theme/hooks/useOverlay';
+import { CustomStyle, GenericComponentProps } from '@typings';
 import createUniqueKey from '@utils';
 import { createPortal } from 'react-dom';
-import { CustomStyle, GenericComponentProps } from 'src/typings';
 
 import { StyledDialog, Wrapper } from './Dialog.styles';
 

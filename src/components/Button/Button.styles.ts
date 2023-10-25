@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { BrandColor } from 'src/typings';
+import { BrandColor } from '@typings';
 
 import { ButtonProps } from '.';
 

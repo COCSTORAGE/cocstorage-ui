@@ -2,7 +2,7 @@ import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useState } from 'rea
 
 import Icon from '@components/Icon';
 
-import { GenericComponentProps } from 'src/typings';
+import { GenericComponentProps } from '@typings';
 
 import { PaginationDot, PaginationItem, StyledPagination } from './Pagination.styles';
 
