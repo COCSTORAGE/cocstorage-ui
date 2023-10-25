@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-import { GenericComponentProps } from '@types';
+import { GenericComponentProps } from 'src/typings';
 
 import { SelectedBar, StyledTab } from './Tab.styles';
 

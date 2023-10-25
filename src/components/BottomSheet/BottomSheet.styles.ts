@@ -1,41 +1,22 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 
 import { BottomSheetProps } from '.';
 
-export const Wrapper = styled.div<
-  Pick<BottomSheetProps, 'transitionDuration'> & { sheetOpen: boolean; sheetClose: boolean }
->`
+export const Wrapper = styled.div<Pick<BottomSheetProps, 'transitionDuration'>>`
+  position: fixed;
+  left: 0;
+  bottom: 0;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
+  justify-content: flex-end;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  overflow: hidden;
+
   z-index: ${({ theme: { zIndex } }) => zIndex.bottomSheet};
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms;
-
-  ${({ sheetOpen }): CSSObject =>
-    sheetOpen
-      ? {
-          opacity: 1,
-          visibility: 'visible'
-        }
-      : {}};
-
-  ${({ sheetClose }): CSSObject =>
-    sheetClose
-      ? {
-          opacity: 0
-        }
-      : {}};
 `;
 
-export const StyledBottomSheet = styled.div<
-  Pick<BottomSheetProps, 'transitionDuration'> & { sheetOpen: boolean; sheetClose: boolean }
->`
+export const StyledBottomSheet = styled.div<Pick<BottomSheetProps, 'transitionDuration'>>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -46,23 +27,11 @@ export const StyledBottomSheet = styled.div<
     }
   }) => background.bg};
   border-radius: 16px 16px 0 0;
-  transition: transform ${({ transitionDuration }) => transitionDuration}ms;
+  overflow: hidden;
+  pointer-events: none;
   transform: translateY(100%);
-  z-index: ${({ theme: { zIndex } }) => zIndex.bottomSheet + 1};
 
-  ${({ sheetOpen }): CSSObject =>
-    sheetOpen
-      ? {
-          transform: 'translateY(0)'
-        }
-      : {}};
-
-  ${({ sheetClose }): CSSObject =>
-    sheetClose
-      ? {
-          transform: 'translateY(100%)'
-        }
-      : {}};
+  transition: transform ${({ transitionDuration }) => transitionDuration}ms;
 `;
 
 export const SwipeZone = styled.div`

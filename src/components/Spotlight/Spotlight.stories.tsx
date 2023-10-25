@@ -27,13 +27,7 @@ function SpotlightWithHooks(args: SpotlightProps & RefAttributes<HTMLDivElement>
       <Button ref={buttonRef} onClick={handleClick}>
         Spotlight Open
       </Button>
-      <Spotlight
-        {...args}
-        open={open}
-        onClose={handleClose}
-        targetRef={buttonRef}
-        style={{ borderRadius: 8 }}
-      >
+      <Spotlight {...args} open={open} onClose={handleClose} targetRef={buttonRef} round={8}>
         <Tooltip open={open} content="Tooltip" placement="right" onClose={handleClose}>
           <Button onClick={handleClose}>Spotlight Open</Button>
         </Tooltip>

@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 
-import useTheme from '@theme/provider/useTheme';
+import useTheme from '@theme/hooks/useTheme';
 
 function GlobalStyles() {
   const {

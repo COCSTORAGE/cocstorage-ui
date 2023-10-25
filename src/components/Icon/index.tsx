@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-import { BrandColor, Color, GenericComponentProps } from '@types';
+import { BrandColor, Color, GenericComponentProps } from 'src/typings';
 
 import { StyledIcon } from './Icon.styles';
 import * as SvgIcons from '../../assets/icons';

@@ -3,7 +3,7 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps, IconName } from '@types';
+import { CSSValue, GenericComponentProps, IconName } from 'src/typings';
 
 import {
   FallbackBox,

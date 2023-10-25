@@ -1,7 +1,8 @@
 import { ElementType, HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
+import { GenericComponentProps } from '@typings';
+
 import { StyledHidden } from './Hidden.styles';
-import { GenericComponentProps } from '../../types';
 
 export interface HiddenProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   component?: ElementType;

@@ -1,7 +1,7 @@
 import { RefAttributes } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
-import useTheme from '@theme/provider/useTheme';
+import useTheme from '@theme/hooks/useTheme';
 
 import Grid, { GridProps } from '.';
 

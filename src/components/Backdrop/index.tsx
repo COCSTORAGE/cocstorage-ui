@@ -1,9 +1,12 @@
-import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useRef, useState } from 'react';
+import { HTMLAttributes, MouseEvent, forwardRef, useEffect, useRef } from 'react';
 
-import { GenericComponentProps } from '@types';
+import { defaultTransitionDuration } from '@constants';
+import useOverlay from '@theme/hooks/useOverlay';
+import createUniqueKey from '@utils';
 import { createPortal } from 'react-dom';
+import { GenericComponentProps } from 'src/typings';
 
-import { Content, StyledBackdrop } from './Backdrop.styles';
+import { StyledBackdrop, Wrapper } from './Backdrop.styles';
 
 export interface BackdropProps extends GenericComponentProps<HTMLAttributes<HTMLDivElement>> {
   open: boolean;
@@ -13,69 +16,73 @@ export interface BackdropProps extends GenericComponentProps<HTMLAttributes<HTML
 }
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
-  { children, open, transitionDuration = 225, centered, onClose, customStyle, ...props },
+  {
+    children,
+    open,
+    transitionDuration = defaultTransitionDuration,
+    centered,
+    onClose,
+    customStyle,
+    ...props
+  },
   ref
 ) {
-  const [isMounted, setIsMounted] = useState(false);
-  const [backdropOpen, setBackdropOpen] = useState(false);
+  const { overlay, push, update, reset, getActiveOverlayState } = useOverlay();
 
-  const backdropPortalRef = useRef<HTMLElement | null>(null);
+  const idRef = useRef(`backdrop-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
+  const contentRef = useRef<HTMLDivElement>(null);
   const backdropOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const backdropCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const activeOverlayState = getActiveOverlayState(idRef.current, 'backdrop');
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden';
-
-      let backdrop = document.getElementById('backdrop-root');
-
-      if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.id = 'backdrop-root';
-        backdrop.style.position = 'fixed';
-        backdrop.style.top = '0';
-        backdrop.style.left = '0';
-        backdrop.style.width = '100%';
-        backdrop.style.height = '100%';
-        backdrop.style.zIndex = '1000';
-        backdrop.setAttribute('role', 'presentation');
-
-        document.body.appendChild(backdrop);
-      }
-
-      backdropPortalRef.current = backdrop;
-
-      setIsMounted(true);
-
-      if (backdropCloseTimerRef.current) {
-        clearTimeout(backdropCloseTimerRef.current);
-      }
-
-      backdropOpenTimerRef.current = setTimeout(() => setBackdropOpen(true), 100);
+      push({
+        id: idRef.current,
+        status: 'pending',
+        from: 'backdrop',
+        props: {
+          onClose,
+          transitionDuration,
+          overlayCustomStyle: customStyle
+        }
+      });
     }
-  }, [open]);
+  }, [open, push, onClose, transitionDuration, customStyle]);
 
   useEffect(() => {
-    if (!open && backdropOpen && backdropPortalRef.current) {
-      if (backdropOpenTimerRef.current) {
-        clearTimeout(backdropOpenTimerRef.current);
-      }
-
-      backdropCloseTimerRef.current = setTimeout(() => {
-        if (backdropPortalRef.current) {
-          backdropPortalRef.current.remove();
-          backdropPortalRef.current = null;
+    if (activeOverlayState?.status === 'pending') {
+      backdropOpenTimerRef.current = setTimeout(() => {
+        // TODO 추후 애니메이션 재사용 가능하도록 개선
+        if (contentRef.current) {
+          contentRef.current.style.opacity = '1';
         }
-
-        setIsMounted(false);
-        setBackdropOpen(false);
-
-        document.body.removeAttribute('style');
-      }, transitionDuration + 100);
+        update(idRef.current, 'active');
+      }, transitionDuration);
     }
-  }, [open, backdropOpen, transitionDuration]);
+  }, [activeOverlayState, transitionDuration, update]);
+
+  useEffect(() => {
+    if (activeOverlayState?.status === 'active') {
+      if (contentRef.current) {
+        contentRef.current.style.pointerEvents = 'auto';
+      }
+    }
+  }, [activeOverlayState?.status]);
+
+  useEffect(() => {
+    if (open || !contentRef.current) return;
+    if (activeOverlayState?.status !== 'active') return;
+
+    contentRef.current.style.opacity = '0';
+
+    backdropCloseTimerRef.current = setTimeout(() => {
+      update(idRef.current, 'fulfilled');
+    }, transitionDuration);
+  }, [open, activeOverlayState, transitionDuration, update]);
 
   useEffect(() => {
     return () => {
@@ -85,39 +92,33 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
       if (backdropCloseTimerRef.current) {
         clearTimeout(backdropCloseTimerRef.current);
       }
-
-      if (backdropPortalRef.current) {
-        backdropPortalRef.current.remove();
-        backdropPortalRef.current = null;
-
-        setIsMounted(false);
-        setBackdropOpen(false);
-
-        document.body.removeAttribute('style');
-      }
     };
   }, []);
 
-  if (isMounted && backdropPortalRef.current) {
-    return createPortal(
-      <StyledBackdrop
-        ref={ref}
-        open={backdropOpen}
-        close={!open}
-        transitionDuration={transitionDuration}
-        {...props}
-        onClick={onClose}
-        css={customStyle}
-      >
-        <Content centered={centered} onClick={handleClick}>
-          {children}
-        </Content>
-      </StyledBackdrop>,
-      backdropPortalRef.current
-    );
-  }
+  useEffect(() => {
+    return () => {
+      if (overlay.root) {
+        reset();
+      }
+    };
+  }, [overlay.root, reset]);
 
-  return null;
+  if (!overlay.root || !activeOverlayState) return null;
+
+  return createPortal(
+    <Wrapper ref={ref}>
+      <StyledBackdrop
+        ref={contentRef}
+        onClick={handleClick}
+        transitionDuration={transitionDuration}
+        centered={centered}
+        {...props}
+      >
+        {children}
+      </StyledBackdrop>
+    </Wrapper>,
+    overlay.root
+  );
 });
 
 export default Backdrop;

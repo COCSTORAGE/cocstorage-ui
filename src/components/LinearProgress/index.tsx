@@ -1,6 +1,6 @@
 import { HTMLAttributes, forwardRef } from 'react';
 
-import { GenericComponentProps } from '@types';
+import { GenericComponentProps } from 'src/typings';
 
 import { ProgressBar, StyledLinearProgress } from './LinearProgress.styles';
 

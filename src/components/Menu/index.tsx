@@ -9,8 +9,8 @@ import {
   useState
 } from 'react';
 
-import { GenericComponentProps } from '@types';
 import { createPortal } from 'react-dom';
+import { GenericComponentProps } from 'src/typings';
 
 import { StyledMenu, Wrapper } from './Menu.styles';
 

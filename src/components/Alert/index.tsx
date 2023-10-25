@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { GenericComponentProps, Severity } from '@types';
+import { GenericComponentProps, Severity } from 'src/typings';
 
 import { Message, StyledAlert } from './Alert.styles';
 

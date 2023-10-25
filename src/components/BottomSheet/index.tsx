@@ -9,8 +9,11 @@ import {
   useState
 } from 'react';
 
-import { CustomStyle, GenericComponentProps } from '@types';
+import { defaultTransitionDuration } from '@constants';
+import useOverlay from '@theme/hooks/useOverlay';
+import createUniqueKey from '@utils';
 import { createPortal } from 'react-dom';
+import { CustomStyle, GenericComponentProps } from 'src/typings';
 
 import { Content, Rectangle, StyledBottomSheet, SwipeZone, Wrapper } from './BottomSheet.styles';
 
@@ -20,7 +23,7 @@ export interface BottomSheetProps extends GenericComponentProps<HTMLAttributes<H
   disableHeaderSwipeableClose?: boolean;
   disableContentSwipeableClose?: boolean;
   onClose: () => void;
-  wrapperCustomStyle?: CustomStyle;
+  overlayCustomStyle?: CustomStyle;
 }
 
 const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProps>>(
@@ -28,22 +31,22 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     {
       children,
       open,
-      transitionDuration = 225,
+      transitionDuration = defaultTransitionDuration,
       disableHeaderSwipeableClose = false,
       disableContentSwipeableClose = false,
       onClose,
-      wrapperCustomStyle,
+      overlayCustomStyle,
       customStyle,
       ...props
     },
     ref
   ) {
-    const [isMounted, setIsMounted] = useState(false);
-    const [sheetOpen, setSheetOpen] = useState(false);
+    const { overlay, push, update, reset, getActiveOverlayState } = useOverlay();
+
     const [headerSwipeableClose, setHeaderSwipeableClose] = useState(false);
     const [contentSwipeableClose, setContentSwipeableClose] = useState(false);
 
-    const sheetPortalRef = useRef<HTMLElement | null>(null);
+    const idRef = useRef(`bottomSheet-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
     const sheetRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const sheetSwipeZoneRef = useRef<HTMLDivElement>(null);
@@ -53,6 +56,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       startClientY: 0,
       lastTranslateY: 0
     });
+
+    const activeOverlayState = getActiveOverlayState(idRef.current, 'bottomSheet');
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
@@ -67,7 +72,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           translateY = 0;
         }
 
-        sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+        sheetRef.current.style.transform = `translateY(${translateY}px)`;
         measureRef.current.lastTranslateY = translateY;
       } else if (contentSwipeableClose && sheetRef.current && contentRef.current) {
         let translateY = event.clientY - measureRef.current.startClientY;
@@ -76,7 +81,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           translateY = 0;
         }
 
-        sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+        sheetRef.current.style.transform = `translateY(${translateY}px)`;
         measureRef.current.lastTranslateY = translateY;
       }
     };
@@ -95,7 +100,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         translateY = 0;
       }
 
-      sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+      sheetRef.current.style.transform = `translateY(${translateY}px)`;
       measureRef.current.lastTranslateY = translateY;
     };
 
@@ -145,67 +150,60 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         translateY = 0;
       }
 
-      sheetRef.current.setAttribute('style', `transform: translateY(${translateY}px)`);
+      sheetRef.current.style.transform = `translateY(${translateY}px)`;
       measureRef.current.lastTranslateY = translateY;
     };
 
     useEffect(() => {
       if (open) {
-        document.body.style.overflow = 'hidden';
-
-        let sheet = document.getElementById('sheet-root');
-
-        if (!sheet) {
-          sheet = document.createElement('div');
-          sheet.id = 'sheet-root';
-          sheet.style.position = 'fixed';
-          sheet.style.top = '0';
-          sheet.style.left = '0';
-          sheet.style.width = '100%';
-          sheet.style.height = '100%';
-          sheet.style.zIndex = '1000';
-          sheet.setAttribute('role', 'presentation');
-
-          document.body.appendChild(sheet);
-        }
-
-        sheetPortalRef.current = sheet;
-
-        setIsMounted(true);
-
-        if (sheetCloseTimerRef.current) {
-          clearTimeout(sheetCloseTimerRef.current);
-        }
-
-        sheetOpenTimerRef.current = setTimeout(() => setSheetOpen(true), 100);
+        push({
+          id: idRef.current,
+          status: 'pending',
+          props: {
+            onClose,
+            transitionDuration,
+            overlayCustomStyle
+          },
+          from: 'bottomSheet'
+        });
       }
-    }, [open]);
+    }, [onClose, open, overlayCustomStyle, push, transitionDuration]);
 
     useEffect(() => {
-      if (!open && sheetOpen && sheetPortalRef.current) {
-        if (sheetOpenTimerRef.current) {
-          clearTimeout(sheetOpenTimerRef.current);
-        }
-
-        sheetCloseTimerRef.current = setTimeout(() => {
-          if (sheetPortalRef.current) {
-            sheetPortalRef.current.remove();
-            sheetPortalRef.current = null;
+      if (activeOverlayState?.status === 'pending') {
+        sheetOpenTimerRef.current = setTimeout(() => {
+          if (sheetRef.current) {
+            sheetRef.current.style.transform = 'translateY(0)';
           }
-
-          setIsMounted(false);
-          setSheetOpen(false);
-          setHeaderSwipeableClose(false);
-          setContentSwipeableClose(false);
-
-          document.body.removeAttribute('style');
-          measureRef.current = {
-            startClientY: 0,
-            lastTranslateY: 0
-          };
-        }, transitionDuration + 100);
+          update(idRef.current, 'active');
+        }, transitionDuration);
       }
-    }, [open, sheetOpen, transitionDuration]);
+    }, [activeOverlayState, transitionDuration, update]);
+
+    useEffect(() => {
+      if (!sheetRef.current) return;
+
+      if (activeOverlayState?.status === 'active') {
+        sheetRef.current.style.pointerEvents = 'auto';
+      }
+    }, [activeOverlayState?.status]);
+
+    useEffect(() => {
+      if (open || !sheetRef.current) return;
+      if (activeOverlayState?.status !== 'active') return;
+
+      sheetRef.current.style.transform = 'translateY(100%)';
+
+      sheetCloseTimerRef.current = setTimeout(() => {
+        update(idRef.current, 'fulfilled');
+        setHeaderSwipeableClose(false);
+        setContentSwipeableClose(false);
+        measureRef.current = {
+          startClientY: 0,
+          lastTranslateY: 0
+        };
+      }, transitionDuration);
+    }, [open, overlay.root, activeOverlayState, transitionDuration, update]);
 
     useEffect(() => {
       return () => {
@@ -215,71 +213,64 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         if (sheetCloseTimerRef.current) {
           clearTimeout(sheetCloseTimerRef.current);
         }
-        if (sheetPortalRef.current) {
-          sheetPortalRef.current.remove();
-          sheetPortalRef.current = null;
-
-          setIsMounted(false);
-          setSheetOpen(false);
-          setHeaderSwipeableClose(false);
-          setContentSwipeableClose(false);
-          measureRef.current = {
-            startClientY: 0,
-            lastTranslateY: 0
-          };
-        }
-        document.body.removeAttribute('style');
+        setHeaderSwipeableClose(false);
+        setContentSwipeableClose(false);
+        measureRef.current = {
+          startClientY: 0,
+          lastTranslateY: 0
+        };
       };
     }, []);
 
-    if (isMounted && sheetPortalRef.current) {
-      return createPortal(
-        <Wrapper
-          ref={ref}
-          sheetOpen={sheetOpen}
-          sheetClose={!open}
+    useEffect(() => {
+      return () => {
+        if (overlay.root) {
+          reset();
+        }
+      };
+    }, [overlay.root, reset]);
+
+    if (!overlay.root || !activeOverlayState) return null;
+
+    return createPortal(
+      <Wrapper
+        ref={ref}
+        onClick={onClose}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleEndSwipeable}
+        transitionDuration={transitionDuration}
+      >
+        <StyledBottomSheet
+          ref={sheetRef}
           transitionDuration={transitionDuration}
-          onClick={onClose}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleEndSwipeable}
-          css={wrapperCustomStyle}
+          onClick={handleClick}
+          css={customStyle}
         >
-          <StyledBottomSheet
-            ref={sheetRef}
-            sheetOpen={sheetOpen}
-            sheetClose={!open}
-            transitionDuration={transitionDuration}
-            onClick={handleClick}
-            css={customStyle}
-          >
-            {!disableHeaderSwipeableClose && (
-              <SwipeZone
-                ref={sheetSwipeZoneRef}
-                onMouseDown={handleMouseDown}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleEndSwipeable}
-              >
-                <Rectangle />
-              </SwipeZone>
-            )}
-            <Content
-              {...props}
-              ref={contentRef}
-              onMouseDown={handleMouseDownContent}
-              onTouchStart={handleTouchStartContent}
-              onTouchMove={handleTouchMoveContent}
+          {!disableHeaderSwipeableClose && (
+            <SwipeZone
+              ref={sheetSwipeZoneRef}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
               onTouchEnd={handleEndSwipeable}
             >
-              {children}
-            </Content>
-          </StyledBottomSheet>
-        </Wrapper>,
-        sheetPortalRef.current
-      );
-    }
-
-    return null;
+              <Rectangle />
+            </SwipeZone>
+          )}
+          <Content
+            {...props}
+            ref={contentRef}
+            onMouseDown={handleMouseDownContent}
+            onTouchStart={handleTouchStartContent}
+            onTouchMove={handleTouchMoveContent}
+            onTouchEnd={handleEndSwipeable}
+          >
+            {children}
+          </Content>
+        </StyledBottomSheet>
+      </Wrapper>,
+      overlay.root
+    );
   }
 );
 

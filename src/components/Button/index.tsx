@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { BrandColor, GenericComponentProps, Size, Variant } from '@types';
+import { BrandColor, GenericComponentProps, Size, Variant } from 'src/typings';
 
 import { StyledButton } from './Button.styles';
 

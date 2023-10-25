@@ -19,12 +19,20 @@ export default defineConfig(({ command }) => {
       replacement: path.resolve(__dirname, 'src/components')
     },
     {
+      find: '@constants',
+      replacement: path.resolve(__dirname, 'src/constants')
+    },
+    {
+      find: '@styles',
+      replacement: path.resolve(__dirname, 'src/styles')
+    },
+    {
       find: '@theme',
       replacement: path.resolve(__dirname, 'src/theme')
     },
     {
-      find: '@types',
-      replacement: path.resolve(__dirname, 'src/types')
+      find: '@typings',
+      replacement: path.resolve(__dirname, 'src/typings')
     },
     {
       find: '@utils',

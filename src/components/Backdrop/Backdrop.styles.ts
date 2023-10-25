@@ -2,48 +2,30 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { BackdropProps } from '.';
 
-export const StyledBackdrop = styled.div<
-  Pick<BackdropProps, 'open' | 'transitionDuration'> & {
-    close: boolean;
-  }
->`
+export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity ${({ transitionDuration }) => transitionDuration}ms ease;
-  overflow: hidden;
-  z-index: ${({ theme: { zIndex } }) => zIndex.dialog};
 
-  ${({ open }): CSSObject =>
-    open
-      ? {
-          opacity: 1,
-          pointerEvents: 'visible'
-        }
-      : {}};
-
-  ${({ close }): CSSObject =>
-    close
-      ? {
-          opacity: 0,
-          pointerEvents: 'none'
-        }
-      : {}};
+  z-index: ${({ theme: { zIndex } }) => zIndex.backdrop};
 `;
 
-export const Content = styled.div<Pick<BackdropProps, 'centered'>>`
+export const StyledBackdrop = styled.div<Pick<BackdropProps, 'transitionDuration' | 'centered'>>`
+  overflow-y: auto;
+  pointer-events: none;
+  opacity: 0;
+
+  transition: opacity ${({ transitionDuration }) => transitionDuration}ms;
+
   ${({ centered }): CSSObject =>
     centered
       ? {
-          position: 'absolute',
+          position: 'fixed',
           top: '50%',
           left: '50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          width: 'auto',
+          height: 'auto'
         }
       : {}};
 `;

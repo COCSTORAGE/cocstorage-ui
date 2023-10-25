@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import useTheme from '@theme/provider/useTheme';
+import useTheme from '@theme/hooks/useTheme';
 
 import {
   BrandColor,
@@ -11,7 +11,7 @@ import {
   TypographyLineHeight,
   TypographyVariant,
   TypographyWeight
-} from '@types';
+} from 'src/typings';
 
 import { StyledTypography } from './Typography.styles';
 

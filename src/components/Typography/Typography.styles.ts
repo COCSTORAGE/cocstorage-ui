@@ -1,7 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { CSSValue, Color, TypographyLineHeight, TypographyWeight } from '@types';
 import { getBrandColorCode } from '@utils';
+import { CSSValue, Color, TypographyLineHeight, TypographyWeight } from 'src/typings';
 
 import { TypographyProps } from '.';
 

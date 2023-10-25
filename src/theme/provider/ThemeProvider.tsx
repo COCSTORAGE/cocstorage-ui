@@ -1,16 +1,15 @@
-import { PropsWithChildren, useMemo } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
+import ThemeContext from '@theme/context/ThemeContext';
+
 import { dark } from '@theme/dark';
-
 import { light } from '@theme/light';
-
-import ThemeContext from '@theme/provider/ThemeContext';
-
+import OverlayProvider from '@theme/provider/OverlayProvider';
 import GlobalStyles from '@theme/utils/GlobalStyles';
 
-import { ThemeMode } from '@types';
+import { ThemeMode } from 'src/typings';
 
 export interface ThemeProviderProps {
   theme: ThemeMode;
@@ -22,12 +21,14 @@ function ThemeProvider({
   theme,
   globalStyles = true
 }: PropsWithChildren<ThemeProviderProps>) {
-  const cocTheme = useMemo(() => (theme === 'light' ? light : dark), [theme]);
+  const cocTheme = theme === 'light' ? light : dark;
 
   return (
     <ThemeContext.Provider value={theme}>
       {globalStyles && <GlobalStyles />}
-      <EmotionThemeProvider theme={cocTheme}>{children}</EmotionThemeProvider>
+      <EmotionThemeProvider theme={cocTheme}>
+        <OverlayProvider>{children}</OverlayProvider>
+      </EmotionThemeProvider>
     </ThemeContext.Provider>
   );
 }

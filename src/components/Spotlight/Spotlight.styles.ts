@@ -2,15 +2,8 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { SpotlightProps } from '.';
 
-export const StyledSpotlight = styled.div<
-  Pick<SpotlightProps, 'open' | 'round' | 'transitionDuration'> & {
-    top: number;
-    left: number;
-  }
->`
+export const StyledSpotlight = styled.div<Pick<SpotlightProps, 'round' | 'transitionDuration'>>`
   position: fixed;
-  top: ${({ top }) => top}px;
-  left: ${({ left }) => left}px;
   width: fit-content;
   height: fit-content;
   background-color: ${({
@@ -27,14 +20,6 @@ export const StyledSpotlight = styled.div<
     round
       ? {
           borderRadius: round
-        }
-      : {}};
-
-  ${({ open }): CSSObject =>
-    open
-      ? {
-          opacity: 1,
-          pointerEvents: 'visible'
         }
       : {}};
 `;

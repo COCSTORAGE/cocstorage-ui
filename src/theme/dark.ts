@@ -204,6 +204,8 @@ export const dark: Theme = {
     bottomNavigation: 10,
     dialog: 20,
     bottomSheet: 20,
-    tooltip: 20
+    backdrop: 20,
+    tooltip: 20,
+    overlay: 20
   }
 };

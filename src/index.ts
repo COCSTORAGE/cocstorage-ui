@@ -1,4 +1,4 @@
 export * from './components';
 export * from './theme';
-export * from './types';
+export * from './typings';
 export { getBrandColorCode, convertNumberToCSSValue } from './utils';

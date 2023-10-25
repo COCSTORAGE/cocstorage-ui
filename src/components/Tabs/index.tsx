@@ -7,9 +7,9 @@ import {
   useRef
 } from 'react';
 
-import useTheme from '@theme/provider/useTheme';
+import useTheme from '@theme/hooks/useTheme';
 
-import { GenericComponentProps, ThemeMode } from '@types';
+import { GenericComponentProps, ThemeMode } from 'src/typings';
 
 import { StyledTabs, TabsInner } from './Tabs.styles';
 

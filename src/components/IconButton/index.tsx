@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, PropsWithChildren, forwardRef } from 'react';
 
-import { GenericComponentProps } from '@types';
+import { GenericComponentProps } from 'src/typings';
 
 import { StyledIconButton } from './IconButton.styles';
 

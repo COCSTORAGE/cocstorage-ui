@@ -2,7 +2,8 @@ import { HTMLAttributes, RefObject, forwardRef, useEffect, useState } from 'reac
 
 import Backdrop from '@components/Backdrop';
 
-import { CSSValue, GenericComponentProps } from '@types';
+import { defaultTransitionDuration } from '@constants';
+import { CSSValue, GenericComponentProps } from 'src/typings';
 
 import { StyledSpotlight } from './Spotlight.styles';
 
@@ -15,7 +16,16 @@ export interface SpotlightProps extends GenericComponentProps<HTMLAttributes<HTM
 }
 
 const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
-  { children, open, targetRef, round, transitionDuration = 225, onClose, customStyle, ...props },
+  {
+    children,
+    open,
+    targetRef,
+    round,
+    transitionDuration = defaultTransitionDuration,
+    onClose,
+    customStyle,
+    ...props
+  },
   ref
 ) {
   const [top, setTop] = useState(0);
@@ -47,13 +57,17 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
     <Backdrop open={open} onClose={onClose} transitionDuration={transitionDuration}>
       <StyledSpotlight
         ref={ref}
-        top={top}
-        left={left}
         open={open}
         round={round}
         transitionDuration={transitionDuration}
         {...props}
         css={customStyle}
+        style={{
+          top,
+          left,
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'visible' : 'none'
+        }}
       >
         {children}
       </StyledSpotlight>

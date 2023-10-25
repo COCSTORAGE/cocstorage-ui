@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, ReactElement, forwardRef, useRef, useState } from 'react';
 
-import { GenericComponentProps, Size, TextBarVariant } from '@types';
+import { GenericComponentProps, Size, TextBarVariant } from 'src/typings';
 
 import { EndIconWrapper, Input, Label, StartIconWrapper, StyledTextBar } from './TextBar.styles';
 

@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, ReactElement, forwardRef } from 'react';
 
-import { BrandColor, GenericComponentProps, Variant } from '@types';
+import { BrandColor, GenericComponentProps, Variant } from 'src/typings';
 
 import { StyledTag } from './Tag.styles';
 

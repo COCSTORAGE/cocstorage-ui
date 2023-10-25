@@ -3,7 +3,7 @@ import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import Icon from '@components/Icon';
 import Skeleton from '@components/Skeleton';
 
-import { CSSValue, GenericComponentProps, IconName } from '@types';
+import { CSSValue, GenericComponentProps, IconName } from 'src/typings';
 
 import { AvatarWrapper, SkeletonWrapper, StyledAvatar } from './Avatar.styles';
 

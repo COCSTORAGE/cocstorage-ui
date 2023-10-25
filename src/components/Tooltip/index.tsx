@@ -1,7 +1,10 @@
 import { HTMLAttributes, ReactElement, forwardRef, useEffect, useRef, useState } from 'react';
 
+import { defaultTransitionDuration } from '@constants';
+
+import { CustomStyle, GenericComponentProps, Variant } from '@typings';
+
 import { StyledTooltip, Wrapper } from './Tooltip.styles';
-import { CustomStyle, GenericComponentProps, Variant } from '../../types';
 
 export interface TooltipProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'content'>> {
@@ -25,7 +28,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
     variant = 'accent',
     open,
     placement = 'bottom',
-    transitionDuration = 225,
+    transitionDuration = defaultTransitionDuration,
     content,
     fillWrapper,
     centered = true,
