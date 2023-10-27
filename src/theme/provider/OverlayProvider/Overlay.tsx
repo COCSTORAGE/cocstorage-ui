@@ -45,20 +45,30 @@ function Overlay() {
   }, [setRoot, states]);
 
   useEffect(() => {
-    if (!ref.current || !root) return;
+    if (!ref.current || !root || !open) return;
 
     const isFulfilledAll =
       states.length === states.filter(({ status }) => status === 'fulfilled').length;
-    const hasPending = states.length === states.filter(({ status }) => status === 'pending').length;
 
     if (isFulfilledAll) {
       setOpen(false);
 
       closeTimerRef.current = setTimeout(reset, currentOverlayState?.props?.transitionDuration);
-    } else if (hasPending) {
+    }
+  }, [open, currentOverlayState?.props?.transitionDuration, reset, root, states]);
+
+  useEffect(() => {
+    const hasOpenStatus =
+      states.filter(({ status }) => ['pending', 'active'].includes(status)).length > 0;
+
+    if (hasOpenStatus) {
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+      }
+
       setOpen(true);
     }
-  }, [currentOverlayState?.props?.transitionDuration, reset, root, states]);
+  }, [states]);
 
   useEffect(() => {
     return () => {
