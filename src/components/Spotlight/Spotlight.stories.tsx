@@ -1,7 +1,6 @@
 import { RefAttributes, useRef, useState } from 'react';
 
 import Button from '@components/Button';
-import Tooltip from '@components/Tooltip';
 
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -25,13 +24,16 @@ function SpotlightWithHooks(args: SpotlightProps & RefAttributes<HTMLDivElement>
   return (
     <>
       <Button ref={buttonRef} onClick={handleClick}>
-        Spotlight Open
+        Open Spotlight
       </Button>
-      <Spotlight {...args} open={open} onClose={handleClose} targetRef={buttonRef} round={8}>
-        <Tooltip open={open} content="Tooltip" placement="right" onClose={handleClose}>
-          <Button onClick={handleClose}>Spotlight Open</Button>
-        </Tooltip>
-      </Spotlight>
+      <Spotlight
+        {...args}
+        open={open}
+        onClose={handleClose}
+        targetRef={buttonRef}
+        round={8}
+        content="Welcome!"
+      />
     </>
   );
 }

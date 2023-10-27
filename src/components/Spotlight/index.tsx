@@ -2,6 +2,7 @@ import { HTMLAttributes, RefObject, forwardRef, useEffect, useState } from 'reac
 
 import Backdrop from '@components/Backdrop';
 
+import Tooltip from '@components/Tooltip';
 import { defaultTransitionDuration } from '@constants';
 import { CSSValue, GenericComponentProps } from '@typings';
 
@@ -12,16 +13,25 @@ export interface SpotlightProps extends GenericComponentProps<HTMLAttributes<HTM
   targetRef: RefObject<HTMLElement>;
   round?: CSSValue;
   transitionDuration?: number;
+  tooltip?: {
+    placement?: 'top' | 'left' | 'right' | 'bottom';
+    content?: string;
+    centered?: boolean;
+    left?: number;
+    triangleLeft?: number;
+    onClick?: () => void;
+    disableOnClose?: boolean;
+  };
   onClose: () => void;
 }
 
 const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
   {
-    children,
     open,
     targetRef,
     round,
     transitionDuration = defaultTransitionDuration,
+    tooltip: { content = '', onClick, ...tooltipProps } = {},
     onClose,
     customStyle,
     ...props
@@ -30,26 +40,38 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
 ) {
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
     if (open && targetRef.current) {
-      setTop(targetRef.current.offsetTop);
-      setLeft(targetRef.current.offsetLeft);
+      const { clientWidth, clientHeight } = targetRef.current;
+      const { top: bcrTop, left: bcrLeft } = targetRef.current.getBoundingClientRect();
+      setTop(bcrTop);
+      setLeft(bcrLeft);
+      setWidth(clientWidth);
+      setHeight(clientHeight);
     }
   }, [open, targetRef]);
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResizeAndScroll = () => {
       if (open && targetRef.current) {
-        setTop(targetRef.current.offsetTop);
-        setLeft(targetRef.current.offsetLeft);
+        const { clientWidth, clientHeight } = targetRef.current;
+        const { top: bcrTop, left: bcrLeft } = targetRef.current.getBoundingClientRect();
+        setTop(bcrTop);
+        setLeft(bcrLeft);
+        setWidth(clientWidth);
+        setHeight(clientHeight);
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResizeAndScroll);
+    window.addEventListener('scroll', handleResizeAndScroll);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResizeAndScroll);
+      window.removeEventListener('scroll', handleResizeAndScroll);
     };
   }, [open, targetRef]);
 
@@ -63,12 +85,21 @@ const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight(
         {...props}
         css={customStyle}
         style={{
+          width,
+          height,
           top,
           left,
           ...props.style
         }}
       >
-        {children}
+        <Tooltip open={!!content} content={content} onClose={onClose} {...tooltipProps}>
+          <div
+            onClick={onClick}
+            role="presentation"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: targetRef.current?.outerHTML || '' }}
+          />
+        </Tooltip>
       </StyledSpotlight>
     </Backdrop>
   );

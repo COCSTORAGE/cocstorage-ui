@@ -4,15 +4,12 @@ import { convertNumberToCSSValue } from '@utils';
 
 import { TooltipProps } from '.';
 
-export const Wrapper = styled.div<Pick<TooltipProps, 'fillWrapper'>>`
-  width: max-content;
+export const Wrapper = styled.div`
+  display: flex;
+`;
 
-  ${({ fillWrapper }): CSSObject =>
-    fillWrapper
-      ? {
-          width: '100%'
-        }
-      : {}}
+export const WrapperInner = styled.div`
+  flex-grow: 1;
 `;
 
 export const StyledTooltip = styled.div<
@@ -21,10 +18,10 @@ export const StyledTooltip = styled.div<
     'variant' | 'placement' | 'transitionDuration' | 'centered' | 'left' | 'triangleLeft'
   > & {
     tooltipOpen: boolean;
-    wrapperClientHeight: number;
-    wrapperClientWidth: number;
-    clientWidth: number;
-    clientHeight: number;
+    wrapperWidth: number;
+    wrapperHeight: number;
+    tooltipWidth: number;
+    tooltipHeight: number;
   }
 >`
   position: absolute;
@@ -76,10 +73,10 @@ export const StyledTooltip = styled.div<
     placement,
     tooltipOpen,
     centered,
-    wrapperClientWidth,
-    wrapperClientHeight,
-    clientWidth,
-    clientHeight,
+    wrapperWidth,
+    wrapperHeight,
+    tooltipWidth,
+    tooltipHeight,
     left = 0
   }): CSSObject => {
     let cssObject: CSSObject;
@@ -88,22 +85,22 @@ export const StyledTooltip = styled.div<
         cssObject = {
           transform: `translate(${
             centered
-              ? `calc(${Math.floor(wrapperClientWidth / 2)}px - ${Math.floor(clientWidth / 2)}px)`
+              ? `calc(${Math.floor(wrapperWidth / 2)}px - ${Math.floor(tooltipWidth / 2)}px)`
               : convertNumberToCSSValue(left)
-          }, -${wrapperClientHeight + clientHeight + 12}px)`
+          }, -${wrapperHeight + tooltipHeight + 12}px)`
         };
         break;
       case 'left':
         cssObject = {
-          transform: `translate(-${clientWidth + 12}px, -${
-            wrapperClientHeight - Math.floor(clientHeight / 4)
+          transform: `translate(-${tooltipWidth + 12}px, -${
+            wrapperHeight - Math.floor(tooltipHeight / 4)
           }px)`
         };
         break;
       case 'right':
         cssObject = {
-          transform: `translate(${wrapperClientWidth + 12}px, -${
-            wrapperClientHeight - Math.floor(clientHeight / 4)
+          transform: `translate(${wrapperWidth + 12}px, -${
+            wrapperHeight - Math.floor(tooltipHeight / 4)
           }px)`
         };
         break;
@@ -111,7 +108,7 @@ export const StyledTooltip = styled.div<
         cssObject = {
           transform: `translate(${
             centered
-              ? `calc(${Math.floor(wrapperClientWidth / 2)}px - ${Math.floor(clientWidth / 2)}px)`
+              ? `calc(${Math.floor(wrapperWidth / 2)}px - ${Math.floor(tooltipWidth / 2)}px)`
               : convertNumberToCSSValue(left)
           }, 12px)`
         };

@@ -29,6 +29,7 @@ export const Wrapper = styled.div<Pick<DialogProps, 'fullWidth' | 'fullScreen'>>
 export const StyledDialog = styled.div<Pick<DialogProps, 'fullScreen' | 'transitionDuration'>>`
   width: 100%;
   height: 100%;
+  margin: auto;
 
   ${({ fullScreen }): CSSObject =>
     !fullScreen
@@ -39,13 +40,13 @@ export const StyledDialog = styled.div<Pick<DialogProps, 'fullScreen' | 'transit
           width: '100%',
           height: '100%'
         }};
-  
+
   background-color: ${({
     theme: {
       palette: { background }
     }
   }) => background.bg};
-  
+
   overflow-y: auto;
   pointer-events: none;
   opacity: 0;
@@ -53,7 +54,6 @@ export const StyledDialog = styled.div<Pick<DialogProps, 'fullScreen' | 'transit
   visibility: hidden;
 
   transition:
-          opacity ${({ transitionDuration }) => transitionDuration}ms,
-          transform ${({ transitionDuration }) => transitionDuration}ms;
-}
+    opacity ${({ transitionDuration }) => transitionDuration}ms,
+    transform ${({ transitionDuration }) => transitionDuration}ms;
 `;

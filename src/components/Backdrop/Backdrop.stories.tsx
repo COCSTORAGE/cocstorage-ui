@@ -30,11 +30,11 @@ function BackdropWithHooks(args: BackdropProps & RefAttributes<HTMLDivElement>) 
   return (
     <>
       <Button variant="accent" onClick={handleClick}>
-        Backdrop Open
+        Open Backdrop
       </Button>
       <Backdrop {...args} open={open} onClose={handleClose}>
         <Button variant="accent" onClick={handleClose}>
-          Backdrop Close
+          Close Backdrop
         </Button>
       </Backdrop>
     </>

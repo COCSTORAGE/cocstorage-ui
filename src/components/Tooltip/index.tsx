@@ -4,7 +4,7 @@ import { defaultTransitionDuration } from '@constants';
 
 import { CustomStyle, GenericComponentProps, Variant } from '@typings';
 
-import { StyledTooltip, Wrapper } from './Tooltip.styles';
+import { StyledTooltip, Wrapper, WrapperInner } from './Tooltip.styles';
 
 export interface TooltipProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'content'>> {
@@ -13,7 +13,6 @@ export interface TooltipProps
   placement?: 'top' | 'left' | 'right' | 'bottom';
   transitionDuration?: number;
   content: ReactElement | string;
-  fillWrapper?: boolean;
   centered?: boolean;
   left?: number;
   triangleLeft?: number;
@@ -30,7 +29,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
     placement = 'bottom',
     transitionDuration = defaultTransitionDuration,
     content,
-    fillWrapper,
     centered = true,
     left = 0,
     triangleLeft = 10,
@@ -43,24 +41,49 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
   ref
 ) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [wrapperClientWidth, setWrapperClientWidth] = useState(0);
-  const [wrapperClientHeight, setWrapperClientHeight] = useState(0);
-  const [clientWidth, setClientWidth] = useState(0);
-  const [clientHeight, setClientHeight] = useState(0);
+  const [wrapperWidth, setWrapperWidth] = useState(0);
+  const [wrapperHeight, setWrapperHeight] = useState(0);
+  const [tooltipWidth, setTooltipWidth] = useState(0);
+  const [tooltipHeight, setTooltipHeight] = useState(0);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (open) {
-      setWrapperClientWidth(wrapperRef.current?.clientWidth || 0);
-      setWrapperClientHeight(wrapperRef.current?.clientHeight || 0);
-      setClientWidth(tooltipRef.current?.clientWidth || 0);
-      setClientHeight(tooltipRef.current?.clientHeight || 0);
+    if (open && wrapperRef.current && tooltipRef.current) {
+      const { clientWidth: wrapperClientWidth, clientHeight: wrapperClientHeight } =
+        wrapperRef.current;
+      const { clientWidth: tooltipClientWidth, clientHeight: tooltipClientHeight } =
+        tooltipRef.current;
+      setWrapperWidth(wrapperClientWidth);
+      setWrapperHeight(wrapperClientHeight);
+      setTooltipWidth(tooltipClientWidth);
+      setTooltipHeight(tooltipClientHeight);
       setTooltipOpen(true);
     } else {
       setTooltipOpen(false);
     }
+  }, [open]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (open && wrapperRef.current && tooltipRef.current) {
+        const { clientWidth: wrapperClientWidth, clientHeight: wrapperClientHeight } =
+          wrapperRef.current;
+        const { clientWidth: tooltipClientWidth, clientHeight: tooltipClientHeight } =
+          tooltipRef.current;
+        setWrapperWidth(wrapperClientWidth);
+        setWrapperHeight(wrapperClientHeight);
+        setTooltipWidth(tooltipClientWidth);
+        setTooltipHeight(tooltipClientHeight);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [open]);
 
   useEffect(() => {
@@ -76,18 +99,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
   }, [tooltipOpen, disableOnClose, onClose]);
 
   return (
-    <div ref={ref}>
-      <Wrapper ref={wrapperRef} fillWrapper={fillWrapper} css={wrapperCustomStyle}>
+    <Wrapper ref={ref}>
+      <WrapperInner ref={wrapperRef} css={wrapperCustomStyle}>
         {children}
         <StyledTooltip
           ref={tooltipRef}
           variant={variant}
           placement={placement}
           transitionDuration={transitionDuration}
-          wrapperClientWidth={wrapperClientWidth}
-          wrapperClientHeight={wrapperClientHeight}
-          clientWidth={clientWidth}
-          clientHeight={clientHeight}
+          wrapperWidth={wrapperWidth}
+          wrapperHeight={wrapperHeight}
+          tooltipWidth={tooltipWidth}
+          tooltipHeight={tooltipHeight}
           tooltipOpen={tooltipOpen}
           centered={centered}
           left={left}
@@ -97,8 +120,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(
         >
           {content}
         </StyledTooltip>
-      </Wrapper>
-    </div>
+      </WrapperInner>
+    </Wrapper>
   );
 });
 

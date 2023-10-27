@@ -28,7 +28,7 @@ function TooltipWithHooks(args: TooltipProps & RefAttributes<HTMLDivElement>) {
 
   return (
     <Tooltip {...args} open={open} onClose={handleClose} content="Tooltip">
-      <Button onClick={handleClick}>Tooltip Open</Button>
+      <Button onClick={handleClick}>Open Tooltip</Button>
     </Tooltip>
   );
 }

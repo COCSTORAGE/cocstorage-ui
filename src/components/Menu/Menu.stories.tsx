@@ -31,11 +31,11 @@ function MenuWithHooks(args: MenuProps & RefAttributes<HTMLDivElement>) {
   return (
     <>
       <Button ref={buttonRef} onClick={handleOpen}>
-        Menu Open
+        Open Menu
       </Button>
       <Menu {...args} anchorRef={buttonRef} open={open} onClose={handleClose}>
         <div style={{ padding: 10 }}>
-          <Button onClick={handleClose}>Close Menu</Button>
+          <Button onClick={handleClose}>Menu Close</Button>
         </div>
       </Menu>
     </>
