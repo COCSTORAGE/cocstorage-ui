@@ -1,6 +1,6 @@
 {
   "name": "@cocstorage/ui",
-  "version": "0.1.60",
+  "version": "0.2.0",
   "description": "Cocstorage React UI Components",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
