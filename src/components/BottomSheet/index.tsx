@@ -41,7 +41,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     },
     ref
   ) {
-    const { overlay, push, update, reset, getActiveOverlayState } = useOverlay();
+    const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
 
     const [headerSwipeableClose, setHeaderSwipeableClose] = useState(false);
     const [contentSwipeableClose, setContentSwipeableClose] = useState(false);
@@ -57,7 +57,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       lastTranslateY: 0
     });
 
-    const activeOverlayState = getActiveOverlayState(idRef.current, 'bottomSheet');
+    const currentOverlayState = getCurrentOverlayState(idRef.current, 'bottomSheet');
+    const hasOverlayState = !!getOverlayState(idRef.current, 'bottomSheet');
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
@@ -110,9 +111,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       const swipedPercentage =
         (measureRef.current.lastTranslateY / (sheetRef.current.clientHeight || 0)) * 100;
 
-      sheetRef.current.removeAttribute('style');
-
       if (swipedPercentage >= 10) {
+        sheetRef.current.removeAttribute('style');
         onClose();
       }
 
@@ -155,7 +155,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     };
 
     useEffect(() => {
-      if (open) {
+      if (open && !hasOverlayState) {
         push({
           id: idRef.current,
           status: 'pending',
@@ -167,10 +167,10 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           from: 'bottomSheet'
         });
       }
-    }, [onClose, open, overlayCustomStyle, push, transitionDuration]);
+    }, [onClose, open, overlayCustomStyle, push, transitionDuration, hasOverlayState]);
 
     useEffect(() => {
-      if (activeOverlayState?.status === 'pending') {
+      if (currentOverlayState?.status === 'pending') {
         sheetOpenTimerRef.current = setTimeout(() => {
           if (sheetRef.current) {
             sheetRef.current.style.transform = 'translateY(0)';
@@ -178,19 +178,19 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           update(idRef.current, 'active');
         }, transitionDuration);
       }
-    }, [activeOverlayState, transitionDuration, update]);
+    }, [currentOverlayState, transitionDuration, update]);
 
     useEffect(() => {
       if (!sheetRef.current) return;
 
-      if (activeOverlayState?.status === 'active') {
+      if (currentOverlayState?.status === 'active') {
         sheetRef.current.style.pointerEvents = 'auto';
       }
-    }, [activeOverlayState?.status]);
+    }, [currentOverlayState?.status]);
 
     useEffect(() => {
       if (open || !sheetRef.current) return;
-      if (activeOverlayState?.status !== 'active') return;
+      if (currentOverlayState?.status !== 'active') return;
 
       sheetRef.current.style.transform = 'translateY(100%)';
 
@@ -203,7 +203,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
           lastTranslateY: 0
         };
       }, transitionDuration);
-    }, [open, overlay.root, activeOverlayState, transitionDuration, update]);
+    }, [open, overlay.root, currentOverlayState, transitionDuration, update]);
 
     useEffect(() => {
       return () => {
@@ -230,7 +230,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
       };
     }, [overlay.root, reset]);
 
-    if (!overlay.root || !activeOverlayState) return null;
+    if (!overlay.root || !currentOverlayState) return null;
 
     return createPortal(
       <Wrapper

@@ -12,7 +12,8 @@ function Overlay() {
     setRoot
   } = useOverlay();
 
-  const currentOverlayState = states[states.length - 1];
+  const currentOverlayState =
+    states.filter(({ status }) => ['pending', 'active'].includes(status))[0] || states[0];
 
   const [open, setOpen] = useState(true);
 

@@ -61,6 +61,12 @@ function WithQueue(args: BottomSheetProps & RefAttributes<HTMLDivElement>) {
 
   const handleCloseThirdBottomSheet = () => setOpenThirdBottomSheet(false);
 
+  const handleOpenAll = () => {
+    setOpen(true);
+    setOpenSecondBottomSheet(true);
+    setOpenThirdBottomSheet(true);
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
     setOpen(args.open);
@@ -79,14 +85,27 @@ function WithQueue(args: BottomSheetProps & RefAttributes<HTMLDivElement>) {
         <Button variant="accent" onClick={handleOpenThirdBottomSheet}>
           Open Third BottomSheet
         </Button>
+        <Button variant="accent" onClick={handleOpenAll}>
+          Open All
+        </Button>
       </Flexbox>
       <BottomSheet {...args} open={open} onClose={handleClose}>
         <Button onClick={handleOpenSecondBottomSheet}>Open Second BottomSheet</Button>
       </BottomSheet>
-      <BottomSheet {...args} open={openSecondBottomSheet} onClose={handleCloseSecondBottomSheet}>
+      <BottomSheet
+        {...args}
+        open={openSecondBottomSheet}
+        onClose={handleCloseSecondBottomSheet}
+        transitionDuration={325}
+      >
         <Button onClick={handleOpenThirdBottomSheet}>Open Third BottomSheet</Button>
       </BottomSheet>
-      <BottomSheet {...args} open={openThirdBottomSheet} onClose={handleCloseThirdBottomSheet}>
+      <BottomSheet
+        {...args}
+        open={openThirdBottomSheet}
+        onClose={handleCloseThirdBottomSheet}
+        transitionDuration={425}
+      >
         <Button onClick={handleCloseThirdBottomSheet}>Close Third BottomSheet</Button>
       </BottomSheet>
     </>

@@ -61,6 +61,12 @@ function WithQueue(args: DialogProps & RefAttributes<HTMLDivElement>) {
 
   const handleCloseThirdDialog = () => setOpenThirdDialog(false);
 
+  const handleOpenAll = () => {
+    setOpen(true);
+    setOpenSecondDialog(true);
+    setOpenThirdDialog(true);
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
     setOpen(args.open);
@@ -79,14 +85,17 @@ function WithQueue(args: DialogProps & RefAttributes<HTMLDivElement>) {
         <Button variant="accent" onClick={handleOpenThirdDialog}>
           Open Third Dialog
         </Button>
+        <Button variant="accent" onClick={handleOpenAll}>
+          Open All
+        </Button>
       </Flexbox>
       <Dialog {...args} open={open} onClose={handleClose}>
         <Button onClick={handleOpenSecondDialog}>Open Second Dialog</Button>
       </Dialog>
-      <Dialog open={openSecondDialog} onClose={handleCloseSecondDialog}>
+      <Dialog open={openSecondDialog} onClose={handleCloseSecondDialog} transitionDuration={325}>
         <Button onClick={handleOpenThirdDialog}>Open Third Dialog</Button>
       </Dialog>
-      <Dialog open={openThirdDialog} onClose={handleCloseThirdDialog}>
+      <Dialog open={openThirdDialog} onClose={handleCloseThirdDialog} transitionDuration={425}>
         <Button onClick={handleCloseThirdDialog}>Close Third Dialog</Button>
       </Dialog>
     </>

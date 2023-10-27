@@ -63,6 +63,12 @@ function WithQueue(args: BackdropProps & RefAttributes<HTMLDivElement>) {
 
   const handleCloseThirdBackdrop = () => setOpenThirdBackdrop(false);
 
+  const handleOpenAll = () => {
+    setOpen(true);
+    setOpenSecondBackdrop(true);
+    setOpenThirdBackdrop(true);
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
     setOpen(args.open);
@@ -80,6 +86,9 @@ function WithQueue(args: BackdropProps & RefAttributes<HTMLDivElement>) {
         </Button>
         <Button variant="accent" onClick={handleOpenThirdBackdrop}>
           Open Third Backdrop
+        </Button>
+        <Button variant="accent" onClick={handleOpenAll}>
+          Open All
         </Button>
       </Flexbox>
       <Backdrop {...args} open={open} onClose={handleClose}>

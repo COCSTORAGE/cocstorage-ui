@@ -10,6 +10,7 @@ module.exports = {
   ],
   rules: {
     quotes: ['error', 'single'],
+    'no-console': 'error',
     'no-use-before-define': 'off',
     'import/no-cycle': 'off',
     'import/extensions': [

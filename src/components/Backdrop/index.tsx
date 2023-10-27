@@ -27,19 +27,20 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
   },
   ref
 ) {
-  const { overlay, push, update, reset, getActiveOverlayState } = useOverlay();
+  const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
 
   const idRef = useRef(`backdrop-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const contentRef = useRef<HTMLDivElement>(null);
   const backdropOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const backdropCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeOverlayState = getActiveOverlayState(idRef.current, 'backdrop');
+  const currentOverlayState = getCurrentOverlayState(idRef.current, 'backdrop');
+  const hasOverlayState = !!getOverlayState(idRef.current, 'backdrop');
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   useEffect(() => {
-    if (open) {
+    if (open && !hasOverlayState) {
       push({
         id: idRef.current,
         status: 'pending',
@@ -51,10 +52,10 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
         }
       });
     }
-  }, [open, push, onClose, transitionDuration, customStyle]);
+  }, [open, push, onClose, transitionDuration, customStyle, hasOverlayState]);
 
   useEffect(() => {
-    if (activeOverlayState?.status === 'pending') {
+    if (currentOverlayState?.status === 'pending') {
       backdropOpenTimerRef.current = setTimeout(() => {
         if (contentRef.current) {
           contentRef.current.style.opacity = '1';
@@ -62,26 +63,26 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
         update(idRef.current, 'active');
       }, transitionDuration);
     }
-  }, [activeOverlayState, transitionDuration, update]);
+  }, [currentOverlayState, transitionDuration, update]);
 
   useEffect(() => {
-    if (activeOverlayState?.status === 'active') {
+    if (currentOverlayState?.status === 'active') {
       if (contentRef.current) {
         contentRef.current.style.pointerEvents = 'auto';
       }
     }
-  }, [activeOverlayState?.status]);
+  }, [currentOverlayState?.status]);
 
   useEffect(() => {
     if (open || !contentRef.current) return;
-    if (activeOverlayState?.status !== 'active') return;
+    if (currentOverlayState?.status !== 'active') return;
 
     contentRef.current.style.opacity = '0';
 
     backdropCloseTimerRef.current = setTimeout(() => {
       update(idRef.current, 'fulfilled');
     }, transitionDuration);
-  }, [open, activeOverlayState, transitionDuration, update]);
+  }, [open, currentOverlayState, transitionDuration, update]);
 
   useEffect(() => {
     return () => {
@@ -102,10 +103,10 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
     };
   }, [overlay.root, reset]);
 
-  if (!overlay.root || !activeOverlayState) return null;
+  if (!overlay.root || !currentOverlayState) return null;
 
   return createPortal(
-    <Wrapper ref={ref}>
+    <Wrapper ref={ref} onClick={onClose}>
       <StyledBackdrop
         ref={contentRef}
         onClick={handleClick}

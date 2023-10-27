@@ -45,19 +45,19 @@ export default function useOverlay() {
     [setOverlay]
   );
 
-  const getActiveOverlayState = (id: string, from: OverlayFrom) => {
-    const hasAlreadyActiveOverlayState = overlay.states.some(
-      (overlayState) =>
-        overlayState.id !== id && overlayState.status === 'active' && overlayState.from === from
+  const getOverlayState = (id: string, from: OverlayFrom) =>
+    overlay.states.find((overlayState) => overlayState.id === id && overlayState.from === from);
+
+  const getCurrentOverlayState = (id: string, from: OverlayFrom) => {
+    const [firstInOverlayState] = overlay.states.filter(
+      (overlayState) => overlayState.status !== 'fulfilled' && overlayState.from === from
     );
 
-    if (hasAlreadyActiveOverlayState) {
+    if (!firstInOverlayState || firstInOverlayState.id !== id) {
       return null;
     }
 
-    return overlay.states.find(
-      (overlayState) => overlayState.id === id && overlayState.status !== 'fulfilled'
-    );
+    return firstInOverlayState;
   };
 
   return {
@@ -66,6 +66,7 @@ export default function useOverlay() {
     update,
     reset,
     setRoot,
-    getActiveOverlayState
+    getCurrentOverlayState,
+    getOverlayState
   };
 }

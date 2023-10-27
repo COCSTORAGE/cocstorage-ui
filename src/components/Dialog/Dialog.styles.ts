@@ -2,9 +2,18 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { DialogProps } from '.';
 
-export const Wrapper = styled.div<Pick<DialogProps, 'fullWidth' | 'fullScreen'>>`
-  max-width: 100%;
+export const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 
+  z-index: ${({ theme: { zIndex } }) => zIndex.dialog};
+`;
+
+export const WrapperInner = styled.div<Pick<DialogProps, 'fullWidth' | 'fullScreen'>>`
   ${({ fullWidth }): CSSObject =>
     fullWidth
       ? {
@@ -22,8 +31,6 @@ export const Wrapper = styled.div<Pick<DialogProps, 'fullWidth' | 'fullScreen'>>
           width: '100%',
           height: '100%'
         }};
-
-  z-index: ${({ theme: { zIndex } }) => zIndex.dialog};
 `;
 
 export const StyledDialog = styled.div<Pick<DialogProps, 'fullScreen' | 'transitionDuration'>>`

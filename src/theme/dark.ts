@@ -202,10 +202,10 @@ export const dark: Theme = {
   zIndex: {
     header: 10,
     bottomNavigation: 10,
-    dialog: 20,
-    bottomSheet: 20,
-    backdrop: 20,
-    tooltip: 20,
+    dialog: 22,
+    bottomSheet: 21,
+    backdrop: 22,
+    tooltip: 23,
     overlay: 20
   }
 };

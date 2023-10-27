@@ -6,6 +6,8 @@ export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 
   z-index: ${({ theme: { zIndex } }) => zIndex.backdrop};
 `;
@@ -23,9 +25,7 @@ export const StyledBackdrop = styled.div<Pick<BackdropProps, 'transitionDuration
           position: 'fixed',
           top: '50%',
           left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 'auto',
-          height: 'auto'
+          transform: 'translate(-50%, -50%)'
         }
       : {}};
 `;

@@ -13,7 +13,7 @@ import { CustomStyle, GenericComponentProps } from '@typings';
 import createUniqueKey from '@utils';
 import { createPortal } from 'react-dom';
 
-import { StyledDialog, Wrapper } from './Dialog.styles';
+import { StyledDialog, Wrapper, WrapperInner } from './Dialog.styles';
 
 export interface DialogProps
   extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
@@ -39,19 +39,20 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
   },
   ref
 ) {
-  const { overlay, push, update, reset, getActiveOverlayState } = useOverlay();
+  const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
 
   const idRef = useRef(`dialog-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeOverlayState = getActiveOverlayState(idRef.current, 'dialog');
+  const currentOverlayState = getCurrentOverlayState(idRef.current, 'dialog');
+  const hasOverlayState = !!getOverlayState(idRef.current, 'dialog');
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   useEffect(() => {
-    if (open) {
+    if (open && !hasOverlayState) {
       push({
         id: idRef.current,
         status: 'pending',
@@ -63,10 +64,10 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         }
       });
     }
-  }, [open, push, onClose, transitionDuration, overlayCustomStyle]);
+  }, [open, push, onClose, transitionDuration, overlayCustomStyle, hasOverlayState]);
 
   useEffect(() => {
-    if (activeOverlayState?.status === 'pending') {
+    if (currentOverlayState?.status === 'pending') {
       dialogOpenTimerRef.current = setTimeout(() => {
         // TODO 추후 애니메이션 재사용 가능하도록 개선
         if (dialogRef.current) {
@@ -77,19 +78,19 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
         update(idRef.current, 'active');
       }, transitionDuration);
     }
-  }, [activeOverlayState, transitionDuration, update]);
+  }, [currentOverlayState, transitionDuration, update]);
 
   useEffect(() => {
-    if (activeOverlayState?.status === 'active') {
+    if (currentOverlayState?.status === 'active') {
       if (dialogRef.current) {
         dialogRef.current.style.pointerEvents = 'auto';
       }
     }
-  }, [activeOverlayState?.status]);
+  }, [currentOverlayState?.status]);
 
   useEffect(() => {
     if (open || !dialogRef.current) return;
-    if (activeOverlayState?.status !== 'active') return;
+    if (currentOverlayState?.status !== 'active') return;
 
     dialogRef.current.style.opacity = '0';
     dialogRef.current.style.transform = 'scale(0.7)';
@@ -97,7 +98,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
     dialogCloseTimerRef.current = setTimeout(() => {
       update(idRef.current, 'fulfilled');
     }, transitionDuration);
-  }, [open, activeOverlayState, transitionDuration, update]);
+  }, [open, currentOverlayState, transitionDuration, update]);
 
   useEffect(() => {
     return () => {
@@ -118,20 +119,22 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
     };
   }, [overlay.root, reset]);
 
-  if (!overlay.root || !activeOverlayState) return null;
+  if (!overlay.root || !currentOverlayState) return null;
 
   return createPortal(
-    <Wrapper ref={ref} fullWidth={fullWidth} fullScreen={fullScreen}>
-      <StyledDialog
-        ref={dialogRef}
-        fullScreen={fullScreen}
-        transitionDuration={transitionDuration}
-        onClick={handleClick}
-        {...props}
-        css={customStyle}
-      >
-        {children}
-      </StyledDialog>
+    <Wrapper ref={ref} onClick={onClose}>
+      <WrapperInner fullWidth={fullWidth} fullScreen={fullScreen}>
+        <StyledDialog
+          ref={dialogRef}
+          fullScreen={fullScreen}
+          transitionDuration={transitionDuration}
+          onClick={handleClick}
+          {...props}
+          css={customStyle}
+        >
+          {children}
+        </StyledDialog>
+      </WrapperInner>
     </Wrapper>,
     overlay.root
   );
