@@ -27,7 +27,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
   },
   ref
 ) {
-  const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
+  const { overlay, push, update, getCurrentOverlayState, getOverlayState } = useOverlay();
 
   const idRef = useRef(`backdrop-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -94,14 +94,6 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
       }
     };
   }, []);
-
-  useEffect(() => {
-    return () => {
-      if (overlay.root) {
-        reset();
-      }
-    };
-  }, [overlay.root, reset]);
 
   if (!overlay.root || !currentOverlayState) return null;
 

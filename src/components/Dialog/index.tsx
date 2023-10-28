@@ -39,7 +39,7 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
   },
   ref
 ) {
-  const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
+  const { overlay, push, update, getCurrentOverlayState, getOverlayState } = useOverlay();
 
   const idRef = useRef(`dialog-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -110,14 +110,6 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
       }
     };
   }, []);
-
-  useEffect(() => {
-    return () => {
-      if (overlay.root) {
-        reset();
-      }
-    };
-  }, [overlay.root, reset]);
 
   if (!overlay.root || !currentOverlayState) return null;
 

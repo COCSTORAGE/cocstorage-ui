@@ -41,7 +41,7 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     },
     ref
   ) {
-    const { overlay, push, update, reset, getCurrentOverlayState, getOverlayState } = useOverlay();
+    const { overlay, push, update, getCurrentOverlayState, getOverlayState } = useOverlay();
 
     const [headerSwipeableClose, setHeaderSwipeableClose] = useState(false);
     const [contentSwipeableClose, setContentSwipeableClose] = useState(false);
@@ -221,14 +221,6 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         };
       };
     }, []);
-
-    useEffect(() => {
-      return () => {
-        if (overlay.root) {
-          reset();
-        }
-      };
-    }, [overlay.root, reset]);
 
     if (!overlay.root || !currentOverlayState) return null;
 
