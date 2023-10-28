@@ -50,8 +50,8 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
     const sheetRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const sheetSwipeZoneRef = useRef<HTMLDivElement>(null);
-    const sheetOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const sheetCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const sheetOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
+    const sheetCloseTimerRef = useRef<ReturnType<typeof setTimeout>>();
     const measureRef = useRef({
       startClientY: 0,
       lastTranslateY: 0
@@ -213,14 +213,15 @@ const BottomSheet = forwardRef<HTMLDivElement, PropsWithChildren<BottomSheetProp
         if (sheetCloseTimerRef.current) {
           clearTimeout(sheetCloseTimerRef.current);
         }
-        setHeaderSwipeableClose(false);
-        setContentSwipeableClose(false);
-        measureRef.current = {
-          startClientY: 0,
-          lastTranslateY: 0
-        };
       };
     }, []);
+
+    useEffect(() => {
+      const id = idRef.current;
+      return () => {
+        update(id, 'fulfilled');
+      };
+    }, [update]);
 
     if (!overlay.root || !currentOverlayState) return null;
 

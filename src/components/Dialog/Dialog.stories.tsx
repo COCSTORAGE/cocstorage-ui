@@ -92,10 +92,10 @@ function WithQueue(args: DialogProps & RefAttributes<HTMLDivElement>) {
       <Dialog {...args} open={open} onClose={handleClose}>
         <Button onClick={handleOpenSecondDialog}>Open Second Dialog</Button>
       </Dialog>
-      <Dialog open={openSecondDialog} onClose={handleCloseSecondDialog} transitionDuration={325}>
+      <Dialog open={openSecondDialog} onClose={handleCloseSecondDialog}>
         <Button onClick={handleOpenThirdDialog}>Open Third Dialog</Button>
       </Dialog>
-      <Dialog open={openThirdDialog} onClose={handleCloseThirdDialog} transitionDuration={425}>
+      <Dialog open={openThirdDialog} onClose={handleCloseThirdDialog}>
         <Button onClick={handleCloseThirdDialog}>Close Third Dialog</Button>
       </Dialog>
     </>

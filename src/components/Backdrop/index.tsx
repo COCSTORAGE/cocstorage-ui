@@ -31,8 +31,8 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
 
   const idRef = useRef(`backdrop-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const contentRef = useRef<HTMLDivElement>(null);
-  const backdropOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const backdropCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const backdropOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const backdropCloseTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const currentOverlayState = getCurrentOverlayState(idRef.current, 'backdrop');
   const hasOverlayState = !!getOverlayState(idRef.current, 'backdrop');
@@ -94,6 +94,13 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(function Backdrop(
       }
     };
   }, []);
+
+  useEffect(() => {
+    const id = idRef.current;
+    return () => {
+      update(id, 'fulfilled');
+    };
+  }, [update]);
 
   if (!overlay.root || !currentOverlayState) return null;
 

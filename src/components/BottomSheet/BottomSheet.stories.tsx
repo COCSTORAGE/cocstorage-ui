@@ -92,20 +92,10 @@ function WithQueue(args: BottomSheetProps & RefAttributes<HTMLDivElement>) {
       <BottomSheet {...args} open={open} onClose={handleClose}>
         <Button onClick={handleOpenSecondBottomSheet}>Open Second BottomSheet</Button>
       </BottomSheet>
-      <BottomSheet
-        {...args}
-        open={openSecondBottomSheet}
-        onClose={handleCloseSecondBottomSheet}
-        transitionDuration={325}
-      >
+      <BottomSheet {...args} open={openSecondBottomSheet} onClose={handleCloseSecondBottomSheet}>
         <Button onClick={handleOpenThirdBottomSheet}>Open Third BottomSheet</Button>
       </BottomSheet>
-      <BottomSheet
-        {...args}
-        open={openThirdBottomSheet}
-        onClose={handleCloseThirdBottomSheet}
-        transitionDuration={425}
-      >
+      <BottomSheet {...args} open={openThirdBottomSheet} onClose={handleCloseThirdBottomSheet}>
         <Button onClick={handleCloseThirdBottomSheet}>Close Third BottomSheet</Button>
       </BottomSheet>
     </>

@@ -43,8 +43,8 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
 
   const idRef = useRef(`dialog-${createUniqueKey(`${Math.floor(Math.random() * 100000)}`)}`);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dialogOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const dialogCloseTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const currentOverlayState = getCurrentOverlayState(idRef.current, 'dialog');
   const hasOverlayState = !!getOverlayState(idRef.current, 'dialog');
@@ -110,6 +110,13 @@ const Dialog = forwardRef<HTMLDivElement, PropsWithChildren<DialogProps>>(functi
       }
     };
   }, []);
+
+  useEffect(() => {
+    const id = idRef.current;
+    return () => {
+      update(id, 'fulfilled');
+    };
+  }, [update]);
 
   if (!overlay.root || !currentOverlayState) return null;
 
